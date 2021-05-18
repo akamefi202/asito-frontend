@@ -5,22 +5,22 @@ import { PATHS } from "utils/constants";
 
 const routes = [
   {
-    path: PATHS.SITES.INDEX,
+    path: PATHS.ROLES.INDEX,
     exact: true,
     component: List,
   },
   {
-    path: PATHS.SITES.SHOW,
+    path: PATHS.ROLES.SHOW,
     exact: true,
     component: Show,
   },
   {
-    path: PATHS.SITES.CREATE,
+    path: PATHS.ROLES.CREATE,
     exact: true,
     component: Form,
   },
   {
-    path: PATHS.SITES.EDIT,
+    path: PATHS.ROLES.EDIT,
     exact: true,
     component: Form,
   },

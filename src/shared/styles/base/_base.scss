@@ -1,7 +1,6 @@
 @import "~antd/dist/antd.css";
 @import url("https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
   -webkit-box-sizing: border-box;
@@ -16,7 +15,7 @@
 }
 
 :root {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.618;
   -webkit-font-smoothing: antialiased;
   --color: #112b7;
@@ -27,7 +26,6 @@
 }
 
 #root {
-  background-color: #F7F9FC;
   overflow: auto;
 }
 
@@ -38,7 +36,7 @@ body {
   overflow-y: hidden !important;
   // background-color: #f7f9fc !important;
   color: #303030;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .p-0 {
@@ -1271,4 +1269,8 @@ body {
 
 .mb-70 {
   margin-bottom: 70px;
+}
+
+.color-gray {
+  color: #DCDCDC;
 }

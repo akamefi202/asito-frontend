@@ -16,7 +16,8 @@
     padding: 17px 8px;
     border: 1px solid #dcdcdc;
     box-sizing: border-box;
-    box-shadow: 0px 8px 16px rgba(227, 0, 15, 0.04);
+    box-shadow: 0px 8px 16px rgba(50, 123, 190, 0.04);
+    border-radius: 20px;
 
     input {
       height: 100%;
@@ -71,6 +72,6 @@
     position: absolute;
     left: 15px;
     bottom: 3px;
-    font: normal normal 300 11px/10px Nunito;
+    font: normal normal 300 11px/10px;
   }
 }

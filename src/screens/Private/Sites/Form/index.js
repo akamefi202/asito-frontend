@@ -33,7 +33,7 @@ const menuItems = [
 export default () => {
   const { id } = useParams();
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.SITES);
+  const { t } = useTranslation(NAME_SPACES.ROLES);
   const [initialValues, setInitialValues] = useState({
     id: cuid(),
     status: "ACTIVE",
@@ -92,7 +92,7 @@ export default () => {
     },
   });
 
-  const cancel = () => history.push(PATHS.SITES.INDEX);
+  const cancel = () => history.push(PATHS.ROLES.INDEX);
 
   const [
     saveChanges,
@@ -100,7 +100,7 @@ export default () => {
   ] = useMutation(CREATE_UPDATE_SITE,
     {
       onCompleted: (data) => {
-        history.push(PATHS.SITES.INDEX);
+        history.push(PATHS.ROLES.INDEX);
       },
       onError: (error) => {
         messages({data: error});
@@ -134,7 +134,7 @@ export default () => {
     {
       title: t("SITES"),
       className: "custom--breadcrumb--one",
-      href: PATHS.SITES.INDEX,
+      href: PATHS.ROLES.INDEX,
     },
     {
       title: id ? initialValues.name : t("NEW_SITE"),

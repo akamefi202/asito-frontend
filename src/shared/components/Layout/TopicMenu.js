@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import Logo from "shared/assets/images/Logo.svg";
 import { Link } from "react-router-dom";
-import { BsBell } from "react-icons/bs";
-import { AiOutlineLogout, AiOutlineSetting } from "react-icons/ai";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -15,7 +13,7 @@ import {NotificationQueries} from "../../graphql/queries";
 
 const {SUBSCRIBE_NOTIFICATION, NOTIFICATIONS} = NotificationQueries;
 
-const TopicMenu = ({ topics, selectedKey }) => {
+const TopicMenu = ({ topics }) => {
   const { t } = useTranslation(NAME_SPACES.NAV_BAR);
   const history = useHistory();
   const [activeLink, setActiveLink] = useState("");
@@ -43,12 +41,10 @@ const TopicMenu = ({ topics, selectedKey }) => {
 
   const activeClassLink = (url) => activeLink === url.replace("/", "") ? "active" : "";
 
-  const menus = topics.map(({ icon: Icon, key, url, title, onClick }) => (
-    <Menu.Item key={key} onClick={onClick} className={`item--li ${activeClassLink(url)}`}>
+  const menus = topics.map(({ icon, key, url, title, onClick, classMenu }) => (
+    <Menu.Item key={key} onClick={onClick} className={`item--li ${classMenu} ${activeClassLink(url)}`}>
       <Link to={url} className="main--sider--menu--item">
-        <span className="icon">
-          <Icon />
-        </span>
+        {icon}
         <span>{t(title)}</span>
       </Link>
     </Menu.Item>
@@ -58,7 +54,7 @@ const TopicMenu = ({ topics, selectedKey }) => {
     <div className="topic--menu">
       <div className="main--sider--top">
         <div className="main--sider--top--logo">
-          <img src={Logo} alt={"Mammoet"} />
+          <img className="logo" src={Logo} alt="Be-better" />
         </div>
         <div className="main--sider--top--links">
           <ul>
@@ -80,7 +76,7 @@ const TopicMenu = ({ topics, selectedKey }) => {
             to={PATHS.NOTIFICATIONS.INDEX}
             className={activeClassLink(PATHS.NOTIFICATIONS.INDEX)}
           >
-            <BsBell />
+            <span className="icon-Notification" />
             <div className="main--sider--notifications--text">
               <span className="txt">{t("NOTIFICATIONS")}</span>
               {count !== 0 && <span id={'counter-id'} className="main--sider--notifications--count">{count}</span>}
@@ -90,20 +86,10 @@ const TopicMenu = ({ topics, selectedKey }) => {
 
         <Menu
           mode="inline"
-          selectedKeys={[selectedKey]}
           className={"main--sider--menu"}
         >
           {menus}
         </Menu>
-
-        <div className="main--sider--setting">
-          <Link to={PATHS.PREFERENCES} className={activeClassLink(PATHS.PREFERENCES)}>
-            <AiOutlineSetting />
-            <div className="main--sider--setting--text">
-              <span className="txt">{t("PREFERENCES")}</span>
-            </div>
-          </Link>
-        </div>
 
         <div className="main--sider--logout">
           <a
@@ -113,7 +99,7 @@ const TopicMenu = ({ topics, selectedKey }) => {
             }}
             className="main--sider--menu--item"
           >
-            <AiOutlineLogout />
+            <span className="icon-Log-Out" />
             <div className="main--sider--setting--text">
               <span className="txt">{t("LOGOUT")}</span>
             </div>

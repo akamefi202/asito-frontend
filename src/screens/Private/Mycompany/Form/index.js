@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
 import GeneralInformation from "./GeneralInformation";
-import { BsCheck } from "react-icons/bs";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
@@ -87,7 +86,7 @@ export default () => {
     },
     {
       title: t("SAVE_CHANGES"),
-      icon: <BsCheck className="btn--icon--right" />,
+      icon: <span className="icon-Check btn--icon--right" />,
       disabled: false,
       action: formik.handleSubmit,
     },

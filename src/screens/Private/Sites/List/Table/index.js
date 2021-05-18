@@ -72,7 +72,7 @@ export default ({ t, sites, take, setTake, setSkip, total, page, setPage}) => {
       onRow={(record) => {
         return {
           onClick: () =>
-            history.push(PATHS.SITES.SHOW.replace(":id", record.id)),
+            history.push(PATHS.ROLES.SHOW.replace(":id", record.id)),
         };
       }}
     />

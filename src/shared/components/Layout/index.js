@@ -1,12 +1,10 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React from "react";
 import { Layout } from "antd";
 import { PATHS } from "utils/constants";
 import { FiUsers } from "react-icons/fi";
 import { BsBuilding } from "react-icons/bs";
-import { BiSitemap } from "react-icons/bi";
-import { AiOutlineSafetyCertificate } from "react-icons/ai";
-import { ImOffice } from "react-icons/im";
+import { AiOutlineIdcard, AiOutlineSafetyCertificate } from "react-icons/ai";
 
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
@@ -20,54 +18,58 @@ const { Content } = Layout;
 const menus = [
     {
         title: "OPERATORS",
+        classMenu: "",
         url: PATHS.OPERATORS.INDEX,
         key: "Operators",
-        icon: FiUsers,
+        icon: <FiUsers className="icon" />,
         type: "simple",
     },
     {
         title: "CERTIFICATES",
+        classMenu: "",
         url: PATHS.CERTIFICATES.INDEX,
         key: "certificates",
-        icon: AiOutlineSafetyCertificate,
+        icon: <AiOutlineSafetyCertificate className="icon" />,
         type: "simple",
     },
     {
         title: "CLIENTS",
+        classMenu: "",
         url: PATHS.CLIENTS.INDEX,
         key: "clients",
-        icon: BsBuilding,
+        icon: <BsBuilding className="icon" />,
         type: "simple",
     },
     {
-        title: "SITES",
-        url: PATHS.SITES.INDEX,
-        key: "sites",
-        icon: BiSitemap,
+        title: "ROLES",
+        classMenu: "",
+        url: PATHS.ROLES.INDEX,
+        key: "roles",
+        icon: <AiOutlineIdcard className="icon" />,
         type: "simple",
     },
     {
         title: "MYCOMPANY",
+        classMenu: "item--li--mt",
         url: PATHS.MYCOMPANY.INDEX,
         key: "mycompany",
-        icon: ImOffice,
+        icon: <span className="icon icon-Office" />,
         type: "simple",
     },
+    {
+      title: "PREFERENCES",
+      classMenu: "",
+      url: PATHS.PREFERENCES,
+      key: "preferences",
+      icon: <span className="icon icon-Settings" />,
+      type: "simple",
+  },
 ];
 
 export default ({ component }) => {
   const WrappedComponent = component;
-  const topics = ["ONE", "Second ", "Third "];
-  const [contentIndex, setContentIndex] = useState(0);
-  const [selectedKey, setSelectedKey] = useState("0");
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
-
-  const changeSelectedKey = (event) => {
-    const key = event.key;
-    setSelectedKey(key);
-    setContentIndex(+key);
-  };
 
   const getMenu = () => {
     return user && USER_ROLES[userRole]
@@ -78,15 +80,12 @@ export default ({ component }) => {
   const Menu = (
     <TopicMenu
       topics={getMenu()}
-      selectedKey={selectedKey}
-      changeSelectedKey={changeSelectedKey}
     />
   );
 
   return (props) => {
     return (
       <Layout className="container--layout">
-        {/* <Sider /> */}
         <NavBar menu={Menu} />
         <SideBar menu={Menu} />
         <Content className="container--antd">

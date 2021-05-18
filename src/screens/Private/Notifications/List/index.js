@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Row, Col} from "antd";
 import {Header, Spin} from "shared/components";
-import {AiOutlineCheck} from "react-icons/ai";
 import {NAME_SPACES} from "shared/locales/constants";
 import {useTranslation} from "react-i18next";
 import moment from "moment";
@@ -73,9 +72,10 @@ export default () => {
     const setBreadcrumbsButtons = [
         {
             title: t("MARK_AS_READ"),
+            buttonStyle: "btn--outline",
             disabled: false,
             action: markAsReadAll,
-            icon: <AiOutlineCheck className="btn--icon--right"/>,
+            icon: <span className="icon-Check btn--icon--right" />,
         }
     ];
 

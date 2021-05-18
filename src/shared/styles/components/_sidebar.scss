@@ -17,9 +17,10 @@
   &--top {
     padding: 24px;
     &--logo {
-      img {
-        width: 100%;
-      }
+        text-align: left;
+        .logo {
+            height: 32px;
+        }
     }
 
     &--links {
@@ -41,7 +42,7 @@
   }
 
   &--notifications {
-    padding: 45px 0;
+    padding: 40px 0;
     padding-left: 24px;
     // height: 88px;
     margin: auto 0;
@@ -87,7 +88,7 @@
 
 
   &--setting {
-    padding-top: 45px;
+    padding-top: 40px;
     padding-left: 24px;
     // height: 88px;
     margin: auto 0;
@@ -177,11 +178,17 @@
   &--menu {
     background-color: $c-white;
     padding: 0 12px;
+    border-right: none;
+
 
     .item--li {
         height: 50px;
         display: flex;
         padding-left: 12px !important;
+
+        &--mt {
+          margin-top: 40px;
+        }
     
         &.active,
         &:hover {

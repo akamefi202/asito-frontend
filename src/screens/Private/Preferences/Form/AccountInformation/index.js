@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col } from "antd";
 import { Card, Input, Button, Spin } from "shared/components";
-import { BsCheck } from "react-icons/bs";
 import { useFormik } from "formik";
 import { bindInputProps } from "utils/helpers/input";
 import validation from "./validation";
@@ -102,7 +101,7 @@ export default ({ t, user }) => {
               <Button
                 onClick={formik.handleSubmit}
               >
-                <BsCheck className="btn--icon--right" /> {t("FORM.ACCOUNT_INFORMATION.SAVE_CHANGES")}
+                <span className="icon-Check btn--icon--right" /> {t("FORM.ACCOUNT_INFORMATION.SAVE_CHANGES")}
               </Button>
             </div>
           </Col>

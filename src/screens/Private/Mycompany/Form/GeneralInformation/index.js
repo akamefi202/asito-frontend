@@ -38,7 +38,7 @@ export default ({ t, formik, modeRole }) => (
         </div>
       </Col>
 
-      {modeRole && <>
+      {/* {modeRole && <>
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
@@ -61,7 +61,7 @@ export default ({ t, formik, modeRole }) => (
             />
           </div>
         </Col>
-      </>}
+      </>} */}
 
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">

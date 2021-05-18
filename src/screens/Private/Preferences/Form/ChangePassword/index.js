@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Card, Input, Button, Spin } from "shared/components";
-import { FaKey } from "react-icons/fa";
 import { useFormik } from "formik";
 import { bindInputProps } from "utils/helpers/input";
 import validation from "./validation";
@@ -132,7 +131,7 @@ export default ({ t, user }) => {
             <Button
               onClick={formik.handleSubmit}
             >
-              <FaKey className="btn--icon--right" /> {t("FORM.CHANGE_PASSWORD.CHANGE_PASSWORD")}
+              <span className="icon-Key btn--icon--right" /> {t("FORM.CHANGE_PASSWORD.CHANGE_PASSWORD")}
             </Button>
           </div>
         </Col>

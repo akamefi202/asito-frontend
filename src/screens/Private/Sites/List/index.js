@@ -27,7 +27,7 @@ const tabs = [
 
 export default () => {
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.SITES);
+  const { t } = useTranslation(NAME_SPACES.ROLES);
   const [data, setData] = useState([]);
   const [count, setCount] = useState({
     ALL: 0,
@@ -77,7 +77,7 @@ export default () => {
     onError: (error) => messages({data: error})
   });
 
-  const createSite = () => history.push(PATHS.SITES.CREATE);
+  const createSite = () => history.push(PATHS.ROLES.CREATE);
 
   const setBreadcrumbsButtons = [
     {

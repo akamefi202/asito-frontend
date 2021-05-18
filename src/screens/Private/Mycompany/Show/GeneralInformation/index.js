@@ -35,7 +35,7 @@ export default ({ t, issuer, modeRole}) => {
           </div>
         </Col>
 
-        {modeRole && <>
+        {/* {modeRole && <>
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--details--item">
               <h5 className="card--details--item--key">
@@ -52,7 +52,7 @@ export default ({ t, issuer, modeRole}) => {
               <h4 className="card--details--item--value">{issuer.vat}</h4>
             </div>
           </Col>
-        </>}
+        </>} */}
 
         <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">

@@ -31,7 +31,7 @@ export default () => {
   const history = useHistory();
   const [site, setSite] = useState({});
   const [totalOperatorSites, setTotalOperatorSites] = useState(0);
-  const { t } = useTranslation(NAME_SPACES.SITES);
+  const { t } = useTranslation(NAME_SPACES.ROLES);
 
   const { loading } = useQuery(SITE, {
     variables: {
@@ -66,7 +66,7 @@ export default () => {
   };
 
   const editSites = () => {
-    history.push(PATHS.SITES.EDIT.replace(":id", id));
+    history.push(PATHS.ROLES.EDIT.replace(":id", id));
   };
 
   const setBreadcrumbsButtons = [
@@ -83,7 +83,7 @@ export default () => {
     {
       title: t("SITES"),
       className: "custom--breadcrumb--one",
-      href: PATHS.SITES.INDEX,
+      href: PATHS.ROLES.INDEX,
     },
     { title: site.name, className: "custom--breadcrumb--two" },
   ];

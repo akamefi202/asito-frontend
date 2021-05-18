@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Checkbox } from "antd";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
-import { FiKey, FiMail } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 import { Button, Input, Spin } from "shared/components";
 import { NAME_SPACES } from "shared/locales/constants";
@@ -12,7 +11,7 @@ import validation from "./validation";
 import Logo from "shared/assets/images/Logo.svg";
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import { AuthMutations } from "shared/graphql/mutations";
-import SignUpModal from "./signUpModal";
+// import SignUpModal from "./signUpModal";
 import {USER} from "shared/graphql/queries/user";
 import {UserStore} from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
@@ -22,7 +21,7 @@ const { LOGIN_MUTATION } = AuthMutations;
 const Form = () => {
   const { t } = useTranslation(NAME_SPACES.AUTH);
   const history = useHistory();
-  const [modalSignUp, setModalSignUp] = useState(false);
+  // const [modalSignUp, setModalSignUp] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
   const [getUser] = useLazyQuery(USER, {
     onCompleted: ({user}) => {
@@ -32,13 +31,13 @@ const Form = () => {
     }
   });
 
-  const showModal = () => {
-    setModalSignUp(true);
-  };
+  // const showModal = () => {
+  //   setModalSignUp(true);
+  // };
 
-  const handleCancelModal = () => {
-    setModalSignUp(false);
-  };
+  // const handleCancelModal = () => {
+  //   setModalSignUp(false);
+  // };
 
   const formik = useFormik({
     initialValues: {
@@ -65,7 +64,7 @@ const Form = () => {
         getUser();
       },
       onError: (error) => {
-        messages({data: error, msg: "Invalid username or password, please try again"});
+        messages({data: error, msg: t("SIGNIN.ERROR")});
       }
     });
 
@@ -73,7 +72,7 @@ const Form = () => {
     <div className={"auth--area--form"}>
       <Spin spinning={loading || userLoading}>
         <div className="auth--area--form--head">
-          <img src={Logo} alt="Mammoet" />
+          <img className="logo" src={Logo} alt="Be-better" />
         </div>
         <div className="auth--area--form--content">
           <div className="auth--area--form--content--title">
@@ -85,7 +84,7 @@ const Form = () => {
               <Input
                 {...bindInputProps({ name: "username", ...formik })}
                 placeholder={t("SIGNIN.FORM_INPUT_LOGIN_PLACEHOLDER")}
-                icon={<FiMail color={COLORS.C_GREY_F3} size={24} />}
+                icon={<span className="icon-Email color-gray" />}
               />
             </div>
             <div className="auth--area--form--content--inputs--item">
@@ -94,7 +93,7 @@ const Form = () => {
                 type="password"
                 {...bindInputProps({ name: "password", ...formik })}
                 placeholder={t("SIGNIN.FORM_INPUT_PASS_PLACEHOLDER")}
-                icon={<FiKey color={COLORS.C_GREY_F3} size={24} />}
+                icon={<span className="icon-Key color-gray" />}
               />
             </div>
 
@@ -127,14 +126,14 @@ const Form = () => {
               {t("SIGNIN.LOGIN")}
             </Button>
           </div>
-          <div className="auth--area--form--content--help sign-up">
+          {/* <div className="auth--area--form--content--help sign-up">
             <div className="auth--area--form--content--help--item">
               <h5>
                 {t("SIGNIN.NO_ACCOUNT")} <span className="link-auth" onClick={showModal}>{t("SIGNIN.SIGN_UP_NOW")}</span>
               </h5>
             </div>
-          </div>
-          <SignUpModal t={t} visible={modalSignUp} handleCancel={handleCancelModal} />
+          </div> */}
+          {/* <SignUpModal t={t} visible={modalSignUp} handleCancel={handleCancelModal} /> */}
         </div>
       </Spin>
     </div>

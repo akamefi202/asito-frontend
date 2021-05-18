@@ -1,10 +1,10 @@
 {
-    "NOTIFICATIONS": "Notifications",
+    "NOTIFICATIONS": "Meldingen",
     "OPERATORS": "Operators",
     "CERTIFICATES": "Certificates",
     "CLIENTS": "Clients",
-    "SITES": "Sites",
+    "ROLES": "Roles",
+    "MYCOMPANY": "Mijn organisatie",
     "PREFERENCES": "Preferences",
-    "MYCOMPANY": "My company",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Uitloggen"
 }

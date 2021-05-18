@@ -1,0 +1,57 @@
+{
+  "MYCOMPANY": "Mijn organisatie",
+  "EDIT_DETAILS": "Edit details",
+  "DISCARD_CHANGES": "Wijzigingen annuleren",
+  "SAVE_CHANGES": "Opslaan",
+  "SHOW": {
+    "MENU": {
+      "GENERAL_INFORMATION": "Algemene informatie"
+    },
+    "GENERAL_INFORMATION": {
+      "ADDRESS": "Adres",
+      "POSTCODE": "Postcode",
+      "CITY": "Woonplaats",
+      "COUNTRY": "Land",
+      "PHONE_NUMBER": "Telefoonnummer",
+      "EMAIL_ADDRESS": "E-mailadres",
+      "WEBSITE": "Website"
+    },
+    "GENERAL_INFORMATION_ISSUER": {
+      "NAME": "Bedrijfsnaam",
+      "NUMBER": "KvK nummer"
+    }
+  },
+  "FORM": {
+    "MENU": {
+      "GENERAL_INFORMATION": "Algemene informatie"
+    },
+    "GENERAL_INFORMATION": {
+      "ADDRESS": "Adres",
+      "ADDRESS_PLACEHOLDER": "Adres",
+      "POSTCODE": "Postcode",
+      "POSTCODE_PLACEHOLDER": "Postcode",
+      "CITY": "Woonplaats",
+      "CITY_PLACEHOLDER": "Woonplaats",
+      "COUNTRY": "Land",
+      "COUNTRY_PLACEHOLDER": "Land",
+      "PHONE_NUMBER": "Telefoonnummer",
+      "PHONE_NUMBER_PLACEHOLDER": "Telefoonnummer",
+      "EMAIL_ADDRESS": "E-mailadres",
+      "EMAIL_ADDRESS_PLACEHOLDER": "E-mailadres",
+      "WEBSITE": "Website",
+      "WEBSITE_PLACEHOLDER": "Website"
+    },
+    "GENERAL_INFORMATION_ISSUER": {
+      "NAME": "Bedrijfsnaam",
+      "NAME_PLACEHOLDER": "Voer uw Bedrijfsnaam",
+      "NUMBER": "KvK nummer",
+      "NUMBER_PLACEHOLDER": "Voer KvK nummer"
+    },
+    "ERROR": {
+      "REQUIRED": "Is een verplicht veld",
+      "NUMBER": "Moet een nummer zijn",
+      "EMAIL": "Moet een geldig e-mailadres zijn",
+      "URL": "Moet een geldige URL zijn"
+    }
+  }
+}

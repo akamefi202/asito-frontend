@@ -34,7 +34,7 @@
 }
 
 .custom-h {
-  height: calc(100vh - 400px);
+  // height: calc(100vh - 400px);
   display: flex;
   margin: auto;
 }
@@ -340,7 +340,7 @@
   padding: 24px;
 }
 .ant-modal-title {
-  font: normal normal 500 21px/25px Montserrat;
+  font: normal normal 500 21px/25px;
   color: $c-grey-35;
 }
 
@@ -356,7 +356,7 @@
     height: 2px;
   }
   .ant-modal-title {
-    font: normal normal 500 16px/20px Montserrat;
+    font: normal normal 500 16px/20px;
   }
 }
 
