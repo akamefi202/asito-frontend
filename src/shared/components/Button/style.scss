@@ -1,0 +1,126 @@
+:root {
+  --primary: #e3000f;
+  --second: #365b9a;
+  --green: #5caf4c;
+}
+
+.btn {
+  /* padding: 8px 24px; */
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0px 8px 16px rgba(227, 0, 15, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .btn--icon {
+    &--right {
+      margin-right: 8px;
+    }
+    &--left {
+      margin-left: 8px;
+    }
+    &--custom-right {
+      margin-right: 12px;
+      color: #4CAF50;
+    }
+
+    &--change-password-right {
+      margin-right: 12px;
+      color: white;
+    }
+  }
+}
+
+.btn--primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn--second {
+  background-color: var(--second);
+  color: #fff;
+}
+.btn--green {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.btn--danger {
+  background-color: rgb(223, 93, 79);
+  color: #fff;
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: #808080;
+  border: 1px solid #dcdcdc;
+  transition: all 0.3s ease-out;
+  padding: 8px 20px;
+  box-shadow: none !important;
+}
+
+.btn--disabled {
+  background-color: rgb(173, 173, 173);
+  cursor: not-allowed;
+  color: white;
+  padding: 8px 20px;
+  opacity: 0.5;
+}
+
+.green-text {
+  color: #4CAF50;
+  font-weight: bold;
+  background-color: #F5F5F5;
+}
+
+.change--password--btn {
+  margin-left: auto;
+}
+
+.btn--small {
+  /* padding: 8px 20px; */
+  font-size: 12px;
+}
+
+.btn--medium {
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.btn--large {
+  padding: 18px 26px;
+  font-size: 20px;
+  width: 100%;
+  font-weight: 800;
+}
+
+.btn--primary:hover {
+  background-color: var(--second);
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+.btn--second:hover {
+  background-color: var(--primary);
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+.btn--danger:hover {
+  background-color: rgb(191, 77, 64);
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+.btn--outline:hover {
+  background-color: var(--primary);
+  color: #fff;
+  transition: all 0.3s ease-out;
+}

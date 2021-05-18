@@ -1,0 +1,173 @@
+.container--auth {
+  // background-image: url("../../assets/images/background-auth.png");
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  min-height: 100vh;
+
+  .auth--area {
+    height: 100%;
+
+    &--form {
+      max-width: 350px;
+      // background-color: white;
+
+      &--head {
+        // background-color: #e3000f;
+        padding: 34px 24px;
+        text-align: center;
+
+        @media (max-width: 800px) {
+            padding: 24px 24px;
+        }
+      }
+
+      &--content {
+          background-color: white;
+          border: 1px solid #F5F5F5;
+          box-sizing: border-box;
+          box-shadow: 0px 8px 16px rgba(227, 0, 15, 0.04);
+          padding: 24px;
+          padding-bottom: 0;
+        &--title {
+            padding-bottom: 24px;
+            h2 {
+              font-style: normal;
+              font-weight: bold;
+              --minFontSize: 28px;
+              --maxFontSize: 32px;
+              --scaler: 8vw;
+              font-size: clamp(var(--minFontSize), var(--scaler), var(--maxFontSize));
+              line-height: 40px;
+              color: #263238;
+              font-weight: 700;
+
+            }
+          }
+
+          &--inputs {
+
+            &--item {
+                margin-bottom: 24px;
+
+                .input-wrapper {
+                    margin-top: 4px;
+                }
+
+                label {
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 22px;
+                    color: #808080;
+                }
+            }
+          }
+
+          &--help {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            &.sign-up {
+              justify-content: center;
+              padding-bottom: 24px;
+            }
+
+              &--item {
+
+                .ant-checkbox-wrapper {
+                    color: #808080;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 24px;
+                    font-weight: 500;
+                    @media(max-width: 500px) {
+                        font-size: 14px;
+                    }
+
+                    .ant-checkbox-inner {
+                        border: 1.7px solid #808080;
+                    }
+                }
+
+                h5, span {
+                    font-size: 16px;
+                    line-height: 24px;
+                    // color: #0F6AFF;
+                    font-weight: 500;
+
+                    @media(max-width: 500px) {
+                        font-size: 14px;
+                    }
+                }
+
+                .link-auth {
+                  color: #0F6AFF;
+                  cursor: pointer;
+
+                  &:hover {
+                    color: #033484;
+                  }
+                }
+
+
+              }
+          }
+
+          hr {
+            padding: 0;
+            margin: 0;
+            margin-top: 24px;
+          }
+      }
+
+
+
+      &--footer {
+          padding: 24px 0px;
+      }
+    }
+  }
+}
+
+.signUp--modal {
+  .ant-modal-content {
+    max-width: 540px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #F5F5F5;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 16px rgba(227, 0, 15, 0.04);
+    border-radius: 8px;
+
+    .ant-modal-body {
+      padding-top: 72px;
+
+      .modal-body {
+        &--img {
+          padding-bottom: 24px;
+        }
+
+        .title {
+          font-weight: bold;
+          font-size: 32px;
+          line-height: 40px;
+          color: #263238;
+          padding-bottom: 16px;
+        }
+
+        .text {
+          font-size: 16px;
+          line-height: 24px;
+          color: #808080;
+        }
+
+        .heading--area--buttons {
+          padding-top: 24px;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

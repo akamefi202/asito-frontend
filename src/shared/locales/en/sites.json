@@ -1,0 +1,117 @@
+{
+    "SITES": "Sites",
+    "NEW_SITE": "New site",
+    "EDIT_SITE": "Edit site",
+    "CANCEL": "Cancel",
+    "SAVE_SITE": "Save site",
+    "STATUS_CODE": {
+        "ACTIVE": "Ative",
+        "INACTIVE": "Inactive"
+    },
+    "LIST": {
+        "SEARCH_PLACEHOLDER": "Search for a site...",
+        "TABS": {
+            "ALL": "All",
+            "ACTIVE": "Ative",
+            "INACTIVE": "Inactive"
+        },
+        "COLUMNS": {
+            "SITE_NAME": "Site Name",
+            "CLIENT_NAME": "Client Name",
+            "LOCATION": "Location",
+            "OPERATORS": "Operators",
+            "STATUS": "Status"
+        }
+    },
+    "SHOW": {
+        "MENU": {
+            "GENERAL_INFORMATION": "General Information",
+            "LOCATION_INFORMATION": "Location information",
+            "REQUIREMENTS": "Requirements",
+            "OPERATORS": "Operators"
+        },
+        "GENERAL_INFORMATION": {
+            "STATUS": "Status",
+            "CLIENT": "Client",
+            "SITE_NAME": "Site name",
+            "OPERATIRS_REQUIRED": "Operators required"
+        },
+        "LOCATION_INFORMATION": {
+            "LATITUDE": "Latitude",
+            "LONGITUDE": "Longitude",
+            "ADDRESS_LINE": "Address line",
+            "POSTCODE": "Postcode",
+            "CITY": "City",
+            "COUNTRY": "Country"
+        },
+        "REQUIREMENTS": {
+            "COLUMNS": {
+                "CERTIFICATE_TYPE": "Certificate type",
+                "VALID_UNTIL": "Valid at least until"
+            }
+        },
+        "OPERATORS": {
+            "ADD_ROW": "Add row",
+            "SURE_DELETE": "Sure to delete?",
+            "SEARCH_OPERATOR": "Search for an operator...",
+            "SCAN_OPERATOR": "Scan operator",
+            "COLUMNS": {
+                "FULL_NAME": "Full name",
+                "EMPLOYEE_NUMBER": "Employee number",
+                "CERTIFICATES": "Certificates",
+                "OPERATOR_ID": "Operator ID"
+            }
+        }
+    },
+    "FORM": {
+        "MENU": {
+            "GENERAL_INFORMATION": "General Information",
+            "LOCATION_INFORMATION": "Location information",
+            "REQUIREMENTS": "Requirements",
+            "OPERATORS": "Operators"
+        },
+        "GENERAL_INFORMATION": {
+            "STATUS": "Status",
+            "CLIENT": "Client",
+            "SITE_NAME": "Site name",
+            "SITE_NAME_PLACEHOLDER": "Site name",
+            "OPERATIRS_REQUIRED": "Operators required",
+            "OPERATIRS_REQUIRED_PLACEHOLDER": "Operators required"
+        },
+        "LOCATION_INFORMATION": {
+            "LATITUDE": "Latitude",
+            "LATITUDE_PLACEHOLDER": "Latitude",
+            "LONGITUDE": "Longitude",
+            "LONGITUDE_PLACEHOLDER": "Longitude",
+            "ADDRESS_LINE": "Address line",
+            "ADDRESS_LINE_PLACEHOLDER": "Address line",
+            "POSTCODE": "Postcode",
+            "POSTCODE_PLACEHOLDER": "Postcode",
+            "CITY": "City",
+            "CITY_PLACEHOLDER": "City",
+            "COUNTRY": "Country"
+        },
+        "REQUIREMENTS": {
+            "ADD_ROW": "Add row",
+            "COLUMNS": {
+                "CERTIFICATE_TYPE": "Certificate type",
+                "CERTIFICATE_TYPE_PLACEHOLDER": "Select a certificate type",
+                "VALID_UNTIL": "Valid at least until",
+                "VALID_UNTIL_PLACEHOLDER": "Valid at least until"
+            }
+        },
+        "OPERATORS": {
+            "ADD_ROW": "Add row",
+            "SEARCH_OPERATOR": "Search for an operator...",
+            "COLUMNS": {
+                "FULL_NAME": "Full name",
+                "EMPLOYEE_NUMBER": "Employee number",
+                "CERTIFICATES": "Certificates"
+            }
+        },
+        "ERROR": {
+            "REQUIRED": "Is a required field",
+            "NUMBER": "Must be a number"
+        }
+    }
+}

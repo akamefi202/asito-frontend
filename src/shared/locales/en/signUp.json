@@ -1,0 +1,75 @@
+{
+  "REGISTRATION": {
+    "ORGANIZATION": "Organization registration",
+    "ACADEMY": "Academy registration"
+  },
+  "STEPS": {
+    "COMPANY_INFORMATION": "Company information",
+    "ACCOUNT_INFORMATION": "Account information",
+    "EMAIL_VERIFICATION": "Email verification"
+  },
+  "GO_BACK": "Go back",
+  "PREVIOUS_STEP": "Previous step",
+  "NEXT_STEP": "Next step",
+  "COMPLETE": "Complete registration",
+  "FORM": {
+    "COMPANY_INFORMATION": {
+      "NAME": "Company name",
+      "NAME_PLACEHOLDER": "Company name",
+      "NUMBER": "Business registration number",
+      "NUMBER_PLACEHOLDER": "Registration number",
+      "VAT_ID": "VAT ID",
+      "VAT_ID_PLACEHOLDER": "VAT ID",
+      "ADDRESS": "Address",
+      "ADDRESS_PLACEHOLDER": "Address line",
+      "POSTCODE": "Postcode",
+      "POSTCODE_PLACEHOLDER": "Postcode",
+      "CITY": "City",
+      "CITY_PLACEHOLDER": "City",
+      "COUNTRY": "Country",
+      "COUNTRY_PLACEHOLDER": "Country",
+      "PHONE_NUMBER": "Phone Number",
+      "PHONE_NUMBER_PLACEHOLDER": "Phone Number",
+      "EMAIL_ADDRESS": "Email Address",
+      "EMAIL_ADDRESS_PLACEHOLDER": "Email Address",
+      "WEBSITE": "Website",
+      "WEBSITE_PLACEHOLDER": "Website"
+    },
+    "ACCOUNT_INFORMATION": {
+      "FIRST_NAME": "First name",
+      "FIRST_NAME_PLACEHOLDER": "First name",
+      "LAST_NAME": "Last name",
+      "LAST_NAME_PLACEHOLDER": "Last name",
+      "EMAIL_ADDRESS": "Email Address",
+      "EMAIL_ADDRESS_PLACEHOLDER": "Email Address",
+      "PHONE_NUMBER": "Phone Number",
+      "PHONE_NUMBER_PLACEHOLDER": "Phone Number",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Password",
+      "REPEAT_PASSWORD": "Repeat password",
+      "REPEAT_PASSWORD_PLACEHOLDER": "Repeat password"
+    },
+    "EMAIL_VERIFICATION": {
+      "SENT": {
+        "PART_ONE": "We just sent an email to",
+        "PART_TWO": ". Please click the verification link in the email."
+      },
+      "SUCCESS": "Success",
+      "NOT_RECEIVE": "Didn’t receive anything?",
+      "RESEND_EMAIL": "Resend verification email"
+
+    },
+    "ACCOUNT_SUBMITTED": {
+      "WELCOME": "Welcome to Mammoet",
+      "LOGIN_ACCOUNT": "You can now log in with your account",
+      "BACK_LOGIN": "Back to Login"
+    },
+    "ERROR": {
+      "REQUIRED": "Is a required field",
+      "PASSVORD_MATCH": "Passwords must match",
+      "EMAIL": "Must be a valid email",
+      "NUMBER": "Must be a number",
+      "URL": "Must be a valid URL"
+    }
+  }
+}

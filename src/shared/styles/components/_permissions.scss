@@ -1,0 +1,111 @@
+.permissions__item {
+  background-color: $c-white;
+  -webkit-box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  -moz-box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  box-shadow: 0 0 10px -4px #0000002b;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  &__icon {
+    background-color: $c-body;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    margin-right: 10px;
+
+    img {
+      width: 75px;
+    }
+  }
+
+    
+  &__infos {
+    width: 100%;
+
+    &__title {
+      padding: 4px 0;
+    }
+    &__more {
+      padding-top: 4px;
+      p {
+        padding: 2px 0;
+      }
+    } 
+  }
+}
+
+.permissions__item:hover .permissions__item__actions {
+  opacity: 1;
+}
+
+.permissions__item__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: rgba($c-main, .6);
+  &__item  {
+    padding: 5px;
+    width: 36px;
+    height: 36px;
+    background-color: $c-body;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 10px;
+  }
+}
+
+.section__encounteres::-webkit-scrollbar {
+  width: 3px !important;
+}
+
+.section__encounteres::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3) !important;
+}
+
+.section__encounteres::-webkit-scrollbar-thumb {
+  background-color: rgb(228, 228, 228) !important;
+  outline: 1px solid rgba(240, 240, 240 ,0) !important;
+  border-radius: 50px !important;
+}
+
+
+
+@media only screen and (max-width: 479px) {
+  .section__encounteres {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .section__encounteres {
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}

@@ -1,0 +1,12 @@
+.custom--table {
+    width: 100%;
+
+    .ant-table-thead > tr > th {
+        background: #FBFBFB;
+    }
+
+    .ant-table-tbody > tr > td {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}

@@ -1,0 +1,111 @@
+{
+    "CERTIFICATES": "Certificates",
+    "NEW_CERTIFICATE": "New Certificate",
+    "EDIT_CERTIFICATE": "Edit Certificate",
+    "DISCARD_CHANGES": "Discard changes",
+    "SAVE_CHANGES": "Save changes",
+    "LIST": {
+        "SEARCH_PLACEHOLDER": "Search for a certificate...",
+        "TABS": {
+            "ALL": "All",
+            "VALID": "Valid",
+            "EXPIRED": "Expired"
+        },
+        "COLUMNS": {
+            "CERTIFICATE_NUMBER": "Certifcate Number",
+            "CERTIFICATE_TYPE": "Certificate Type",
+            "ISSUED_TO": "Issued To",
+            "ISSUED_ON": "Issued On",
+            "VALID_UNTIL": "Valid Until"
+        }
+    },
+    "SHOW": {
+        "MENU": {
+            "GENERAL_INFORMATION": "General Information",
+            "ISSUER_INFORMATION": "Issuer Information",
+            "ATTACHMENTS": "Attachments"
+        },
+        "GENERAL_INFORMATION": {
+            "CERTIFICATE_NUMBER": "Certifcate Number",
+            "CERTIFICATE_TYPE": "Certificate Type",
+            "ISSUED_TO": "Issued To",
+            "ISSUED_BY": "Issued By",
+            "ISSUED_ON": "Issued On",
+            "VALID_UNTIL": "Valid Until"
+        },
+        "ISSUER_INFORMATION": {
+            "SIGNED_BY": "Signed by",
+            "SIGNERS_TITLE": "Signer's Title",
+            "REGISTERED_NAME": "Registered Name",
+            "ISSUER_NUMBER": "Issuer Number",
+            "ADDRESS": "Address",
+            "POSTCODE": "Postcode",
+            "CITY": "City",
+            "COUNTRY": "Country",
+            "PHONE_NUMBER": "Phone Number",
+            "EMAIL_ADDRESS": "Email Address",
+            "WEBSITE": "Website"
+        },
+        "ATTACHMENTS": {
+            "COLUMNS": {
+                "FILE_NAME": "File Name",
+                "FILE_TYPE": "File Type",
+                "UPLOAD_DATE": "Uploaded on"
+            }
+        }
+    },
+    "FORM": {
+        "MENU": {
+            "GENERAL_INFORMATION": "General Information",
+            "ISSUER_INFORMATION": "Issuer Information",
+            "ATTACHMENTS": "Attachments"
+        },
+        "GENERAL_INFORMATION": {
+            "ISSUED_TO": "Issued To",
+            "ISSUED_TO_PLACEHOLDER": "Search for an operator...",
+            "CERTIFICATE_NUMBER": "Certifcate Number",
+            "CERTIFICATE_NUMBER_PLACEHOLDER": "Certifcate Number",
+            "CERTIFICATE_TYPE": "Certificate Type",
+            "ISSUED_ON": "Issued On",
+            "ISSUED_ON_PLACEHOLDER": "Issued On",
+            "VALID_UNTIL": "Valid Until",
+            "VALID_UNTIL_PLACEHOLDER": "Valid Until"
+        },
+        "ISSUER_INFORMATION": {
+            "SIGNED_BY": "Signed by",
+            "SIGNED_BY_PLACEHOLDER": "Signed by",
+            "SIGNERS_TITLE": "Signer's Title",
+            "SIGNERS_TITLE_PLACEHOLDER": "Signer's Title",
+            "REGISTERED_NAME": "Registered issuer name",
+            "REGISTERED_NAME_PLACEHOLDER": "Registered issuer name",
+            "ISSUER_NUMBER": "Issuer Number",
+            "ISSUER_NUMBER_PLACEHOLDER": "Issuer Number",
+            "ADDRESS": "Address",
+            "ADDRESS_PLACEHOLDER": "Address",
+            "POSTCODE": "Postcode",
+            "POSTCODE_PLACEHOLDER": "Postcode",
+            "CITY": "City",
+            "CITY_PLACEHOLDER": "City",
+            "COUNTRY": "Country",
+            "PHONE_NUMBER": "Phone Number",
+            "PHONE_NUMBER_PLACEHOLDER": "Phone Number",
+            "EMAIL_ADDRESS": "Email Address",
+            "EMAIL_ADDRESS_PLACEHOLDER": "Email Address",
+            "WEBSITE": "Website",
+            "WEBSITE_PLACEHOLDER": "Website"
+        },
+        "ATTACHMENTS": {
+            "UPLOAD_FILE": "Upload file",
+            "COLUMNS": {
+                "FILE_NAME": "File Name",
+                "FILE_TYPE": "File Type",
+                "FILE_TYPE_PLACEHOLDER": "File Type",
+                "UPLOAD_DATE": "Uploaded on",
+                "UPLOAD_DATE_PLACEHOLDER": "Uploaded on"
+            }
+        },
+        "ERROR": {
+            "REQUIRED": "Is a required field"
+        }
+    }
+}

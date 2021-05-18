@@ -1,0 +1,141 @@
+// Buttons
+
+.button_style {
+  padding: 10px 38px;
+  font-size: 16px;
+  justify-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+.simple_button_style {
+  padding: 14px 38px;
+  font-size: 16px;
+  justify-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.button_style.custom_style__bg__main {
+  background-color: $c-main;
+}
+.button_style.custom_style__bg__second {
+  background-color: $c-second;
+}
+
+.button_style.custom_style__bg__main-opacity {
+  background-color: $c-main-opacity;
+}
+.button_style.custom_style__bg__main-dark-opacity {
+  background-color: $c-main-dark-opacity;
+}
+.button_style.custom_style__bg__second-opacity {
+  background-color: $c-second-opacity;
+}
+.button_style.custom_style__bg__gray {
+  background-color: $c-grey-DD;
+}
+.button_style.custom_style__bg__white {
+  background-color: $c-white;
+}
+
+.simple_button_style.custom_style__bg__main {
+  background-color: $c-main;
+}
+.simple_button_style.custom_style__bg__second {
+  background-color: $c-second;
+}
+
+.simple_button_style.custom_style__bg__main-opacity {
+  background-color: $c-main-opacity;
+}
+.simple_button_style.custom_style__bg__main-dark-opacity {
+  background-color: $c-main-dark-opacity;
+}
+.simple_button_style.custom_style__bg__second-opacity {
+  background-color: $c-second-opacity;
+}
+.simple_button_style.custom_style__bg__gray {
+  background-color: $c-grey-DD;
+}
+.simple_button_style.custom_style__bg__white {
+  background-color: $c-white;
+}
+
+.title_style {
+  font-size: 15px;
+  font-weight: 500;
+  padding-right: 10px;
+}
+
+.title_style.custom_style__color__main {
+  color: $c-main;
+}
+.title_style.custom_style__color__second {
+  color: $c-second;
+}
+
+.title_style.custom_style__color__gray {
+  color: $c-grey-DD;
+}
+.title_style.custom_style__color__white {
+  color: $c-white;
+}
+.title_style.custom_style__color__black {
+  color: $c-black;
+}
+
+
+
+
+
+// TAB BUTTONS
+.button__tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 0 9px;
+
+    h5 {
+      font-size: 14px;
+    }
+
+  &__icon {
+    border-radius: 12px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3px;
+
+    img {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+}
+
+
+.button__tab__bg__blue {
+  background-color: #EAEFFF;
+}
+.button__tab__bg__black {
+  background-color: #F0F0F0;
+}
+.button__tab__color__blue {
+  color: #112B75;
+}
+.button__tab__color__black {
+  color: #303030;
+}

@@ -1,0 +1,42 @@
+@import "../../../shared/styles/partials/variables";
+
+.select-wrapper {
+  background-color: $c-white;
+  min-height: 50px;
+  max-height: 50px;
+  width: 100%;
+  
+  .custom--select {
+    width: 100%;
+    
+    .ant-select-selector {
+      background-color: $c-white;
+      min-height: 50px;
+      max-height: 50px;
+      width: 100%;
+      
+      .ant-select-selector {
+        min-height: 50px;
+        max-height: 50px;
+        width: 100%;
+        
+        border: 1px solid #dcdcdc;
+        box-shadow: 0px 8px 16px rgba(227, 0, 15, 0.04);
+        cursor: pointer;
+
+        .ant-select-selection-item {
+          line-height: 45px;
+        }
+      }
+    }
+  }
+    
+  .custom--select.error {
+    border: 1px solid red;
+  }
+
+  p {
+    color: red;
+    white-space: nowrap;
+  }
+}

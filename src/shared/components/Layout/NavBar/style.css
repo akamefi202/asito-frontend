@@ -1,0 +1,24 @@
+/* .navbar {
+  background-color: white;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+} */
+
+  .navbar {
+    display: none;
+    position: absolute;
+  }
+
+@media (max-width: 992px) {
+  .navbar {
+    display: block;
+  }
+}
+
+
+
+.logo {
+  height: 32px;
+  margin-left: 1rem;
+}

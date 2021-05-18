@@ -1,0 +1,105 @@
+
+.section__documents {
+  padding: 20px;
+  background-color: $c-white;
+  border-radius: 13px;
+}
+
+.documents__item {
+  background-color: $c-white;
+  -webkit-box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  -moz-box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  &__image {
+    img {
+      border-radius: 10px;
+      height: 180px;
+    }
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 10px;
+
+    h5 {
+      color: #303030;
+      font-size: 12px;
+    }
+    h6 {
+      font-size: 10px;
+      color: #A6AAB4;
+    }
+  }
+
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 3px;
+
+
+    &__item {
+      background-color: #F7F9FC;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  
+}
+
+
+.section__encounteres::-webkit-scrollbar {
+  width: 3px !important;
+}
+
+.section__encounteres::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3) !important;
+}
+
+.section__encounteres::-webkit-scrollbar-thumb {
+  background-color: rgb(228, 228, 228) !important;
+  outline: 1px solid rgba(240, 240, 240 ,0) !important;
+  border-radius: 50px !important;
+}
+
+
+
+@media only screen and (max-width: 479px) {
+  .section__encounteres {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .section__encounteres {
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}

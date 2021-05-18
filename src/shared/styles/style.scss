@@ -1,0 +1,388 @@
+//Setup
+@import "partials/normalize";
+@import "partials/reset";
+@import "partials/variables";
+@import "partials/helpers";
+@import "partials/mixins";
+@import "partials/fonts";
+@import "partials/colors";
+
+// Component
+@import "components/buttons";
+@import "components/sidebar";
+@import "components/breadcrumb";
+@import "components/menu";
+@import "components/card";
+@import "components/table";
+@import "components/form";
+@import "../components/Button/style";
+@import "../components/Input/style";
+
+//screens
+@import "screens/auth";
+@import "screens/signUp";
+@import "screens/operator";
+
+//Base styles
+@import "base/base";
+
+/*--
+    - Common Classes
+-----------------------------------------*/
+.h-100vh {
+  height: 100vh;
+}
+
+.custom-h {
+  height: calc(100vh - 400px);
+  display: flex;
+  margin: auto;
+}
+
+.custom-h-change-password {
+  height: calc(100vh - 250px);
+  display: flex;
+  margin: auto;
+}
+
+.w-100-100 {
+  width: 100%;
+}
+
+//container
+.container--layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container--antd {
+  padding: 24px;
+  padding-top: 0px;
+
+  @media (max-width: 991px) {
+    padding-top: 24px;
+  }
+}
+
+.btn--icon {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    color: #dcdcdc;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container--antd {
+    max-width: 992px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container--antd {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container--antd {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+//
+
+.clickable:active {
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.fix {
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.main__layout {
+  padding: 15px 30px 0 30px;
+}
+
+.main__sider {
+  background-color: $c-main;
+  text-align: center;
+  &__menu {
+    background-color: $c-main;
+  }
+}
+
+.main__footer {
+  padding: 12px 50px;
+}
+
+.fixed__height {
+  overflow-y: auto;
+  max-height: 100%;
+  height: calc(100vh - 350px);
+}
+
+// --------------------------------- Onboarding -----------------------------------
+
+.onboarding__container {
+  height: 100vh;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.shap_login {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 300px;
+}
+
+// Sign UP
+
+.signin_steps_title {
+  font-size: 24px;
+  color: #000066;
+}
+.signin_steps_subtitle {
+  font-size: 18px;
+}
+.onboarding__steps__wrapper {
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  overflow: auto;
+}
+.onboarding__steps__wrapper_container {
+  background-color: #fff;
+  border-radius: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.onboarding__steps__wrapper_container_row {
+  margin: 20px;
+}
+.signin_phonestep_top_img {
+  height: 150px;
+  width: 150px;
+  border-radius: 20px;
+}
+.signin_phonestep_img {
+  height: 20px;
+  width: 20px;
+}
+
+.onboarding__steps__wrapper_container_row_input {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.onboarding__steps__wrapper_container_row_input_item {
+  width: 85%;
+}
+
+.shap_icon {
+  background-color: #f4f6f9;
+  padding: 7px;
+  border-radius: 6px;
+  margin-right: 10px;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 39px;
+  border: 1px solid #dfe5ed;
+}
+
+.eye-show_icon {
+  width: 56px;
+  height: 56px;
+  border: 1px solid;
+  box-sizing: border-box;
+  border-radius: 48px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  margin: auto;
+  margin-bottom: 24px;
+}
+
+.success {
+  color: #4caf50;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.custom-radio {
+  .ant-radio-wrapper-checked {
+    border: 1px solid #0f6aff;
+    color: #0f6aff;
+
+    .ant-radio-inner {
+      border-color: #0f6aff;
+      &::after {
+        background-color: #0f6aff;
+      }
+    }
+  }
+}
+
+.onboarding__steps__wrapper_container_row_resend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_icon {
+    width: 30px;
+    height: 30px;
+    background-color: $c-second;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 10px;
+  }
+
+  h5 {
+    font-size: 14px;
+    color: $c-black;
+  }
+}
+
+.section__call__title {
+  z-index: 99999;
+  background-color: $c-black;
+  padding: 8px 10px;
+  color: $c-white;
+  width: 87.1%;
+  margin: 0 auto;
+}
+
+.call__section {
+  position: relative;
+  height: 94vh;
+  &__actions {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 20%;
+
+    &__buttons {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__operator {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    width: 200px;
+    z-index: 9999999;
+  }
+
+  &__video {
+    height: 95vh;
+  }
+}
+
+// --------------------------------- END Onboarding -----------------------------------
+
+// --------------------------------- LMV -----------------------------------
+.red-line {
+  height: 4px;
+  background-color: $c-lmv-primary;
+}
+.basic-card {
+  border: 1px solid $c-grey-e8;
+  background-color: $c-white;
+  padding: 24px;
+}
+.ant-modal-title {
+  font: normal normal 500 21px/25px Montserrat;
+  color: $c-grey-35;
+}
+
+// --------------------------------- RESPONSIVE
+@media (max-width: 576px) {
+  .shap_login {
+    display: none;
+  }
+  .signin_steps_subtitle {
+    font-size: 12px;
+  }
+  .red-line {
+    height: 2px;
+  }
+  .ant-modal-title {
+    font: normal normal 500 16px/20px Montserrat;
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+}
+
+@media only screen and (max-width: 479px) {
+  .main__layout {
+    padding: 10px 20px 0 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .main__layout {
+    padding: 10px 20px 0 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}

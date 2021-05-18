@@ -1,0 +1,15 @@
+export { default as AuthMutations } from "./auth";
+export { default as SiteMutations } from "./site";
+export { default as CertificateMutations } from "./certificate";
+export { default as OperatorMutations } from "./operator";
+export { default as ClientMutations } from "./client";
+export { default as IssuerMutations } from "./issuer";
+export { default as UserMutations } from "./user";
+export { default as AccessMutations } from "./access";
+export { default as NotificationMutations } from "./notification";
+export { default as FileMutations } from "./file";
+export { default as OperatorSiteMutations } from "./operatorSite";
+export { default as AttachmentsSiteMutations } from "./attachments";
+export { default as ForgetPasswordMutations } from "./forgetPassword";
+export { default as ResetPasswordMutations } from "./resetPassword";
+export { default as RemoveAttachmentsMutations } from "./removeAttachments";

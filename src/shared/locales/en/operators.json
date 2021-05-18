@@ -1,0 +1,136 @@
+{
+    "OPERATORS": "Operators",
+    "NEW_OPERATOR": "New operator",
+    "EDIT_OPERATOR": "Edit operator",
+    "DISCARD_CHANGES": "Discard changes",
+    "SAVE_CHANGES": "Save changes",
+    "GENDER": {
+        "male": "Male",
+        "female": "Female"
+    },
+    "LIST": {
+        "SEARCH_PLACEHOLDER": "Search for an operator...",
+        "TABS": {
+            "ALL": "All",
+            "AUTHORIZED": "Authorized",
+            "PENDING": "Pending Authorization",
+            "NO_AUTHORIZED": "No Authorization"
+        },
+        "COLUMNS": {
+            "FULL_NAME": "Full Name",
+            "EMPLOYEE_NUMBER": "Employee number",
+            "CERTIFICATES": "Certificates",
+            "ASSIGNED_SITES": "Assigned Sites",
+            "DATA_ACCESS": "Data Access"
+        }
+    },
+    "SHOW": {
+        "MENU": {
+            "DATA_ACCESS": "Data Access",
+            "GENERAL_INFORMATION": "General Information",
+            "CONTACT_INFORMATION": "Contact information",
+            "CERTIFICATES": "Certificates",
+            "ASSIGNED_SITES": "Assigned sites"
+        },
+        "DATA_ACCESS": {
+            "COLUMNS": {
+                "CLIENT": "Client",
+                "SHARED_ON": "Shared on",
+                "SHARED_UNTIL": "Shared until"
+            },
+            "SHARING_AUTHORIZATION": "Data sharing authorization granted on"
+        },
+        "GENERAL_INFORMATION": {
+            "EMPLOYEE_NUMBER": "Employee number",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name",
+            "DATE_OF_BIRTH": "Date of birth",
+            "GENDER": "Gender"
+        },
+        "CONTACT_INFORMATION": {
+            "PHONE_NUMBER": "Phone number",
+            "EMAIL_ADDRESS": "Email address",
+            "ADDRESS_LINE": "Address line",
+            "POSTCODE": "Postcode",
+            "CITY": "City",
+            "COUNTRY": "Country"
+        },
+        "CERTIFICATES": {
+            "COLUMNS": {
+                "CERTIFICATE_NUMBER": "Certificate number",
+                "CERTIFICATE_TYPE": "Certificate type",
+                "ISSUED_ON": "Issued on",
+                "VALID_UNTIL": "Valid until"
+            }
+        },
+        "ASSIGNED_SITES": {
+            "COLUMNS": {
+                "SITE_NAME": "Site name",
+                "CLIENT": "Client",
+                "ASSIGNED_FROM": "Assigned from",
+                "ASSIGNED_UNTIL": "Assigned until"
+            }
+        }
+    },
+    "FORM": {
+        "MENU": {
+            "DATA_ACCESS": "Data Access",
+            "GENERAL_INFORMATION": "General Information",
+            "CONTACT_INFORMATION": "Contact information",
+            "CERTIFICATES": "Certificates",
+            "ASSIGNED_SITES": "Assigned sites"
+        },
+        "DATA_ACCESS": {
+            "ADD_ROW": "Add row",
+            "ACCESS_PLACEHOLDER": "Select a client",
+            "COLUMNS": {
+                "CLIENT": "Client",
+                "SHARED_ON": "Shared on",
+                "SHARED_UNTIL": "Shared until",
+                "SHARED_ON_PLACEHOLDER": "Shared on",
+                "SHARED_UNTIL_PLACEHOLDER": "Shared until"
+            }
+        },
+        "GENERAL_INFORMATION": {
+            "EMPLOYEE_NUMBER": "Employee number",
+            "EMPLOYEE_NUMBER_PLACEHOLDER": "Employee number",
+            "FIRST_NAME": "First name",
+            "FIRST_NAME_PLACEHOLDER": "First name",
+            "LAST_NAME": "Last name",
+            "LAST_NAME_PLACEHOLDER": "Last name",
+            "DATE_OF_BIRTH": "Date of birth",
+            "DATE_OF_BIRTH_PLACEHOLDER": "Date of birth",
+            "GENDER": "Gender",
+            "MALE": "Male",
+            "FEMALE": "Female"
+        },
+        "CONTACT_INFORMATION": {
+            "PHONE_NUMBER": "Phone number",
+            "PHONE_NUMBER_PLACEHOLDER": "Phone number",
+            "EMAIL_ADDRESS": "Email address",
+            "EMAIL_ADDRESS_PLACEHOLDER": "Email address",
+            "ADDRESS_LINE": "Address line",
+            "ADDRESS_LINE_PLACEHOLDER": "Address line",
+            "POSTCODE": "Postcode",
+            "POSTCODE_PLACEHOLDER": "Postcode",
+            "CITY": "City",
+            "CITY_PLACEHOLDER": "City",
+            "COUNTRY": "Country"
+        },
+        "ASSIGNED_SITES": {
+            "ADD_ROW": "Add row",
+            "SITES_PLACEHOLDER": "Select a site",
+            "COLUMNS": {
+                "SITE_NAME": "Site name",
+                "ASSIGNED_FROM": "Assigned from",
+                "ASSIGNED_UNTIL": "Assigned until",
+                "ASSIGNED_FROM_PLACEHOLDER": "Assigned from",
+                "ASSIGNED_UNTIL_PLACEHOLDER": "Assigned until"
+            }
+        },
+        "ERROR": {
+            "REQUIRED": "Is a required field",
+            "NUMBER": "Must be a number"
+        }
+    }
+}

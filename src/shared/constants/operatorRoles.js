@@ -1,0 +1,16 @@
+export const OPERATOR_ROLES = [
+  {key: "1", value: "Crane Operator"},
+  {key: "2", value: "Crane Operator Hydra"},
+  {key: "3", value: "Crane Operator Hydra Senior"},
+  {key: "4", value: "Crane Supervisor"},
+  {key: "5", value: "Crane Supervisor Hydra"},
+  {key: "6", value: "Crane Supervisor Senior"},
+  {key: "7", value: "Senior Crane Operator"},
+  {key: "8", value: "Senior SPMT Supervisor"},
+  {key: "9", value: "Senior Supervisor"},
+  {key: "10", value: "Transport Supervisor"},
+  {key: "11", value: "Operator"},
+  {key: "12", value: "Rigger"},
+  {key: "13", value: "Project Manager"},
+  {key: "14", value: "Engineer"},
+];

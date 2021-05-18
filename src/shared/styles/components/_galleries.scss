@@ -1,0 +1,148 @@
+.medecin__item {
+  margin: 8px 0;
+  h5 {
+    color: #444560;
+    font-size: 14px;
+    font-weight: 100;
+    padding-bottom: 8px;
+  }
+
+  &__content {
+    background-color: #F4F6F9;
+    border-radius: 7px;
+    height: 45px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 15px;
+
+    h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #444560;
+    }
+  }
+}
+.modal__gallery {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &__container {
+
+    &__button__back {
+      background-color: $c-white;
+      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      z-index: 99999;
+      cursor: pointer;
+    }
+  }
+
+  .ant-modal-content {
+    background-color: $c-body;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+}
+
+
+.galleries__item {
+  background-color: $c-white;
+  -webkit-box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  -moz-box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  box-shadow: 0 0 10px -4px rgba(0,0,0,.17);
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  &__image {
+    img {
+      border-radius: 10px;
+      height: 180px;
+    }
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 10px;
+
+    h5 {
+      color: #303030;
+      font-size: 12px;
+    }
+    h6 {
+      font-size: 10px;
+      color: #A6AAB4;
+    }
+  }
+
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 8px;
+
+
+    &__item {
+      background-color: #F7F9FC;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  
+}
+
+@media only screen and (max-width: 479px) {
+  .modal__gallery {
+    &__container {
+      &__button__back {
+        position: absolute;
+        top: 2%;
+        left: 4%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .modal__gallery {
+    &__container {
+      &__button__back {
+        position: absolute;
+        top: 2%;
+        left: 4%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}

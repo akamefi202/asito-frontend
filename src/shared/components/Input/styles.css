@@ -1,0 +1,13 @@
+.componnent_input_wrapper {
+  background-color: #f4f6f9;
+  padding: 7px;
+  border: 1px solid #dfe5ed;
+  border-radius: 6px;
+  width: 100%;
+}
+.componnent_input {
+  height: 40px;
+  border-color: transparent;
+  background-color: transparent;
+  width: 100%;
+}

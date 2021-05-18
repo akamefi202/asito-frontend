@@ -1,0 +1,252 @@
+.topic--menu {
+    height: 100%;
+
+    &--scroll {
+        height: calc(100% - 180px);
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+.main--sider {
+  background-color: $c-white;
+  text-align: center;
+
+  &--top {
+    padding: 24px;
+    &--logo {
+      img {
+        width: 100%;
+      }
+    }
+
+    &--links {
+        text-align: left;
+        padding-top: 16px;
+      ul {
+        li {
+            padding-top: 4px;
+          a {
+            text-decoration: none;
+            color: #808080;
+            font-size: 14px;
+            line-height: 22px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  &--notifications {
+    padding: 45px 0;
+    padding-left: 24px;
+    // height: 88px;
+    margin: auto 0;
+    display: flex;
+    a {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #808080;
+
+        &.active,
+        &:hover {
+            color: $c-primary;
+        }
+    }
+    &--text {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .txt {
+            margin-left: 10px;
+        }
+    }
+    &--count {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF;
+        background-color: $c-primary;
+        border-radius: 100px;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    
+  }
+
+
+
+  &--setting {
+    padding-top: 45px;
+    padding-left: 24px;
+    // height: 88px;
+    margin: auto 0;
+    display: flex;
+    a {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #808080;
+
+        &.active,
+        &:hover {
+            color: $c-primary;
+        }
+    }
+    &--text {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .txt {
+            margin-left: 10px;
+        }
+    }
+    &--count {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF;
+        background-color: $c-primary;
+        border-radius: 100px;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    
+  }
+
+  &--logout {
+    padding: 20px 0;
+    padding-left: 24px;
+    margin: auto 0;
+    display: flex;
+    a {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #808080;
+
+        &:hover {
+            color: $c-primary;
+        }
+    }
+    &--text {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .txt {
+            margin-left: 10px;
+        }
+    }
+    &--count {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF;
+        background-color: $c-primary;
+        border-radius: 100px;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    
+  }
+
+
+
+  &--menu {
+    background-color: $c-white;
+    padding: 0 12px;
+
+    .item--li {
+        height: 50px;
+        display: flex;
+        padding-left: 12px !important;
+    
+        &.active,
+        &:hover {
+            background-color: #F5F5F5;
+            color: #0F6AFF;
+        }
+     }
+
+     .ant-menu-item a {
+        color: #808080 ;
+        &:hover {
+            color: #0F6AFF;
+        }
+     }
+
+    &--item {
+        
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+
+
+        &:hover {
+            color: #0F6AFF;
+        }
+    }
+
+    .active {
+        &--item,
+        &.ant-menu-item a {
+            color: #0F6AFF;
+        }
+    }
+
+    .icon {
+        margin-right: 10px;
+        display: flex;
+        svg {
+            font-size: 16px;
+        }
+    }
+  }
+
+  &--middel {
+      margin-top: 30px;
+  }
+
+
+}
+
+
+
+
+
+.ant-drawer-body {
+    padding: 24px 0;
+}
+
+.ant-btn-primary {
+    background-color: $c-primary;
+    border: 1px solid $c-primary;
+    
+    &:hover {
+        background-color: $c-second;
+        border: 1px solid $c-second;
+    }
+}
