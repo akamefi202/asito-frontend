@@ -54,7 +54,7 @@ export default () => {
     },
   ];
 
-  const isAccess = () => userRole && ((userRole === USER_ROLES.ISSUER.key) || ( userRole === USER_ROLES.TEST.key))
+  const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || ( userRole === USER_ROLES.TEST.key))
 
   return (
     <div className="wrapper--content">

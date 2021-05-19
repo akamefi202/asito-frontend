@@ -83,7 +83,11 @@
 }
 
 .search--input {
-  padding: 20px 0;
+  padding: 24px 0px;
+
+  &--no--tabs {
+    padding-bottom: 24px;
+  }
 
   &--custom {
     width: 50%;
@@ -121,25 +125,22 @@
   display: flex;
   align-items: center;
 
-  span {
-    margin-left: 10px;
+  .icon {
+    margin-right: 10px;
   }
 }
 
 .green {
   color: #4caf50;
   font-size: 16px;
-  font-weight: 500;
 }
 .yellow {
   color: #f2a635;
   font-size: 16px;
-  font-weight: 500;
 }
 .red {
   color: #e65050;
   font-size: 16px;
-  font-weight: 500;
 }
 
 .wrapper--content {

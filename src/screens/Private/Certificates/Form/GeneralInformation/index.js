@@ -9,7 +9,7 @@ import { bindInputProps } from "utils/helpers/input";
 import { withoutRepetitions } from "utils/helpers/array";
 import { delay } from "utils/helpers/delay";
 
-const {OPERATORS} = OperatorQueries;
+const { OPERATORS } = OperatorQueries;
 
 export default ({ t, formik }) => {
   const [operatorsSelect, setOperatorsSelect] = useState([]);
@@ -24,11 +24,11 @@ export default ({ t, formik }) => {
 
   const { loading } = useQuery(OPERATORS, {
     variables: variablesSelect,
-    onCompleted: ({operators}) => {
+    onCompleted: ({ operators }) => {
       if (!operators || !operators.data) return;
-      const select = operators.data.map((item) => ({ 
-        key: item.id, 
-        value: `${item.firstName} ${item.lastName}` 
+      const select = operators.data.map((item) => ({
+        key: item.id,
+        value: `${item.firstName} ${item.lastName}`
       }));
       setTotalSelect(operators.count || 0);
       const selectAll = scanStatus ? select : withoutRepetitions([...operatorsSelect, ...select]);
@@ -36,7 +36,7 @@ export default ({ t, formik }) => {
       setOperatorsSelect(selectAll);
     },
     onError: (error) => {
-        messages({data: error});
+      messages({ data: error });
     }
   });
 

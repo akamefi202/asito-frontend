@@ -4,7 +4,7 @@ export const NAME_SPACES = {
   LAYOUT: "layout",
   OPERATORS: "operators",
   ROLES: "roles",
-  CLIENTS: "clients",
+  DEPARTAMENTS: "departments",
   CERTIFICATES: "certificates",
   NAV_BAR: "navBar",
   PREFERENCES: "preferences",

@@ -1,14 +1,13 @@
 import React from "react";
 import { Row, Col } from "antd";
 import Card from "shared/components/Card";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { dateToString, timestampToDate } from "utils/helpers/moment";
 import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import moment from "moment";
 
 const today = moment();
 
-export default ({ t, certificate, issuers}) => {
+export default ({ t, certificate, issuers }) => {
   const validUntil = timestampToDate(certificate.validUntil);
   const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
 
@@ -73,9 +72,9 @@ export default ({ t, certificate, issuers}) => {
           <div className="card--details--item">
             <h5 className="card--details--item--key">{t('SHOW.GENERAL_INFORMATION.VALID_UNTIL')}</h5>
             <h4 className="card--details--item--value access--type">
-              { isValid
-                ? certificate.validUntil && <CheckOutlined className="green" />
-                : certificate.validUntil && <CloseOutlined className="red" />
+              {isValid
+                ? certificate.validUntil && <span className="icon icon-Checkicon-Check green" />
+                : certificate.validUntil && <span className="icon icon-Close red" />
               }
               <span className={isValid ? "" : "red"}>{dateToString(certificate.validUntil)}</span>
             </h4>

@@ -6,12 +6,12 @@ import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
-import {useReactiveVar} from "@apollo/client";
-import {UserStore} from "shared/store/UserStore";
-import {useLazyQuery, useSubscription} from "@apollo/react-hooks";
-import {NotificationQueries} from "../../graphql/queries";
+import { useReactiveVar } from "@apollo/client";
+import { UserStore } from "shared/store/UserStore";
+import { useLazyQuery, useSubscription } from "@apollo/react-hooks";
+import { NotificationQueries } from "../../graphql/queries";
 
-const {SUBSCRIBE_NOTIFICATION, NOTIFICATIONS} = NotificationQueries;
+const { SUBSCRIBE_NOTIFICATION, NOTIFICATIONS } = NotificationQueries;
 
 const TopicMenu = ({ topics }) => {
   const { t } = useTranslation(NAME_SPACES.NAV_BAR);
@@ -22,12 +22,12 @@ const TopicMenu = ({ topics }) => {
   const [count, setCount] = useState(0);
 
   const [getNotification] = useLazyQuery(NOTIFICATIONS, {
-    variables: {where: {read: false}},
-    onCompleted: ({notifications}) => setCount(notifications.count)
+    variables: { where: { read: false } },
+    onCompleted: ({ notifications }) => setCount(notifications.count)
   });
 
   useSubscription(SUBSCRIBE_NOTIFICATION, {
-    variables: {where: {}},
+    variables: { where: {} },
     onSubscriptionData: () => getNotification()
   });
 
@@ -41,14 +41,20 @@ const TopicMenu = ({ topics }) => {
 
   const activeClassLink = (url) => activeLink === url.replace("/", "") ? "active" : "";
 
-  const menus = topics.map(({ icon, key, url, title, onClick, classMenu }) => (
-    <Menu.Item key={key} onClick={onClick} className={`item--li ${classMenu} ${activeClassLink(url)}`}>
-      <Link to={url} className="main--sider--menu--item">
-        {icon}
-        <span>{t(title)}</span>
-      </Link>
-    </Menu.Item>
-  ));
+  let prevTopics = "";
+  const menus = topics.map(({ icon, key, url, title, onClick, topics }) => {
+    let classMenu = prevTopics !== topics ? "item--li--mt" : "";
+    prevTopics = topics;
+    return (
+      <Menu.Item key={key} onClick={onClick} className={`item--li ${classMenu} ${activeClassLink(url)}`}>
+        <Link to={url} className="main--sider--menu--item">
+          {icon}
+          <span>{t(title)}</span>
+        </Link>
+      </Menu.Item>
+    );
+  }
+  );
 
   return (
     <div className="topic--menu">

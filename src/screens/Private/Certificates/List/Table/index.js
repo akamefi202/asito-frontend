@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "shared/components";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { dateToString, timestampToDate } from "utils/helpers/moment";
@@ -49,8 +48,8 @@ const columns = (t) => [
         return (
           <div className="access--type">
             { isValid
-                ? <CheckOutlined className="green" />
-                : <CloseOutlined className="red" />
+                ? <span className="icon icon-Check green" />
+                : <span className="icon icon-Close red" />
             }
             <span className={isValid ? "" : "red"}>
               {dateToString(text)}

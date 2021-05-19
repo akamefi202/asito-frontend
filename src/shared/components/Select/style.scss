@@ -14,19 +14,31 @@
       min-height: 50px;
       max-height: 50px;
       width: 100%;
-      border: 1px solid #dcdcdc !important;
+      border: 1px solid #dcdcdc;
       box-shadow: 0px 8px 16px rgba(50, 123, 190, 0.04) !important;
       border-radius: 20px !important;
       align-items: center;
 
+      &:hover {
+        border-color: $c-hover-blue !important;
+      }
+
       .ant-select-selection-item {
         line-height: 45px;
+      }
+
+      .ant-select-selection-placeholder {
+        color: #DCDCDC;
+        font-size: 16px;
+        line-height: 24px;
       }
     }
   }
     
   .custom--select.error {
-    border: 1px solid red;
+    .ant-select-selector {
+      border: 1px solid red;
+    }
   }
 
   p {

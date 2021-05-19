@@ -3,7 +3,7 @@ import auth from "./auth";
 import layout from "./layout";
 import operators from "./operators";
 import roles from "./roles";
-import clients from "./clients";
+import departments from "./departments";
 import certificates from "./certificates";
 import navBar from "./nav-bar";
 import preferences from "./preferences";
@@ -17,7 +17,7 @@ export default {
   layout,
   operators,
   roles,
-  clients,
+  departments,
   certificates,
   navBar,
   preferences,

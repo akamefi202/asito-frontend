@@ -1,0 +1,62 @@
+{
+    "DEPARTAMENTS": "Departments",
+    "NEW": "New department",
+    "EDIT": "Edit department",
+    "DISCARD": "Discard changes",
+    "SAVE": "Save changes",
+    "LIST": {
+        "SEARCH_PLACEHOLDER": "Search for a department...",
+        "COLUMNS": {
+            "NAME": "Department name",
+            "TYPE": "Department type",
+            "LOCATION": "Location",
+            "ROLES": "Available roles"
+        }
+    },
+    "SHOW": {
+        "MENU": {
+            "GENERAL_INFORMATION": "General information",
+            "ROLES": "Roles"
+        },
+        "GENERAL_INFORMATION": {
+            "NAME": "Department name",
+            "TYPE": "Department type",
+            "ADDRESS": "Address",
+            "POSTCODE": "Postcode",
+            "CITY": "City",
+            "COUNTRY": "Country",
+            "PHONE_NUMBER": "Phone number"
+        },
+        "ROLES": {
+            "COLUMNS": {
+                "NAME": "Role Name",
+                "PERSONNEL": "Personnel"
+            }
+        }
+    },
+    "FORM": {
+        "MENU": {
+            "GENERAL_INFORMATION": "General information"
+        },
+        "GENERAL_INFORMATION": {
+            "NAME": "Department name",
+            "NAME_PLACEHOLDER": "Enter department name",
+            "TYPE": "Department type",
+            "TYPE_PLACEHOLDER": "Enter department type",
+            "ADDRESS": "Address",
+            "ADDRESS_PLACEHOLDER": "Enter address",
+            "POSTCODE": "Postcode",
+            "POSTCODE_PLACEHOLDER": "Enter postcode",
+            "CITY": "City",
+            "CITY_PLACEHOLDER": "Enter city",
+            "COUNTRY": "Country",
+            "COUNTRY_PLACEHOLDER": "Select a country",
+            "PHONE_NUMBER": "Phone number",
+            "PHONE_NUMBER_PLACEHOLDER": "Enter phone number"
+        },
+        "ERROR": {
+            "REQUIRED": "Is a required field",
+            "NUMBER": "Must be a number"
+        }
+    }
+}

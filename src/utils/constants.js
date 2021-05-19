@@ -26,11 +26,11 @@ export const PATHS = {
   NOTIFICATIONS: {
     INDEX: "/notifications",
   },
-  CLIENTS: {
-    INDEX: "/clients",
-    CREATE: "/clients/create",
-    SHOW: "/clients/show/:id",
-    EDIT: "/clients/edit/:id",
+  DEPARTAMENTS: {
+    INDEX: "/departaments",
+    CREATE: "/departaments/create",
+    SHOW: "/departaments/show/:id",
+    EDIT: "/departaments/edit/:id",
   },
   ROLES: {
     INDEX: "/roles",

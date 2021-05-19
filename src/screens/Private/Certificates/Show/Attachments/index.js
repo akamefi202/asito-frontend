@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "antd";
 import { Table } from "shared/components";
 import Card from "shared/components/Card";
-import {dateToString} from "utils/helpers/moment";
+import { dateToString } from "utils/helpers/moment";
 
 const columns = (t) => [
   {

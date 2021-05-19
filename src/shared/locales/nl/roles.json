@@ -1,48 +1,48 @@
 {
-    "SITES": "Sites",
-    "NEW_SITE": "New site",
-    "EDIT_SITE": "Edit site",
+    "ROLES": "Roles",
+    "NEW": "New role",
+    "EDIT": "Edit site",
     "CANCEL": "Cancel",
-    "SAVE_SITE": "Save site",
+    "SAVE": "Save site",
     "STATUS_CODE": {
         "ACTIVE": "Ative",
         "INACTIVE": "Inactive"
     },
     "LIST": {
-        "SEARCH_PLACEHOLDER": "Search for a site...",
+        "SEARCH_PLACEHOLDER": "Search for a role...",
         "TABS": {
             "ALL": "All",
             "ACTIVE": "Ative",
             "INACTIVE": "Inactive"
         },
         "COLUMNS": {
-            "SITE_NAME": "Site Name",
-            "CLIENT_NAME": "Client Name",
-            "LOCATION": "Location",
-            "OPERATORS": "Operators",
+            "ROLE_NAME": "Role name",
+            "DEPARTAMENT": "Department",
+            "REQUIREMENTS": "Certificate requirements",
+            "PERSONNEL": "Personnel",
             "STATUS": "Status"
         }
     },
     "SHOW": {
         "MENU": {
             "GENERAL_INFORMATION": "General Information",
-            "LOCATION_INFORMATION": "Location information",
             "REQUIREMENTS": "Requirements",
-            "OPERATORS": "Operators"
+            "PROTOCOLS": "Protocols",
+            "PERSONNEL": "Personnel"
         },
         "GENERAL_INFORMATION": {
             "STATUS": "Status",
-            "CLIENT": "Client",
-            "SITE_NAME": "Site name",
-            "OPERATIRS_REQUIRED": "Operators required"
+            "DEPARTAMENT": "Department",
+            "ROLE_NAME": "Role name",
+            "PERSONNEL_REQUIRED": "Personnel required",
+            "ROLE_DESCRIPTION": "Role description"
         },
-        "LOCATION_INFORMATION": {
-            "LATITUDE": "Latitude",
-            "LONGITUDE": "Longitude",
-            "ADDRESS_LINE": "Address line",
-            "POSTCODE": "Postcode",
-            "CITY": "City",
-            "COUNTRY": "Country"
+        "PROTOCOLS": {
+          "COLUMNS": {
+              "FILE_NAME": "File Name",
+              "FILE_TYPE": "File Type",
+              "UPLOAD_DATE": "Uploaded on"
+          }
         },
         "REQUIREMENTS": {
             "COLUMNS": {
@@ -50,13 +50,13 @@
                 "VALID_UNTIL": "Valid at least until"
             }
         },
-        "OPERATORS": {
+        "PERSONNEL": {
             "ADD_ROW": "Add row",
             "SURE_DELETE": "Sure to delete?",
             "SEARCH_OPERATOR": "Search for an operator...",
             "SCAN_OPERATOR": "Scan operator",
             "COLUMNS": {
-                "FULL_NAME": "Full name",
+                "PERSONNEL": "Personnel",
                 "EMPLOYEE_NUMBER": "Employee number",
                 "CERTIFICATES": "Certificates",
                 "OPERATOR_ID": "Operator ID"
@@ -66,30 +66,19 @@
     "FORM": {
         "MENU": {
             "GENERAL_INFORMATION": "General Information",
-            "LOCATION_INFORMATION": "Location information",
             "REQUIREMENTS": "Requirements",
-            "OPERATORS": "Operators"
+            "PROTOCOLS": "Protocols"
         },
         "GENERAL_INFORMATION": {
             "STATUS": "Status",
-            "CLIENT": "Client",
-            "SITE_NAME": "Site name",
-            "SITE_NAME_PLACEHOLDER": "Site name",
-            "OPERATIRS_REQUIRED": "Operators required",
-            "OPERATIRS_REQUIRED_PLACEHOLDER": "Operators required"
-        },
-        "LOCATION_INFORMATION": {
-            "LATITUDE": "Latitude",
-            "LATITUDE_PLACEHOLDER": "Latitude",
-            "LONGITUDE": "Longitude",
-            "LONGITUDE_PLACEHOLDER": "Longitude",
-            "ADDRESS_LINE": "Address line",
-            "ADDRESS_LINE_PLACEHOLDER": "Address line",
-            "POSTCODE": "Postcode",
-            "POSTCODE_PLACEHOLDER": "Postcode",
-            "CITY": "City",
-            "CITY_PLACEHOLDER": "City",
-            "COUNTRY": "Country"
+            "DEPARTAMENT": "Department",
+            "DEPARTAMENT_PLACEHOLDER": "Search for a department",
+            "ROLE_NAME": "Role name",
+            "ROLE_NAME_PLACEHOLDER": "Enter role name",
+            "PERSONNEL_REQUIRED": "Personnel required",
+            "PERSONNEL_REQUIRED_PLACEHOLDER": "Enter personnel required",
+            "ROLE_DESCRIPTION": "Role description",
+            "ROLE_DESCRIPTION_PLACEHOLDER": "Enter role description"
         },
         "REQUIREMENTS": {
             "ADD_ROW": "Add row",
@@ -97,7 +86,7 @@
                 "CERTIFICATE_TYPE": "Certificate type",
                 "CERTIFICATE_TYPE_PLACEHOLDER": "Select a certificate type",
                 "VALID_UNTIL": "Valid at least until",
-                "VALID_UNTIL_PLACEHOLDER": "Valid at least until"
+                "VALID_UNTIL_PLACEHOLDER": "Select valid at least until"
             }
         },
         "OPERATORS": {
@@ -108,6 +97,16 @@
                 "EMPLOYEE_NUMBER": "Employee number",
                 "CERTIFICATES": "Certificates"
             }
+        },
+        "PROTOCOLS": {
+          "UPLOAD_FILE": "Upload file",
+          "COLUMNS": {
+              "FILE_NAME": "File Name",
+              "FILE_TYPE": "File Type",
+              "FILE_TYPE_PLACEHOLDER": "File Type",
+              "UPLOAD_DATE": "Uploaded on",
+              "UPLOAD_DATE_PLACEHOLDER": "Uploaded on"
+          }
         },
         "ERROR": {
             "REQUIRED": "Is a required field",

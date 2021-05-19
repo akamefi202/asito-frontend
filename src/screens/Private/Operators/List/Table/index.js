@@ -3,7 +3,7 @@ import { Table } from "shared/components";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import {ASSESS_STATUSES} from "shared/constants/accessStatuses";
+import { ASSESS_STATUSES } from "shared/constants/accessStatuses";
 
 const columns = (t) => [
   {
@@ -30,63 +30,63 @@ const columns = (t) => [
     title: t("LIST.COLUMNS.ASSIGNED_SITES"),
     dataIndex: "operatorSites",
     key: "assigned_sites",
-    render: (operatorSites) =>  operatorSites ? operatorSites.length : 0
+    render: (operatorSites) => operatorSites ? operatorSites.length : 0
   },
   {
     title: t("LIST.COLUMNS.DATA_ACCESS"),
     dataIndex: "DATA_ACCESS",
     key: "DATA_ACCESS",
     render: (text) => {
-       if (!text) return ;
-       return (
-           <div className={`access--type ${text.class}`}>
-                {text.class === "green" ? <AiOutlineEye/> : <AiOutlineEyeInvisible/>}
-                <span>{text.value}</span>
-           </div>
-       )
+      if (!text) return;
+      return (
+        <div className={`access--type ${text.class}`}>
+          {text.class === "green" ? <AiOutlineEye className="icon" /> : <AiOutlineEyeInvisible className="icon" />}
+          <span>{text.value}</span>
+        </div>
+      )
     },
   },
 ];
 
 const dataTables = (data) => (
-    data.map(operator => {
-      // operator.DATA_ACCESS = getStatus(operator.accesses || []);
-      operator.DATA_ACCESS = {
-        value: `Authorized (${operator.operatorSites ? operator.operatorSites.length : 0})`,
-        class: "green"
-      };
-      return operator;
-    })
+  data.map(operator => {
+    // operator.DATA_ACCESS = getStatus(operator.accesses || []);
+    operator.DATA_ACCESS = {
+      value: `Authorized (${operator.operatorSites ? operator.operatorSites.length : 0})`,
+      class: "green"
+    };
+    return operator;
+  })
 );
 
 // const getStatus = (accesses) => {
-  // let pending = 0;
-  // let authorized = 0;
-  // let noAuthorized = 0;
+// let pending = 0;
+// let authorized = 0;
+// let noAuthorized = 0;
 
-  // accesses.forEach(access => {
-  //   switch (access.status) {
-  //     case ASSESS_STATUSES.PENDING:
-  //       pending += 1;
-  //       break;
-  //     case ASSESS_STATUSES.AUTHORIZED:
-  //       authorized += 1;
-  //       break;
-  //     default:
-  //       noAuthorized += 1;
-  //   }
-  // });
+// accesses.forEach(access => {
+//   switch (access.status) {
+//     case ASSESS_STATUSES.PENDING:
+//       pending += 1;
+//       break;
+//     case ASSESS_STATUSES.AUTHORIZED:
+//       authorized += 1;
+//       break;
+//     default:
+//       noAuthorized += 1;
+//   }
+// });
 
-  // if (authorized !== 0 && authorized >= pending && authorized >= noAuthorized) {
-  //   return {value: `Authorized (${authorized})`, class: "green"};
-  // }
-  // if (pending !== 0 && pending >= noAuthorized) {
-  //   return {value: `Pending authorization (${pending})`, class: "yellow"};
-  // }
-  // return {value: 'No authorization', class: "red"}
+// if (authorized !== 0 && authorized >= pending && authorized >= noAuthorized) {
+//   return {value: `Authorized (${authorized})`, class: "green"};
+// }
+// if (pending !== 0 && pending >= noAuthorized) {
+//   return {value: `Pending authorization (${pending})`, class: "yellow"};
+// }
+// return {value: 'No authorization', class: "red"}
 // }
 
-export default ({ t, operators, take, setTake, setSkip, page, setPage, total}) => {
+export default ({ t, operators, take, setTake, setSkip, page, setPage, total }) => {
   const history = useHistory();
 
   const onPageChange = (page) => {

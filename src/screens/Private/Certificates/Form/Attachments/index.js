@@ -1,22 +1,22 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import { Col, Row, Form, Upload } from "antd";
 import { CloseOutlined, CloudUploadOutlined } from "@ant-design/icons";
-import {Card, Button} from "shared/components";
-import {useMutation} from "@apollo/react-hooks";
-import {FileMutations} from "shared/graphql/mutations";
+import { Card, Button } from "shared/components";
+import { useMutation } from "@apollo/react-hooks";
+import { FileMutations } from "shared/graphql/mutations";
 import moment from "moment";
 import cuid from "cuid";
 
-const {CREATE_FILE} = FileMutations;
+const { CREATE_FILE } = FileMutations;
 
-export default ({ t , formik , certificateId, deletedFiles, setDeletedFiles}) => {
+export default ({ t, formik, certificateId, deletedFiles, setDeletedFiles }) => {
   const [form] = Form.useForm();
   const fileStatus = useRef('');
 
   const attachments = formik.values.attachments;
 
   useEffect(() => {
-    form.setFieldsValue({attachments});
+    form.setFieldsValue({ attachments });
   }, [attachments])
 
   const onRemoveFile = (columns) => {
@@ -33,20 +33,20 @@ export default ({ t , formik , certificateId, deletedFiles, setDeletedFiles}) =>
     if (fileStatus.current === file.status || file.status !== 'error') return;
     fileStatus.current = file.status;
     const fileObject = await readFile(file.originFileObj);
-    getFile({variables: {data: fileObject}})
-        .then(({data}) => {
-          const displayedFile = {
-            id: cuid(),
-            name: fileObject.name,
-            type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
-            certificate: {id: certificateId},
-            url: data.createFile,
-            updatedAt: moment(file.lastModified).format()
-          }
-          fileStatus.current = '';
-          const values = formik.getFieldProps('attachments').value;
-          formik.setFieldValue('attachments', [...values, displayedFile]);
-        });
+    getFile({ variables: { data: fileObject } })
+      .then(({ data }) => {
+        const displayedFile = {
+          id: cuid(),
+          name: fileObject.name,
+          type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
+          certificate: { id: certificateId },
+          url: data.createFile,
+          updatedAt: moment(file.lastModified).format()
+        }
+        fileStatus.current = '';
+        const values = formik.getFieldProps('attachments').value;
+        formik.setFieldValue('attachments', [...values, displayedFile]);
+      });
   }
 
   const readFile = (file) => {
@@ -70,10 +70,10 @@ export default ({ t , formik , certificateId, deletedFiles, setDeletedFiles}) =>
 
   const getShowData = (index, field) => {
     if (!formik
-        || !formik.values
-        || !formik.values.attachments
-        || !formik.values.attachments[index]
-        || !formik.values.attachments[index][field]) return '';
+      || !formik.values
+      || !formik.values.attachments
+      || !formik.values.attachments[index]
+      || !formik.values.attachments[index][field]) return '';
     const data = formik.values.attachments[index][field];
     if (field === 'updatedAt') return moment(data).format('DD-MM-YYYY');
     return data ? data : '';
@@ -132,8 +132,8 @@ export default ({ t , formik , certificateId, deletedFiles, setDeletedFiles}) =>
                           >
                             {() => (
                               <Form.Item {...field}
-                                         name={[field.name, 'name']}
-                                         fieldKey={[field.fieldKey, 'name']}>
+                                name={[field.name, 'name']}
+                                fieldKey={[field.fieldKey, 'name']}>
                                 <div>{getShowData(field.name, 'name')}</div>
                               </Form.Item>
                             )}
@@ -141,15 +141,15 @@ export default ({ t , formik , certificateId, deletedFiles, setDeletedFiles}) =>
                         </Col>
                         <Col xs={6} md={6}>
                           <Form.Item {...field}
-                                     name={[field.name, 'type']}
-                                     fieldKey={[field.fieldKey, 'type']}>
+                            name={[field.name, 'type']}
+                            fieldKey={[field.fieldKey, 'type']}>
                             <div>{getShowData(field.name, 'type')}</div>
                           </Form.Item>
                         </Col>
                         <Col xs={6} md={8}>
                           <Form.Item {...field}
-                                     name={[field.name, 'updatedAt']}
-                                     fieldKey={[field.fieldKey, 'updatedAt']}>
+                            name={[field.name, 'updatedAt']}
+                            fieldKey={[field.fieldKey, 'updatedAt']}>
                             <div>{getShowData(field.name, 'updatedAt')}</div>
                           </Form.Item>
                         </Col>
@@ -158,21 +158,21 @@ export default ({ t , formik , certificateId, deletedFiles, setDeletedFiles}) =>
                             <CloseOutlined onClick={() => {
                               remove(field.name)
                               onRemoveFile(field);
-                            }}/>
+                            }} />
                           </div>
                         </Col>
                       </Row>
                     </div>
                   ))}
-                    <Upload accept={'application/pdf'}
-                            action={'/'}
-                            showUploadList={false}
-                            onChange={({file}) => uploadFile(file)}>
-                      <Button buttonStyle={"btn--outline"}>
-                        <CloudUploadOutlined className="btn--icon--right" />{" "}
-                        {t("FORM.ATTACHMENTS.UPLOAD_FILE")}
-                      </Button>
-                    </Upload>
+                  <Upload accept={'application/pdf'}
+                    action={'/'}
+                    showUploadList={false}
+                    onChange={({ file }) => uploadFile(file)}>
+                    <Button buttonStyle={"btn--outline"}>
+                      <span className="icon-Upload btn--icon--right" />
+                      {t("FORM.ATTACHMENTS.UPLOAD_FILE")}
+                    </Button>
+                  </Upload>
                 </>
               )}
             </Form.List>
