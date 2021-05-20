@@ -2,8 +2,6 @@
 import React from "react";
 import { Layout } from "antd";
 import { PATHS } from "utils/constants";
-import { FiUsers } from "react-icons/fi";
-import { BsBuilding } from "react-icons/bs";
 import { AiOutlineIdcard, AiOutlineSafetyCertificate } from "react-icons/ai";
 
 import NavBar from "./NavBar";
@@ -17,11 +15,11 @@ const { Content } = Layout;
 
 const menus = [
     {
-        title: "OPERATORS",
+        title: "PERSONNELS",
         topics: 1,
-        url: PATHS.OPERATORS.INDEX,
+        url: PATHS.PERSONNELS.INDEX,
         key: "Operators",
-        icon: <FiUsers className="icon" />,
+        icon: <span className="icon icon-Team" />,
         type: "simple",
     },
     {
@@ -33,9 +31,9 @@ const menus = [
         type: "simple",
     },
     {
-        title: "DEPARTAMENTS",
+        title: "DEPARTMENTS",
         topics: 1,
-        url: PATHS.DEPARTAMENTS.INDEX,
+        url: PATHS.DEPARTMENTS.INDEX,
         key: "departments",
         icon: <span className="icon icon-Office" />,
         type: "simple",

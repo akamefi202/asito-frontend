@@ -1,9 +1,9 @@
 {
     "NOTIFICATIONS": "Meldingen",
-    "OPERATORS": "Operators",
-    "CERTIFICATES": "Certificates",
-    "DEPARTAMENTS": "Departments",
-    "ROLES": "Roles",
+    "PERSONNELS": "Medewerkers",
+    "CERTIFICATES": "Certificaten",
+    "DEPARTMENTS": "Afdelingen",
+    "ROLES": "Funties",
     "MYCOMPANY": "Mijn organisatie",
     "PREFERENCES": "Preferences",
     "LOGOUT": "Uitloggen"

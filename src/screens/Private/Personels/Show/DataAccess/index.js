@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Row, Col } from "antd";
-import { Card, Table } from "shared/components";
-import { AiOutlineEye } from "react-icons/ai";
-import {dateToString} from "utils/helpers/moment";
+import { Card, Table, Spin } from "shared/components";
+import { dateToString } from "utils/helpers/moment";
 
 const columns = (t) => [
   {
     title: t("SHOW.DATA_ACCESS.COLUMNS.CLIENT"),
     dataIndex: "client",
     key: "client",
+    sorter: (a, b) => a.client.localeCompare(b.client),
     render: (client) => {
       const name = client && client.name ? client.name : '';
       return <span className="custom-link">{name}</span>
@@ -28,7 +28,7 @@ const columns = (t) => [
   },
 ];
 
-export default ({ t, accesses, take, setTake, setSkip, total}) => {
+export default ({ t, accesses, take, setTake, setSkip, total, loading }) => {
   const [page, setPage] = useState(1);
 
   const onPageChange = (page) => {
@@ -41,8 +41,8 @@ export default ({ t, accesses, take, setTake, setSkip, total}) => {
   }
 
   return (
-    <>
-      <Card cardStyle={"card--details"}>
+    <Card cardStyle={"card--details"}>
+      <Spin spinning={loading}>
         <Row>
           <Col xs={24}>
             <h2 className="card--details--title">
@@ -64,22 +64,13 @@ export default ({ t, accesses, take, setTake, setSkip, total}) => {
               rowKey={"id"}
               onRow={(record) => {
                 return {
-                  onClick: () => {},
+                  onClick: () => { },
                 };
               }}
             />
           </Col>
         </Row>
-      </Card>
-
-      <div className="card--details claim__item__infos text-center">
-        <div className="success eye-show_icon">
-          <AiOutlineEye />
-        </div>
-        <h5 className="success">
-          {t("SHOW.DATA_ACCESS.SHARING_AUTHORIZATION")}.
-        </h5>
-      </div>
-    </>
+      </Spin>
+    </Card>
   );
 };

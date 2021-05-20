@@ -4,7 +4,7 @@ import Home from "./Home";
 import Certificates from "./Certificates";
 import Roles from "./Roles";
 import Departments from "./Departments";
-import Operators from "./Operators";
+import Personels from "./Personels";
 import Preferences from "./Preferences";
 import Notifications from "./Notifications";
 import Mycompany from "./Mycompany";
@@ -14,7 +14,7 @@ const routes = [
   ...Certificates,
   ...Roles,
   ...Departments,
-  ...Operators,
+  ...Personels,
   ...Preferences,
   ...Notifications,
   ...Mycompany,

@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col, Radio } from "antd";
 import {Card, Input, DatePicker, Select} from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
-import { OPERATOR_ROLES } from "shared/constants/operatorRoles";
 
 export default ({ t, formik }) => {
   return (
@@ -49,15 +48,6 @@ export default ({ t, formik }) => {
             />
           </div>
         </Col>
-        <Col xs={24} sm={24} md={12} lg={12}>
-          <div className="card--form--item">
-            <label className="card--form--item--label">
-              {t("Role")}
-            </label>
-            <Select placeholder={t("Select role")} items={OPERATOR_ROLES} />
-          </div>
-        </Col>
-        <Col xs={24} sm={24} md={12} lg={12}/>
 
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">

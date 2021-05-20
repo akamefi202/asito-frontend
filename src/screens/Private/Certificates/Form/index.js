@@ -175,7 +175,7 @@ export default () => {
                 <GeneralInformation t={t} formik={formik} />
               </section>
               <section id="issuer">
-                <IssuerInformation t={t} formik={formik} />
+                <IssuerInformation t={t} formik={formik} issuer={issuer} />
               </section>
               <section id="attachments">
                 <Attachments t={t}

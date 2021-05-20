@@ -101,6 +101,7 @@ export default ({ t, formik }) => {
               {t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE")}
             </label>
             <Select
+              placeholder={t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE_PLACEHOLDER")}
               {...bindInputProps({ name: "type", ...formik })}
               items={CERTIFICATES_TYPE}
             />

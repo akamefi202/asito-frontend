@@ -1,0 +1,109 @@
+{
+  "PERSONNELS": "Medewerkers",
+  "NEW": "Nieuwe medewerker",
+  "EDIT": "Wijzig medewerker",
+  "DISCARD": "Wijzigingen annuleren",
+  "SAVE": "Opslaan",
+  "GENDER": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "LIST": {
+    "SEARCH_PLACEHOLDER": "Zoek een medewerker...",
+    "COLUMNS": {
+      "NAME": "Naam",
+      "NUMBER": "Personeelsnummer",
+      "CERTIFICATES": "Certificaten",
+      "DEPARTMENT": "Afdeling",
+      "ROLE": "Functie"
+    }
+  },
+  "SHOW": {
+    "MENU": {
+      "DATA_ACCESS": "Afdeling en functie",
+      "GENERAL_INFORMATION": "Algemene informatie",
+      "CONTACT_INFORMATION": "Contact informatie",
+      "CERTIFICATES": "Certificaten"
+    },
+    "DATA_ACCESS": {
+      "COLUMNS": {
+        "CLIENT": "Afdeling",
+        "SHARED_ON": "Functie",
+        "SHARED_UNTIL": "Acceptatie protocollen"
+      }
+    },
+    "GENERAL_INFORMATION": {
+      "NUMBER": "Personeelsnummer",
+      "FIRST_NAME": "Voornaam",
+      "LAST_NAME": "Achternaam",
+      "DATE_OF_BIRTH": "Geboortedatum",
+      "GENDER": "Geslacht"
+    },
+    "CONTACT_INFORMATION": {
+      "PHONE_NUMBER": "Telefoonnummer",
+      "EMAIL_ADDRESS": "E-mailadres",
+      "ADDRESS_LINE": "Adres",
+      "POSTCODE": "Postcode",
+      "CITY": "Woonplaats",
+      "COUNTRY": "Land"
+    },
+    "CERTIFICATES": {
+      "COLUMNS": {
+        "CERTIFICATE_NUMBER": "Certificaten",
+        "CERTIFICATE_TYPE": "Certificaat type",
+        "ISSUED_ON": "Uitgegeven op",
+        "VALID_UNTIL": "Geldig tot"
+      }
+    }
+  },
+  "FORM": {
+    "MENU": {
+      "DATA_ACCESS": "Afdeling en functie",
+      "GENERAL_INFORMATION": "Algemene informatie",
+      "CONTACT_INFORMATION": "Contact informatie",
+      "CERTIFICATES": "Certificaten"
+    },
+    "DATA_ACCESS": {
+      "ADD_ROW": "Add row",
+      "ACCESS_PLACEHOLDER": "Select a client",
+      "COLUMNS": {
+        "CLIENT": "Client",
+        "SHARED_ON": "Shared on",
+        "SHARED_UNTIL": "Shared until",
+        "SHARED_ON_PLACEHOLDER": "Shared on",
+        "SHARED_UNTIL_PLACEHOLDER": "Shared until"
+      }
+    },
+    "GENERAL_INFORMATION": {
+      "EMPLOYEE_NUMBER": "Personeelsnummer",
+      "EMPLOYEE_NUMBER_PLACEHOLDER": "Personeelsnummer",
+      "FIRST_NAME": "Voornaam",
+      "FIRST_NAME_PLACEHOLDER": "Voornaam",
+      "LAST_NAME": "Achternaam",
+      "LAST_NAME_PLACEHOLDER": "Achternaam",
+      "DATE_OF_BIRTH": "Geboortedatum",
+      "DATE_OF_BIRTH_PLACEHOLDER": "Geboortedatum",
+      "GENDER": "Geslacht",
+      "MALE": "Mannelijk",
+      "FEMALE": "Vrouwelijk"
+    },
+    "CONTACT_INFORMATION": {
+      "PHONE_NUMBER": "Telefoonnummer",
+      "PHONE_NUMBER_PLACEHOLDER": "Telefoonnummer",
+      "EMAIL_ADDRESS": "E-mailadres",
+      "EMAIL_ADDRESS_PLACEHOLDER": "E-mailadres",
+      "ADDRESS_LINE": "Adres",
+      "ADDRESS_LINE_PLACEHOLDER": "Adres",
+      "POSTCODE": "Postcode",
+      "POSTCODE_PLACEHOLDER": "Postcode",
+      "CITY": "Woonplaats",
+      "CITY_PLACEHOLDER": "Woonplaats",
+      "COUNTRY": "Land",
+      "COUNTRY_PLACEHOLDER": "Land"
+    },
+    "ERROR": {
+      "REQUIRED": "Is a required field",
+      "NUMBER": "Must be a number"
+    }
+  }
+}

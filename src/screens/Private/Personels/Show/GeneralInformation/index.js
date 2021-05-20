@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { dateToString } from "utils/helpers/moment";
 
-export default ({ t, operator }) => (
+export default ({ t, personel }) => (
   <Card cardStyle={"card--details"}>
     <Row>
       <Col xs={24}>
@@ -16,9 +16,9 @@ export default ({ t, operator }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--details--item">
           <h5 className="card--details--item--key">
-            {t("SHOW.GENERAL_INFORMATION.EMPLOYEE_NUMBER")}
+            {t("SHOW.GENERAL_INFORMATION.NUMBER")}
           </h5>
-          <h4 className="card--details--item--value">{operator.number}</h4>
+          <h4 className="card--details--item--value">{personel.number}</h4>
         </div>
       </Col>
       <Col xs={24} sm={24} md={12} lg={12}>
@@ -27,7 +27,7 @@ export default ({ t, operator }) => (
             {t("SHOW.GENERAL_INFORMATION.FIRST_NAME")}
           </h5>
           <h4 className="card--details--item--value">
-            {operator.firstName}
+            {personel.firstName}
           </h4>
         </div>
       </Col>
@@ -38,7 +38,7 @@ export default ({ t, operator }) => (
             {t("SHOW.GENERAL_INFORMATION.LAST_NAME")}
           </h5>
           <h4 className="card--details--item--value">
-            {operator.lastName}
+            {personel.lastName}
           </h4>
         </div>
       </Col>
@@ -46,20 +46,10 @@ export default ({ t, operator }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--details--item">
           <h5 className="card--details--item--key">
-            {t("Role")}
-          </h5>
-          <h4 className="card--details--item--value">Operator</h4>
-        </div>
-      </Col>
-      <Col xs={24} sm={24} md={12} lg={12}/>
-
-      <Col xs={24} sm={24} md={12} lg={12}>
-        <div className="card--details--item">
-          <h5 className="card--details--item--key">
             {t("SHOW.GENERAL_INFORMATION.DATE_OF_BIRTH")}
           </h5>
           <h4 className="card--details--item--value">
-            {dateToString(operator.dateOfBirth)}
+            {dateToString(personel.dateOfBirth)}
           </h4>
         </div>
       </Col>
@@ -69,7 +59,7 @@ export default ({ t, operator }) => (
           <h5 className="card--details--item--key">
             {t("SHOW.GENERAL_INFORMATION.GENDER")}
           </h5>
-          <h4 className="card--details--item--value">{t(`GENDER.${operator.gender}`)}</h4>
+          <h4 className="card--details--item--value">{t(`GENDER.${personel.gender}`)}</h4>
         </div>
       </Col>
     </Row>

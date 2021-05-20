@@ -54,7 +54,7 @@ export default ({ t, departments, take, setTake, setSkip, total, page, setPage})
       onRow={(record) => {
         return {
           onClick: () =>
-            history.push(`${PATHS.DEPARTAMENTS.SHOW.replace(":id", record.id)}`),
+            history.push(`${PATHS.DEPARTMENTS.SHOW.replace(":id", record.id)}`),
         };
       }}
     />

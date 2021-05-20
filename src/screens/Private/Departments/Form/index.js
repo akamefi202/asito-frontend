@@ -25,7 +25,7 @@ const menuItems = [
 export default () => {
   const { id } = useParams();
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.DEPARTAMENTS)
+  const { t } = useTranslation(NAME_SPACES.DEPARTMENTS)
   const [initialValues, setInitialValues] = useState({
     id: cuid(),
     name: "",
@@ -81,7 +81,7 @@ export default () => {
   const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_CLIENT,
     {
       onCompleted: (data) => {
-        history.push(PATHS.DEPARTAMENTS.INDEX);
+        history.push(PATHS.DEPARTMENTS.INDEX);
       },
       onError: (error) => {
         messages({ data: error });
@@ -109,9 +109,9 @@ export default () => {
 
   const setBreadcrumbsItem = [
     {
-      title: t("DEPARTAMENTS"),
+      title: t("DEPARTMENTS"),
       className: "custom--breadcrumb--one",
-      href: PATHS.DEPARTAMENTS.INDEX,
+      href: PATHS.DEPARTMENTS.INDEX,
     },
     { title: id ? initialValues.name : t("NEW"), className: "custom--breadcrumb--two" },
   ];

@@ -3,11 +3,10 @@ import { Table } from "shared/components";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { ASSESS_STATUSES } from "shared/constants/accessStatuses";
 
 const columns = (t) => [
   {
-    title: t("LIST.COLUMNS.FULL_NAME"),
+    title: t("LIST.COLUMNS.NAME"),
     dataIndex: "full_mame",
     key: "full_mame",
     sorter: (a, b) => a.firstName.localeCompare(b.firstName),
@@ -16,7 +15,7 @@ const columns = (t) => [
     ),
   },
   {
-    title: t("LIST.COLUMNS.EMPLOYEE_NUMBER"),
+    title: t("LIST.COLUMNS.NUMBER"),
     dataIndex: "number",
     key: "number",
   },
@@ -27,13 +26,13 @@ const columns = (t) => [
     render: (certificates) => certificates ? certificates.length : 0
   },
   {
-    title: t("LIST.COLUMNS.ASSIGNED_SITES"),
+    title: t("LIST.COLUMNS.DEPARTMENT"),
     dataIndex: "operatorSites",
     key: "assigned_sites",
     render: (operatorSites) => operatorSites ? operatorSites.length : 0
   },
   {
-    title: t("LIST.COLUMNS.DATA_ACCESS"),
+    title: t("LIST.COLUMNS.ROLE"),
     dataIndex: "DATA_ACCESS",
     key: "DATA_ACCESS",
     render: (text) => {
@@ -49,44 +48,16 @@ const columns = (t) => [
 ];
 
 const dataTables = (data) => (
-  data.map(operator => {
-    // operator.DATA_ACCESS = getStatus(operator.accesses || []);
-    operator.DATA_ACCESS = {
-      value: `Authorized (${operator.operatorSites ? operator.operatorSites.length : 0})`,
+  data.map(personnel => {
+    personnel.DATA_ACCESS = {
+      value: `Authorized (${personnel.operatorSites ? personnel.operatorSites.length : 0})`,
       class: "green"
     };
-    return operator;
+    return personnel;
   })
 );
 
-// const getStatus = (accesses) => {
-// let pending = 0;
-// let authorized = 0;
-// let noAuthorized = 0;
-
-// accesses.forEach(access => {
-//   switch (access.status) {
-//     case ASSESS_STATUSES.PENDING:
-//       pending += 1;
-//       break;
-//     case ASSESS_STATUSES.AUTHORIZED:
-//       authorized += 1;
-//       break;
-//     default:
-//       noAuthorized += 1;
-//   }
-// });
-
-// if (authorized !== 0 && authorized >= pending && authorized >= noAuthorized) {
-//   return {value: `Authorized (${authorized})`, class: "green"};
-// }
-// if (pending !== 0 && pending >= noAuthorized) {
-//   return {value: `Pending authorization (${pending})`, class: "yellow"};
-// }
-// return {value: 'No authorization', class: "red"}
-// }
-
-export default ({ t, operators, take, setTake, setSkip, page, setPage, total }) => {
+export default ({ t, personnels, take, setTake, setSkip, page, setPage, total }) => {
   const history = useHistory();
 
   const onPageChange = (page) => {
@@ -102,7 +73,7 @@ export default ({ t, operators, take, setTake, setSkip, page, setPage, total }) 
     <Table
       columns={columns(t)}
       className="table--custom"
-      data={dataTables(operators)}
+      data={dataTables(personnels)}
       total={total}
       rowKey={"id"}
       page={page}
@@ -112,7 +83,7 @@ export default ({ t, operators, take, setTake, setSkip, page, setPage, total }) 
       onRow={(record) => {
         return {
           onClick: () =>
-            history.push(`${PATHS.OPERATORS.SHOW.replace(":id", record.id)}`),
+            history.push(`${PATHS.PERSONNELS.SHOW.replace(":id", record.id)}`),
         };
       }}
     />

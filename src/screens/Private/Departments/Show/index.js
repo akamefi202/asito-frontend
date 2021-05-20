@@ -26,7 +26,7 @@ const menuItems = [
 export default () => {
   const { id } = useParams();
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.DEPARTAMENTS);
+  const { t } = useTranslation(NAME_SPACES.DEPARTMENTS);
   const [skipSites, setSkipSites] = useState(0);
   const [totalSites, setTotalSites] = useState(0);
   const [takeSites, setTakeSites] = useState(5);
@@ -55,7 +55,7 @@ export default () => {
   };
 
   const edit = () => {
-    history.push(PATHS.DEPARTAMENTS.EDIT.replace(":id", id));
+    history.push(PATHS.DEPARTMENTS.EDIT.replace(":id", id));
   };
 
   const setBreadcrumbsButtons = [
@@ -70,9 +70,9 @@ export default () => {
 
   const setBreadcrumbsItem = [
     {
-      title: t("DEPARTAMENTS"),
+      title: t("DEPARTMENTS"),
       className: "custom--breadcrumb--one",
-      href: PATHS.DEPARTAMENTS.INDEX,
+      href: PATHS.DEPARTMENTS.INDEX,
     },
     { title: department.name, className: "custom--breadcrumb--two" },
   ];
