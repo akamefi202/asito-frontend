@@ -76,34 +76,34 @@
     },
     "GENERAL_INFORMATION": {
       "EMPLOYEE_NUMBER": "Personeelsnummer",
-      "EMPLOYEE_NUMBER_PLACEHOLDER": "Personeelsnummer",
+      "EMPLOYEE_NUMBER_PLACEHOLDER": "Enter Personeelsnummer",
       "FIRST_NAME": "Voornaam",
-      "FIRST_NAME_PLACEHOLDER": "Voornaam",
+      "FIRST_NAME_PLACEHOLDER": "Enter Voornaam",
       "LAST_NAME": "Achternaam",
-      "LAST_NAME_PLACEHOLDER": "Achternaam",
+      "LAST_NAME_PLACEHOLDER": "Enter Achternaam",
       "DATE_OF_BIRTH": "Geboortedatum",
-      "DATE_OF_BIRTH_PLACEHOLDER": "Geboortedatum",
+      "DATE_OF_BIRTH_PLACEHOLDER": "Selecteer een Geboortedatum",
       "GENDER": "Geslacht",
       "MALE": "Mannelijk",
       "FEMALE": "Vrouwelijk"
     },
     "CONTACT_INFORMATION": {
       "PHONE_NUMBER": "Telefoonnummer",
-      "PHONE_NUMBER_PLACEHOLDER": "Telefoonnummer",
+      "PHONE_NUMBER_PLACEHOLDER": "Enter Telefoonnummer",
       "EMAIL_ADDRESS": "E-mailadres",
-      "EMAIL_ADDRESS_PLACEHOLDER": "E-mailadres",
+      "EMAIL_ADDRESS_PLACEHOLDER": "Enter E-mailadres",
       "ADDRESS_LINE": "Adres",
-      "ADDRESS_LINE_PLACEHOLDER": "Adres",
+      "ADDRESS_LINE_PLACEHOLDER": "Enter Adres",
       "POSTCODE": "Postcode",
-      "POSTCODE_PLACEHOLDER": "Postcode",
+      "POSTCODE_PLACEHOLDER": "Enter Postcode",
       "CITY": "Woonplaats",
-      "CITY_PLACEHOLDER": "Woonplaats",
+      "CITY_PLACEHOLDER": "Enter Woonplaats",
       "COUNTRY": "Land",
-      "COUNTRY_PLACEHOLDER": "Land"
+      "COUNTRY_PLACEHOLDER": "Selecteer een Land"
     },
     "ERROR": {
-      "REQUIRED": "Is a required field",
-      "NUMBER": "Must be a number"
+      "REQUIRED": "Is een verplicht veld",
+      "NUMBER": "Moet een nummer zijn"
     }
   }
 }

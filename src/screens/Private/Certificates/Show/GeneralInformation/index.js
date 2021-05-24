@@ -4,6 +4,8 @@ import Card from "shared/components/Card";
 import { dateToString, timestampToDate } from "utils/helpers/moment";
 import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { PATHS } from "utils/constants";
 
 const today = moment();
 
@@ -11,9 +13,14 @@ export default ({ t, certificate, issuers }) => {
   const validUntil = timestampToDate(certificate.validUntil);
   const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
 
-  const getCertificateOperator = () => {
+  const getCertificateOperator = (id = false) => {
     const firstName = certificate.operator && certificate.operator.firstName ? certificate.operator.firstName : '';
     const lastName = certificate.operator && certificate.operator.lastName ? certificate.operator.lastName : '';
+
+    if (id) {
+      return certificate.operator && certificate.operator.id ? certificate.operator.id : '';
+    }
+
     return [firstName, lastName].join(' ');
   }
 
@@ -36,16 +43,16 @@ export default ({ t, certificate, issuers }) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={24} sm={24} md={12} lg={12}>
+        <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">{t("SHOW.GENERAL_INFORMATION.ISSUED_TO")}</h5>
-            <h4 className="card--details--item--value custom-link">{getCertificateOperator()}</h4>
-          </div>
-        </Col>
-        <Col xs={24} sm={24} md={12} lg={12}>
-          <div className="card--details--item">
-            <h5 className="card--details--item--key">{t("SHOW.GENERAL_INFORMATION.ISSUED_BY")}</h5>
-            <h4 className="card--details--item--value">{getIssuerName()}</h4>
+            <h4 className="card--details--item--value">
+              <Link 
+                className="custom-link" 
+                to={PATHS.PERSONNELS.SHOW.replace(":id", getCertificateOperator(true))}>
+                  {getCertificateOperator()}
+              </Link>
+            </h4>
           </div>
         </Col>
 

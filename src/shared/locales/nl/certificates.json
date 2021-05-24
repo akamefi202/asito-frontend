@@ -1,104 +1,101 @@
 {
-    "CERTIFICATES": "Certificates",
-    "NEW_CERTIFICATE": "New Certificate",
-    "EDIT_CERTIFICATE": "Edit Certificate",
-    "DISCARD_CHANGES": "Discard changes",
-    "SAVE_CHANGES": "Save changes",
+    "CERTIFICATES": "Certificaten",
+    "NEW": "Nieuw certificaat",
+    "EDIT": "Wijzig certificaat",
+    "DISCARD": "Wijzigingen annuleren",
+    "SAVE": "Opslaan",
     "LIST": {
-        "SEARCH_PLACEHOLDER": "Search for a certificate...",
+        "SEARCH_PLACEHOLDER": "Zoek certificaat...",
         "TABS": {
-            "ALL": "All",
-            "VALID": "Valid",
-            "EXPIRED": "Expired"
+            "ALL": "Alle",
+            "VALID": "Geldige",
+            "EXPIRED": "Verlopen"
         },
         "COLUMNS": {
-            "CERTIFICATE_NUMBER": "Certifcate Number",
-            "CERTIFICATE_TYPE": "Certificate Type",
-            "ISSUED_TO": "Issued To",
-            "ISSUED_ON": "Issued On",
-            "VALID_UNTIL": "Valid Until"
+            "CERTIFICATE_NUMBER": "Certificaatnummer",
+            "CERTIFICATE_TYPE": "Type certificaat",
+            "ISSUED_TO": "Uitgegeven door",
+            "ISSUED_ON": "Uitgegeven op",
+            "VALID_UNTIL": "Geldig tot"
         }
     },
     "SHOW": {
         "MENU": {
-            "GENERAL_INFORMATION": "General Information",
-            "ISSUER_INFORMATION": "Issuer Information",
-            "ATTACHMENTS": "Attachments"
+            "GENERAL_INFORMATION": "Algemene informatie",
+            "ISSUER_INFORMATION": "Informatie over uitgever",
+            "ATTACHMENTS": "Bijlagen"
         },
         "GENERAL_INFORMATION": {
-            "CERTIFICATE_NUMBER": "Certifcate Number",
-            "CERTIFICATE_TYPE": "Certificate Type",
-            "ISSUED_TO": "Issued To",
-            "ISSUED_BY": "Issued By",
-            "ISSUED_ON": "Issued On",
-            "VALID_UNTIL": "Valid Until"
+            "CERTIFICATE_NUMBER": "Certificaat nummer",
+            "CERTIFICATE_TYPE": "Type certificaat",
+            "ISSUED_TO": "Uitgegeven door",
+            "ISSUED_ON": "Uitgegeven op",
+            "VALID_UNTIL": "Geldig tot"
         },
         "ISSUER_INFORMATION": {
-            "SIGNED_BY": "Signed by",
-            "SIGNERS_TITLE": "Signer's Title",
-            "REGISTERED_NAME": "Registered issuer name",
-            "ISSUER_NUMBER": "KvK",
-            "ADDRESS": "Address",
+            "SIGNED_BY": "Getekend door",
+            "SIGNERS_TITLE": "Functie ondertekenaar",
+            "REGISTERED_NAME": "Uitgevende instantie",
+            "ISSUER_NUMBER": "KvK nummer",
+            "ADDRESS": "Adres",
             "POSTCODE": "Postcode",
-            "CITY": "City",
-            "COUNTRY": "Country",
-            "PHONE_NUMBER": "Phone Number",
-            "EMAIL_ADDRESS": "Email Address",
+            "CITY": "Woonplaats",
+            "COUNTRY": "Land",
+            "PHONE_NUMBER": "Telefoonnummer",
+            "EMAIL_ADDRESS": "E-mailadres",
             "WEBSITE": "Website"
         },
         "ATTACHMENTS": {
             "COLUMNS": {
-                "FILE_NAME": "File Name",
-                "FILE_TYPE": "File Type",
-                "UPLOAD_DATE": "Uploaded on"
+                "FILE_NAME": "Bestandnaam",
+                "FILE_TYPE": "Bestandstype",
+                "UPLOAD_DATE": "Bijgevoegd op"
             }
         }
     },
     "FORM": {
         "MENU": {
-            "GENERAL_INFORMATION": "General Information",
-            "ISSUER_INFORMATION": "Issuer Information",
-            "ATTACHMENTS": "Attachments"
+            "GENERAL_INFORMATION": "Algemene informatie",
+            "ISSUER_INFORMATION": "Informatie over uitgever",
+            "ATTACHMENTS": "Bijlagen"
         },
         "GENERAL_INFORMATION": {
-            "ISSUED_TO": "Issued To",
-            "ISSUED_TO_PLACEHOLDER": "Search for an operator...",
-            "CERTIFICATE_NUMBER": "Certifcate Number",
-            "CERTIFICATE_NUMBER_PLACEHOLDER": "Enter certifcate Number",
-            "CERTIFICATE_TYPE": "Certificate Type",
-            "CERTIFICATE_TYPE_PLACEHOLDER": "Select a certificate Type",
-            "ISSUED_ON": "Issued On",
-            "ISSUED_ON_PLACEHOLDER": "Select a issued On",
-            "VALID_UNTIL": "Valid Until",
-            "VALID_UNTIL_PLACEHOLDER": "Select a valid Until"
+            "ISSUED_TO": "Uitgegeven door",
+            "ISSUED_TO_PLACEHOLDER": "Zoek een medewerker...",
+            "CERTIFICATE_NUMBER": "Certificaat nummer",
+            "CERTIFICATE_NUMBER_PLACEHOLDER": "Enter certificaat nummer",
+            "CERTIFICATE_TYPE": "Type certificaat",
+            "CERTIFICATE_TYPE_PLACEHOLDER": "Selecteer een type certificaat",
+            "ISSUED_ON": "Uitgegeven op",
+            "ISSUED_ON_PLACEHOLDER": "Selecteer een uitgegeven op",
+            "VALID_UNTIL": "Geldig tot",
+            "VALID_UNTIL_PLACEHOLDER": "Selecteer een geldig tot"
         },
         "ISSUER_INFORMATION": {
-            "SIGNED_BY": "Signed by",
-            "SIGNED_BY_PLACEHOLDER": "Enter signed by",
-            "SIGNERS_TITLE": "Signer's Title",
-            "SIGNERS_TITLE_PLACEHOLDER": "Enter signer's Title",
-            "REGISTERED_NAME": "Registered issuer name",
-            "ISSUER_NUMBER": "KvK",
-            "ADDRESS": "Address",
+            "SIGNED_BY": "Getekend door",
+            "SIGNED_BY_PLACEHOLDER": "Enter getekend door",
+            "SIGNERS_TITLE": "Functie ondertekenaar",
+            "SIGNERS_TITLE_PLACEHOLDER": "Enter functie ondertekenaar",
+            "REGISTERED_NAME": "Uitgevende instantie",
+            "ISSUER_NUMBER": "KvK nummer",
+            "ADDRESS": "Adres",
             "POSTCODE": "Postcode",
-            "CITY": "City",
-            "COUNTRY": "Country",
-            "PHONE_NUMBER": "Phone Number",
-            "EMAIL_ADDRESS": "Email Address",
+            "CITY": "Woonplaats",
+            "COUNTRY": "Land",
+            "PHONE_NUMBER": "Telefoonnummer",
+            "EMAIL_ADDRESS": "E-mailadres",
             "WEBSITE": "Website"
         },
         "ATTACHMENTS": {
-            "UPLOAD_FILE": "Upload file",
+            "UPLOAD_FILE": "Bestand toevoegen",
             "COLUMNS": {
-                "FILE_NAME": "File Name",
-                "FILE_TYPE": "File Type",
-                "FILE_TYPE_PLACEHOLDER": "File Type",
-                "UPLOAD_DATE": "Uploaded on",
-                "UPLOAD_DATE_PLACEHOLDER": "Uploaded on"
+                "FILE_NAME": "Bestandnaam",
+                "FILE_TYPE": "Bestandstype",
+                "UPLOAD_DATE": "Bijgevoegd op"
             }
         },
         "ERROR": {
-            "REQUIRED": "Is a required field"
+            "REQUIRED": "Is een verplicht veld"
         }
     }
 }

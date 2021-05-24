@@ -121,8 +121,8 @@ export default ({ t, issuer, modeRole}) => {
             <h5 className="card--details--item--key">
               {t("SHOW.GENERAL_INFORMATION.WEBSITE")}
             </h5>
-            <h4 className="card--details--item--value custom-link">
-              {issuer.website}
+            <h4 className="card--details--item--value">
+              <a className="custom-link" target="_blank" href={issuer.website}>{issuer.website}</a>
             </h4>
           </div>
         </Col>

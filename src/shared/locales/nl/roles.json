@@ -1,92 +1,90 @@
 {
-    "ROLES": "Roles",
-    "NEW": "New role",
-    "EDIT": "Edit site",
-    "CANCEL": "Cancel",
-    "SAVE": "Save site",
+    "ROLES": "Functies",
+    "NEW": "Nieuwe functie",
+    "EDIT": "Wijzig functie",
+    "DISCARD": "Wijzigingen annuleren",
+    "SAVE": "Opslaan",
     "STATUS_CODE": {
-        "ACTIVE": "Ative",
-        "INACTIVE": "Inactive"
+        "ACTIVE": "Actief",
+        "INACTIVE": "Verlopen"
     },
     "LIST": {
-        "SEARCH_PLACEHOLDER": "Search for a role...",
+        "SEARCH_PLACEHOLDER": "Zoek een functie...",
         "TABS": {
-            "ALL": "All",
-            "ACTIVE": "Ative",
-            "INACTIVE": "Inactive"
+            "ALL": "Alle",
+            "ACTIVE": "Actief",
+            "INACTIVE": "Verlopen"
         },
         "COLUMNS": {
-            "ROLE_NAME": "Role name",
-            "DEPARTAMENT": "Department",
-            "REQUIREMENTS": "Certificate requirements",
-            "PERSONNEL": "Personnel",
+            "ROLE_NAME": "Functie",
+            "DEPARTAMENT": "Afdeling",
+            "REQUIREMENTS": "Vereiste certificaten",
+            "PERSONNEL": "Medewerkers",
             "STATUS": "Status"
         }
     },
     "SHOW": {
         "MENU": {
-            "GENERAL_INFORMATION": "General Information",
-            "REQUIREMENTS": "Requirements",
-            "PROTOCOLS": "Protocols",
-            "PERSONNEL": "Personnel"
+            "GENERAL_INFORMATION": "Algemene informatie",
+            "REQUIREMENTS": "Vereiste certificaten",
+            "PROTOCOLS": "Protocollen",
+            "PERSONNEL": "Medewerkers"
         },
         "GENERAL_INFORMATION": {
             "STATUS": "Status",
-            "DEPARTAMENT": "Department",
-            "ROLE_NAME": "Role name",
-            "PERSONNEL_REQUIRED": "Personnel required",
-            "ROLE_DESCRIPTION": "Role description"
+            "DEPARTAMENT": "Afdeling",
+            "ROLE_NAME": "Afdeling",
+            "PERSONNEL_REQUIRED": "Benodigde medewerkers",
+            "ROLE_DESCRIPTION": "Omschrijving functie"
         },
         "PROTOCOLS": {
-          "COLUMNS": {
-              "FILE_NAME": "File Name",
-              "FILE_TYPE": "File Type",
-              "UPLOAD_DATE": "Uploaded on"
-          }
+            "COLUMNS": {
+                "FILE_NAME": "Bestandsnaam",
+                "FILE_TYPE": "Bestandstype",
+                "UPLOAD_DATE": "Bijgevoegd op"
+            }
         },
         "REQUIREMENTS": {
             "COLUMNS": {
-                "CERTIFICATE_TYPE": "Certificate type",
-                "VALID_UNTIL": "Valid at least until"
+                "CERTIFICATE_TYPE": "Type certificaat",
+                "VALID_UNTIL": "Tenminste geldig tot"
             }
         },
         "PERSONNEL": {
-            "ADD_ROW": "Add row",
-            "SURE_DELETE": "Sure to delete?",
-            "SEARCH_OPERATOR": "Search for an operator...",
-            "SCAN_OPERATOR": "Scan operator",
+            "ADD_ROW": "Medewerker toevoegen",
+            "SURE_DELETE": "Weet u zeker dat u wilt verwijderen?",
+            "SEARCH_OPERATOR": "Zoek een medewerker...",
             "COLUMNS": {
-                "PERSONNEL": "Personnel",
-                "EMPLOYEE_NUMBER": "Employee number",
-                "CERTIFICATES": "Certificates",
-                "OPERATOR_ID": "Operator ID"
+                "PERSONNEL": "Medewerker",
+                "EMPLOYEE_NUMBER": "Personeelsnummer",
+                "CERTIFICATES": "Certificaten"
             }
         }
     },
     "FORM": {
         "MENU": {
-            "GENERAL_INFORMATION": "General Information",
-            "REQUIREMENTS": "Requirements",
-            "PROTOCOLS": "Protocols"
+            "GENERAL_INFORMATION": "Algemene informatie",
+            "REQUIREMENTS": "Vereiste certificaten",
+            "PROTOCOLS": "Protocollen"
         },
         "GENERAL_INFORMATION": {
             "STATUS": "Status",
-            "DEPARTAMENT": "Department",
-            "DEPARTAMENT_PLACEHOLDER": "Search for a department",
-            "ROLE_NAME": "Role name",
-            "ROLE_NAME_PLACEHOLDER": "Enter role name",
-            "PERSONNEL_REQUIRED": "Personnel required",
-            "PERSONNEL_REQUIRED_PLACEHOLDER": "Enter personnel required",
-            "ROLE_DESCRIPTION": "Role description",
-            "ROLE_DESCRIPTION_PLACEHOLDER": "Enter role description"
+            "DEPARTAMENT": "Afdeling",
+            "DEPARTAMENT_PLACEHOLDER": "Zoek een afdeling...",
+            "ROLE_NAME": "Functie",
+            "ROLE_NAME_PLACEHOLDER": "Enter functie",
+            "PERSONNEL_REQUIRED": "Benodigde medewerkers",
+            "PERSONNEL_REQUIRED_PLACEHOLDER": "Enter benodigde medewerkers",
+            "ROLE_DESCRIPTION": "Omschrijving functie",
+            "ROLE_DESCRIPTION_PLACEHOLDER": "Enter omschrijving functie"
         },
         "REQUIREMENTS": {
-            "ADD_ROW": "Add row",
+            "ADD_ROW": "Rij toevoegen",
             "COLUMNS": {
-                "CERTIFICATE_TYPE": "Certificate type",
-                "CERTIFICATE_TYPE_PLACEHOLDER": "Select a certificate type",
-                "VALID_UNTIL": "Valid at least until",
-                "VALID_UNTIL_PLACEHOLDER": "Select valid at least until"
+                "CERTIFICATE_TYPE": "Type certificaat",
+                "CERTIFICATE_TYPE_PLACEHOLDER": "Zoek een type certificaat...",
+                "VALID_UNTIL": "Tenminste geldig tot",
+                "VALID_UNTIL_PLACEHOLDER": "Selecteer een tenminste geldig tot"
             }
         },
         "OPERATORS": {
@@ -99,18 +97,16 @@
             }
         },
         "PROTOCOLS": {
-          "UPLOAD_FILE": "Upload file",
-          "COLUMNS": {
-              "FILE_NAME": "File Name",
-              "FILE_TYPE": "File Type",
-              "FILE_TYPE_PLACEHOLDER": "File Type",
-              "UPLOAD_DATE": "Uploaded on",
-              "UPLOAD_DATE_PLACEHOLDER": "Uploaded on"
-          }
+            "UPLOAD_FILE": "Bestand toevoegen",
+            "COLUMNS": {
+                "FILE_NAME": "Bestandsnaam",
+                "FILE_TYPE": "Bestandstype",
+                "UPLOAD_DATE": "Bijgevoegd op"
+            }
         },
         "ERROR": {
-            "REQUIRED": "Is a required field",
-            "NUMBER": "Must be a number"
+            "REQUIRED": "Is een verplicht veld",
+            "NUMBER": "Moet een nummer zijn"
         }
     }
 }

@@ -43,27 +43,13 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.CONTACT_INFORMATION.ADDRESS_LINE")} 1
+            {t("FORM.CONTACT_INFORMATION.ADDRESS_LINE")}
           </label>
           <Input
             {...bindInputProps({ name: "address1", ...formik })}
-            placeholder={`${t(
+            placeholder={t(
               "FORM.CONTACT_INFORMATION.ADDRESS_LINE_PLACEHOLDER"
-            )} 1`}
-          />
-        </div>
-      </Col>
-
-      <Col xs={24} sm={24} md={24} lg={24}>
-        <div className="card--form--item">
-          <label className="card--form--item--label">
-            {t("FORM.CONTACT_INFORMATION.ADDRESS_LINE")} 2
-          </label>
-          <Input
-            {...bindInputProps({ name: "address2", ...formik })}
-            placeholder={`${t(
-              "FORM.CONTACT_INFORMATION.ADDRESS_LINE_PLACEHOLDER"
-            )} 2`}
+            )}
           />
         </div>
       </Col>

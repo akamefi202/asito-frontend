@@ -134,14 +134,14 @@ export default () => {
 
   const setBreadcrumbsButtons = [
     {
-      title: t("DISCARD_CHANGES"),
+      title: t("DISCARD"),
       disabled: false,
       action: discardChanges,
       custom: "heading--area--buttons--left",
       buttonStyle: "btn--outline",
     },
     {
-      title: t("SAVE_CHANGES"),
+      title: t("SAVE"),
       icon: <span className="icon-Check btn--icon--right" />,
       disabled: false,
       action: formik.handleSubmit,
@@ -155,7 +155,7 @@ export default () => {
       href: PATHS.CERTIFICATES.INDEX,
     },
     {
-      title: id ? initialValues.number : t("NEW_CERTIFICATE"),
+      title: id ? initialValues.number : t("NEW"),
       className: "custom--breadcrumb--two",
     },
   ];

@@ -20,7 +20,7 @@ export default ({ t, department }) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={24} sm={24} md={12} lg={12}>
+        <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">
               {t("SHOW.GENERAL_INFORMATION.NAME")}
@@ -28,7 +28,7 @@ export default ({ t, department }) => {
             <h4 className="card--details--item--value">{department.name}</h4>
           </div>
         </Col>
-        <Col xs={24} sm={24} md={12} lg={12}>
+        <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">
               {t("SHOW.GENERAL_INFORMATION.TYPE")}

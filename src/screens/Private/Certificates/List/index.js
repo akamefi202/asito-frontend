@@ -86,7 +86,7 @@ export default () => {
 
   const setBreadcrumbsButtons = [
     {
-      title: t("NEW_CERTIFICATE"),
+      title: t("NEW"),
       disabled: false,
       action: createCertificate,
       icon: <span className="icon-Add-New btn--icon--right" />,

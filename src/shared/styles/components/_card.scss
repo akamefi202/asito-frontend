@@ -43,14 +43,16 @@
       color: #263238;
       font-weight: 400;
     }
-
-    .custom-link {
-        color: #0F6AFF;
-    }
   }
 }
+
 .custom-link {
-    color: #0F6AFF;
+  color: #0F6AFF;
+  cursor: pointer;
+
+  &:hover {
+    color: #033484;
+  }
 }
 
 .card--details--notifications {

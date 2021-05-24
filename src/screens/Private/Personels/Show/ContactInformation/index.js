@@ -43,7 +43,7 @@ export default ({ t, personel }) => {
         <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">
-              {t("SHOW.CONTACT_INFORMATION.ADDRESS_LINE")} 1
+              {t("SHOW.CONTACT_INFORMATION.ADDRESS_LINE")}
           </h5>
             <h4 className="card--details--item--value">
               {personel.address1}

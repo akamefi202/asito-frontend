@@ -1,6 +1,8 @@
 import React from "react";
 import { Row, Col } from "antd";
 import Card from "shared/components/Card";
+import { Link } from "react-router-dom";
+import { PATHS } from "utils/constants";
 
 export default ({ t, role }) => (
   <Card cardStyle={"card--details"}>
@@ -26,8 +28,14 @@ export default ({ t, role }) => (
           <h5 className="card--details--item--key">
             {t("SHOW.GENERAL_INFORMATION.DEPARTAMENT")}
           </h5>
-          <h4 className="card--details--item--value custom-link">
-            {role.client && role.client.name}
+          <h4 className="card--details--item--value">
+            {role.client && (
+              <Link 
+                className="custom-link" 
+                to={PATHS.DEPARTMENTS.SHOW.replace(":id", role.client.id)}>
+                  {role.client.name}
+              </Link>
+            )}
           </h4>
         </div>
       </Col>

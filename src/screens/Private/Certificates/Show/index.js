@@ -59,7 +59,7 @@ export default () => {
 
   const setBreadcrumbsButtons = [
     {
-      title: t("EDIT_CERTIFICATE"),
+      title: t("EDIT"),
       disabled: false,
       custom: "heading--area--buttons--left",
       buttonStyle: "btn--outline",

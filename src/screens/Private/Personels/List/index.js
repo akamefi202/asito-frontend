@@ -10,6 +10,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { OperatorQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { messages } from "utils/helpers/message";
+import { useReactiveVar } from "@apollo/client";
+import { UserStore } from "shared/store/UserStore";
+import { USER_ROLES } from "shared/constants/userRoles";
 import { delay } from "utils/helpers/delay";
 
 const { OPERATORS } = OperatorQueries;
@@ -22,6 +25,9 @@ export default () => {
   const [total, setTotal] = useState(0);
   const [take, setTake] = useState(10);
   const [page, setPage] = useState(1);
+
+  const user = useReactiveVar(UserStore);
+  const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
   const variables = { scan, skip, take };
 
@@ -56,9 +62,11 @@ export default () => {
     }, 500);
   };
 
+  const isAccess = () => userRole && ((userRole === USER_ROLES.PLANER.key) || (userRole === USER_ROLES.TEST.key));
+
   return (
     <div className="wrapper--content">
-      <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
+      <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
 
       <div className="details--page">
         <Card>

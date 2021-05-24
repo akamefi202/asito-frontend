@@ -1,36 +1,36 @@
 {
-  "PREFERENCES": "Preferences",
+  "PREFERENCES": "Instellingen",
   "FORM": {
     "MENU": {
-      "ACCOUNT_INFORMATION": "Account information",
-      "CHANGE_PASSWORD": "Change password"
+      "ACCOUNT_INFORMATION": "Gebruikersinformatie",
+      "CHANGE_PASSWORD": "Wijzig wachtwoord"
     },
     "ACCOUNT_INFORMATION": {
       "SUCCESS": "Account information updated",
-      "FIRST_NAME": "First name",
-      "FIRST_NAME_PLACEHOLDER": "First name",
-      "LAST_NAME": "Last name",
-      "LAST_NAME_PLACEHOLDER": "Last name",
-      "EMAIL_ADDRESS": "Email address",
-      "EMAIL_ADDRESS_PLACEHOLDER": "Email address",
-      "REVERT_CHANGES": "Revert changes",
-      "SAVE_CHANGES": "Save changes"
+      "FIRST_NAME": "Voornaam",
+      "FIRST_NAME_PLACEHOLDER": "Enter voornaam",
+      "LAST_NAME": "Achternaam",
+      "LAST_NAME_PLACEHOLDER": "Enter achternaam",
+      "EMAIL_ADDRESS": "E-mailadres",
+      "EMAIL_ADDRESS_PLACEHOLDER": "Enter e-mailadres",
+      "REVERT_CHANGES": "Wijzigingen annuleren",
+      "SAVE_CHANGES": "Wijzigingen opslaan"
     },
     "CHANGE_PASSWORD": {
-      "HINT": "To change your password, fill in your current password and new password twice, then click on Change password.",
-      "CURRENT_PASSWORD": "Current password",
-      "CURRENT_PASSWORD_PLACEHOLDER": "Current password",
-      "NEW_PASSWORD": "New password",
-      "NEW_PASSWORD_PLACEHOLDER": "New password",
-      "REPEAT_NEW_PASSWORD": "Repeat new password",
-      "REPEAT_NEW_PASSWORD_PLACEHOLDER": "Repeat new password",
-      "CHANGE_PASSWORD": "Change password",
-      "PASSWORD_CHANGED": "Password changed",
-      "INVALID_CURRENT_PASSWORD": "Invalid Current password"
+      "HINT": "Om het wachtwoord te wijzigen vul eerst uw huidige wachtwoord in. Daarna moet u 2 keer het nieuwe wachtwoord invoeren en vervolgens kiezen voor 'Wachtwoord opslaan'.",
+      "CURRENT_PASSWORD": "Huidig wachtwoord",
+      "CURRENT_PASSWORD_PLACEHOLDER": "Enter huidig wachtwoord",
+      "NEW_PASSWORD": "Nieuw wachtwoord",
+      "NEW_PASSWORD_PLACEHOLDER": "Enter nieuw wachtwoord",
+      "REPEAT_NEW_PASSWORD": "Herhaal het nieuwe wachtwoord",
+      "REPEAT_NEW_PASSWORD_PLACEHOLDER": "Enter herhaal het nieuwe wachtwoord",
+      "CHANGE_PASSWORD": "Wachtwoord opslaan",
+      "PASSWORD_CHANGED": "wachtwoord veranderd",
+      "INVALID_CURRENT_PASSWORD": "Ongeldig huidig wachtwoord"
     },
     "ERROR": {
-      "REQUIRED": "Is a required field",
-      "PASSVORD_MATCH": "Passwords must match"
+      "REQUIRED": "Is een verplicht veld",
+      "PASSVORD_MATCH": "Wachtwoorden moeten overeenkomen"
     }
   }
 }

@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import { Row, Col } from "antd";
 import { Table } from "shared/components";
 import Card from "shared/components/Card";
-import {COUNTRY_LIST} from "shared/constants/country";
+import { Link } from "react-router-dom";
+import { PATHS } from "utils/constants";
 
 const columns = (t) => [
   {
@@ -10,7 +11,13 @@ const columns = (t) => [
     dataIndex: "name",
     key: "name",
     sorter: (a, b) => a.name.localeCompare(b.name),
-    render: (text) => <span className="custom-link">{text}</span>,
+    render: (text, record) => (
+      <Link 
+        className="custom-link" 
+        to={PATHS.ROLES.SHOW.replace(":id", record.id)}>
+          {text}
+      </Link>
+    ),
   },
   {
     title: t("SHOW.ROLES.COLUMNS.PERSONNEL"),

@@ -57,15 +57,9 @@ export default ({ t, certificate, issuers }) => {
             </div>
           </Col>
 
-          <Col xs={24} sm={24} md={12} lg={12}>
+          <Col xs={24} sm={24} md={24} lg={24}>
             <div className="card--details--item">
               <h5 className="card--details--item--key">{t("SHOW.ISSUER_INFORMATION.ADDRESS") + ' 1'}</h5>
-              <h4 className="card--details--item--value">{getField('address1')}</h4>
-            </div>
-          </Col>
-          <Col xs={24} sm={24} md={12} lg={12}>
-            <div className="card--details--item">
-              <h5 className="card--details--item--key">{t("SHOW.ISSUER_INFORMATION.ADDRESS") + ' 2'}</h5>
               <h4 className="card--details--item--value">{getField('address1')}</h4>
             </div>
           </Col>
@@ -105,7 +99,9 @@ export default ({ t, certificate, issuers }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--details--item">
               <h5 className="card--details--item--key">{t("SHOW.ISSUER_INFORMATION.WEBSITE")}</h5>
-              <h4 className="card--details--item--value custom-link">{getField('website')}</h4>
+              <h4 className="card--details--item--value custom-link">
+                <a className="custom-link" target="_blank" href={getField('website')}>{getField('website')}</a>
+              </h4>
             </div>
           </Col>
       </Row>

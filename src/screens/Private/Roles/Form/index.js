@@ -99,7 +99,7 @@ export default () => {
     },
   });
 
-  const cancel = () => history.push(PATHS.ROLES.INDEX);
+  const discardChanges = () => formik.resetForm();
 
   const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_SITE);
   const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
@@ -112,9 +112,9 @@ export default () => {
 
   const setBreadcrumbsButtons = [
     {
-      title: t("CANCEL"),
+      title: t("DISCARD"),
       disabled: false,
-      action: cancel,
+      action: discardChanges,
       custom: "heading--area--buttons--left",
       buttonStyle: "btn--outline",
     },

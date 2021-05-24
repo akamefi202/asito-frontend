@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { PATHS } from "utils/constants";
 import { Row, Col, Popconfirm } from "antd";
 import { Card, Table, Button, Select, Spin } from "shared/components";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
@@ -27,12 +29,17 @@ const columns = (t, removeOperator, checkRequirements) => [
     key: "personnel",
     visible: [
       USER_ROLES.PLANER.key,
+      USER_ROLES.CLIENT.key,
       USER_ROLES.TEST.key
     ],
     sorter: (a, b) => a.operator.firstName.localeCompare(b.operator.firstName),
-    render: (_, record) => (<span className="custom-link">
-      {`${record.operator.firstName} ${record.operator.lastName}`}
-    </span>),
+    render: (_, record) => (
+      <Link 
+        className="custom-link" 
+        to={PATHS.PERSONNELS.SHOW.replace(":id", record.id)}>
+          {`${record.operator.firstName} ${record.operator.lastName}`}
+      </Link>
+    ),
   },
   {
     title: t("SHOW.PERSONNEL.COLUMNS.EMPLOYEE_NUMBER"),
@@ -40,6 +47,7 @@ const columns = (t, removeOperator, checkRequirements) => [
     key: "number",
     visible: [
       USER_ROLES.PLANER.key,
+      USER_ROLES.CLIENT.key,
       USER_ROLES.TEST.key
     ],
   },
@@ -67,7 +75,7 @@ const columns = (t, removeOperator, checkRequirements) => [
     dataIndex: "DELL",
     key: "DELL",
     visible: [
-      USER_ROLES.CLIENT.key,
+      USER_ROLES.PLANER.key,
       USER_ROLES.TEST.key
     ],
     render: (_, record) => (

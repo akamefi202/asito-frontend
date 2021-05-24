@@ -1,62 +1,62 @@
 {
-    "DEPARTMENTS": "Departments",
-    "NEW": "New department",
-    "EDIT": "Edit department",
-    "DISCARD": "Discard changes",
-    "SAVE": "Save changes",
+    "DEPARTMENTS": "Afdelingen",
+    "NEW": "Nieuwe afdeling",
+    "EDIT": "Wijzig afdeling",
+    "DISCARD": "Wijzigingen annuleren",
+    "SAVE": "Opslaan",
     "LIST": {
-        "SEARCH_PLACEHOLDER": "Search for a department...",
+        "SEARCH_PLACEHOLDER": "Zoek een afdeling",
         "COLUMNS": {
-            "NAME": "Department name",
-            "TYPE": "Department type",
-            "LOCATION": "Location",
-            "ROLES": "Available roles"
+            "NAME": "Afdeling",
+            "TYPE": "Type afdeling",
+            "LOCATION": "Locatie",
+            "ROLES": "Toegewezen functies"
         }
     },
     "SHOW": {
         "MENU": {
-            "GENERAL_INFORMATION": "General information",
-            "ROLES": "Roles"
+            "GENERAL_INFORMATION": "Algemene informatie",
+            "ROLES": "Functies"
         },
         "GENERAL_INFORMATION": {
-            "NAME": "Department name",
-            "TYPE": "Department type",
-            "ADDRESS": "Address",
+            "NAME": "Afdeling",
+            "TYPE": "Type afdeling",
+            "ADDRESS": "Adres",
             "POSTCODE": "Postcode",
-            "CITY": "City",
-            "COUNTRY": "Country",
-            "PHONE_NUMBER": "Phone number"
+            "CITY": "Woonplaats",
+            "COUNTRY": "Land",
+            "PHONE_NUMBER": "Telefoonnummer"
         },
         "ROLES": {
             "COLUMNS": {
-                "NAME": "Role Name",
-                "PERSONNEL": "Personnel"
+                "NAME": "Functie",
+                "PERSONNEL": "Medewerkers"
             }
         }
     },
     "FORM": {
         "MENU": {
-            "GENERAL_INFORMATION": "General information"
+            "GENERAL_INFORMATION": "Algemene informatie"
         },
         "GENERAL_INFORMATION": {
-            "NAME": "Department name",
-            "NAME_PLACEHOLDER": "Enter department name",
-            "TYPE": "Department type",
-            "TYPE_PLACEHOLDER": "Enter department type",
-            "ADDRESS": "Address",
-            "ADDRESS_PLACEHOLDER": "Enter address",
+            "NAME": "Afdeling",
+            "NAME_PLACEHOLDER": "Enter afdeling",
+            "TYPE": "Type afdeling",
+            "TYPE_PLACEHOLDER": "Enter type afdeling",
+            "ADDRESS": "Adres",
+            "ADDRESS_PLACEHOLDER": "Enter adres",
             "POSTCODE": "Postcode",
             "POSTCODE_PLACEHOLDER": "Enter postcode",
-            "CITY": "City",
-            "CITY_PLACEHOLDER": "Enter city",
-            "COUNTRY": "Country",
-            "COUNTRY_PLACEHOLDER": "Select a country",
-            "PHONE_NUMBER": "Phone number",
-            "PHONE_NUMBER_PLACEHOLDER": "Enter phone number"
+            "CITY": "Woonplaats",
+            "CITY_PLACEHOLDER": "Enter woonplaats",
+            "COUNTRY": "Land",
+            "COUNTRY_PLACEHOLDER": "Selecteer een land",
+            "PHONE_NUMBER": "Telefoonnummer",
+            "PHONE_NUMBER_PLACEHOLDER": "Enter telefoonnummer"
         },
         "ERROR": {
-            "REQUIRED": "Is a required field",
-            "NUMBER": "Must be a number"
+            "REQUIRED": "Is een verplicht veld",
+            "NUMBER": "Moet een nummer zijn"
         }
     }
 }
