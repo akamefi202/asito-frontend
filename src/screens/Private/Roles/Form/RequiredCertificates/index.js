@@ -17,11 +17,11 @@ export default ({ t, formik }) => {
 
   const onValuesChange = (_, data) => {
     const requirements = data.requirements.map(requirement => ({
-      id: cuid(),
+      id: requirement && requirement.id || cuid(),
       type: requirement && requirement.type || '',
       validAtLeastUntil: requirement && requirement.validAtLeastUntil || '',
     }));
-
+    
     formik.setFieldValue("requirements", requirements);
   };
 
@@ -38,7 +38,7 @@ export default ({ t, formik }) => {
             <h4>{t("FORM.REQUIREMENTS.COLUMNS.CERTIFICATE_TYPE")}</h4>
           </div>
         </Col>
-        <Col xs={10} md={10}>
+        <Col xs={14} md={14}>
           <div className="card--form--head">
             <h4>{t("FORM.REQUIREMENTS.COLUMNS.VALID_UNTIL")}</h4>
           </div>

@@ -5,7 +5,7 @@
     "DISCARD": "Wijzigingen annuleren",
     "SAVE": "Opslaan",
     "LIST": {
-        "SEARCH_PLACEHOLDER": "Zoek een afdeling",
+        "SEARCH_PLACEHOLDER": "Zoek een afdeling...",
         "COLUMNS": {
             "NAME": "Afdeling",
             "TYPE": "Type afdeling",
@@ -16,7 +16,7 @@
     "SHOW": {
         "MENU": {
             "GENERAL_INFORMATION": "Algemene informatie",
-            "ROLES": "Functies"
+            "ROLES": "Toegewezen functies"
         },
         "GENERAL_INFORMATION": {
             "NAME": "Afdeling",
@@ -25,7 +25,7 @@
             "POSTCODE": "Postcode",
             "CITY": "Woonplaats",
             "COUNTRY": "Land",
-            "PHONE_NUMBER": "Telefoonnummer"
+            "LOCATION": "Locatie"
         },
         "ROLES": {
             "COLUMNS": {
@@ -51,8 +51,8 @@
             "CITY_PLACEHOLDER": "Enter woonplaats",
             "COUNTRY": "Land",
             "COUNTRY_PLACEHOLDER": "Selecteer een land",
-            "PHONE_NUMBER": "Telefoonnummer",
-            "PHONE_NUMBER_PLACEHOLDER": "Enter telefoonnummer"
+            "LOCATION": "Locatie",
+            "LOCATION_PLACEHOLDER": "Enter locatie"
         },
         "ERROR": {
             "REQUIRED": "Is een verplicht veld",

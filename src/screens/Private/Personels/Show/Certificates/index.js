@@ -22,12 +22,6 @@ const columns = (t) => [
     },
   },
   {
-    title: t("SHOW.CERTIFICATES.COLUMNS.ISSUED_ON"),
-    dataIndex: "issuedOn",
-    key: "issuedOn",
-    render: (issuedOn) => (<span>{dateToString(issuedOn, "DD-MM-YYYY")}</span>)
-  },
-  {
     title: t("SHOW.CERTIFICATES.COLUMNS.VALID_UNTIL"),
     dataIndex: "validUntil",
     key: "validUntil",

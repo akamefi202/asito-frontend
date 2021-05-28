@@ -99,7 +99,7 @@ export default ({ t, certificate, issuers }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--details--item">
               <h5 className="card--details--item--key">{t("SHOW.ISSUER_INFORMATION.WEBSITE")}</h5>
-              <h4 className="card--details--item--value custom-link">
+              <h4 className="card--details--item--value">
                 <a className="custom-link" target="_blank" href={getField('website')}>{getField('website')}</a>
               </h4>
             </div>

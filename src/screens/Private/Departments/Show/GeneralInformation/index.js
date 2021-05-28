@@ -40,6 +40,17 @@ export default ({ t, department }) => {
         <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">
+              {t("SHOW.GENERAL_INFORMATION.LOCATION")}
+            </h5>
+            <h4 className="card--details--item--value">
+              
+            </h4>
+          </div>
+        </Col>
+
+        <Col xs={24} sm={24} md={24} lg={24}>
+          <div className="card--details--item">
+            <h5 className="card--details--item--key">
               {t("SHOW.GENERAL_INFORMATION.ADDRESS")}
             </h5>
             <h4 className="card--details--item--value">
@@ -74,17 +85,6 @@ export default ({ t, department }) => {
             </h5>
             <h4 className="card--details--item--value">
               {getCountryName()}
-            </h4>
-          </div>
-        </Col>
-
-        <Col xs={24} sm={24} md={12} lg={12}>
-          <div className="card--details--item">
-            <h5 className="card--details--item--key">
-              {t("SHOW.GENERAL_INFORMATION.PHONE_NUMBER")}
-            </h5>
-            <h4 className="card--details--item--value">
-              {department.phone}
             </h4>
           </div>
         </Col>

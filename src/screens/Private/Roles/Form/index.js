@@ -3,8 +3,9 @@ import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
 import GeneralInformation from "./GeneralInformation";
+import Departments from "./Departments";
 import Protocols from "./Protocols";
-import Requirements from "./Requirements";
+import RequiredCertificates from "./RequiredCertificates";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
@@ -24,6 +25,7 @@ const { SITE } = SiteQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
+  { key: "DEPARTAMENT", href: "departments" },
   { key: "REQUIREMENTS", href: "requirements" },
   { key: "PROTOCOLS", href: "protocols" },
 ];
@@ -69,7 +71,7 @@ export default () => {
           });
         }
 
-        setInitialValues({ ...initialValues, ...removeTypename(site) });
+        setInitialValues({ ...initialValues, ...removeTypename(newSite) });
       }
     },
     onError: (error) => {
@@ -151,8 +153,11 @@ export default () => {
               <section id="general">
                 <GeneralInformation t={t} formik={formik} />
               </section>
+              <section id="departments">
+                <Departments t={t} formik={formik} />
+              </section>
               <section id="requirements">
-                <Requirements t={t} formik={formik} />
+                <RequiredCertificates t={t} formik={formik} />
               </section>
               <section id="protocols">
                 <Protocols

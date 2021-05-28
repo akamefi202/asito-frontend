@@ -45,6 +45,20 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">{`${t(
+            "FORM.GENERAL_INFORMATION.LOCATION"
+          )}`}</label>
+          <Input
+            {...bindInputProps({ name: "location", ...formik })}
+            placeholder={`${t(
+              "FORM.GENERAL_INFORMATION.LOCATION_PLACEHOLDER"
+            )}`}
+          />
+        </div>
+      </Col>
+
+      <Col xs={24} sm={24} md={24} lg={24}>
+        <div className="card--form--item">
+          <label className="card--form--item--label">{`${t(
             "FORM.GENERAL_INFORMATION.ADDRESS"
           )}`}</label>
           <Input
@@ -87,18 +101,6 @@ export default ({ t, formik }) => (
             {...bindInputProps({ name: "country", ...formik })}
             placeholder={t("FORM.GENERAL_INFORMATION.COUNTRY_PLACEHOLDER")}
             items={COUNTRY_LIST}
-          />
-        </div>
-      </Col>
-
-      <Col xs={24} sm={24} md={12} lg={12}>
-        <div className="card--form--item">
-          <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.PHONE_NUMBER")}
-          </label>
-          <Input
-            {...bindInputProps({ name: "phone", ...formik })}
-            placeholder={t("FORM.GENERAL_INFORMATION.PHONE_NUMBER_PLACEHOLDER")}
           />
         </div>
       </Col>

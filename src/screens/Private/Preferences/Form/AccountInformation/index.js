@@ -7,6 +7,7 @@ import validation from "./validation";
 import { UserMutations } from "shared/graphql/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { messages } from "utils/helpers/message";
+import { fieldsQqual } from "utils/helpers/check";
 
 const { CREATE_UPDATE_USER } = UserMutations;
 
@@ -34,13 +35,14 @@ export default ({ t, user }) => {
   ] = useMutation(CREATE_UPDATE_USER,
     {
       onCompleted: (data) => {
-        messages({msg: t("FORM.ACCOUNT_INFORMATION.SUCCESS"), type: "success"});
+        messages({ msg: t("FORM.ACCOUNT_INFORMATION.SUCCESS"), type: "success" });
       },
       onError: (error) => {
-        messages({data: error});
+        messages({ data: error });
       }
     }
   );
+
   const discardChanges = () => formik.resetForm();
 
   return (
@@ -93,12 +95,14 @@ export default ({ t, user }) => {
             <div className="heading--area--buttons heading--area--buttons--end">
               <Button
                 buttonStyle={"btn--outline"}
+                disabled={fieldsQqual(formik.initialValues, formik.values)}
                 custom={"heading--area--buttons--left"}
                 onClick={discardChanges}
               >
                 {t("FORM.ACCOUNT_INFORMATION.REVERT_CHANGES")}
               </Button>
               <Button
+                disabled={fieldsQqual(formik.initialValues, formik.values)}
                 onClick={formik.handleSubmit}
               >
                 <span className="icon-Check btn--icon--right" /> {t("FORM.ACCOUNT_INFORMATION.SAVE_CHANGES")}

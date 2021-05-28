@@ -23,23 +23,6 @@ export default ({ t, role }) => (
         </div>
       </Col>
 
-      <Col xs={24} sm={24} md={24} lg={24}>
-        <div className="card--details--item">
-          <h5 className="card--details--item--key">
-            {t("SHOW.GENERAL_INFORMATION.DEPARTAMENT")}
-          </h5>
-          <h4 className="card--details--item--value">
-            {role.client && (
-              <Link 
-                className="custom-link" 
-                to={PATHS.DEPARTMENTS.SHOW.replace(":id", role.client.id)}>
-                  {role.client.name}
-              </Link>
-            )}
-          </h4>
-        </div>
-      </Col>
-
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--details--item">
           <h5 className="card--details--item--key">
@@ -53,7 +36,7 @@ export default ({ t, role }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--details--item">
           <h5 className="card--details--item--key">
-            {t("SHOW.GENERAL_INFORMATION.ROLE_DESCRIPTION")}
+            {t("SHOW.GENERAL_INFORMATION.PERSONNEL_REQUIRED")}
           </h5>
           <h4 className="card--details--item--value">
             {role.numberOfOperatorsRequired}

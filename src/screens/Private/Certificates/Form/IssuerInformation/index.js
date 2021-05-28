@@ -120,7 +120,9 @@ export default ({ t, formik, issuer }) => {
             <label className="card--form--item--label">
               {t("FORM.ISSUER_INFORMATION.WEBSITE")}
             </label>
-            <h4 className="card--details--item--value">{issuer.website}</h4>
+            <h4 className="card--details--item--value">
+              <a className="custom-link" target="_blank" href={issuer.website}>{issuer.website}</a>
+            </h4>
           </div>
         </Col>
       </Row>

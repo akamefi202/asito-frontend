@@ -3,9 +3,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
 import GeneralInformation from "./GeneralInformation";
+import Departments from "./Departments";
 import Protocols from "./Protocols";
-import Requirements from "./Requirements";
-import Personnel from "./Personnel";
+import RequiredCertificates from "./RequiredCertificates";
+import Personnels from "./Personnels";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
@@ -21,6 +22,7 @@ const { SITE } = SiteQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
+  { key: "DEPARTAMENT", href: "departments" },
   { key: "REQUIREMENTS", href: "requirements" },
   { key: "PROTOCOLS", href: "protocols" },
   { key: "PERSONNEL", href: "personnel" },
@@ -95,14 +97,17 @@ export default () => {
               <section id="general">
                 <GeneralInformation t={t} role={role} />
               </section>
+              <section id="departments">
+                <Departments t={t} departments={[]} />
+              </section>
               <section id="requirements">
-                <Requirements t={t} role={role} />
+                <RequiredCertificates t={t} role={role} />
               </section>
               <section id="protocols">
                 <Protocols t={t} protocols={[]} />
               </section>
               <section id="personnel">
-                <Personnel siteId={id} t={t} site={role} total={totalOperatorSites} setTotal={setTotalOperatorSites}/>
+                <Personnels siteId={id} t={t} site={role} total={totalOperatorSites} setTotal={setTotalOperatorSites}/>
               </section>
             </Col>
           </Row>

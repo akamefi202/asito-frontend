@@ -25,7 +25,7 @@ const Button = ({
 
     return (
             <button
-                className={`btn ${checkButtonSize} ${custom} `+ ( disabled ? ' btn--disabled ' + customDisabledClass: checkButtonStyle ) }
+                className={`btn ${checkButtonSize} ${custom} ${checkButtonStyle}`+ ( disabled ? ' btn--disabled ' + customDisabledClass : '' ) }
                 onClick={onClick}
                 type={type}
                 disabled={disabled}

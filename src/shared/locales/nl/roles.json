@@ -26,6 +26,7 @@
     "SHOW": {
         "MENU": {
             "GENERAL_INFORMATION": "Algemene informatie",
+            "DEPARTAMENT": "Afdeling",
             "REQUIREMENTS": "Vereiste certificaten",
             "PROTOCOLS": "Protocollen",
             "PERSONNEL": "Medewerkers"
@@ -33,9 +34,16 @@
         "GENERAL_INFORMATION": {
             "STATUS": "Status",
             "DEPARTAMENT": "Afdeling",
-            "ROLE_NAME": "Afdeling",
+            "ROLE_NAME": "Functie",
             "PERSONNEL_REQUIRED": "Benodigde medewerkers",
             "ROLE_DESCRIPTION": "Omschrijving functie"
+        },
+        "DEPARTAMENT": {
+            "COLUMNS": {
+                "NAME": "Afdeling",
+                "TYPE": "Type afdeling",
+                "LOCATION": "Locatie"
+            }
         },
         "PROTOCOLS": {
             "COLUMNS": {
@@ -64,6 +72,7 @@
     "FORM": {
         "MENU": {
             "GENERAL_INFORMATION": "Algemene informatie",
+            "DEPARTAMENT": "Afdeling",
             "REQUIREMENTS": "Vereiste certificaten",
             "PROTOCOLS": "Protocollen"
         },
@@ -77,6 +86,13 @@
             "PERSONNEL_REQUIRED_PLACEHOLDER": "Enter benodigde medewerkers",
             "ROLE_DESCRIPTION": "Omschrijving functie",
             "ROLE_DESCRIPTION_PLACEHOLDER": "Enter omschrijving functie"
+        },
+        "DEPARTAMENT": {
+            "ADD_ROW": "Rij toevoegen",
+            "COLUMNS": {
+                "NAME": "Afdeling",
+                "NAME_PLACEHOLDER": "Zoek een afdeling..."
+            }
         },
         "REQUIREMENTS": {
             "ADD_ROW": "Rij toevoegen",

@@ -49,8 +49,8 @@
     },
     "CERTIFICATES": {
       "COLUMNS": {
-        "CERTIFICATE_NUMBER": "Certificaten",
-        "CERTIFICATE_TYPE": "Certificaat type",
+        "CERTIFICATE_NUMBER": "Certificaatnummer",
+        "CERTIFICATE_TYPE": "Type certificaat",
         "ISSUED_ON": "Uitgegeven op",
         "VALID_UNTIL": "Geldig tot"
       }
