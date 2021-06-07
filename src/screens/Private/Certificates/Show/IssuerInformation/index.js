@@ -3,13 +3,7 @@ import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { COUNTRY_LIST } from "shared/constants/country";
 
-export default ({ t, certificate, issuers }) => {
-
-  const getIssuerName = () => {
-    const issuer = issuers.find(i => i.id === certificate.signedBy);
-    return issuer ? issuer.name : certificate.signedBy;
-  }
-
+export default ({ t, certificate }) => {
   const getField = (name) => {
     let field = certificate && certificate.issuer ? certificate.issuer[name] : "";
     return field;
@@ -34,7 +28,7 @@ export default ({ t, certificate, issuers }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">{t("SHOW.ISSUER_INFORMATION.SIGNED_BY")}</h5>
-            <h4 className="card--details--item--value">{getIssuerName()}</h4>
+            <h4 className="card--details--item--value">{certificate.signedBy}</h4>
           </div>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12}>

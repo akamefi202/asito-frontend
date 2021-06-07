@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Table from "./Table";
-import { AiOutlinePlus } from "react-icons/ai";
 import { Card, Header, Spin, Input } from "shared/components";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";

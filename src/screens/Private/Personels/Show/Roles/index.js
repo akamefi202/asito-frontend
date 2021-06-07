@@ -1,34 +1,34 @@
-import React, {useState} from "react";
-import { Row, Col } from "antd";
-import { Table } from "shared/components";
-import Card from "shared/components/Card";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
+import { Row, Col } from "antd";
+import { Card, Table } from "shared/components";
 
 const columns = (t) => [
   {
     title: t("SHOW.ROLES.COLUMNS.NAME"),
-    dataIndex: "name",
+    dataIndex: ["site", "name"],
     key: "name",
-    sorter: (a, b) => a.name.localeCompare(b.name),
-    render: (text, record) => (
+    sorter: (a, b) => a.site.name.localeCompare(b.site.name),
+    render: (name, record) => (
       <Link 
         className="custom-link" 
-        to={PATHS.ROLES.SHOW.replace(":id", record.id)}>
-          {text}
+        to={PATHS.ROLES.SHOW.replace(":id", record.site.id)}>
+          {name}
       </Link>
     ),
   },
   {
-    title: t("SHOW.ROLES.COLUMNS.PERSONNEL"),
-    dataIndex: "operatorSites",
-    key: "operatorSites",
-    render: (operatorSites, record) => {
-      const operatorAmount = operatorSites ? operatorSites.length : 0;
-      const maxAmount = record && record.numberOfOperatorsRequired ? record.numberOfOperatorsRequired : 0;
-      return [operatorAmount, '/', maxAmount].join('')
-    }
-  }
+    title: t("SHOW.ROLES.COLUMNS.PROTOCOLS"),
+    dataIndex: ["site", "protocols"],
+    key: "protocols",
+    render: (protocols) => (
+      <div className="access--type">
+        <span className="icon icon-Check green"></span>
+        <span>{t('SHOW.ROLES.COLUMNS.ACCEPTED')}</span>
+      </div>
+    )
+  },
 ];
 
 export default ({ t, roles }) => {
@@ -57,9 +57,11 @@ export default ({ t, roles }) => {
             total={roles.length}
             onPageChange={onPageChange}
             rowKey={"id"}
-            onRow={() => ({
-              onClick: () => {},
-            })}
+            onRow={(record) => {
+              return {
+                onClick: () => { },
+              };
+            }}
           />
         </Col>
       </Row>

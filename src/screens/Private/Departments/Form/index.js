@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useLazyQuery } from "@apollo/react-hooks";
 import { ClientMutations } from "shared/graphql/mutations";
 import { ClientQueries } from "shared/graphql/queries";
 import validation from "./validation";
@@ -30,19 +30,14 @@ export default () => {
     id: cuid(),
     name: "",
     number: "",
-    registrationNumber: "",
-    vat: "",
     address: "",
     zipCode: "",
     city: "",
     country: "",
     phone: "",
-    email: "",
-    website: "",
-    sites: [],
   });
 
-  const { loading: loadingClient } = useQuery(CLIENT, {
+  const [getDepartment, { loading: loadingClient }] = useLazyQuery(CLIENT, {
     variables: {
       where: {
         id
@@ -57,6 +52,11 @@ export default () => {
       messages({ data: error });
     }
   });
+
+  useEffect(() => {
+    if (!id) return;
+    getDepartment();
+  }, []);
 
 
   const formik = useFormik({

@@ -9,7 +9,7 @@ import { PATHS } from "utils/constants";
 
 const today = moment();
 
-export default ({ t, certificate, issuers }) => {
+export default ({ t, certificate }) => {
   const validUntil = timestampToDate(certificate.validUntil);
   const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
 
@@ -28,11 +28,6 @@ export default ({ t, certificate, issuers }) => {
     const certificateType = certificate && certificate.requirement
       && CERTIFICATES_TYPE.find(item => item.key === certificate.requirement.type);
     return certificateType ? certificateType.value : "";
-  }
-
-  const getIssuerName = () => {
-    const issuer = issuers.find(i => i.id === certificate.signedBy);
-    return issuer ? issuer.name : certificate.signedBy;
   }
 
   return (

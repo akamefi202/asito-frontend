@@ -20,16 +20,16 @@
   },
   "SHOW": {
     "MENU": {
-      "DATA_ACCESS": "Afdeling en functie",
+      "ROLES": "Afdeling en functie",
       "GENERAL_INFORMATION": "Algemene informatie",
       "CONTACT_INFORMATION": "Contact informatie",
       "CERTIFICATES": "Certificaten"
     },
-    "DATA_ACCESS": {
+    "ROLES": {
       "COLUMNS": {
-        "CLIENT": "Afdeling",
-        "SHARED_ON": "Functie",
-        "SHARED_UNTIL": "Acceptatie protocollen"
+        "NAME": "Afdeling",
+        "ACCEPTED": "Geaccepteerd",
+        "PROTOCOLS": "Acceptatie protocollen"
       }
     },
     "GENERAL_INFORMATION": {

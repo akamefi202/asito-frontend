@@ -1,14 +1,6 @@
 import gql from "graphql-tag";
 
-export const CREATE_OPERATOR = gql`
-  mutation createOperator($data: OperatorWhereInput) {
-    createOperator(data: $data) {
-      id
-    }
-  }
-`;
-
-export const UPDATE_OPERATOR = gql`
+export const CREATE_UPDATE_OPERATOR = gql`
   mutation updateOperator($data: OperatorWhereInput) {
     updateOperator(data: $data) {
       id
@@ -17,6 +9,5 @@ export const UPDATE_OPERATOR = gql`
 `;
 
 export default {
-  CREATE_OPERATOR,
-  UPDATE_OPERATOR
+  CREATE_UPDATE_OPERATOR,
 };

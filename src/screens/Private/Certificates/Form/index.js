@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { CertificateMutations, RemoveAttachmentsMutations } from "shared/graphql/mutations";
 import { CertificateQueries } from "shared/graphql/queries";
 import validation from "./validation";
@@ -70,7 +70,7 @@ export default () => {
     }
   });
 
-  const { loading: loadingCertificate } = useQuery(CERTIFICATE, {
+  const [getSertificate, { loading: loadingCertificate }] = useLazyQuery(CERTIFICATE, {
     variables: {
       where: {
         id
@@ -91,6 +91,11 @@ export default () => {
       messages({ data: error });
     }
   });
+
+  useEffect(() => {
+    if (!id) return;
+    getSertificate();
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,

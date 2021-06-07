@@ -9,12 +9,9 @@ export default messages => {
     gender: yup.string().required(messages.REQUIRED),
     phone: yup.string().required(messages.REQUIRED),
     email: yup.string().email().required(messages.REQUIRED),
-    accesses: yup.array().of(
-      yup.object().shape({
-        clientId: yup.string().required(messages.REQUIRED),
-        sharedOn: yup.string().required(messages.REQUIRED),
-        sharedUntil: yup.string().required(messages.REQUIRED),
-      })
-    )
+    address1: yup.string().required(messages.REQUIRED),
+    zipCode: yup.string().required(messages.REQUIRED),
+    city: yup.string().required(messages.REQUIRED),
+    country: yup.string().required(messages.REQUIRED),
   });
 };

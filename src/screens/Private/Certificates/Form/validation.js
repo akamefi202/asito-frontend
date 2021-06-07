@@ -9,6 +9,5 @@ export default messages => {
     operator: yup.object().shape({
       id: yup.string().required(messages.REQUIRED),
     }),
-    // attachments: yup.string(),
   });
 };

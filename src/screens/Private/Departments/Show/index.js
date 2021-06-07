@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -8,7 +8,7 @@ import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { ClientQueries, SiteQueries } from "shared/graphql/queries";
+import { ClientQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {useReactiveVar} from "@apollo/client";
@@ -16,7 +16,6 @@ import {UserStore} from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
 
 const { CLIENT } = ClientQueries;
-const { SITES } = SiteQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -27,26 +26,21 @@ export default () => {
   const { id } = useParams();
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.DEPARTMENTS);
-  const [skipSites, setSkipSites] = useState(0);
-  const [totalSites, setTotalSites] = useState(0);
-  const [takeSites, setTakeSites] = useState(5);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
   const variables = { where: { id } };
-  const variablesSites = { where: { client: { id } }, skip: skipSites, take: takeSites };
 
-  const { data, loading, error } = useQuery(CLIENT, { variables });
-  const { data: dataSites, loading: loadingSites, error: errorSites } = useQuery(SITES, {
-    variables: variablesSites,
-    onCompleted: ({ sites }) => setTotalSites(sites.count || 0)
+  const { data, loading } = useQuery(CLIENT, {
+    variables,
+    onError: (error) => {
+      messages({ data: error });
+    }
   });
 
-  if (error || errorSites) messages({ data: error });
-
   const department = get(data, "client", {}) || {};
-  const sites = get(dataSites, "sites.data", []) || [];
+  const roles = get(data, "client.sites", []) || [];
 
   const getScrollMenuItem = (t) => {
     return menuItems.map((item) => {
@@ -83,7 +77,7 @@ export default () => {
     <div className="wrapper--content">
       <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
       <div className="details--page">
-        <Spin spinning={loading || loadingSites}>
+        <Spin spinning={loading}>
           <Row gutter={[16]}>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem(t)} />
@@ -94,12 +88,7 @@ export default () => {
                 <GeneralInformation t={t} department={department} />
               </section>
               <section id="roles">
-                <Roles t={t}
-                  sites={sites}
-                  take={takeSites}
-                  setTake={setTakeSites}
-                  setSkip={setSkipSites}
-                  total={totalSites} />
+                <Roles t={t} roles={roles} />
               </section>
             </Col>
           </Row>

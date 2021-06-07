@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Col, Row, Form, Upload } from "antd";
-import { CloseOutlined, CloudUploadOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 import { Card, Button } from "shared/components";
 import { useMutation } from "@apollo/react-hooks";
 import { FileMutations } from "shared/graphql/mutations";

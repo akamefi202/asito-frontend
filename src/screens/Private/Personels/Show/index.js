@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
-import DataAccess from "./DataAccess";
+import Roles from "./Roles";
 import GeneralInformation from "./GeneralInformation";
 import ContactInformation from "./ContactInformation";
 import Certificates from "./Certificates";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { AccessQueries, CertificateQueries, OperatorQueries } from "shared/graphql/queries";
+import { useQuery } from "@apollo/react-hooks";
+import { OperatorQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
@@ -18,11 +18,9 @@ import { USER_ROLES } from "shared/constants/userRoles";
 import { messages } from "utils/helpers/message";
 
 const { OPERATOR } = OperatorQueries;
-const { CERTIFICATES } = CertificateQueries;
-const { ACCESSES } = AccessQueries;
 
 const menuItems = [
-  { key: "DATA_ACCESS", href: "dataAccess" },
+  { key: "ROLES", href: "roles" },
   { key: "GENERAL_INFORMATION", href: "general" },
   { key: "CONTACT_INFORMATION", href: "contact" },
   { key: "CERTIFICATES", href: "certificates" },
@@ -32,45 +30,19 @@ export default () => {
   const { id } = useParams();
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.PERSONNELS);
-  const [skipAccess, setSkipAccess] = useState(0);
-  const [totalAccess, setTotalAccess] = useState(0);
-  const [takeAccess, setTakeAccess] = useState(5);
-  const [skipCertificates, setSkipCertificates] = useState(0);
-  const [totalCertificates, setTotalCertificates] = useState(0);
-  const [takeCertificates, setTakeCertificates] = useState(5);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
-  const variablesAccess = { where: { operator: { id } }, skip: skipAccess, take: takeAccess };
-  const variablesCertificates = { where: { operator: { id } }, skip: skipCertificates, take: takeCertificates };
 
-  const [requestOperator, { data, loading }] = useLazyQuery(OPERATOR, {
+  const { data, loading } = useQuery(OPERATOR, {
     variables: { where: { id } },
     onError: (error) => messages({ data: error })
   });
 
-  const [requestAccesses, { data: dataAccesses, loading: loadingAccesses }] = useLazyQuery(ACCESSES, {
-    variables: variablesAccess,
-    onCompleted: ({ accesses }) => setTotalAccess(accesses.count || 0),
-    onError: (error) => messages({ data: error })
-  });
-
-  const [requestCertificates, { data: dataCertificates, loading: loadingCertificates }] = useLazyQuery(CERTIFICATES, {
-    variables: variablesCertificates,
-    onCompleted: ({ certificates }) => setTotalCertificates(certificates.count || 0),
-    onError: (error) => messages({ data: error })
-  });
-
-  useEffect(() => {
-    requestOperator();
-    requestAccesses();
-    requestCertificates();
-  }, [])
-
   const personel = get(data, "operator", {}) || {};
-  const accesses = get(dataAccesses, "accesses.data", []) || [];
-  const certificates = get(dataCertificates, "certificates.data", []) || [];
+  const roles = get(data, "operator.operatorSites", []) || [];
+  const certificates = get(data, "operator.certificates", []) || [];
 
   const getScrollMenuItem = (t) => {
     return menuItems.map((item) => {
@@ -117,14 +89,8 @@ export default () => {
             </Col>
 
             <Col xs={24} sm={24} md={18} lg={18}>
-              <section id="dataAccess">
-                <DataAccess t={t}
-                  loading={!loading && loadingAccesses}
-                  accesses={accesses}
-                  take={takeAccess}
-                  setTake={setTakeAccess}
-                  setSkip={setSkipAccess}
-                  total={totalAccess} />
+              <section id="roles">
+                <Roles t={t} roles={roles} />
               </section>
               <section id="general">
                 <GeneralInformation t={t} personel={personel} />
@@ -133,13 +99,7 @@ export default () => {
                 <ContactInformation t={t} personel={personel} />
               </section>
               <section id="certificates">
-                <Certificates t={t}
-                  loading={!loading && loadingCertificates}
-                  certificates={certificates}
-                  take={takeCertificates}
-                  setTake={setTakeCertificates}
-                  setSkip={setSkipCertificates}
-                  total={totalCertificates} />
+                <Certificates t={t} certificates={certificates} />
               </section>
             </Col>
           </Row>
