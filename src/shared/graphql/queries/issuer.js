@@ -6,9 +6,7 @@ export const ISSUER = gql`
       id
       name
       number
-      vat
       address1
-      address2
       zipCode
       city
       country
@@ -26,11 +24,8 @@ export const ISSUERS = gql`
       data {
         id
         name
-        vat
-        registrationNumber
         number
         address1
-        address2
         zipCode
         city
         country

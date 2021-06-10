@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { COUNTRY_LIST } from "shared/constants/country";
 
-export default ({ t, issuer, modeRole}) => {
+export default ({ t, issuer }) => {
   const country = issuer.country
     ? (COUNTRY_LIST.find(item => item.key === issuer.country)) || {}
     : "";
@@ -21,7 +21,7 @@ export default ({ t, issuer, modeRole}) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">
-              {t( modeRole ? "SHOW.GENERAL_INFORMATION_ISSUER.NAME" : "SHOW.GENERAL_INFORMATION.NAME")}
+              {t("SHOW.GENERAL_INFORMATION_ISSUER.NAME")}
             </h5>
             <h4 className="card--details--item--value">{issuer.name}</h4>
           </div>
@@ -29,30 +29,11 @@ export default ({ t, issuer, modeRole}) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">
-              {t(modeRole ? "SHOW.GENERAL_INFORMATION_ISSUER.NUMBER" : "SHOW.GENERAL_INFORMATION.NUMBER")}
+              {t("SHOW.GENERAL_INFORMATION_ISSUER.NUMBER")}
             </h5>
             <h4 className="card--details--item--value">{issuer.number}</h4>
           </div>
         </Col>
-
-        {/* {modeRole && <>
-          <Col xs={24} sm={24} md={12} lg={12}>
-            <div className="card--details--item">
-              <h5 className="card--details--item--key">
-                {t("SHOW.GENERAL_INFORMATION_ISSUER.BUSINESS_NUMBER")}
-              </h5>
-              <h4 className="card--details--item--value">{issuer.registrationNumber}</h4>
-            </div>
-          </Col>
-          <Col xs={24} sm={24} md={12} lg={12}>
-            <div className="card--details--item">
-              <h5 className="card--details--item--key">
-                {t("SHOW.GENERAL_INFORMATION_ISSUER.VAT_ID")}
-              </h5>
-              <h4 className="card--details--item--value">{issuer.vat}</h4>
-            </div>
-          </Col>
-        </>} */}
 
         <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--details--item">

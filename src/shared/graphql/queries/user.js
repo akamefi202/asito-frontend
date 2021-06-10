@@ -12,11 +12,8 @@ export const USER = gql`
       issuer {
         id
         name
-        vat
-        registrationNumber
         number
         address1
-        address2
         zipCode
         city
         country

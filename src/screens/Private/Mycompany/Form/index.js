@@ -13,9 +13,6 @@ import { UserQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
-import {USER_ROLES} from "shared/constants/userRoles";
-import {useReactiveVar} from "@apollo/client";
-import {UserStore} from "shared/store/UserStore";
 
 const { CREATE_UPDATE_ISSUER } = IssuerMutations;
 const { USER } = UserQueries;
@@ -27,16 +24,11 @@ const menuItems = [
 export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.MYCOMPANY);
-  const user = useReactiveVar(UserStore);
-  const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
   const [initialValues, setInitialValues] = useState({
     id: "",
     name: "",
     number: "",
-    registrationNumber: "",
-    vat: "",
     address1: "",
-    address2: "",
     zipCode: "",
     city: "",
     country: "",
@@ -100,8 +92,6 @@ export default () => {
     }
   ];
 
-  const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || ( userRole === USER_ROLES.TEST.key))
-
   return (
     <div className="wrapper--content">
       <Spin spinning={loading || loadingIssuer}>
@@ -114,7 +104,7 @@ export default () => {
 
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
-                <GeneralInformation t={t} formik={formik} modeRole={isAccess()} />
+                <GeneralInformation t={t} formik={formik} />
               </section>
             </Col>
           </Row>

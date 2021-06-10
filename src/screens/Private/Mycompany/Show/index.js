@@ -10,9 +10,6 @@ import { useQuery } from "@apollo/react-hooks";
 import { UserQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { messages } from "utils/helpers/message";
-import {USER_ROLES} from "shared/constants/userRoles";
-import {useReactiveVar} from "@apollo/client";
-import {UserStore} from "shared/store/UserStore";
 
 const { USER } = UserQueries;
 
@@ -23,8 +20,6 @@ const menuItems = [
 export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.MYCOMPANY);
-  const user = useReactiveVar(UserStore);
-  const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
   const { data, loading, error } = useQuery(USER);
 
@@ -54,8 +49,6 @@ export default () => {
     },
   ];
 
-  const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || ( userRole === USER_ROLES.TEST.key))
-
   return (
     <div className="wrapper--content">
       <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
@@ -68,7 +61,7 @@ export default () => {
 
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
-                <GeneralInformation t={t} issuer={issuer} modeRole={isAccess()} />
+                <GeneralInformation t={t} issuer={issuer} />
               </section>
             </Col>
           </Row>
