@@ -44,7 +44,7 @@ export default ({ t, certificate }) => {
             <h4 className="card--details--item--value">
               <Link 
                 className="custom-link" 
-                to={PATHS.PERSONNELS.SHOW.replace(":id", getCertificateOperator(true))}>
+                to={PATHS.EMPLOYEES.SHOW.replace(":id", getCertificateOperator(true))}>
                   {getCertificateOperator()}
               </Link>
             </h4>

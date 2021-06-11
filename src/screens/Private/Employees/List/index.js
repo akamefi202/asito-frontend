@@ -6,7 +6,7 @@ import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { OperatorQueries } from "shared/graphql/queries";
+import { EmployeeQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { messages } from "utils/helpers/message";
 import { useReactiveVar } from "@apollo/client";
@@ -14,11 +14,11 @@ import { UserStore } from "shared/store/UserStore";
 import { USER_ROLES } from "shared/constants/userRoles";
 import { delay } from "utils/helpers/delay";
 
-const { OPERATORS } = OperatorQueries;
+const { EMPLOYEES } = EmployeeQueries;
 
 export default () => {
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.PERSONNELS);
+  const { t } = useTranslation(NAME_SPACES.EMPLOYEES);
   const [scan, setScan] = useState("");
   const [skip, setSkip] = useState(0);
   const [total, setTotal] = useState(0);
@@ -30,27 +30,27 @@ export default () => {
 
   const variables = { scan, skip, take };
 
-  const { data, loading } = useQuery(OPERATORS, {
+  const { data, loading } = useQuery(EMPLOYEES, {
     variables,
-    onCompleted: ({ operators }) => setTotal(operators.count || 0),
+    onCompleted: ({ employees }) => setTotal(employees.count || 0),
     onError: (error) => messages({ data: error })
   });
 
-  const personnels = get(data, "operators.data", []);
+  const employees = get(data, "employees.data", []);
 
-  const createOperators = () => history.push(PATHS.PERSONNELS.CREATE);
+  const create = () => history.push(PATHS.EMPLOYEES.CREATE);
 
   const setBreadcrumbsButtons = [
     {
       title: t("NEW"),
       disabled: false,
-      action: createOperators,
+      action: create,
       icon: <span className="icon-Add-New btn--icon--right" />,
     },
   ];
 
   const setBreadcrumbsItem = [
-    { title: t("PERSONNELS"), className: "heading--area--title" },
+    { title: t("EMPLOYEES"), className: "heading--area--title" },
   ];
 
   const onSearchChange = (value) => {
@@ -77,7 +77,7 @@ export default () => {
                 placeholder={t("LIST.SEARCH_PLACEHOLDER")}
               />
             </div>
-            <Table t={t} personnels={personnels} take={take} setTake={setTake} setSkip={setSkip} total={total} page={page} setPage={setPage} />
+            <Table t={t} employees={employees} take={take} setTake={setTake} setSkip={setSkip} total={total} page={page} setPage={setPage} />
           </Spin>
         </Card>
       </div>

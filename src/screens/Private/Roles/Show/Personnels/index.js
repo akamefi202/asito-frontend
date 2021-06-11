@@ -7,7 +7,7 @@ import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { BsCheck } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
-import { OperatorQueries, OperatorSiteQueries } from "shared/graphql/queries";
+import { EmployeeQueries, OperatorSiteQueries } from "shared/graphql/queries";
 import { OperatorSiteMutations } from "shared/graphql/mutations";
 import cuid from "cuid";
 import { USER_ROLES } from "shared/constants/userRoles";
@@ -17,8 +17,9 @@ import { delay } from "utils/helpers/delay";
 import { messages } from "utils/helpers/message";
 import { datesEqual } from "utils/helpers/moment";
 import { withoutRepetitions } from "utils/helpers/array";
+import { EMPLOYEE } from "shared/graphql/queries/employee";
 
-const { OPERATORS } = OperatorQueries;
+const { EMPLOYEES } = EmployeeQueries;
 const { OPERATOR_SITES } = OperatorSiteQueries;
 const { UPDATE_CREATE_OPERATOR_SITE, REMOVE_OPERATOR_SITE } = OperatorSiteMutations;
 
@@ -32,18 +33,18 @@ const columns = (t, removeOperator, checkRequirements) => [
       USER_ROLES.CLIENT.key,
       USER_ROLES.TEST.key
     ],
-    sorter: (a, b) => a.operator.firstName.localeCompare(b.operator.firstName),
+    sorter: (a, b) => a.employee.firstName.localeCompare(b.employee.firstName),
     render: (_, record) => (
       <Link 
         className="custom-link" 
-        to={PATHS.PERSONNELS.SHOW.replace(":id", record.id)}>
-          {`${record.operator.firstName} ${record.operator.lastName}`}
+        to={PATHS.EMPLOYEES.SHOW.replace(":id", record.id)}>
+          {`${record.employee.firstName} ${record.employee.lastName}`}
       </Link>
     ),
   },
   {
     title: t("SHOW.PERSONNEL.COLUMNS.EMPLOYEE_NUMBER"),
-    dataIndex: ["operator", "number"],
+    dataIndex: ["employee", "number"],
     key: "number",
     visible: [
       USER_ROLES.PLANER.key,
@@ -53,7 +54,7 @@ const columns = (t, removeOperator, checkRequirements) => [
   },
   {
     title: t("SHOW.PERSONNEL.COLUMNS.CERTIFICATES"),
-    dataIndex: ["operator", "certificates"],
+    dataIndex: ["employee", "certificates"],
     key: "certificates",
     visible: [
       USER_ROLES.PLANER.key,
@@ -97,7 +98,7 @@ export default ({ t, role, roleId, total, setTotal }) => {
   const [skipOperatorSites, setSkipOperatorSites] = useState(0);
   const [takeOperatorSites, setTakeOperatorSites] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [operatorsSelect, setOperatorsSelect] = useState([]);
+  const [employeesSelect, setEmployeesSelect] = useState([]);
   const [scanSelect, setScanSelect] = useState("");
   const [pageSelect, setPageSelect] = useState(1);
   const [skipSelect, setSkipSelect] = useState(0);
@@ -113,18 +114,18 @@ export default ({ t, role, roleId, total, setTotal }) => {
     getOperatorSite();
   }, []);
 
-  const { loading: loadingOperators } = useQuery(OPERATORS, {
+  const { loading: loadingOperators } = useQuery(EMPLOYEES, {
     variables: variablesSelect,
-    onCompleted: ({ operators }) => {
-      if (!operators || !operators.data) return;
-      const select = operators.data.map((item) => ({ 
+    onCompleted: ({ employees }) => {
+      if (!employees || !employees.data) return;
+      const select = employees.data.map((item) => ({ 
         key: item.id, 
         value: `${item.firstName} ${item.lastName}` 
       }));
-      setTotalSelect(operators.count || 0);
-      const selectAll = scanStatus ? select : withoutRepetitions([...operatorsSelect, ...select]);
+      setTotalSelect(employees.count || 0);
+      const selectAll = scanStatus ? select : withoutRepetitions([...employeesSelect, ...select]);
       setScanStatus(false);
-      setOperatorsSelect(selectAll);
+      setEmployeesSelect(selectAll);
     },
     onError: (error) => {
       messages({ data: error });
@@ -149,11 +150,11 @@ export default ({ t, role, roleId, total, setTotal }) => {
 
   const [getOperatorSite] = useLazyQuery(OPERATOR_SITES, {
     variables: variablesOperatorSites,
-    onCompleted: ({ operatorSites }) => {
+    onCompleted: ({ employeeSites }) => {
       setLoading(false);
-      if (!operatorSites || !operatorSites.data) return;
-      setTotal(operatorSites.count);
-      setSiteOperators(operatorSites.data);
+      if (!employeeSites || !employeeSites.data) return;
+      setTotal(employeeSites.count);
+      setSiteOperators(employeeSites.data);
     },
     onError: (error) => {
       setLoading(false);
@@ -192,7 +193,7 @@ export default ({ t, role, roleId, total, setTotal }) => {
       site: {
         id: roleId
       },
-      operator: {
+      employee: {
         id
       }
     }
@@ -296,7 +297,7 @@ export default ({ t, role, roleId, total, setTotal }) => {
                     <Select
                       placeholder={t("SHOW.PERSONNEL.SEARCH_OPERATOR")}
                       onChange={onChangeOperator}
-                      items={operatorsSelect}
+                      items={employeesSelect}
                       getSelect={getSelect}
                       getScan={getScanSelect}
                       loading={loadingOperators}

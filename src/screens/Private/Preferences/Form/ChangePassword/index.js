@@ -21,8 +21,6 @@ export default ({ t, user }) => {
       currentPassword: "",
       confirmNewPassword: "",
       newPassword: "",
-      username: localStorage.getItem("username"),
-      accessToken: localStorage.getItem("access_token"),
     },
     validationSchema: validation(
       t('FORM.ERROR', {

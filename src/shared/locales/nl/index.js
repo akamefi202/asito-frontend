@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import auth from "./auth";
 import layout from "./layout";
-import personnels from "./personnels";
+import employees from "./employees";
 import roles from "./roles";
 import departments from "./departments";
 import certificates from "./certificates";
@@ -15,7 +15,7 @@ import signUp from "./signUp";
 export default {
   auth,
   layout,
-  personnels,
+  employees,
   roles,
   departments,
   certificates,

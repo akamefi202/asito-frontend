@@ -3,16 +3,16 @@ import { Row, Col } from "antd";
 import { Card, Input, Select, DatePicker } from "shared/components";
 import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import { useQuery } from "@apollo/react-hooks";
-import { OperatorQueries } from "shared/graphql/queries";
+import { EmployeeQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { bindInputProps } from "utils/helpers/input";
 import { withoutRepetitions } from "utils/helpers/array";
 import { delay } from "utils/helpers/delay";
 
-const { OPERATORS } = OperatorQueries;
+const { EMPLOYEES } = EmployeeQueries;
 
 export default ({ t, formik }) => {
-  const [operatorsSelect, setOperatorsSelect] = useState([]);
+  const [employeesSelect, setEmployeesSelect] = useState([]);
   const [scanSelect, setScanSelect] = useState("");
   const [pageSelect, setPageSelect] = useState(1);
   const [skipSelect, setSkipSelect] = useState(0);
@@ -22,18 +22,18 @@ export default ({ t, formik }) => {
 
   const variablesSelect = { scan: scanSelect, skip: skipSelect, take: takeSelect };
 
-  const { loading } = useQuery(OPERATORS, {
+  const { loading } = useQuery(EMPLOYEES, {
     variables: variablesSelect,
-    onCompleted: ({ operators }) => {
-      if (!operators || !operators.data) return;
-      const select = operators.data.map((item) => ({
+    onCompleted: ({ employees }) => {
+      if (!employees || !employees.data) return;
+      const select = employees.data.map((item) => ({
         key: item.id,
         value: `${item.firstName} ${item.lastName}`
       }));
-      setTotalSelect(operators.count || 0);
-      const selectAll = scanStatus ? select : withoutRepetitions([...operatorsSelect, ...select]);
+      setTotalSelect(employees.count || 0);
+      const selectAll = scanStatus ? select : withoutRepetitions([...employeesSelect, ...select]);
       setScanStatus(false);
-      setOperatorsSelect(selectAll);
+      setEmployeesSelect(selectAll);
     },
     onError: (error) => {
       messages({ data: error });
@@ -73,8 +73,8 @@ export default ({ t, formik }) => {
             </label>
             <Select
               placeholder={t("FORM.GENERAL_INFORMATION.ISSUED_TO_PLACEHOLDER")}
-              {...bindInputProps({ prefix: true, name: "operator.id", ...formik })}
-              items={operatorsSelect}
+              {...bindInputProps({ prefix: true, name: "employee.id", ...formik })}
+              items={employeesSelect}
               getSelect={getSelect}
               getScan={getScanSelect}
               loading={loading}

@@ -1,5 +1,5 @@
 export { default as AuthQueries } from "./auth";
-export { default as OperatorQueries } from "./operator";
+export { default as EmployeeQueries } from "./employee";
 export { default as CertificateQueries } from "./certificate";
 export { default as SiteQueries } from "./site";
 export { default as ClientQueries } from "./client";

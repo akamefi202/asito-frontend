@@ -11,11 +11,11 @@ export const PATHS = {
     },
     VALIDATION: `${PUBLIC_INDEX}/validation/:id`,
   },
-  PERSONNELS: {
-    INDEX: "/personels",
-    CREATE: "/personels/create",
-    SHOW: "/personels/show/:id",
-    EDIT: "/personels/edit/:id",
+  EMPLOYEES: {
+    INDEX: "/employees",
+    CREATE: "/Employees/create",
+    SHOW: "/employees/show/:id",
+    EDIT: "/employees/edit/:id",
   },
   CERTIFICATES: {
     INDEX: "/certificates",

@@ -7,20 +7,20 @@ import { Card, Table } from "shared/components";
 const columns = (t) => [
   {
     title: t("SHOW.ROLES.COLUMNS.NAME"),
-    dataIndex: ["site", "name"],
+    dataIndex: ["role", "name"],
     key: "name",
-    sorter: (a, b) => a.site.name.localeCompare(b.site.name),
+    sorter: (a, b) => a.role.name.localeCompare(b.role.name),
     render: (name, record) => (
       <Link 
         className="custom-link" 
-        to={PATHS.ROLES.SHOW.replace(":id", record.site.id)}>
+        to={PATHS.ROLES.SHOW.replace(":id", record.role.id)}>
           {name}
       </Link>
     ),
   },
   {
     title: t("SHOW.ROLES.COLUMNS.PROTOCOLS"),
-    dataIndex: ["site", "protocols"],
+    dataIndex: ["role", "protocols"],
     key: "protocols",
     render: (protocols) => (
       <div className="access--type">

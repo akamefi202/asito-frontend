@@ -10,14 +10,14 @@ import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { OperatorQueries } from "shared/graphql/queries";
+import { EmployeeQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
 import { USER_ROLES } from "shared/constants/userRoles";
 import { messages } from "utils/helpers/message";
 
-const { OPERATOR } = OperatorQueries;
+const { EMPLOYEE } = EmployeeQueries;
 
 const menuItems = [
   { key: "ROLES", href: "roles" },
@@ -29,20 +29,20 @@ const menuItems = [
 export default () => {
   const { id } = useParams();
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.PERSONNELS);
+  const { t } = useTranslation(NAME_SPACES.EMPLOYEES);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
 
-  const { data, loading } = useQuery(OPERATOR, {
+  const { data, loading } = useQuery(EMPLOYEE, {
     variables: { where: { id } },
     onError: (error) => messages({ data: error })
   });
 
-  const personel = get(data, "operator", {}) || {};
-  const roles = get(data, "operator.operatorSites", []) || [];
-  const certificates = get(data, "operator.certificates", []) || [];
+  const employee = get(data, "employee", {}) || {};
+  const roles = get(data, "employee.employeeRoles", []) || [];
+  const certificates = get(data, "employee.certificates", []) || [];
 
   const getScrollMenuItem = (t) => {
     return menuItems.map((item) => {
@@ -50,15 +50,15 @@ export default () => {
     });
   };
 
-  const editOperators = () => {
-    history.push(PATHS.PERSONNELS.EDIT.replace(":id", id));
+  const edit = () => {
+    history.push(PATHS.EMPLOYEES.EDIT.replace(":id", id));
   };
 
   const setBreadcrumbsButtons = [
     {
       title: t("EDIT"),
       disabled: false,
-      action: editOperators,
+      action: edit,
       custom: "heading--area--buttons--left",
       buttonStyle: "btn--outline",
     },
@@ -66,12 +66,12 @@ export default () => {
 
   const setBreadcrumbsItem = [
     {
-      title: t("PERSONNELS"),
+      title: t("EMPLOYEES"),
       className: "custom--breadcrumb--one",
-      href: PATHS.PERSONNELS.INDEX,
+      href: PATHS.EMPLOYEES.INDEX,
     },
     {
-      title: `${personel.firstName} ${personel.lastName}`,
+      title: `${employee.firstName} ${employee.lastName}`,
       className: "custom--breadcrumb--two"
     },
   ];
@@ -93,10 +93,10 @@ export default () => {
                 <Roles t={t} roles={roles} />
               </section>
               <section id="general">
-                <GeneralInformation t={t} personel={personel} />
+                <GeneralInformation t={t} employee={employee} />
               </section>
               <section id="contact">
-                <ContactInformation t={t} personel={personel} />
+                <ContactInformation t={t} employee={employee} />
               </section>
               <section id="certificates">
                 <Certificates t={t} certificates={certificates} />

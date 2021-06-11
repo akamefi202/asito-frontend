@@ -1,7 +1,7 @@
 export { default as AuthMutations } from "./auth";
 export { default as SiteMutations } from "./site";
 export { default as CertificateMutations } from "./certificate";
-export { default as OperatorMutations } from "./operator";
+export { default as EmployeeMutations } from "./employee";
 export { default as ClientMutations } from "./client";
 export { default as IssuerMutations } from "./issuer";
 export { default as UserMutations } from "./user";

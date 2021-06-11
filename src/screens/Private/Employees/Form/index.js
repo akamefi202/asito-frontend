@@ -10,14 +10,14 @@ import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
-import { OperatorMutations } from "shared/graphql/mutations";
-import { OperatorQueries } from "shared/graphql/queries";
+import { EmployeeMutations } from "shared/graphql/mutations";
+import { EmployeeQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
 
-const { CREATE_UPDATE_OPERATOR } = OperatorMutations;
-const { OPERATOR } = OperatorQueries;
+const { CREATE_UPDATE_EMPLOYEE } = EmployeeMutations;
+const { EMPLOYEE } = EmployeeQueries;
 
 
 const menuItems = [
@@ -28,7 +28,7 @@ const menuItems = [
 export default () => {
   const { id } = useParams();
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.PERSONNELS);
+  const { t } = useTranslation(NAME_SPACES.EMPLOYEES);
   const [initialValues, setInitialValues] = useState({
     id: cuid(),
     number: "",
@@ -39,20 +39,20 @@ export default () => {
     phone: "",
     email: "",
     address1: "",
+    address2: "",
     zipCode: "",
     city: "",
     country: "",
   });
 
-  const [getOperators, { loading: loadingOperator }] = useLazyQuery(OPERATOR, {
+  const [getEmployee, { loading: loadingEmployee }] = useLazyQuery(EMPLOYEE, {
     variables: { where: { id } },
-    onCompleted: ({ operator }) => {
-      const newOperator = { ...operator };
-      delete newOperator.accesses;
-      delete newOperator.certificates;
-      delete newOperator.operatorSites;
+    onCompleted: ({ employee }) => {
+      const newEmloyee = { ...employee };
+      delete newEmloyee.certificates;
+      delete newEmloyee.employeeRoles;
       
-      setInitialValues({ ...initialValues, ...removeTypename(newOperator) })
+      setInitialValues({ ...initialValues, ...removeTypename(newEmloyee) })
     },
     onError: (error) => messages({ data: error })
   });
@@ -60,7 +60,7 @@ export default () => {
 
   useEffect(() => {
     if (!id) return;
-    getOperators();
+    getEmployee();
   }, [])
 
   const formik = useFormik({
@@ -75,8 +75,8 @@ export default () => {
     }
   });
 
-  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_OPERATOR, {
-    onCompleted: () => history.push(PATHS.PERSONNELS.INDEX),
+  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_EMPLOYEE, {
+    onCompleted: () => history.push(PATHS.EMPLOYEES.INDEX),
     onError: (error) => messages({data: error})
   });
 
@@ -110,9 +110,9 @@ export default () => {
 
   const setBreadcrumbsItem = [
     {
-      title: t("PERSONNELS"),
+      title: t("EMPLOYEES"),
       className: "custom--breadcrumb--one",
-      href: PATHS.PERSONNELS.INDEX,
+      href: PATHS.EMPLOYEES.INDEX,
     },
     {
       title: id ? `${initialValues.firstName} ${initialValues.lastName}` : t("NEW"),
@@ -122,7 +122,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || loadingOperator}>
+      <Spin spinning={loading || loadingEmployee}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
         <div className="details--page">
           <Row gutter={[16]}>

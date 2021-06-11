@@ -2,7 +2,7 @@ export const NAME_SPACES = {
   AUTH: "auth",
   HOME: "home",
   LAYOUT: "layout",
-  PERSONNELS: "personnels",
+  EMPLOYEES: "employees",
   ROLES: "roles",
   DEPARTMENTS: "departments",
   CERTIFICATES: "certificates",

@@ -3,9 +3,9 @@ import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { COUNTRY_LIST } from "shared/constants/country";
 
-export default ({ t, personel }) => {
+export default ({ t, employee }) => {
   const getCountryName = () => {
-    const country = COUNTRY_LIST.find(item => item.key === personel.country);
+    const country = COUNTRY_LIST.find(item => item.key === employee.country);
     return country ? country.value : '';
   }
 
@@ -25,7 +25,7 @@ export default ({ t, personel }) => {
               {t("SHOW.CONTACT_INFORMATION.PHONE_NUMBER")}
             </h5>
             <h4 className="card--details--item--value">
-              {personel.phone}
+              {employee.phone}
             </h4>
           </div>
         </Col>
@@ -35,7 +35,7 @@ export default ({ t, personel }) => {
               {t("SHOW.CONTACT_INFORMATION.EMAIL_ADDRESS")}
             </h5>
             <h4 className="card--details--item--value">
-              {personel.email}
+              {employee.email}
             </h4>
           </div>
         </Col>
@@ -46,7 +46,7 @@ export default ({ t, personel }) => {
               {t("SHOW.CONTACT_INFORMATION.ADDRESS_LINE")}
           </h5>
             <h4 className="card--details--item--value">
-              {personel.address1}
+              {employee.address1}
             </h4>
           </div>
         </Col>
@@ -57,7 +57,7 @@ export default ({ t, personel }) => {
               {t("SHOW.CONTACT_INFORMATION.POSTCODE")}
             </h5>
             <h4 className="card--details--item--value">
-              {personel.zipCode}
+              {employee.zipCode}
             </h4>
           </div>
         </Col>
@@ -67,7 +67,7 @@ export default ({ t, personel }) => {
             <h5 className="card--details--item--key">
               {t("SHOW.CONTACT_INFORMATION.CITY")}
             </h5>
-            <h4 className="card--details--item--value">{personel.city}</h4>
+            <h4 className="card--details--item--value">{employee.city}</h4>
           </div>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12}>

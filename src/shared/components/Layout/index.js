@@ -15,9 +15,9 @@ const { Content } = Layout;
 
 const menus = [
     {
-        title: "PERSONNELS",
+        title: "EMPLOYEES",
         topics: 1,
-        url: PATHS.PERSONNELS.INDEX,
+        url: PATHS.EMPLOYEES.INDEX,
         key: "Operators",
         icon: <span className="icon icon-Team" />,
         type: "simple",

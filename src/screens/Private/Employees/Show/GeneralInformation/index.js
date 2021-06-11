@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { dateToString } from "utils/helpers/moment";
 
-export default ({ t, personel }) => (
+export default ({ t, employee }) => (
   <Card cardStyle={"card--details"}>
     <Row>
       <Col xs={24}>
@@ -18,7 +18,7 @@ export default ({ t, personel }) => (
           <h5 className="card--details--item--key">
             {t("SHOW.GENERAL_INFORMATION.NUMBER")}
           </h5>
-          <h4 className="card--details--item--value">{personel.number}</h4>
+          <h4 className="card--details--item--value">{employee.number}</h4>
         </div>
       </Col>
       <Col xs={24} sm={24} md={12} lg={12}>
@@ -27,7 +27,7 @@ export default ({ t, personel }) => (
             {t("SHOW.GENERAL_INFORMATION.FIRST_NAME")}
           </h5>
           <h4 className="card--details--item--value">
-            {personel.firstName}
+            {employee.firstName}
           </h4>
         </div>
       </Col>
@@ -38,7 +38,7 @@ export default ({ t, personel }) => (
             {t("SHOW.GENERAL_INFORMATION.LAST_NAME")}
           </h5>
           <h4 className="card--details--item--value">
-            {personel.lastName}
+            {employee.lastName}
           </h4>
         </div>
       </Col>
@@ -49,7 +49,7 @@ export default ({ t, personel }) => (
             {t("SHOW.GENERAL_INFORMATION.DATE_OF_BIRTH")}
           </h5>
           <h4 className="card--details--item--value">
-            {dateToString(personel.dateOfBirth)}
+            {dateToString(employee.dateOfBirth)}
           </h4>
         </div>
       </Col>
@@ -59,7 +59,7 @@ export default ({ t, personel }) => (
           <h5 className="card--details--item--key">
             {t("SHOW.GENERAL_INFORMATION.GENDER")}
           </h5>
-          <h4 className="card--details--item--value">{t(`GENDER.${personel.gender}`)}</h4>
+          <h4 className="card--details--item--value">{t(`GENDER.${employee.gender}`)}</h4>
         </div>
       </Col>
     </Row>

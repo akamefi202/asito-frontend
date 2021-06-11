@@ -27,9 +27,9 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.DEPARTMENT"),
-    dataIndex: "operatorSites",
-    key: "assigned_sites",
-    render: (operatorSites) => operatorSites ? operatorSites.length : 0
+    dataIndex: "employeeRoles",
+    key: "employeeRoles",
+    render: (employeeRoles) => employeeRoles ? employeeRoles.length : 0
   },
   {
     title: t("LIST.COLUMNS.ROLE"),
@@ -48,16 +48,16 @@ const columns = (t) => [
 ];
 
 const dataTables = (data) => (
-  data.map(personnel => {
-    personnel.DATA_ACCESS = {
-      value: `Authorized (${personnel.operatorSites ? personnel.operatorSites.length : 0})`,
+  data.map(employee => {
+    employee.DATA_ACCESS = {
+      value: `Authorized (${employee.employeeRoles ? employee.employeeRoles.length : 0})`,
       class: "green"
     };
-    return personnel;
+    return employee;
   })
 );
 
-export default ({ t, personnels, take, setTake, setSkip, page, setPage, total }) => {
+export default ({ t, employees, take, setTake, setSkip, page, setPage, total }) => {
   const history = useHistory();
 
   const onPageChange = (page) => {
@@ -73,7 +73,7 @@ export default ({ t, personnels, take, setTake, setSkip, page, setPage, total })
     <Table
       columns={columns(t)}
       className="table--custom"
-      data={dataTables(personnels)}
+      data={dataTables(employees)}
       total={total}
       rowKey={"id"}
       page={page}
@@ -83,7 +83,7 @@ export default ({ t, personnels, take, setTake, setSkip, page, setPage, total })
       onRow={(record) => {
         return {
           onClick: () =>
-            history.push(`${PATHS.PERSONNELS.SHOW.replace(":id", record.id)}`),
+            history.push(`${PATHS.EMPLOYEES.SHOW.replace(":id", record.id)}`),
         };
       }}
     />
