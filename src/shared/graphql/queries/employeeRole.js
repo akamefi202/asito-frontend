@@ -1,18 +1,18 @@
 import gql from "graphql-tag";
 
-export const OPERATOR_SITE = gql`
-  query operatorSite($where: OperatorSiteWhereInput, $skip: Int, $take: Int) {
-    operatorSite(where: $where, skip: $skip, take: $take) {
+export const EMPLOYEE_ROLE = gql`
+  query employeeRole($where: EmployeeRoleWhereInput, $skip: Int, $take: Int) {
+    employeeRole(where: $where, skip: $skip, take: $take) {
       id
-      site {
+      role {
         id
         name
-        numberOfOperatorsRequired
+        numberOfEmployeesRequired
         city
         country
         status
       }
-      operator {
+      employee {
         id
         number
         firstName
@@ -41,20 +41,20 @@ export const OPERATOR_SITE = gql`
   }
 `;
 
-export const OPERATOR_SITES = gql`
-  query operatorSites($where: OperatorSiteWhereInput, $skip: Int, $take: Int, $scan: String) {
-    operatorSites(where: $where, skip: $skip, take: $take, scan: $scan) {
+export const EMPLOYEE_ROLES = gql`
+  query employeeRoles($where: EmployeeRoleWhereInput, $skip: Int, $take: Int, $scan: String) {
+    employeeRoles(where: $where, skip: $skip, take: $take, scan: $scan) {
       data {
         id
-        site {
+        role {
           id
           name
-          numberOfOperatorsRequired
+          numberOfEmployeesRequired
           city
           country
           status
         }
-        operator {
+        employee {
           id
           number
           firstName
@@ -87,6 +87,6 @@ export const OPERATOR_SITES = gql`
 `;
 
 export default {
-  OPERATOR_SITES,
-  OPERATOR_SITES
+  EMPLOYEE_ROLE,
+  EMPLOYEE_ROLES
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -6,48 +6,47 @@ import GeneralInformation from "./GeneralInformation";
 import Departments from "./Departments";
 import Protocols from "./Protocols";
 import RequiredCertificates from "./RequiredCertificates";
-import Personnels from "./Personnels";
+import Employees from "./Employees";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { SiteQueries } from "shared/graphql/queries";
+import { RoleQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {useReactiveVar} from "@apollo/client";
 import {UserStore} from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
 
-const { SITE } = SiteQueries;
+const { ROLE } = RoleQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
   { key: "DEPARTAMENT", href: "departments" },
   { key: "REQUIREMENTS", href: "requirements" },
   { key: "PROTOCOLS", href: "protocols" },
-  { key: "PERSONNEL", href: "personnel" },
+  { key: "EMPLOYEES", href: "employees" },
 ];
 
 export default () => {
   const { id } = useParams();
   const history = useHistory();
-  const [role, setRole] = useState({});
-  const [totalOperatorSites, setTotalOperatorSites] = useState(0);
   const { t } = useTranslation(NAME_SPACES.ROLES);
 
-  const { loading } = useQuery(SITE, {
+  const { data, loading } = useQuery(ROLE, {
     variables: {
       where: {
         id
       }
     },
-    onCompleted: ({ site }) => {
-      site && setRole(site);
-    },
     onError: (error) => {
       messages({ data: error });
     }
   });
+
+  const role = get(data, "role", {}) || {};
+  const departments = get(data, "role.departments", []) || [];
+  const protocols = get(data, "role.protocols", []) || [];
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
@@ -98,16 +97,16 @@ export default () => {
                 <GeneralInformation t={t} role={role} />
               </section>
               <section id="departments">
-                <Departments t={t} departments={[]} />
+                <Departments t={t} departments={departments} />
               </section>
               <section id="requirements">
                 <RequiredCertificates t={t} role={role} />
               </section>
               <section id="protocols">
-                <Protocols t={t} protocols={[]} />
+                <Protocols t={t} protocols={protocols} />
               </section>
-              <section id="personnel">
-                <Personnels siteId={id} t={t} site={role} total={totalOperatorSites} setTotal={setTotalOperatorSites}/>
+              <section id="employees">
+                <Employees t={t} roleId={id} role={role} />
               </section>
             </Col>
           </Row>

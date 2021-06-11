@@ -1,16 +1,16 @@
 import gql from "graphql-tag";
 
-export const SITE = gql`
-  query Site($where: SiteWhereInput) {
-    site(where: $where) {
+export const ROLE = gql`
+  query role($where: RoleWhereInput) {
+    role(where: $where) {
       id
       status
-      client {
+      department {
         id
         name
       }
       name
-      numberOfOperatorsRequired
+      numberOfEmployeesRequired
       latitude
       longitude
       address1
@@ -26,12 +26,12 @@ export const SITE = gql`
           id
         }
       }
-      operatorSites {
+      employeeRoles {
         id
-        site {
+        role {
           id
         }
-        operator {
+        employee {
           id
           number
           firstName
@@ -51,26 +51,29 @@ export const SITE = gql`
   }
 `;
 
-export const SITES = gql`
-  query Sites($where: SiteWhereInput, $skip: Int, $take: Int, $scan: String) {
-    sites(where: $where, skip: $skip, take: $take, scan: $scan) {
+export const ROLES = gql`
+  query roles($where: RoleWhereInput, $skip: Int, $take: Int, $scan: String) {
+    roles(where: $where, skip: $skip, take: $take, scan: $scan) {
       data {
         id
         name
-        client {
+        department {
           id
           name
         }
-        numberOfOperatorsRequired
+        numberOfEmployeesRequired
         city
         country
         status
-        operatorSites {
+        requirements {
           id
-          site {
+        }
+        employeeRoles {
+          id
+          role {
             id
           }
-          operator {
+          employee {
             id
             number
             firstName
@@ -80,10 +83,6 @@ export const SITES = gql`
             }
           }
         }
-        client {
-          id
-          name
-        }
       }
       count
     }
@@ -91,6 +90,6 @@ export const SITES = gql`
 `;
 
 export default {
-  SITE,
-  SITES,
+  ROLE,
+  ROLES,
 };

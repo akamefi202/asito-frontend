@@ -30,7 +30,7 @@
         "ROLES": {
             "COLUMNS": {
                 "NAME": "Functie",
-                "PERSONNEL": "Medewerkers"
+                "EMPLOYEE": "Medewerkers"
             }
         }
     },

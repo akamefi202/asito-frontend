@@ -11,7 +11,13 @@ const {USER} = UserQueries;
 
 const App = () => {
     const token = localStorage.getItem('access_token');
-    const [getUser] = useLazyQuery(USER, {onCompleted: ({user}) => UserStore(user)});
+    const [getUser] = useLazyQuery(USER, {
+        onCompleted: ({user}) => UserStore(user),
+        onError: () => {
+            window.localStorage.clear();
+            window.location.reload();
+        }
+    });
 
     useEffect(() => {
         if (token) getUser();

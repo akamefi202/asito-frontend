@@ -13,12 +13,12 @@ export default ({ t, certificate }) => {
   const validUntil = timestampToDate(certificate.validUntil);
   const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
 
-  const getCertificateOperator = (id = false) => {
-    const firstName = certificate.operator && certificate.operator.firstName ? certificate.operator.firstName : '';
-    const lastName = certificate.operator && certificate.operator.lastName ? certificate.operator.lastName : '';
+  const getCertificateEmployee = (id = false) => {
+    const firstName = certificate.employee && certificate.employee.firstName ? certificate.employee.firstName : '';
+    const lastName = certificate.employee && certificate.employee.lastName ? certificate.employee.lastName : '';
 
     if (id) {
-      return certificate.operator && certificate.operator.id ? certificate.operator.id : '';
+      return certificate.employee && certificate.employee.id ? certificate.employee.id : '';
     }
 
     return [firstName, lastName].join(' ');
@@ -44,8 +44,8 @@ export default ({ t, certificate }) => {
             <h4 className="card--details--item--value">
               <Link 
                 className="custom-link" 
-                to={PATHS.EMPLOYEES.SHOW.replace(":id", getCertificateOperator(true))}>
-                  {getCertificateOperator()}
+                to={PATHS.EMPLOYEES.SHOW.replace(":id", getCertificateEmployee(true))}>
+                  {getCertificateEmployee()}
               </Link>
             </h4>
           </div>
@@ -75,7 +75,7 @@ export default ({ t, certificate }) => {
             <h5 className="card--details--item--key">{t('SHOW.GENERAL_INFORMATION.VALID_UNTIL')}</h5>
             <h4 className="card--details--item--value access--type">
               {isValid
-                ? certificate.validUntil && <span className="icon icon-Checkicon-Check green" />
+                ? certificate.validUntil && <span className="icon icon-Check green" />
                 : certificate.validUntil && <span className="icon icon-Close red" />
               }
               <span className={isValid ? "" : "red"}>{dateToString(certificate.validUntil)}</span>

@@ -9,14 +9,14 @@ import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
 import { useMutation, useLazyQuery } from "@apollo/react-hooks";
-import { ClientMutations } from "shared/graphql/mutations";
-import { ClientQueries } from "shared/graphql/queries";
+import { DepartmentMutations } from "shared/graphql/mutations";
+import { DepartmentQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
 
-const { CREATE_UPDATE_CLIENT } = ClientMutations;
-const { CLIENT } = ClientQueries;
+const { CREATE_UPDATE_DEPARTMENT } = DepartmentMutations;
+const { DEPARTMENT } = DepartmentQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -34,18 +34,23 @@ export default () => {
     zipCode: "",
     city: "",
     country: "",
+
+    registrationNumber: "",
+    vat: "",
     phone: "",
+    email: "",
+    webrole: "",
   });
 
-  const [getDepartment, { loading: loadingClient }] = useLazyQuery(CLIENT, {
+  const [getDepartment, { loading: loadingDepartment }] = useLazyQuery(DEPARTMENT, {
     variables: {
       where: {
         id
       }
     },
-    onCompleted: ({ client }) => {
-      if (id === client.id) {
-        setInitialValues({ ...removeTypename(client) });
+    onCompleted: ({ department }) => {
+      if (id === department.id) {
+        setInitialValues({ ...initialValues, ...removeTypename(department) });
       }
     },
     onError: (error) => {
@@ -68,6 +73,7 @@ export default () => {
       })
     ),
     onSubmit: data => {
+      delete data.location;
       saveChanges({ variables: { data } });
     },
   });
@@ -78,7 +84,7 @@ export default () => {
     });
   };
 
-  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_CLIENT,
+  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_DEPARTMENT,
     {
       onCompleted: (data) => {
         history.push(PATHS.DEPARTMENTS.INDEX);
@@ -120,7 +126,7 @@ export default () => {
     <div className="wrapper--content">
       <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
       <div className="details--page">
-        <Spin spinning={loading || loadingClient}>
+        <Spin spinning={loading || loadingDepartment}>
           <Row gutter={[16]}>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem(t)} />

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { ClientQueries } from "shared/graphql/queries";
+import { DepartmentQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { messages } from "utils/helpers/message";
 import { USER_ROLES } from "shared/constants/userRoles";
@@ -14,7 +14,7 @@ import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
 import { delay } from "utils/helpers/delay";
 
-const { CLIENTS } = ClientQueries;
+const { DEPARTMENTS } = DepartmentQueries;
 
 export default () => {
   const { t } = useTranslation(NAME_SPACES.DEPARTMENTS);
@@ -30,13 +30,13 @@ export default () => {
 
   const variables = {scan, skip, take};
 
-  const { data, loading } = useQuery(CLIENTS, {
+  const { data, loading } = useQuery(DEPARTMENTS, {
     variables,
-    onCompleted: ({clients}) => setTotal(clients.count),
+    onCompleted: ({departments}) => setTotal(departments.count),
     onError: (error) => messages({data: error})
   });
 
-  const departments = get(data, "clients.data", []);
+  const departments = get(data, "departments.data", []);
 
   const create = () => {
     history.push(PATHS.DEPARTMENTS.CREATE);

@@ -16,10 +16,10 @@
             "INACTIVE": "Verlopen"
         },
         "COLUMNS": {
-            "ROLE_NAME": "Functie",
+            "NAME": "Functie",
             "DEPARTAMENT": "Afdeling",
             "REQUIREMENTS": "Vereiste certificaten",
-            "PERSONNEL": "Medewerkers",
+            "EMPLOYEES": "Medewerkers",
             "STATUS": "Status"
         }
     },
@@ -29,13 +29,13 @@
             "DEPARTAMENT": "Afdeling",
             "REQUIREMENTS": "Vereiste certificaten",
             "PROTOCOLS": "Protocollen",
-            "PERSONNEL": "Medewerkers"
+            "EMPLOYEES": "Medewerkers"
         },
         "GENERAL_INFORMATION": {
             "STATUS": "Status",
             "DEPARTAMENT": "Afdeling",
             "ROLE_NAME": "Functie",
-            "PERSONNEL_REQUIRED": "Benodigde medewerkers",
+            "EMPLOYEE_REQUIRED": "Benodigde medewerkers",
             "ROLE_DESCRIPTION": "Omschrijving functie"
         },
         "DEPARTAMENT": {
@@ -58,13 +58,13 @@
                 "VALID_UNTIL": "Tenminste geldig tot"
             }
         },
-        "PERSONNEL": {
+        "EMPLOYEES": {
             "ADD_ROW": "Medewerker toevoegen",
             "SURE_DELETE": "Weet u zeker dat u wilt verwijderen?",
             "SEARCH_OPERATOR": "Zoek een medewerker...",
             "COLUMNS": {
-                "PERSONNEL": "Medewerker",
-                "EMPLOYEE_NUMBER": "Personeelsnummer",
+                "EMPLOYEE": "Medewerker",
+                "NUMBER": "Personeelsnummer",
                 "CERTIFICATES": "Certificaten"
             }
         }
@@ -82,8 +82,8 @@
             "DEPARTAMENT_PLACEHOLDER": "Zoek een afdeling...",
             "ROLE_NAME": "Functie",
             "ROLE_NAME_PLACEHOLDER": "Enter functie",
-            "PERSONNEL_REQUIRED": "Benodigde medewerkers",
-            "PERSONNEL_REQUIRED_PLACEHOLDER": "Enter benodigde medewerkers",
+            "EMPLOYEE_REQUIRED": "Benodigde medewerkers",
+            "EMPLOYEE_REQUIRED_PLACEHOLDER": "Enter benodigde medewerkers",
             "ROLE_DESCRIPTION": "Omschrijving functie",
             "ROLE_DESCRIPTION_PLACEHOLDER": "Enter omschrijving functie"
         },
@@ -103,12 +103,12 @@
                 "VALID_UNTIL_PLACEHOLDER": "Selecteer een tenminste geldig tot"
             }
         },
-        "OPERATORS": {
+        "EMPLOYEES": {
             "ADD_ROW": "Add row",
             "SEARCH_OPERATOR": "Search for an operator...",
             "COLUMNS": {
                 "FULL_NAME": "Full name",
-                "EMPLOYEE_NUMBER": "Employee number",
+                "NUMBER": "Employee number",
                 "CERTIFICATES": "Certificates"
             }
         },

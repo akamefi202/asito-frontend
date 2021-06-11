@@ -33,6 +33,7 @@ export const EMPLOYEE = gql`
         assignedUntil
         role {
           id
+          name
         }
       }
     }

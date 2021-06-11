@@ -22,9 +22,9 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.ROLES"),
-    dataIndex: "sites",
-    key: "sites",
-    render: (sites) =>  sites ? sites.length : 0
+    dataIndex: "roles",
+    key: "roles",
+    render: (roles) =>  roles ? roles.length : 0
   },
 ];
 

@@ -4,16 +4,16 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Card, Select, Button } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
 import { useQuery } from "@apollo/react-hooks";
-import { ClientQueries } from "shared/graphql/queries";
+import { DepartmentQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { withoutRepetitions } from "utils/helpers/array";
 import { delay } from "utils/helpers/delay";
 
-const { CLIENTS } = ClientQueries;
+const { DEPARTMENTS } = DepartmentQueries;
 
 export default ({ t, formik }) => {
   const [form] = Form.useForm();
-  const [clientsSelect, setClientsSelect] = useState([]);
+  const [departmentsSelect, setDepartmentsSelect] = useState([]);
   const [scanSelect, setScanSelect] = useState("");
   const [pageSelect, setPageSelect] = useState(1);
   const [skipSelect, setSkipSelect] = useState(0);
@@ -29,15 +29,15 @@ export default ({ t, formik }) => {
     form.setFieldsValue({ departments });
   }, [departments])
 
-  const { loading } = useQuery(CLIENTS, {
+  const { loading } = useQuery(DEPARTMENTS, {
     variables: variablesSelect,
-    onCompleted: ({ clients }) => {
-      if (!clients || !clients.data) return;
-      const select = clients.data.map((item) => ({ key: item.id, value: item.name }));
-      setTotalSelect(clients.count || 0);
-      const selectAll = scanStatus ? select : withoutRepetitions([...clientsSelect, ...select]);
+    onCompleted: ({ departments }) => {
+      if (!departments || !departments.data) return;
+      const select = departments.data.map((item) => ({ key: item.id, value: item.name }));
+      setTotalSelect(departments.count || 0);
+      const selectAll = scanStatus ? select : withoutRepetitions([...departmentsSelect, ...select]);
       setScanStatus(false);
-      setClientsSelect(selectAll);
+      setDepartmentsSelect(selectAll);
     },
     onError: (error) => {
       messages({ data: error });
@@ -113,7 +113,7 @@ export default ({ t, formik }) => {
                                 <Select
                                   placeholder={t("FORM.DEPARTAMENT.COLUMNS.NAME_PLACEHOLDER")}
                                   {...bindInputProps({ prefix: true, name: `departments.${field.name}.id`, ...formik })}
-                                  items={clientsSelect}
+                                  items={departmentsSelect}
                                   getSelect={getSelect}
                                   getScan={getScanSelect}
                                   loading={loading}

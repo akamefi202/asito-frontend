@@ -53,11 +53,11 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.PERSONNEL_REQUIRED")}
+              {t("FORM.GENERAL_INFORMATION.EMPLOYEE_REQUIRED")}
             </label>
             <Input
-              {...bindInputProps({ name: "numberOfOperatorsRequired", ...formik })}
-              placeholder={t("FORM.GENERAL_INFORMATION.PERSONNEL_REQUIRED_PLACEHOLDER")}
+              {...bindInputProps({ name: "numberOfEmployeesRequired", ...formik })}
+              placeholder={t("FORM.GENERAL_INFORMATION.EMPLOYEE_REQUIRED_PLACEHOLDER")}
             />
           </div>
         </Col>

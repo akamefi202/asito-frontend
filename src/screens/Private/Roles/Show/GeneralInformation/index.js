@@ -36,10 +36,10 @@ export default ({ t, role }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--details--item">
           <h5 className="card--details--item--key">
-            {t("SHOW.GENERAL_INFORMATION.PERSONNEL_REQUIRED")}
+            {t("SHOW.GENERAL_INFORMATION.EMPLOYEE_REQUIRED")}
           </h5>
           <h4 className="card--details--item--value">
-            {role.numberOfOperatorsRequired}
+            {role.numberOfEmployeesRequired}
           </h4>
         </div>
       </Col>

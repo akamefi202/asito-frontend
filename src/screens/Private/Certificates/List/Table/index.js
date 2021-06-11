@@ -26,9 +26,9 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.ISSUED_TO"),
-    dataIndex: "operator",
-    key: "operator",
-    render: (operator) => operator ? [operator.firstName, operator.lastName].join(' ') : operator
+    dataIndex: "employee",
+    key: "employee",
+    render: (employee) => employee ? [employee.firstName, employee.lastName].join(' ') : ""
   },
   {
     title: t("LIST.COLUMNS.ISSUED_ON"),

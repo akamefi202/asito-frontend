@@ -23,7 +23,7 @@ export const CERTIFICATE = gql`
             }
             updatedAt
       }
-      operator {
+      employee {
         id
         email
         number
@@ -77,7 +77,7 @@ export const CERTIFICATES = gql`
             type
             updatedAt
         }
-        operator {
+        employee {
           id
           firstName
           lastName

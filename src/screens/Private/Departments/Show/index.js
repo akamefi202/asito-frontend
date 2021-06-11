@@ -8,14 +8,14 @@ import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { ClientQueries } from "shared/graphql/queries";
+import { DepartmentQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {useReactiveVar} from "@apollo/client";
 import {UserStore} from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
 
-const { CLIENT } = ClientQueries;
+const { DEPARTMENT } = DepartmentQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -32,15 +32,15 @@ export default () => {
 
   const variables = { where: { id } };
 
-  const { data, loading } = useQuery(CLIENT, {
+  const { data, loading } = useQuery(DEPARTMENT, {
     variables,
     onError: (error) => {
       messages({ data: error });
     }
   });
 
-  const department = get(data, "client", {}) || {};
-  const roles = get(data, "client.sites", []) || [];
+  const department = get(data, "department", {}) || {};
+  const roles = get(data, "department.roles", []) || [];
 
   const getScrollMenuItem = (t) => {
     return menuItems.map((item) => {

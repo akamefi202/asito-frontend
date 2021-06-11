@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -11,17 +11,17 @@ import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { SiteMutations, RemoveAttachmentsMutations } from "shared/graphql/mutations";
-import { SiteQueries } from "shared/graphql/queries";
+import { useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { RoleMutations, RemoveAttachmentsMutations } from "shared/graphql/mutations";
+import { RoleQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
 import { timestampToDate } from "utils/helpers/moment";
 
-const { CREATE_UPDATE_SITE } = SiteMutations;
+const { CREATE_UPDATE_ROLE } = RoleMutations;
 const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
-const { SITE } = SiteQueries;
+const { ROLE } = RoleQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -39,11 +39,11 @@ export default () => {
   const [initialValues, setInitialValues] = useState({
     id: generatedId,
     status: "ACTIVE",
-    client: {
+    department: {
       id: ""
     },
     name: "",
-    numberOfOperatorsRequired: "",
+    numberOfEmployeesRequired: "",
     latitude: "",
     longitude: "",
     address1: "",
@@ -55,29 +55,34 @@ export default () => {
     requirements: []
   });
 
-  const { loading: loadingSite } = useQuery(SITE, {
+  const [getRole, { loading: loadingRole }] = useLazyQuery(ROLE, {
     variables: {
       where: {
         id
       }
     },
-    onCompleted: ({ site }) => {
-      if (id === site.id) {
-        const newSite = { ...site };
-        if (newSite.requirements && newSite.requirements.length) {
-          newSite.requirements.map(item => {
+    onCompleted: ({ role }) => {
+      if (id === role.id) {
+        const newRole = { ...role };
+        if (newRole.requirements && newRole.requirements.length) {
+          newRole.requirements.map(item => {
             item.validAtLeastUntil = timestampToDate(item.validAtLeastUntil);
             return item;
           });
         }
 
-        setInitialValues({ ...initialValues, ...removeTypename(newSite) });
+        setInitialValues({ ...initialValues, ...removeTypename(newRole) });
       }
     },
     onError: (error) => {
       messages({ data: error });
     }
   });
+
+  useEffect(() => {
+    if (!id) return;
+    getRole();
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -89,12 +94,13 @@ export default () => {
     ),
     onSubmit: data => {
       const newData = { ...data };
-      delete newData.operatorSites;
+      delete newData.roleDescription;
+      delete newData.employeeRoles;
       delete newData.protocols;
 
       Promise.all([
         saveChanges({ variables: { data: newData } }),
-        deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))
+        // deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))
       ])
         .then(() => history.push(PATHS.ROLES.INDEX))
         .catch(error => messages({ data: error }))
@@ -103,7 +109,7 @@ export default () => {
 
   const discardChanges = () => formik.resetForm();
 
-  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_SITE);
+  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_ROLE);
   const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
 
   const getScrollMenuItem = (t) => {
@@ -142,7 +148,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || loadingSite || loadingAttachments}>
+      <Spin spinning={loading || loadingRole || loadingAttachments}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
         <div className="details--page">
           <Row gutter={[16]}>

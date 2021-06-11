@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const CLIENT = gql`
-  query Client($where: ClientWhereInput) {
-    client(where: $where) {
+export const DEPARTMENT = gql`
+  query department($where: DepartmentWhereInput) {
+    department(where: $where) {
       id
       name
       number
@@ -14,13 +14,13 @@ export const CLIENT = gql`
       country
       phone
       email
-      website
-      sites {
+      webrole
+      roles {
         id
         status
-        clientId
+        departmentId
         name
-        numberOfOperatorsRequired
+        numberOfEmployeesRequired
         latitude
         longitude
         address1
@@ -28,8 +28,8 @@ export const CLIENT = gql`
         zipCode
         city
         country
-        operatorSites {
-          operator {
+        employeeRoles {
+          employee {
             id
             firstName
             lastName
@@ -40,9 +40,9 @@ export const CLIENT = gql`
   }
 `;
 
-export const CLIENTS = gql`
-  query Clients($scan: String, $where: ClientWhereInput, $skip: Int, $take: Int) {
-    clients(scan: $scan, where: $where, skip: $skip, take: $take) {
+export const DEPARTMENTS = gql`
+  query departments($scan: String, $where: DepartmentWhereInput, $skip: Int, $take: Int) {
+    departments(scan: $scan, where: $where, skip: $skip, take: $take) {
       data {
         id
         name
@@ -55,8 +55,8 @@ export const CLIENTS = gql`
         country
         phone
         email
-        website
-        sites {
+        webrole
+        roles {
           id
         }
       }
@@ -66,6 +66,6 @@ export const CLIENTS = gql`
 `;
 
 export default {
-  CLIENT,
-  CLIENTS,
+  DEPARTMENT,
+  DEPARTMENTS,
 };

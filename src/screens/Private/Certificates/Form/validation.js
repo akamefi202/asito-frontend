@@ -6,7 +6,7 @@ export default messages => {
     type: yup.string().required(messages.REQUIRED),
     issuedOn: yup.string().required(messages.REQUIRED),
     validUntil: yup.string().required(messages.REQUIRED),
-    operator: yup.object().shape({
+    employee: yup.object().shape({
       id: yup.string().required(messages.REQUIRED),
     }),
   });

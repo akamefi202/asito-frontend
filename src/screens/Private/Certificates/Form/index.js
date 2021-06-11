@@ -44,7 +44,7 @@ export default () => {
     issuedOn: "",
     validUntil: "",
     attachments: [],
-    operator: {
+    employee: {
       id: ""
     }
   });
@@ -70,7 +70,7 @@ export default () => {
     }
   });
 
-  const [getSertificate, { loading: loadingCertificate }] = useLazyQuery(CERTIFICATE, {
+  const [getCertificate, { loading: loadingCertificate }] = useLazyQuery(CERTIFICATE, {
     variables: {
       where: {
         id
@@ -82,7 +82,7 @@ export default () => {
         newCertificate.type = certificate.requirement && certificate.requirement.type || "";
         newCertificate.issuedOn = timestampToDate(newCertificate.issuedOn);
         newCertificate.validUntil = timestampToDate(newCertificate.validUntil);
-        newCertificate.attachments = timestampToDate(newCertificate.attachments);
+        // newCertificate.attachments = timestampToDate(newCertificate.attachments);
         setInitialValues({ ...initialValues, ...removeTypename(newCertificate) });
         if (newCertificate.issuer) setIssuer({ ...newCertificate.issuer });
       }
@@ -94,7 +94,7 @@ export default () => {
 
   useEffect(() => {
     if (!id) return;
-    getSertificate();
+    getCertificate();
   }, []);
 
   const formik = useFormik({
@@ -108,15 +108,20 @@ export default () => {
     onSubmit: data => {
       const newData = { ...data };
       delete newData.type;
+
       newData.requirement = {
-        id: cuid(),
+        id: data.requirement && data.requirement.type || cuid(),
         type: data.type,
         validAtLeastUntil: data.validUntil
       };
+
       newData.attachments = data.attachments.map(x =>
         ({ id: x.id, certificate: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
+
       newData.issuer = issuer && issuer.id ? { id: issuer.id } : null;
+
       if (newData.attachments.length === 0) delete newData.attachments;
+      
       Promise.all([
         saveChanges({ variables: { data: newData } }),
         deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))

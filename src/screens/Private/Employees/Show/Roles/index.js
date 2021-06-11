@@ -33,7 +33,6 @@ const columns = (t) => [
 
 export default ({ t, roles }) => {
   const [page, setPage] = useState(1);
-
   const onPageChange = (page) => {
     setPage(page);
   };

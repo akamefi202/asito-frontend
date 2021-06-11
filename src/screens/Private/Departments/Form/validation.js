@@ -8,6 +8,5 @@ export default messages => {
     zipCode: yup.number().typeError(messages.NUMBER || true).required(messages.REQUIRED),
     city: yup.string().required(messages.REQUIRED),
     country: yup.string().required(messages.REQUIRED),
-    phone: yup.string().required(messages.REQUIRED),
   });
 };

@@ -20,12 +20,12 @@ const columns = (t) => [
     ),
   },
   {
-    title: t("SHOW.ROLES.COLUMNS.PERSONNEL"),
-    dataIndex: "operatorSites",
-    key: "operatorSites",
-    render: (operatorSites, record) => {
-      const operatorAmount = operatorSites ? operatorSites.length : 0;
-      const maxAmount = record && record.numberOfOperatorsRequired ? record.numberOfOperatorsRequired : 0;
+    title: t("SHOW.ROLES.COLUMNS.EMPLOYEES"),
+    dataIndex: "employeeRoles",
+    key: "employeeRoles",
+    render: (employeeRoles, record) => {
+      const operatorAmount = employeeRoles ? employeeRoles.length : 0;
+      const maxAmount = record && record.numberOfEmployeesRequired ? record.numberOfEmployeesRequired : 0;
       return [operatorAmount, '/', maxAmount].join('')
     }
   }

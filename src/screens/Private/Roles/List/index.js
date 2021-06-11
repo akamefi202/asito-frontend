@@ -7,14 +7,14 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { SiteQueries } from "shared/graphql/queries";
+import { RoleQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { USER_ROLES } from "shared/constants/userRoles";
 import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
 import { delay } from "utils/helpers/delay";
 
-const { SITES } = SiteQueries;
+const { ROLES } = RoleQueries;
 
 const { TabPane } = Tabs;
 
@@ -51,28 +51,28 @@ export default () => {
     inactiveData();
   }, []);
 
-  const [filterData, { loading }] = useLazyQuery(SITES, {
+  const [filterData, { loading }] = useLazyQuery(ROLES, {
     variables,
-    onCompleted: ({ sites }) => {
-      if (!sites.data) return;
-      setData(sites.data);
-      setTotal(sites.count);
+    onCompleted: ({ roles }) => {
+      if (!roles.data) return;
+      setData(roles.data);
+      setTotal(roles.count);
       if (!Object.keys(statusTab).length && !scan) {
-        setCount({ ...count, ALL: sites.count });
+        setCount({ ...count, ALL: roles.count });
       }
     },
     onError: (error) => messages({ data: error })
   });
 
-  const [activeData, { loading: activeDataLoading }] = useLazyQuery(SITES, {
+  const [activeData, { loading: activeDataLoading }] = useLazyQuery(ROLES, {
     variables: { where: { status: "ACTIVE" } },
-    onCompleted: ({ sites }) => setCount({ ...count, ACTIVE: sites.count }),
+    onCompleted: ({ roles }) => setCount({ ...count, ACTIVE: roles.count }),
     onError: (error) => messages({ data: error })
   });
 
-  const [inactiveData, { loading: inactiveDataLoading }] = useLazyQuery(SITES, {
+  const [inactiveData, { loading: inactiveDataLoading }] = useLazyQuery(ROLES, {
     variables: { where: { status: "INACTIVE" } },
-    onCompleted: ({ sites }) => setCount({ ...count, INACTIVE: sites.count }),
+    onCompleted: ({ roles }) => setCount({ ...count, INACTIVE: roles.count }),
     onError: (error) => messages({ data: error })
   });
 

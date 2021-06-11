@@ -5,32 +5,30 @@ import { PATHS } from "utils/constants";
 
 const columns = (t) => [
   {
-    title: t("LIST.COLUMNS.ROLE_NAME"),
+    title: t("LIST.COLUMNS.NAME"),
     dataIndex: "name",
     key: "name",
     sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: t("LIST.COLUMNS.DEPARTAMENT"),
-    dataIndex: "client",
-    key: "client",
-    render: (client) => client && client.name ? client.name : ''
+    dataIndex: "departments",
+    key: "departments",
+    render: (departments) => departments ? departments.length : 0
   },
   {
     title: t("LIST.COLUMNS.REQUIREMENTS"),
-    dataIndex: "location",
-    key: "location",
-    render: (_, record) => (
-      <span>{`${record.city}, ${record.country}`}</span>
-    ),
+    dataIndex: "requirements",
+    key: "requirements",
+    render: (requirements) => requirements ? requirements.length : 0,
   },
   {
-    title: t("LIST.COLUMNS.PERSONNEL"),
-    dataIndex: "numberOfOperatorsRequired",
-    key: "numberOfOperatorsRequired",
+    title: t("LIST.COLUMNS.EMPLOYEES"),
+    dataIndex: "numberOfEmployeesRequired",
+    key: "numberOfEmployeesRequired",
     render: (number, record) => (
       <span>
-        {`${record.operatorSites && record.operatorSites.length}/${number}`}
+        {`${record.employeeRoles && record.employeeRoles.length || 0}/${number}`}
       </span>
     ),
   },

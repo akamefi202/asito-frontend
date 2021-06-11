@@ -1,14 +1,14 @@
 import gql from "graphql-tag";
 
-export const CREATE_UPDATE_SITE = gql`
-  mutation createSite($data: SiteWhereInput) {
-    createSite(data: $data) {
+export const CREATE_UPDATE_ROLE = gql`
+  mutation createRole($data: RoleWhereInput) {
+    createRole(data: $data) {
       id
-      operatorSites {
-        site {
+      employeeRoles {
+        role {
           id
         }
-        operator {
+        employee {
           number
           firstName
           lastName
@@ -22,5 +22,5 @@ export const CREATE_UPDATE_SITE = gql`
 `;
 
 export default {
-  CREATE_UPDATE_SITE,
+  CREATE_UPDATE_ROLE,
 };
