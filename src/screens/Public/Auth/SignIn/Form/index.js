@@ -11,7 +11,7 @@ import validation from "./validation";
 import Logo from "shared/assets/images/Logo.svg";
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import { AuthMutations } from "shared/graphql/mutations";
-// import SignUpModal from "./signUpModal";
+import SignUpModal from "./signUpModal";
 import { USER } from "shared/graphql/queries/user";
 import { UserStore } from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
@@ -21,7 +21,7 @@ const { LOGIN_MUTATION } = AuthMutations;
 const Form = () => {
   const { t } = useTranslation(NAME_SPACES.AUTH);
   const history = useHistory();
-  // const [modalSignUp, setModalSignUp] = useState(false);
+  const [modalSignUp, setModalSignUp] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
   const [getUser] = useLazyQuery(USER, {
     onCompleted: ({ user }) => {
@@ -31,13 +31,13 @@ const Form = () => {
     }
   });
 
-  // const showModal = () => {
-  //   setModalSignUp(true);
-  // };
+  const showModal = () => {
+    setModalSignUp(true);
+  };
 
-  // const handleCancelModal = () => {
-  //   setModalSignUp(false);
-  // };
+  const handleCancelModal = () => {
+    setModalSignUp(false);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -125,14 +125,14 @@ const Form = () => {
                 {t("SIGNIN.LOGIN")}
               </Button>
             </div>
-            {/* <div className="auth--area--form--content--help sign-up">
+            <div className="auth--area--form--content--help sign-up">
               <div className="auth--area--form--content--help--item">
                 <h5>
                   {t("SIGNIN.NO_ACCOUNT")} <span className="link-auth" onClick={showModal}>{t("SIGNIN.SIGN_UP_NOW")}</span>
                 </h5>
               </div>
-            </div> */}
-            {/* <SignUpModal t={t} visible={modalSignUp} handleCancel={handleCancelModal} /> */}
+            </div>
+            <SignUpModal t={t} visible={modalSignUp} handleCancel={handleCancelModal} />
           </form>
         </div>
       </Spin>

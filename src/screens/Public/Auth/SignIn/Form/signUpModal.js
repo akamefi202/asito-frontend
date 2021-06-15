@@ -28,14 +28,14 @@ const SignUpModal = ({ t, visible, handleCancel }) => {
         <p className="text">{t("SIGNIN.SIGN_UP_MODAL.TEXT")}</p>
         <div className="heading--area--buttons">
             <Button
-              onClick={() => handleOk("organization")}
+              onClick={() => handleOk("client")}
               buttonStyle="btn--outline"
               custom="heading--area--buttons--left"
             >
               <BsBuilding className="btn--icon--right" /> {t("SIGNIN.SIGN_UP_MODAL.ORGANIZATION")}
             </Button>
             <Button
-              onClick={() => handleOk("academy")}
+              onClick={() => handleOk("planer")}
               buttonStyle="btn--outline"
               custom="heading--area--buttons--left"
             >

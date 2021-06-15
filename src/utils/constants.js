@@ -47,8 +47,8 @@ export const PATHS = {
 };
 
 export const ROLE_URL = {
-  academy: "ISSUER",
-  organization: "CLIENT",
+  planer: "PLANER",
+  client: "CLIENT",
 };
 
 
