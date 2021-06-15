@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { Button, Input, Spin } from "shared/components";
 import { NAME_SPACES } from "shared/locales/constants";
-import { COLORS, PATHS } from "utils/constants";
+import { PATHS } from "utils/constants";
 import { bindInputProps } from "utils/helpers/input";
 import validation from "./validation";
 import Logo from "shared/assets/images/Logo.svg";

@@ -1,13 +1,11 @@
 import React from "react";
-import {FiKey} from "react-icons/fi";
-import {BsCheck} from "react-icons/bs";
 import {Button} from "shared/components";
 
 export default ({ t, email, backToLogin }) => {
   return (
     <div className="card--form account--submited">
       <div className="icon--check">
-          <BsCheck />
+        <span className="icon-Check" />
       </div>
       <h1 className="title">
         {t("FORM.ACCOUNT_SUBMITTED.WELCOME")}
@@ -21,7 +19,7 @@ export default ({ t, email, backToLogin }) => {
         custom="heading--area--buttons--left"
         onClick={backToLogin}
       >
-        <FiKey className="btn--icon--right" />
+        <span className="btn--icon--right icon-Key" />
         {t("FORM.ACCOUNT_SUBMITTED.BACK_LOGIN")}
       </Button>
     </div>

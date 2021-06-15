@@ -20,7 +20,7 @@ const columns = (t) => [
     ),
   },
   {
-    title: t("SHOW.ROLES.COLUMNS.EMPLOYEES"),
+    title: t("SHOW.ROLES.COLUMNS.EMPLOYEE"),
     dataIndex: "employeeRoles",
     key: "employeeRoles",
     render: (employeeRoles, record) => {
