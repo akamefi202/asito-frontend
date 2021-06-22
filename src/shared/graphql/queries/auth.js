@@ -54,7 +54,7 @@ export const ACCESSES = gql`
 `;
 
 export const DEVICES = gql`
-  query accesses($where: DeviceWhereInput) {
+  query devices($where: DeviceWhereInput) {
     devices(where: $where) @authBff {
       data {
         guid
@@ -77,15 +77,6 @@ export const USERS_AUTH = gql`
   }
 `;
 
-export const PIN = gql`
-  query Pin($where: InputPhoneVerification) {
-    pin(where: $where) @authBff {
-      id
-      code
-    }
-  }
-`;
-
 export default {
   DEVICE,
   USER_AUTH,
@@ -93,5 +84,4 @@ export default {
   ACCESS,
   ACCESSES,
   DEVICES,
-  PIN,
 };
