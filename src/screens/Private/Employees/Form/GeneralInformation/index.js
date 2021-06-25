@@ -1,9 +1,51 @@
-import React from "react";
-import { Row, Col, Radio } from "antd";
-import {Card, Input, DatePicker, Select} from "shared/components";
+/* eslint-disable import/no-anonymous-default-export */
+import React, { useRef } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { FileMutations } from "../../../../../shared/graphql/mutations";
+import { Row, Col, Radio, Upload } from "antd";
+import { Card, Input, DatePicker, Button } from "shared/components";
+import { CloudUploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { bindInputProps } from "utils/helpers/input";
 
+const { CREATE_FILE } = FileMutations;
+
 export default ({ t, formik }) => {
+
+  const fileStatus = useRef('');
+
+  const onRemoveFile = () => formik.setFieldValue('avatar', '');
+
+  const [getFile] = useMutation(CREATE_FILE);
+
+  const uploadFile = async (file) => {
+    if (fileStatus.current === file.status || file.status !== 'error') return;
+    fileStatus.current = file.status;
+    const fileObject = await readFile(file.originFileObj);
+    getFile({variables: {data: fileObject}})
+      .then(({data}) => {
+        fileStatus.current = '';
+        formik.setFieldValue('avatar', data.createFile);
+      });
+  }
+
+  const readFile = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const reg = new RegExp(('^data:' + file.type + ';base64,'));
+        const stream = reader.result.replace(reg, '');
+        resolve({
+          name: file.name,
+          contentType: file.type,
+          size: file.size,
+          body: stream
+        });
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
   return (
     <Card cardStyle={"card--form"}>
       <Row>
@@ -84,6 +126,39 @@ export default ({ t, formik }) => {
                 </Col>
               </Row>
             </Radio.Group>
+          </div>
+        </Col>
+        <Col xs={48} sm={48} md={24} lg={24}>
+          <div className="card--form--item">
+            {formik.values.avatar &&
+              <>
+                <label className="card--form--item--label">
+                  {t("FORM.GENERAL_INFORMATION.PHOTO")}
+                </label>
+                <div className='card--form--avatar--wrapper'>
+                  <img src={formik.values.avatar} alt="Photo" />
+                </div>
+              </>}
+            <Row gutter={[16, 24]}>
+              <Col>
+                <Upload
+                  action={'/'}
+                  accept='image/jpeg, image/png, image/svg'
+                  showUploadList={false}
+                  onChange={({file}) => uploadFile(file)}
+                  >
+                    <Button buttonStyle={"btn--outline"}>
+                      <CloudUploadOutlined className="btn--icon--right" />{" "}
+                      {t("FORM.GENERAL_INFORMATION.UPLOAD_PHOTO")}
+                    </Button>
+                </Upload>
+              </Col>
+              <Col>
+                <Button onClick={onRemoveFile} icon={<DeleteOutlined className="btn--icon--right" />} buttonStyle={"btn--outline"}>
+                  {t("FORM.GENERAL_INFORMATION.DELETE_PHOTO")}
+                </Button>
+              </Col>
+            </Row>
           </div>
         </Col>
       </Row>

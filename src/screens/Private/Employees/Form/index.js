@@ -36,6 +36,7 @@ export default () => {
     lastName: "",
     dateOfBirth: "",
     gender: "male",
+    avatar: "",
     phone: "",
     email: "",
     address1: "",

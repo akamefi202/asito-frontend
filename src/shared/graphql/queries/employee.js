@@ -9,6 +9,7 @@ export const EMPLOYEE = gql`
       lastName
       dateOfBirth
       gender
+      avatar
       phone
       email
       address1

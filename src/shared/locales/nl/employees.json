@@ -37,7 +37,8 @@
       "FIRST_NAME": "Voornaam",
       "LAST_NAME": "Achternaam",
       "DATE_OF_BIRTH": "Geboortedatum",
-      "GENDER": "Geslacht"
+      "GENDER": "Geslacht",
+      "PHOTO": "Foto"
     },
     "CONTACT_INFORMATION": {
       "PHONE_NUMBER": "Telefoonnummer",
@@ -84,6 +85,9 @@
       "DATE_OF_BIRTH": "Geboortedatum",
       "DATE_OF_BIRTH_PLACEHOLDER": "Selecteer een Geboortedatum",
       "GENDER": "Geslacht",
+      "PHOTO": "Foto",
+      "UPLOAD_PHOTO": "Upload foto",
+      "DELETE_PHOTO": "Huidige foto verwijderen",
       "MALE": "Mannelijk",
       "FEMALE": "Vrouwelijk"
     },

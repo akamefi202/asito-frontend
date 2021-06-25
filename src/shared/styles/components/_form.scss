@@ -12,6 +12,27 @@
     }
   }
 
+  &--avatar--wrapper {
+    width: 70px;
+    height: 90px;
+    margin-bottom: 16px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 500px) {
+      height: 250px;
+      width: auto;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
   &--text {
     padding-bottom: 24px;
     color: #808080;

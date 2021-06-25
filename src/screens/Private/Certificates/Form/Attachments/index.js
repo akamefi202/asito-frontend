@@ -54,7 +54,8 @@ export default ({ t, formik, certificateId, deletedFiles, setDeletedFiles }) => 
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        const stream = reader.result.replace(/^data:application\/\w+;base64,/, '');
+        const reg = new RegExp(('^data:' + file.type +  ';base64,'));
+        const stream = reader.result.replace(reg, '');
         resolve({
           name: file.name,
           contentType: file.type,

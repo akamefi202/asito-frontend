@@ -23,6 +23,16 @@
     }
   }
 
+  &--photo--wrapper {
+    width: 70px;
+    height: 90px;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   &--item {
     padding-bottom: 24px;
     //&:last-child() {

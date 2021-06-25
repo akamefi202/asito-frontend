@@ -62,6 +62,18 @@ export default ({ t, employee }) => (
           <h4 className="card--details--item--value">{t(`GENDER.${employee.gender}`)}</h4>
         </div>
       </Col>
+
+      {employee.avatar &&
+        <Col xs={24} sm={24} md={12} lg={12}>
+          <div className="card--details--item">
+            <h5 className="card--details--item--key">
+              {t("SHOW.GENERAL_INFORMATION.PHOTO")}
+            </h5>
+            <div className='card--details--photo--wrapper'>
+              <img src={employee.avatar} alt='avatar' />
+            </div>
+          </div>
+        </Col>}
     </Row>
   </Card>
 );
