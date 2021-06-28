@@ -20,6 +20,10 @@
       justify-content: flex-end;
     }
 
+    &--between {
+      justify-content: space-between;
+    }
+
     @media (max-width: 500px) {
       padding-top: 20px;
       justify-content: center;

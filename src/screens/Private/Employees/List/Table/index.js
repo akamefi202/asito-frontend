@@ -33,29 +33,11 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.ROLE"),
-    dataIndex: "DATA_ACCESS",
-    key: "DATA_ACCESS",
-    render: (text) => {
-      if (!text) return;
-      return (
-        <div className={`access--type ${text.class}`}>
-          {text.class === "green" ? <AiOutlineEye className="icon" /> : <AiOutlineEyeInvisible className="icon" />}
-          <span>{text.value}</span>
-        </div>
-      )
-    },
+    dataIndex: ["employeeRoles"],
+    key: "employeeRoles",
+    render: (employeeRoles) => employeeRoles && employeeRoles.length || 0,
   },
 ];
-
-const dataTables = (data) => (
-  data.map(employee => {
-    employee.DATA_ACCESS = {
-      value: `Authorized (${employee.employeeRoles ? employee.employeeRoles.length : 0})`,
-      class: "green"
-    };
-    return employee;
-  })
-);
 
 export default ({ t, employees, take, setTake, setSkip, page, setPage, total }) => {
   const history = useHistory();
@@ -73,7 +55,7 @@ export default ({ t, employees, take, setTake, setSkip, page, setPage, total }) 
     <Table
       columns={columns(t)}
       className="table--custom"
-      data={dataTables(employees)}
+      data={employees}
       total={total}
       rowKey={"id"}
       page={page}

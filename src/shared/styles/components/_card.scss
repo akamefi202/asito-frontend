@@ -65,6 +65,12 @@
   }
 }
 
+.items-center {
+  display: flex;
+  height: 40px;
+  align-items: center;
+}
+
 .card--details--notifications {
   border-radius: 16px;
   
