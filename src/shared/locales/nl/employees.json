@@ -2,11 +2,13 @@
   "EMPLOYEES": "Medewerkers",
   "NEW": "Nieuwe medewerker",
   "EDIT": "Wijzig medewerker",
+  "SHOW_QR_CODE": "QR code",
+  "QR_CODE_MODAL": "QR code",
   "DISCARD": "Wijzigingen annuleren",
   "SAVE": "Opslaan",
   "GENDER": {
-    "male": "Male",
-    "female": "Female"
+    "male": "Mannetje",
+    "female": "Vrouw"
   },
   "LIST": {
     "SEARCH_PLACEHOLDER": "Zoek een medewerker...",
