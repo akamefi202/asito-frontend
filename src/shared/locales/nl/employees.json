@@ -30,7 +30,19 @@
         "NAME": "Afdeling",
         "ACCEPTED": "Geaccepteerd",
         "PROTOCOLS": "Acceptatie protocollen"
-      }
+      },
+      "VIEW_PROTOCOLS": "Bekijk protocollen",
+      "PENDING": "In afwachting"
+    },
+    "PROTOCOLS_MODAL": {
+      "TITLE": "Protocollen voor functie Role A 't Waellant",
+      "COLUMNS": {
+        "FILE_NAME": "Bestandsnaam",
+        "FILE_TYPE": "Bestandstype",
+        "UPLOAD_DATE": "Bijgevoegd op"
+      },
+      "CLOSE": "Sluiten",
+      "ACCEPT": "Accepteer protocollen"
     },
     "GENERAL_INFORMATION": {
       "NUMBER": "Personeelsnummer",
