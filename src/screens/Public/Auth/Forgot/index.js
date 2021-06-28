@@ -51,7 +51,7 @@ const FORGOT = () => {
                 <div className="auth--area--form--head">
                     <img className="logo" src={Logo} alt="Be-better" />
                 </div>
-                <Col span={24} className="wrapper--content forgot">
+                <Col span={24} className="wrapper--content">
                     <div className="auth--area--form">
                         <Spin spinning={loading}>
                             <div className="details--page">

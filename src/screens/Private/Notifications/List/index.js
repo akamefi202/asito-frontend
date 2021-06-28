@@ -120,7 +120,7 @@ export default () => {
                 <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons}/>
                 <div className="details--page">
                     <Row justify="center" gutter={[16, 8]}>
-                        <Col xs={18} onScroll={scroll}>
+                        <Col xs={24} onScroll={scroll}>
                             {[
                                 ...notifications.map(notification => !notification.read ? getTemplateNotification(notification) : ''),
                                 ...notifications.map(notification => notification.read ? getTemplateNotification(notification) : '')

@@ -1,9 +1,7 @@
 .container--signUp {
   min-height: 100vh;
-
-  .forgot, .change-password {
-    width: 540px;
-  }
+  max-width: 778px;
+  margin: 0 auto;
 
   .wrapper--content {
     height: auto;
@@ -43,6 +41,15 @@
     .custom--steps {
       padding-bottom: 24px;
       border-bottom: 1px solid #DCDCDC;
+
+      @media screen and (max-width: 720px) {
+        display: block;
+
+        & .ant-steps-item {
+          padding: 0;
+          margin-bottom: 10px;
+        }
+      }
 
       .ant-steps-item-icon {
         border-color: #DCDCDC;
@@ -101,6 +108,18 @@
         padding-top: 24px;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap-reverse;
+
+        @media (max-width: 500px) {
+          button {
+            margin-top: 10px;
+            width: 100%;
+
+            &:last-child {
+              margin-top: 0;
+            }
+          }
+        }
 
         &--end {
           justify-content: flex-end;

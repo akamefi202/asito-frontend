@@ -34,15 +34,9 @@
 }
 
 .custom-h {
-  // height: calc(100vh - 400px);
   display: flex;
   margin: auto;
-}
-
-.custom-h-change-password {
-  height: calc(100vh - 250px);
-  display: flex;
-  margin: auto;
+  padding: 10px;
 }
 
 .w-100-100 {
@@ -62,6 +56,10 @@
 
   @media (max-width: 991px) {
     padding-top: 24px;
+  }
+
+  @media (max-width: 500px) {
+    overflow: auto;
   }
 }
 

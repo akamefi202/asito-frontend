@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default ({ items = [], buttons = [] }) => {
   return (
-    <div className="heading--area p-left-20">
+    <div className="heading--area">
       <Breadcrumb separator={<RightOutlined />} className="custom--breadcrumb">
         {items.map((item, index) => (
           <Breadcrumb.Item key={index} className={item.className}>

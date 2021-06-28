@@ -52,11 +52,11 @@ const ResetPassword = () => {
 
     return (
         <Layout className="container--signUp">
-            <Row justify="center" align="middle" className="custom-h-change-password">
+            <Row justify="center" align="middle" className="custom-h">
                 <div className="auth--area--form--head">
                     <img className="logo" src={Logo} alt="Be-better" />
                 </div>
-                <Col span={24} className="wrapper--content change-password">
+                <Col span={24} className="wrapper--content">
                     <div className="auth--area--form">
                         <Spin spinning={loading || verifyLoading}>
                             <div className="details--page">

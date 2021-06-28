@@ -1,6 +1,7 @@
 @import "../../../shared/styles/partials/variables";
 
 .custom-input {
+  position: relative;
   background-color: $c-white;
   min-height: 50px;
   max-height: 50px;
@@ -80,8 +81,8 @@
 
   .custom-input p {
     position: absolute;
-    left: 15px;
-    bottom: 3px;
-    font: normal normal 300 11px/10px;
+    left: 0;
+    bottom: -5px;
+    font: normal normal 300 16px/10px Nunito;
   }
 }

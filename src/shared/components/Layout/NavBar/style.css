@@ -13,6 +13,7 @@
 @media (max-width: 992px) {
   .navbar {
     display: block;
+    z-index: 1000;
   }
 }
 
