@@ -2,8 +2,17 @@
     "DEPARTMENTS": "Afdelingen",
     "NEW": "Nieuwe afdeling",
     "EDIT": "Wijzig afdeling",
+    "SCAN_EMPLOYEE": "Scan medewerker",
     "DISCARD": "Wijzigingen annuleren",
     "SAVE": "Opslaan",
+    "SCAN": {
+        "SUCCESS": "Scan succes",
+        "ERROR": "Scanfout",
+        "SUCCESS_BUTTON": "Scan opnieuw",
+        "ERROR_BUTTON": "Probeer het opnieuw",
+        "ERROR_MESSAGE": "Reden: Onvoldoende certificaatvoorwaarden.",
+        "USER_NOT_FOUND": "Gebruiker niet gevonden"
+    },
     "LIST": {
         "SEARCH_PLACEHOLDER": "Zoek een afdeling...",
         "COLUMNS": {
