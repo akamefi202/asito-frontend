@@ -18,7 +18,7 @@ const STEPS = {
   STEP_2: 2
 }
 
-const Reader = ({onScan, setScanner, stopScanner, stoppedScanner}) => {
+const Reader = ({onScan, setScanner, stopScanner, steps}) => {
   const scannerRef = useRef();
   let qrScanner;
 
@@ -28,17 +28,16 @@ const Reader = ({onScan, setScanner, stopScanner, stoppedScanner}) => {
   }
 
   useEffect(() => {
-    if (!qrScanner && !stoppedScanner) {
+    if (!qrScanner) {
       qrScanner = new QrScanner(scannerRef.current, (result) => onScanHandler(result), (error) => console.log(error));
-      setScanner(qrScanner);
-      return qrScanner.start();
+      qrScanner.start().then(() => setScanner(qrScanner)).catch(() => console.log('something went wrong'));
     };
 
     return () => {
       stopScanner();
     }
 
-  }, [qrScanner, stoppedScanner]);
+  }, [steps]);
 
   return (
     <div className="scanner__video-wrapper">
@@ -48,7 +47,12 @@ const Reader = ({onScan, setScanner, stopScanner, stoppedScanner}) => {
   )
 }
 
-const EmployeeInfo = ({t, employee, onClick}) => {
+const EmployeeInfo = ({t, employee, onClick, scanner}) => {
+
+  useEffect(() => {
+    scanner && scanner.stop();
+  }, [scanner]);
+
   return (
     <div>
       <h2 className='scanner__header'>{t("SCAN.SUCCESS")}</h2>
@@ -87,19 +91,18 @@ const Scanner = ({ t, visible, handleCancel }) => {
   const [employee, setEmployee] = useState(null);
   const [steps, setSteps] = useState(STEPS.STEP_0);
   const [scanner, setScanner] = useState(null);
-  const [stoppedScanner, setStoppedScanner] = useState(false);
+
+  useEffect(() => {
+    if (scanner) scanner.stop();
+  }, [steps]);
 
   const [ getEmployees, { loading }] = useLazyQuery(EMPLOYEE, {
     onCompleted: ({ employee }) => {
       employee && setEmployee(employee);
-      scanner.stop();
-      setStoppedScanner(true);
       setSteps(STEPS.STEP_1);
     },
     onError: (error) => {
       messages({ data: error });
-      scanner.stop();
-      setStoppedScanner(true);
       setSteps(STEPS.STEP_2);
     }
   });
@@ -112,23 +115,19 @@ const Scanner = ({ t, visible, handleCancel }) => {
       }
     }});
     if (scanner) scanner.stop();
-    setStoppedScanner(true);
   };
 
   const showSuccessContent = () => {
     setSteps(STEPS.STEP_0);
-    setStoppedScanner(false);
   }
 
   const showErrorContent = () => {
     setSteps(STEPS.STEP_0);
-    setStoppedScanner(false);
   }
 
   const stopScanner = () => {
     if (scanner) {
       scanner.stop();
-      setStoppedScanner(true);
     }
   }
 
@@ -136,16 +135,6 @@ const Scanner = ({ t, visible, handleCancel }) => {
     handleCancel();
     scanner && scanner.stop();
     setSteps(STEPS.STEP_0);
-    setStoppedScanner(true);
-  }
-
-  const Content = () => {
-    switch(steps) {
-      case STEPS.STEP_0: return (<Reader onScan={onScan} setScanner={setScanner} stopScanner={stopScanner} stoppedScanner={stoppedScanner} />)
-      case STEPS.STEP_1: return (<EmployeeInfo t={t} employee={employee} onClick={showSuccessContent} />)
-      case STEPS.STEP_2: return (<Error t={t} onClick={showErrorContent} />)
-      default: return null
-    }
   }
 
   return (
@@ -159,12 +148,13 @@ const Scanner = ({ t, visible, handleCancel }) => {
       <div className="modal-body">
         {steps === STEPS.STEP_0 && <h1 className="title">{t("SCAN_EMPLOYEE")}</h1>}
         <div className='scanner'>
-          {loading ?
+          {loading &&
             <div className='scanner__spinner'>
               <Spin spinning={loading}></Spin>
-            </div>
-            :
-            Content()}
+            </div>}
+          {!loading && steps === STEPS.STEP_0 && <Reader onScan={onScan} setScanner={setScanner} stopScanner={stopScanner} steps={steps} />}
+          {!loading && steps === STEPS.STEP_1 && <EmployeeInfo t={t} employee={employee} onClick={showSuccessContent} scanner={scanner}/>}
+          {!loading && steps === STEPS.STEP_2 && <Error t={t} onClick={showErrorContent} />}
         </div>
       </div>
     </Modal>

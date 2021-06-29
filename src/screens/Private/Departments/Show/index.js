@@ -110,7 +110,7 @@ export default () => {
             </Col>
           </Row>
         </Spin>
-        <Scanner id={id} t={t} visible={scannerVisible} handleCancel={closeScanner} />
+        {scannerVisible && <Scanner id={id} t={t} visible={scannerVisible} handleCancel={closeScanner} />}
       </div>
     </div>
   );
