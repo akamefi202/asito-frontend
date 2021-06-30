@@ -5,10 +5,12 @@ export const ROLE = gql`
     role(where: $where) {
       id
       status
-      department {
+      departments {
         id
         name
       }
+      accepted
+      roleDescription
       name
       numberOfEmployeesRequired
       latitude
@@ -65,6 +67,12 @@ export const ROLES = gql`
         city
         country
         status
+        departments {
+          id
+          name
+        }
+        accepted
+        roleDescription
         requirements {
           id
         }

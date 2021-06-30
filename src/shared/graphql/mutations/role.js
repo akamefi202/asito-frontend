@@ -4,6 +4,8 @@ export const CREATE_UPDATE_ROLE = gql`
   mutation createRole($data: RoleWhereInput) {
     createRole(data: $data) {
       id
+      accepted
+      name
       employeeRoles {
         role {
           id

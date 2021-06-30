@@ -25,7 +25,7 @@ export const EMPLOYEE = gql`
         requirement {
           id
           type
-          validAtLeastUntil      
+          validAtLeastUntil
         }
       }
       employeeRoles {
@@ -35,6 +35,7 @@ export const EMPLOYEE = gql`
         role {
           id
           name
+          accepted
         }
       }
     }

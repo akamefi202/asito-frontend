@@ -16,8 +16,8 @@ const columns = (t, protocolsVisible, isAccess) => [
     key: "name",
     sorter: (a, b) => a.role.name.localeCompare(b.role.name),
     render: (name, record) => (
-      <Link 
-        className="custom-link items-center" 
+      <Link
+        className="custom-link items-center"
         to={PATHS.ROLES.SHOW.replace(":id", record.role.id)}>
           {name}
       </Link>
@@ -27,7 +27,15 @@ const columns = (t, protocolsVisible, isAccess) => [
     title: t("SHOW.ROLES.COLUMNS.PROTOCOLS"),
     dataIndex: ["role", "protocols"],
     key: "protocols",
-    render: (protocols) => {
+    render: (protocols, record) => {
+      if (record.role.accepted) {
+        return (
+          <div className="access--type items-center">
+            <span className="icon icon-Check green" />
+            <span>Geaccepteerd</span>
+          </div>
+        )
+      }
       if (isAccess()) {
         return (
           <div className="access--type items-center">
@@ -37,7 +45,7 @@ const columns = (t, protocolsVisible, isAccess) => [
         )
       } else {
         return (<Button
-          onClick={() => protocolsVisible(protocols)}
+          onClick={() => protocolsVisible(protocols, record.role.id)}
           icon={<span className="btn--icon--right icon-Eye-Show" />}
           buttonStyle={"btn--primary"}
         >{t('SHOW.ROLES.VIEW_PROTOCOLS')}</Button>)
@@ -51,19 +59,19 @@ export default ({ t, roles }) => {
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
   const [page, setPage] = useState(1);
-  const [protocolsModalVisible, setProtocolsModalVisible] = useState(false);
+  const [protocolsModalVisible, setProtocolsModalVisible] = useState({visible: false, activeRoleId: null});
   const [protocols, setProtocols] = useState([
-    {name: 'protocol_doc1.pdf', type: 'PDF', updatedAt: '01-01-2020'},
-    {name: 'protocol_doc1.pdf', type: 'PDF', updatedAt: '01-01-2020'},
+    {name: 'protocol_doc1.pdf', id: "1", type: 'PDF', updatedAt: '01-01-2020'},
+    {name: 'protocol_doc1.pdf', id: "2", type: 'PDF', updatedAt: '01-01-2020'},
   ]);
 
   const onPageChange = (page) => {
     setPage(page);
   };
 
-  const protocolsVisible = (protocols) => {
+  const protocolsVisible = (protocols, id) => {
     // setProtocols(protocols);
-    setProtocolsModalVisible(true);
+    setProtocolsModalVisible({visible: true, activeRoleId: id});
   }
 
   const isAccess = () => userRole && (userRole === USER_ROLES.CLIENT.key);
@@ -95,8 +103,13 @@ export default ({ t, roles }) => {
           />
         </Col>
       </Row>
-      {protocolsModalVisible 
-        ? <ProtocolsModal t={t} protocols={protocols} visible={protocolsModalVisible} handleCancel={setProtocolsModalVisible} /> 
+      {protocolsModalVisible
+        ?
+          <ProtocolsModal
+            t={t} protocols={protocols}
+            visible={protocolsModalVisible.visible}
+            handleCancel={setProtocolsModalVisible}
+            roleId={protocolsModalVisible.activeRoleId} />
         : ''}
     </Card>
   );
