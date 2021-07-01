@@ -9,7 +9,7 @@ const columns = (t) => [
     title: t("SHOW.ATTACHMENTS.COLUMNS.FILE_NAME"),
     dataIndex: "name",
     key: "name",
-    render: (name) => (<span className="custom-link">{name}</span>),
+    render: (name, record) => (<a href={record.url} target="_blank" rel="noreferrer" className="custom-link">{name}</a>)
   },
   {
     title: t("SHOW.ATTACHMENTS.COLUMNS.FILE_TYPE"),

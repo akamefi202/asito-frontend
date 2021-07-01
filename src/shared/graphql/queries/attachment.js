@@ -9,6 +9,7 @@ export const ATTACHMENTS = gql`
         type
         updatedAt
         createdAt
+        url
       }
     }
   }
