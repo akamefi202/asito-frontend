@@ -1,8 +1,6 @@
 import React from "react";
 import { Row, Col } from "antd";
 import Card from "shared/components/Card";
-import { Link } from "react-router-dom";
-import { PATHS } from "utils/constants";
 
 export default ({ t, role }) => (
   <Card cardStyle={"card--details"}>
@@ -50,7 +48,7 @@ export default ({ t, role }) => (
             {t("SHOW.GENERAL_INFORMATION.ROLE_DESCRIPTION")}
           </h5>
           <h4 className="card--details--item--value">
-            ROLE_DESCRIPTION
+            {role.roleDescription}
           </h4>
         </div>
       </Col>

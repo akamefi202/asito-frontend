@@ -59,17 +59,12 @@ export const ROLES = gql`
       data {
         id
         name
-        department {
-          id
-          name
-        }
         numberOfEmployeesRequired
         city
         country
         status
         departments {
           id
-          name
         }
         accepted
         roleDescription

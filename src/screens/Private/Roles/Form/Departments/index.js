@@ -65,7 +65,7 @@ export default ({ t, formik }) => {
       id: department && department.id || '',
     }));
 
-    // formik.setFieldValue("departments", departments);
+    formik.setFieldValue("departments", departments);
   };
 
   return (

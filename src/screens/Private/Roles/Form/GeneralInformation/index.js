@@ -67,7 +67,7 @@ export default ({ t, formik }) => {
             <label className="card--form--item--label">
               {t("FORM.GENERAL_INFORMATION.ROLE_DESCRIPTION")}
             </label>
-            <Input 
+            <Input
               {...bindInputProps({ prefix: true, name: "roleDescription", ...formik })}
               placeholder={t("FORM.GENERAL_INFORMATION.ROLE_DESCRIPTION_PLACEHOLDER")}
             />

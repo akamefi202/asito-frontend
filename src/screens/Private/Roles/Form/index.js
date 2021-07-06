@@ -39,10 +39,9 @@ export default () => {
   const [initialValues, setInitialValues] = useState({
     id: generatedId,
     status: "ACTIVE",
-    department: {
-      id: ""
-    },
     name: "",
+    departments: [],
+    roleDescription: "",
     numberOfEmployeesRequired: "",
     latitude: "",
     longitude: "",
