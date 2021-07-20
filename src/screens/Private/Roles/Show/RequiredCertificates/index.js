@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Card, Table } from "shared/components";
 import { dateToString } from "utils/helpers/moment";
-import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 
 const columns = (t) => [
   {
@@ -10,10 +9,6 @@ const columns = (t) => [
     dataIndex: "type",
     key: "type",
     sorter: (a, b) => a.type.localeCompare(b.type),
-    render: (type) => {
-      const certificateType = CERTIFICATES_TYPE.find(item => item.key === type);
-      return certificateType ? certificateType.value : "";
-    },
   },
   {
     title: t('SHOW.REQUIREMENTS.COLUMNS.VALID_UNTIL'),

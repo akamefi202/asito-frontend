@@ -77,7 +77,7 @@ export default () => {
       }
     },
     onCompleted: ({ certificate }) => {
-      if (id === certificate.id) {
+      if (id && id === certificate.id) {
         const newCertificate = { ...certificate };
         newCertificate.type = certificate.requirement && certificate.requirement.type || "";
         newCertificate.issuedOn = timestampToDate(newCertificate.issuedOn);
@@ -109,11 +109,7 @@ export default () => {
       const newData = { ...data };
       delete newData.type;
 
-      newData.requirement = {
-        id: data.requirement && data.requirement.type || cuid(),
-        type: data.type,
-        validAtLeastUntil: data.validUntil
-      };
+      newData.requirement = {id: data.type};
 
       newData.attachments = data.attachments.map(x =>
         ({ id: x.id, certificate: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
@@ -121,7 +117,7 @@ export default () => {
       newData.issuer = issuer && issuer.id ? { id: issuer.id } : null;
 
       if (newData.attachments.length === 0) delete newData.attachments;
-      
+
       Promise.all([
         saveChanges({ variables: { data: newData } }),
         deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))

@@ -3,10 +3,9 @@ import { Col, Row, Form } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { Card, Select, DatePicker, Button } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
-import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import cuid from "cuid";
 
-export default ({ t, formik }) => {
+export default ({ t, formik, certificateTypes }) => {
   const [form] = Form.useForm();
 
   const requirements = formik.values.requirements;
@@ -17,11 +16,10 @@ export default ({ t, formik }) => {
 
   const onValuesChange = (_, data) => {
     const requirements = data.requirements.map(requirement => ({
-      id: requirement && requirement.id || cuid(),
-      type: requirement && requirement.type || '',
+      id: requirement && requirement.id || '',
       validAtLeastUntil: requirement && requirement.validAtLeastUntil || '',
     }));
-    
+
     formik.setFieldValue("requirements", requirements);
   };
 
@@ -67,15 +65,15 @@ export default ({ t, formik }) => {
                             }
                           >
                             {() => (
-                              <Form.Item 
+                              <Form.Item
                                 {...field}
                                 name={[field.name, 'type']}
                                 fieldKey={[field.fieldKey, 'type']}
                               >
-                                <Select 
+                                <Select
                                   placeholder={t("FORM.REQUIREMENTS.COLUMNS.CERTIFICATE_TYPE_PLACEHOLDER")}
-                                  {...bindInputProps({ prefix: true, name: `requirements.${field.name}.type`, ...formik })}
-                                  items={CERTIFICATES_TYPE}
+                                  {...bindInputProps({ prefix: true, name: `requirements.${field.name}.id`, ...formik })}
+                                  items={certificateTypes}
                                 />
                               </Form.Item>
                             )}

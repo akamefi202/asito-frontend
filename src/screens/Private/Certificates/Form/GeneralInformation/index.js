@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Card, Input, Select, DatePicker } from "shared/components";
-import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import { useQuery } from "@apollo/react-hooks";
-import { EmployeeQueries } from "shared/graphql/queries";
+import { EmployeeQueries, CertificateQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { bindInputProps } from "utils/helpers/input";
 import { withoutRepetitions } from "utils/helpers/array";
 import { delay } from "utils/helpers/delay";
 
 const { EMPLOYEES } = EmployeeQueries;
+const { CERTIFICATE_TYPES } = CertificateQueries;
 
 export default ({ t, formik }) => {
   const [employeesSelect, setEmployeesSelect] = useState([]);
@@ -19,6 +19,7 @@ export default ({ t, formik }) => {
   const [totalSelect, setTotalSelect] = useState(0);
   const [takeSelect, setTakeSelect] = useState(50);
   const [scanStatus, setScanStatus] = useState(false);
+  const [certificateTypes, setCertificateTypes] = useState([]);
 
   const variablesSelect = { scan: scanSelect, skip: skipSelect, take: takeSelect };
 
@@ -38,6 +39,12 @@ export default ({ t, formik }) => {
     onError: (error) => {
       messages({ data: error });
     }
+  });
+
+  const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
+    variables: {take: 1000},
+    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type}))),
+    onError: (error) => messages({data: error})
   });
 
   const getSelect = () => {
@@ -103,7 +110,8 @@ export default ({ t, formik }) => {
             <Select
               placeholder={t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE_PLACEHOLDER")}
               {...bindInputProps({ name: "type", ...formik })}
-              items={CERTIFICATES_TYPE}
+              items={certificateTypes}
+              loading={loadingCertificateTypes}
             />
           </div>
         </Col>

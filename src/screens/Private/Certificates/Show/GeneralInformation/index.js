@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { dateToString, timestampToDate } from "utils/helpers/moment";
-import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
@@ -24,12 +23,6 @@ export default ({ t, certificate }) => {
     return [firstName, lastName].join(' ');
   }
 
-  const getType = () => {
-    const certificateType = certificate && certificate.requirement
-      && CERTIFICATES_TYPE.find(item => item.key === certificate.requirement.type);
-    return certificateType ? certificateType.value : "";
-  }
-
   return (
     <Card cardStyle={"card--details"}>
       <Row>
@@ -42,8 +35,8 @@ export default ({ t, certificate }) => {
           <div className="card--details--item">
             <h5 className="card--details--item--key">{t("SHOW.GENERAL_INFORMATION.ISSUED_TO")}</h5>
             <h4 className="card--details--item--value">
-              <Link 
-                className="custom-link" 
+              <Link
+                className="custom-link"
                 to={PATHS.EMPLOYEES.SHOW.replace(":id", getCertificateEmployee(true))}>
                   {getCertificateEmployee()}
               </Link>
@@ -60,7 +53,7 @@ export default ({ t, certificate }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">{t("SHOW.GENERAL_INFORMATION.CERTIFICATE_TYPE")}</h5>
-            <h4 className="card--details--item--value">{getType()}</h4>
+            <h4 className="card--details--item--value">{certificate?.requirement?.type || ''}</h4>
           </div>
         </Col>
 

@@ -3,7 +3,6 @@ import { Table } from "shared/components";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { dateToString, timestampToDate } from "utils/helpers/moment";
-import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
 import moment from "moment";
 
 const today = moment();
@@ -19,10 +18,6 @@ const columns = (t) => [
     title: t("LIST.COLUMNS.CERTIFICATE_TYPE"),
     dataIndex: ["requirement", "type"],
     key: "type",
-    render: (type) => {
-      const certificateType = CERTIFICATES_TYPE.find(item => item.key === type);
-      return certificateType ? certificateType.value : "";
-    },
   },
   {
     title: t("LIST.COLUMNS.ISSUED_TO"),

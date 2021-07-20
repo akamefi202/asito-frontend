@@ -11,9 +11,9 @@ import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
-import { useMutation, useLazyQuery } from "@apollo/react-hooks";
+import {useMutation, useLazyQuery, useQuery} from "@apollo/react-hooks";
 import { RoleMutations, RemoveAttachmentsMutations } from "shared/graphql/mutations";
-import { RoleQueries } from "shared/graphql/queries";
+import { RoleQueries, CertificateQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
@@ -22,6 +22,7 @@ import { timestampToDate } from "utils/helpers/moment";
 const { CREATE_UPDATE_ROLE } = RoleMutations;
 const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
 const { ROLE } = RoleQueries;
+const { CERTIFICATE_TYPES } = CertificateQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -36,6 +37,7 @@ export default () => {
   const { t } = useTranslation(NAME_SPACES.ROLES);
   const [generatedId] = useState(cuid());
   const [deletedFiles, setDeletedFiles] = useState([]);
+  const [certificateTypes, setCertificateTypes] = useState([]);
   const [initialValues, setInitialValues] = useState({
     id: generatedId,
     status: "ACTIVE",
@@ -76,6 +78,12 @@ export default () => {
     onError: (error) => {
       messages({ data: error });
     }
+  });
+
+  const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
+    variables: {take: 1000},
+    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type}))),
+    onError: (error) => messages({data: error})
   });
 
   useEffect(() => {
@@ -147,7 +155,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || loadingRole || loadingAttachments}>
+      <Spin spinning={loading || loadingRole || loadingAttachments || loadingCertificateTypes}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
         <div className="details--page">
           <Row gutter={[16]}>
@@ -162,7 +170,7 @@ export default () => {
                 <Departments t={t} formik={formik} />
               </section>
               <section id="requirements">
-                <RequiredCertificates t={t} formik={formik} />
+                <RequiredCertificates t={t} formik={formik} certificateTypes={certificateTypes}/>
               </section>
               <section id="protocols">
                 <Protocols
