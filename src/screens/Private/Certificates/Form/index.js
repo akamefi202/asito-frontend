@@ -19,7 +19,7 @@ import { USER } from "shared/graphql/queries/user";
 import { messages } from "utils/helpers/message";
 import { timestampToDate } from "utils/helpers/moment";
 
-const { UPDATE_CERTIFICATE } = CertificateMutations;
+const { CREATE_CERTIFICATE } = CertificateMutations;
 const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
 const { CERTIFICATE } = CertificateQueries;
 
@@ -127,7 +127,7 @@ export default () => {
     },
   });
 
-  const [saveChanges, { loading }] = useMutation(UPDATE_CERTIFICATE);
+  const [saveChanges, { loading }] = useMutation(CREATE_CERTIFICATE);
   const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
 
   const discardChanges = () => formik.resetForm();

@@ -6,6 +6,8 @@ export default messages => {
     type: yup.string().required(messages.REQUIRED),
     issuedOn: yup.string().required(messages.REQUIRED),
     validUntil: yup.string().required(messages.REQUIRED),
+    signedBy: yup.string().required(messages.REQUIRED),
+    signerTitle: yup.string().required(messages.REQUIRED),
     employee: yup.object().shape({
       id: yup.string().required(messages.REQUIRED),
     }),

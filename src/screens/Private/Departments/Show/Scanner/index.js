@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { Modal } from 'antd';
 import { Button } from "../../../../../shared/components";
 import QrScanner from "qr-scanner";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import { EmployeeQueries } from "shared/graphql/queries";
+import { IdentityOwnerMutations } from "shared/graphql/mutations";
 import { Spin } from "shared/components";
 import { messages } from "utils/helpers/message";
 import ErrorIcon from '../../../../../shared/assets/images/error.svg';
@@ -11,6 +12,7 @@ import ErrorIcon from '../../../../../shared/assets/images/error.svg';
 QrScanner.WORKER_PATH = '/qr-scanner-worker.min.js';
 
 const { EMPLOYEE } = EmployeeQueries;
+const { IDENTITY_OWNER } = IdentityOwnerMutations;
 
 const STEPS = {
   STEP_0: 0,
@@ -71,7 +73,12 @@ const EmployeeInfo = ({t, employee, onClick, scanner}) => {
   )
 }
 
-const Error = ({t, onClick}) => {
+const Error = ({t, onClick, scanner}) => {
+
+  useEffect(() => {
+    scanner && scanner.stop();
+  }, [scanner]);
+
   return (
     <div>
       <h2 className='scanner__header'>{t("SCAN.ERROR")}</h2>
@@ -96,8 +103,16 @@ const Scanner = ({ t, visible, handleCancel }) => {
     if (scanner) scanner.stop();
   }, [steps]);
 
+  const [saveChanges, { loading: verifyLoading }] = useMutation(IDENTITY_OWNER);
+
   const [ getEmployees, { loading }] = useLazyQuery(EMPLOYEE, {
-    onCompleted: ({ employee }) => {
+    onCompleted: async ({ employee }) => {
+      const res = await saveChanges({variables: {data: {id: employee.wallet}}});
+
+      if (res.data && !res.data.verify) {
+        return setSteps(STEPS.STEP_2);
+      }
+
       employee && setEmployee(employee);
       setSteps(STEPS.STEP_1);
     },
@@ -148,13 +163,13 @@ const Scanner = ({ t, visible, handleCancel }) => {
       <div className="modal-body">
         {steps === STEPS.STEP_0 && <h1 className="title">{t("SCAN_EMPLOYEE")}</h1>}
         <div className='scanner'>
-          {loading &&
+          {(loading || verifyLoading) &&
             <div className='scanner__spinner'>
-              <Spin spinning={loading}></Spin>
+              <Spin spinning={loading || verifyLoading}></Spin>
             </div>}
-          {!loading && steps === STEPS.STEP_0 && <Reader onScan={onScan} setScanner={setScanner} stopScanner={stopScanner} steps={steps} />}
-          {!loading && steps === STEPS.STEP_1 && <EmployeeInfo t={t} employee={employee} onClick={showSuccessContent} scanner={scanner}/>}
-          {!loading && steps === STEPS.STEP_2 && <Error t={t} onClick={showErrorContent} />}
+          {!loading && !verifyLoading && steps === STEPS.STEP_0 && <Reader onScan={onScan} setScanner={setScanner} stopScanner={stopScanner} steps={steps} />}
+          {!loading && !verifyLoading && steps === STEPS.STEP_1 && <EmployeeInfo t={t} employee={employee} onClick={showSuccessContent} scanner={scanner}/>}
+          {!loading && !verifyLoading && steps === STEPS.STEP_2 && <Error t={t} onClick={showErrorContent}  scanner={scanner}/>}
         </div>
       </div>
     </Modal>

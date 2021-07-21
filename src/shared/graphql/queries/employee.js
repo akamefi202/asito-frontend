@@ -4,6 +4,7 @@ export const EMPLOYEE = gql`
   query employee($where: EmployeeWhereInput) {
     employee(where: $where) {
       id
+      wallet
       number
       firstName
       lastName

@@ -13,3 +13,4 @@ export { default as AttachmentsSiteMutations } from "./attachments";
 export { default as ForgetPasswordMutations } from "./forgetPassword";
 export { default as ResetPasswordMutations } from "./resetPassword";
 export { default as RemoveAttachmentsMutations } from "./removeAttachments";
+export { default as IdentityOwnerMutations } from './identityOwner';
