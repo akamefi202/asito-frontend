@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Row, Col } from "antd";
-import { Header, ScrollMenu, Spin } from "shared/components";
+import React, {useEffect, useState} from "react";
+import {useHistory, useParams} from "react-router-dom";
+import {Col, Row} from "antd";
+import {Header, ScrollMenu, Spin} from "shared/components";
 import GeneralInformation from "./GeneralInformation";
 import IssuerInformation from "./IssuerInformation";
 import Attachments from "./Attachments";
-import { NAME_SPACES } from "shared/locales/constants";
-import { useTranslation } from "react-i18next";
-import { PATHS } from "utils/constants";
-import { useFormik } from "formik";
+import {NAME_SPACES} from "shared/locales/constants";
+import {useTranslation} from "react-i18next";
+import {PATHS} from "utils/constants";
+import {useFormik} from "formik";
 import cuid from "cuid";
-import { useMutation, useQuery, useLazyQuery } from "@apollo/react-hooks";
-import { CertificateMutations, RemoveAttachmentsMutations } from "shared/graphql/mutations";
-import { CertificateQueries } from "shared/graphql/queries";
+import {useLazyQuery, useMutation, useQuery} from "@apollo/react-hooks";
+import {CertificateMutations, RemoveAttachmentsMutations} from "shared/graphql/mutations";
+import {CertificateQueries} from "shared/graphql/queries";
 import validation from "./validation";
-import { removeTypename } from "utils/helpers/removeTypename";
-import { USER } from "shared/graphql/queries/user";
-import { messages } from "utils/helpers/message";
-import { timestampToDate } from "utils/helpers/moment";
+import {removeTypename} from "utils/helpers/removeTypename";
+import {USER} from "shared/graphql/queries/user";
+import {messages} from "utils/helpers/message";
+import {timestampToDate} from "utils/helpers/moment";
 
 const { UPDATE_CERTIFICATE } = CertificateMutations;
 const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
-const { CERTIFICATE } = CertificateQueries;
+const { CERTIFICATE, CERTIFICATE_TYPES } = CertificateQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -35,11 +35,12 @@ export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.CERTIFICATES);
   const [deletedFiles, setDeletedFiles] = useState([]);
+  const [certificateTypes, setCertificateTypes] = useState([]);
   const [initialValues, setInitialValues] = useState({
     id: generatedId,
     signedBy: "",
     signerTitle: "",
-    number: generatedId,
+    number: "",
     type: "",
     issuedOn: "",
     validUntil: "",
@@ -68,6 +69,12 @@ export default () => {
     onError: (error) => {
       messages({ data: error });
     }
+  });
+
+  const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
+    variables: {take: 1000},
+    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(x => ({...x, validAtLeastUntil: null}))),
+    onError: (error) => messages({data: error})
   });
 
   const [getCertificate, { loading: loadingCertificate }] = useLazyQuery(CERTIFICATE, {
@@ -106,11 +113,9 @@ export default () => {
       })
     ),
     onSubmit: data => {
-      const newData = { ...data };
+      const newData = {...data};
       delete newData.type;
-
-      newData.requirement = {id: data.type};
-
+      newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
       newData.attachments = data.attachments.map(x =>
         ({ id: x.id, certificate: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
 
@@ -168,7 +173,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || (loadingCertificate && loadingIssuer) || loadingAttachments}>
+      <Spin spinning={loading || (loadingCertificate && loadingIssuer && loadingCertificateTypes) || loadingAttachments}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
         <div className="details--page">
           <Row gutter={[16]}>
@@ -178,7 +183,7 @@ export default () => {
 
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
-                <GeneralInformation t={t} formik={formik} />
+                <GeneralInformation t={t} formik={formik} certificateTypes={certificateTypes} />
               </section>
               <section id="issuer">
                 <IssuerInformation t={t} formik={formik} issuer={issuer} />
