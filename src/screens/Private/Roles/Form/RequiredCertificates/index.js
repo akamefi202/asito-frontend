@@ -67,8 +67,8 @@ export default ({ t, formik, certificateTypes }) => {
                             {() => (
                               <Form.Item
                                 {...field}
-                                name={[field.name, 'type']}
-                                fieldKey={[field.fieldKey, 'type']}
+                                name={[field.name, 'id']}
+                                fieldKey={[field.fieldKey, 'id']}
                               >
                                 <Select
                                   placeholder={t("FORM.REQUIREMENTS.COLUMNS.CERTIFICATE_TYPE_PLACEHOLDER")}
