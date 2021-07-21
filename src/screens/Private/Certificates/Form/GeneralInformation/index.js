@@ -9,9 +9,8 @@ import { withoutRepetitions } from "utils/helpers/array";
 import { delay } from "utils/helpers/delay";
 
 const { EMPLOYEES } = EmployeeQueries;
-const { CERTIFICATE_TYPES } = CertificateQueries;
 
-export default ({ t, formik }) => {
+export default ({ t, formik, certificateTypes }) => {
   const [employeesSelect, setEmployeesSelect] = useState([]);
   const [scanSelect, setScanSelect] = useState("");
   const [pageSelect, setPageSelect] = useState(1);
@@ -19,7 +18,6 @@ export default ({ t, formik }) => {
   const [totalSelect, setTotalSelect] = useState(0);
   const [takeSelect, setTakeSelect] = useState(50);
   const [scanStatus, setScanStatus] = useState(false);
-  const [certificateTypes, setCertificateTypes] = useState([]);
 
   const variablesSelect = { scan: scanSelect, skip: skipSelect, take: takeSelect };
 
@@ -39,12 +37,6 @@ export default ({ t, formik }) => {
     onError: (error) => {
       messages({ data: error });
     }
-  });
-
-  const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
-    variables: {take: 1000},
-    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type}))),
-    onError: (error) => messages({data: error})
   });
 
   const getSelect = () => {
@@ -110,8 +102,7 @@ export default ({ t, formik }) => {
             <Select
               placeholder={t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE_PLACEHOLDER")}
               {...bindInputProps({ name: "type", ...formik })}
-              items={certificateTypes}
-              loading={loadingCertificateTypes}
+              items={certificateTypes.map(ct => ({key: ct.id, value: ct.type}))}
             />
           </div>
         </Col>
