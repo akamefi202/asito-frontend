@@ -43,7 +43,7 @@ export default ({ t, department }) => {
               {t("SHOW.GENERAL_INFORMATION.LOCATION")}
             </h5>
             <h4 className="card--details--item--value">
-              
+              {department.location}
             </h4>
           </div>
         </Col>

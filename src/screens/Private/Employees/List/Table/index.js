@@ -26,12 +26,6 @@ const columns = (t) => [
     render: (certificates) => certificates ? certificates.length : 0
   },
   {
-    title: t("LIST.COLUMNS.DEPARTMENT"),
-    dataIndex: "employeeRoles",
-    key: "employeeRoles",
-    render: (employeeRoles) => employeeRoles ? employeeRoles.length : 0
-  },
-  {
     title: t("LIST.COLUMNS.ROLE"),
     dataIndex: ["employeeRoles"],
     key: "employeeRoles",

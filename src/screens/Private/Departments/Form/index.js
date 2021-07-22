@@ -30,6 +30,7 @@ export default () => {
     id: cuid(),
     name: "",
     number: "",
+    location: "",
     address: "",
     zipCode: "",
     city: "",
@@ -73,7 +74,6 @@ export default () => {
       })
     ),
     onSubmit: data => {
-      delete data.location;
       saveChanges({ variables: { data } });
     },
   });

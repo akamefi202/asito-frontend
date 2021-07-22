@@ -8,6 +8,7 @@ export const DEPARTMENT = gql`
       number
       registrationNumber
       vat
+      location
       address
       zipCode
       city
@@ -49,6 +50,7 @@ export const DEPARTMENTS = gql`
         number
         registrationNumber
         vat
+        location
         address
         zipCode
         city

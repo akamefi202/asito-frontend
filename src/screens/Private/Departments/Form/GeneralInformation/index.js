@@ -6,6 +6,8 @@ import Select from "shared/components/Select";
 import { bindInputProps } from "utils/helpers/input";
 import { COUNTRY_LIST } from "shared/constants/country";
 
+const requiredFieldSymbol = String.fromCodePoint(parseInt('002A', 16));
+
 export default ({ t, formik }) => (
   <Card cardStyle={"card--form"}>
     <Row>
@@ -19,7 +21,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.NAME")}
+            {t("FORM.GENERAL_INFORMATION.NAME")} {requiredFieldSymbol}
           </label>
           <Input
             {...bindInputProps({ name: "name", ...formik })}
@@ -31,7 +33,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.TYPE")}
+            {t("FORM.GENERAL_INFORMATION.TYPE")} {requiredFieldSymbol}
           </label>
           <Input
             {...bindInputProps({ name: "number", ...formik })}
@@ -46,7 +48,7 @@ export default ({ t, formik }) => (
         <div className="card--form--item">
           <label className="card--form--item--label">{`${t(
             "FORM.GENERAL_INFORMATION.LOCATION"
-          )}`}</label>
+          )}`} {requiredFieldSymbol}</label>
           <Input
             {...bindInputProps({ name: "location", ...formik })}
             placeholder={`${t(
@@ -60,7 +62,7 @@ export default ({ t, formik }) => (
         <div className="card--form--item">
           <label className="card--form--item--label">{`${t(
             "FORM.GENERAL_INFORMATION.ADDRESS"
-          )}`}</label>
+          )}`} {requiredFieldSymbol}</label>
           <Input
             {...bindInputProps({ name: "address", ...formik })}
             placeholder={`${t(
@@ -73,7 +75,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={6} lg={6}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.POSTCODE")}
+            {t("FORM.GENERAL_INFORMATION.POSTCODE")} {requiredFieldSymbol}
           </label>
           <Input
             {...bindInputProps({ name: "zipCode", ...formik })}
@@ -84,7 +86,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={6} lg={6}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.CITY")}
+            {t("FORM.GENERAL_INFORMATION.CITY")} {requiredFieldSymbol}
           </label>
           <Input
             {...bindInputProps({ name: "city", ...formik })}
@@ -95,7 +97,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.COUNTRY")}
+            {t("FORM.GENERAL_INFORMATION.COUNTRY")} {requiredFieldSymbol}
           </label>
           <Select
             {...bindInputProps({ name: "country", ...formik })}
