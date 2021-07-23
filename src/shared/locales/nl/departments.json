@@ -30,6 +30,7 @@
         "GENERAL_INFORMATION": {
             "NAME": "Afdeling",
             "TYPE": "Type afdeling",
+            "NUMBER": "Afdelings code",
             "ADDRESS": "Adres",
             "POSTCODE": "Postcode",
             "CITY": "Woonplaats",
@@ -52,6 +53,8 @@
             "NAME_PLACEHOLDER": "Enter afdeling",
             "TYPE": "Type afdeling",
             "TYPE_PLACEHOLDER": "Enter type afdeling",
+            "NUMBER": "Afdelings code",
+            "NUMBER_PLACEHOLDER": "Enter Afdelings code",
             "ADDRESS": "Adres",
             "ADDRESS_PLACEHOLDER": "Enter adres",
             "POSTCODE": "Postcode",

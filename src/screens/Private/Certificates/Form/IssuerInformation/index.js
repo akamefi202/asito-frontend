@@ -3,6 +3,7 @@ import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { Input } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 
 export default ({ t, formik, issuer }) => {
   return (
@@ -18,7 +19,7 @@ export default ({ t, formik, issuer }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.ISSUER_INFORMATION.SIGNED_BY")}
+              {t("FORM.ISSUER_INFORMATION.SIGNED_BY")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               placeholder={t("FORM.ISSUER_INFORMATION.SIGNED_BY_PLACEHOLDER")}
@@ -29,7 +30,7 @@ export default ({ t, formik, issuer }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.ISSUER_INFORMATION.SIGNERS_TITLE")}
+              {t("FORM.ISSUER_INFORMATION.SIGNERS_TITLE")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               placeholder={t("FORM.ISSUER_INFORMATION.SIGNERS_TITLE_PLACEHOLDER")}

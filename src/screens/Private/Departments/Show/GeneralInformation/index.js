@@ -33,6 +33,15 @@ export default ({ t, department }) => {
             <h5 className="card--details--item--key">
               {t("SHOW.GENERAL_INFORMATION.TYPE")}
             </h5>
+            <h4 className="card--details--item--value">{department.type}</h4>
+          </div>
+        </Col>
+
+        <Col xs={24} sm={24} md={24} lg={24}>
+          <div className="card--details--item">
+            <h5 className="card--details--item--key">
+              {t("SHOW.GENERAL_INFORMATION.NUMBER")}
+            </h5>
             <h4 className="card--details--item--value">{department.number}</h4>
           </div>
         </Col>

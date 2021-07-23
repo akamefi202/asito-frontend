@@ -4,6 +4,7 @@ import Card from "shared/components/Card";
 import { Input } from "shared/components";
 import Select from "shared/components/Select";
 import { bindInputProps } from "utils/helpers/input";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 import { COUNTRY_LIST } from "shared/constants/country";
 
 const requiredFieldSymbol = String.fromCodePoint(parseInt('002A', 16));
@@ -21,7 +22,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.NAME")} {requiredFieldSymbol}
+            {t("FORM.GENERAL_INFORMATION.NAME")} {REQUIRED_FIELD_SYMBOL}
           </label>
           <Input
             {...bindInputProps({ name: "name", ...formik })}
@@ -33,10 +34,10 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.TYPE")} {requiredFieldSymbol}
+            {t("FORM.GENERAL_INFORMATION.TYPE")} {REQUIRED_FIELD_SYMBOL}
           </label>
           <Input
-            {...bindInputProps({ name: "number", ...formik })}
+            {...bindInputProps({ name: "type", ...formik })}
             placeholder={t(
               "FORM.GENERAL_INFORMATION.TYPE_PLACEHOLDER"
             )}
@@ -46,9 +47,23 @@ export default ({ t, formik }) => (
 
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
+          <label className="card--form--item--label">
+            {t("FORM.GENERAL_INFORMATION.NUMBER")} {REQUIRED_FIELD_SYMBOL}
+          </label>
+          <Input
+            {...bindInputProps({ name: "number", ...formik })}
+            placeholder={t(
+              "FORM.GENERAL_INFORMATION.NUMBER_PLACEHOLDER"
+            )}
+          />
+        </div>
+      </Col>
+
+      <Col xs={24} sm={24} md={24} lg={24}>
+        <div className="card--form--item">
           <label className="card--form--item--label">{`${t(
             "FORM.GENERAL_INFORMATION.LOCATION"
-          )}`} {requiredFieldSymbol}</label>
+          )}`} {REQUIRED_FIELD_SYMBOL}</label>
           <Input
             {...bindInputProps({ name: "location", ...formik })}
             placeholder={`${t(
@@ -62,7 +77,7 @@ export default ({ t, formik }) => (
         <div className="card--form--item">
           <label className="card--form--item--label">{`${t(
             "FORM.GENERAL_INFORMATION.ADDRESS"
-          )}`} {requiredFieldSymbol}</label>
+          )}`} {REQUIRED_FIELD_SYMBOL}</label>
           <Input
             {...bindInputProps({ name: "address", ...formik })}
             placeholder={`${t(
@@ -75,7 +90,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={6} lg={6}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.POSTCODE")} {requiredFieldSymbol}
+            {t("FORM.GENERAL_INFORMATION.POSTCODE")} {REQUIRED_FIELD_SYMBOL}
           </label>
           <Input
             {...bindInputProps({ name: "zipCode", ...formik })}
@@ -86,7 +101,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={6} lg={6}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.CITY")} {requiredFieldSymbol}
+            {t("FORM.GENERAL_INFORMATION.CITY")} {REQUIRED_FIELD_SYMBOL}
           </label>
           <Input
             {...bindInputProps({ name: "city", ...formik })}
@@ -97,7 +112,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.COUNTRY")} {requiredFieldSymbol}
+            {t("FORM.GENERAL_INFORMATION.COUNTRY")} {REQUIRED_FIELD_SYMBOL}
           </label>
           <Select
             {...bindInputProps({ name: "country", ...formik })}

@@ -33,7 +33,8 @@ export default ({ t, formik }) => {
     variables: variablesSelect,
     onCompleted: ({ departments }) => {
       if (!departments || !departments.data) return;
-      const select = departments.data.map((item) => ({ key: item.id, value: item.name }));
+      const select = departments.data.map((item) => ({ key: item.id, value: item.name }))
+        .sort((a,b) => a.value.localeCompare(b.value));
       setTotalSelect(departments.count || 0);
       const selectAll = scanStatus ? select : withoutRepetitions([...departmentsSelect, ...select]);
       setScanStatus(false);

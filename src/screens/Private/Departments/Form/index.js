@@ -30,6 +30,7 @@ export default () => {
     id: cuid(),
     name: "",
     number: "",
+    type: "",
     location: "",
     address: "",
     zipCode: "",

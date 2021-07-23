@@ -6,6 +6,7 @@ import { Row, Col, Radio, Upload } from "antd";
 import { Card, Input, DatePicker, Button } from "shared/components";
 import { CloudUploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { bindInputProps } from "utils/helpers/input";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 
 const { CREATE_FILE } = FileMutations;
 
@@ -59,7 +60,7 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.EMPLOYEE_NUMBER")}
+              {t("FORM.GENERAL_INFORMATION.EMPLOYEE_NUMBER")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               {...bindInputProps({ name: "number", ...formik })}
@@ -71,7 +72,7 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.FIRST_NAME")}
+              {t("FORM.GENERAL_INFORMATION.FIRST_NAME")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               {...bindInputProps({ name: "firstName", ...formik })}
@@ -82,7 +83,7 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.LAST_NAME")}
+              {t("FORM.GENERAL_INFORMATION.LAST_NAME")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               {...bindInputProps({ name: "lastName", ...formik })}
@@ -94,7 +95,7 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.DATE_OF_BIRTH")}
+              {t("FORM.GENERAL_INFORMATION.DATE_OF_BIRTH")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <DatePicker
               {...bindInputProps({ name: "dateOfBirth", ...formik })}
@@ -114,14 +115,19 @@ export default ({ t, formik }) => {
               {...bindInputProps({ name: "gender", ...formik })}
             >
               <Row gutter={[16, 8]}>
-                <Col span={12}>
+                <Col span={8}>
                   <Radio className="input-wrapper" value={"male"}>
                     {t("FORM.GENERAL_INFORMATION.MALE")}
                   </Radio>
                 </Col>
-                <Col span={12}>
+                <Col span={8}>
                   <Radio className="input-wrapper" value={"female"}>
                     {t("FORM.GENERAL_INFORMATION.FEMALE")}
+                  </Radio>
+                </Col>
+                <Col span={8}>
+                  <Radio className="input-wrapper" value={"neutral"}>
+                    {t("FORM.GENERAL_INFORMATION.NEUTRAL")}
                   </Radio>
                 </Col>
               </Row>

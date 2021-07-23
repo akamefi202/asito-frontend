@@ -24,10 +24,7 @@ const columns = (t) => [
     title: t("SHOW.CERTIFICATES.COLUMNS.CERTIFICATE_TYPE"),
     dataIndex: ["requirement", "type"],
     key: "type",
-    render: (type) => {
-      const certificateType = CERTIFICATES_TYPE.find(item => item.key === type);
-      return certificateType ? certificateType.value : "";
-    },
+    render: (type) => type
   },
   {
     title: t("SHOW.CERTIFICATES.COLUMNS.VALID_UNTIL"),

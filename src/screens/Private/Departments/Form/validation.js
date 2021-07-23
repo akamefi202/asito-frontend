@@ -4,6 +4,7 @@ export default messages => {
   return yup.object().shape({
     name: yup.string().required(messages.REQUIRED),
     number: yup.string().required(messages.REQUIRED),
+    type: yup.string().required(messages.REQUIRED),
     location: yup.string().required(messages.REQUIRED),
     address: yup.string().required(messages.REQUIRED),
     zipCode: yup.string().required(messages.REQUIRED),

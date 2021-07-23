@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -9,8 +9,8 @@ import Certificates from "./Certificates";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
-import { useQuery } from "@apollo/react-hooks";
-import { EmployeeQueries } from "shared/graphql/queries";
+import { useQuery, useLazyQuery} from "@apollo/react-hooks";
+import { EmployeeQueries, CertificateQueries } from "shared/graphql/queries";
 import { get } from "lodash";
 import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
@@ -21,6 +21,7 @@ import SignUpModal from "../../../Public/Auth/SignIn/Form/signUpModal";
 import QRCodeModal from "./QRCodeModal";
 
 const { EMPLOYEE } = EmployeeQueries;
+const { CERTIFICATES } = CertificateQueries;
 
 const menuItems = [
   { key: "ROLES", href: "roles" },
@@ -34,9 +35,25 @@ export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.EMPLOYEES);
   const [qrCodeModalVisible, setQRCodeModalVisible] = useState(false);
+  const [skipCertificates, setSkipCertificates] = useState(0);
+  const [totalCertificates, setTotalCertificates] = useState(0);
+  const [takeCertificates, setTakeCertificates] = useState(5);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
+
+  const variablesCertificates = {where: {employee: {id}}, skip: skipCertificates, take: takeCertificates};
+
+  const [requestCertificates, {data: dataCertificates, loading: loadingCertificates, error: errorCertificates}] = useLazyQuery(CERTIFICATES, {
+    variables: variablesCertificates,
+    onCompleted: ({certificates}) =>  setTotalCertificates(certificates.count || 0)
+  });
+
+  useEffect(() => {
+    requestCertificates();
+  }, [])
+
+  if (errorCertificates) messages({data: errorCertificates})
 
 
   const { data, loading } = useQuery(EMPLOYEE, {
@@ -46,7 +63,7 @@ export default () => {
 
   const employee = get(data, "employee", {}) || {};
   const roles = get(data, "employee.employeeRoles", []) || [];
-  const certificates = get(data, "employee.certificates", []) || [];
+  const certificates = get(dataCertificates, "certificates.data", []) || [];
 
   const getScrollMenuItem = (t) => {
     return menuItems.map((item) => {

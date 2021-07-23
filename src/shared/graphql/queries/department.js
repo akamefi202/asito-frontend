@@ -6,6 +6,7 @@ export const DEPARTMENT = gql`
       id
       name
       number
+      type
       registrationNumber
       vat
       location
@@ -48,6 +49,7 @@ export const DEPARTMENTS = gql`
         id
         name
         number
+        type
         registrationNumber
         vat
         location

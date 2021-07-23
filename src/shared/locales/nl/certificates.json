@@ -14,7 +14,7 @@
         "COLUMNS": {
             "CERTIFICATE_NUMBER": "Certificaatnummer",
             "CERTIFICATE_TYPE": "Type certificaat",
-            "ISSUED_TO": "Uitgegeven door",
+            "ISSUED_TO": "Uitgegeven aan",
             "ISSUED_ON": "Uitgegeven op",
             "VALID_UNTIL": "Geldig tot"
         }
@@ -28,7 +28,7 @@
         "GENERAL_INFORMATION": {
             "CERTIFICATE_NUMBER": "Certificaat nummer",
             "CERTIFICATE_TYPE": "Type certificaat",
-            "ISSUED_TO": "Uitgegeven door",
+            "ISSUED_TO": "Uitgegeven aan",
             "ISSUED_ON": "Uitgegeven op",
             "VALID_UNTIL": "Geldig tot"
         },
@@ -60,7 +60,7 @@
             "ATTACHMENTS": "Bijlagen"
         },
         "GENERAL_INFORMATION": {
-            "ISSUED_TO": "Uitgegeven door",
+            "ISSUED_TO": "Uitgegeven aan",
             "ISSUED_TO_PLACEHOLDER": "Zoek een medewerker...",
             "CERTIFICATE_NUMBER": "Certificaat nummer",
             "CERTIFICATE_NUMBER_PLACEHOLDER": "Enter certificaat nummer",

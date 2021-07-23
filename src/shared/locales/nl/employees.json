@@ -7,8 +7,9 @@
   "DISCARD": "Wijzigingen annuleren",
   "SAVE": "Opslaan",
   "GENDER": {
-    "male": "Mannetje",
-    "female": "Vrouw"
+    "male": "Man",
+    "female": "Vrouw",
+    "neutral": "Neutraal"
   },
   "LIST": {
     "SEARCH_PLACEHOLDER": "Zoek een medewerker...",
@@ -102,8 +103,9 @@
       "PHOTO": "Foto",
       "UPLOAD_PHOTO": "Upload foto",
       "DELETE_PHOTO": "Huidige foto verwijderen",
-      "MALE": "Mannelijk",
-      "FEMALE": "Vrouwelijk"
+      "MALE": "Man",
+      "FEMALE": "Vrouw",
+      "NEUTRAL": "Neutraal"
     },
     "CONTACT_INFORMATION": {
       "PHONE_NUMBER": "Telefoonnummer",

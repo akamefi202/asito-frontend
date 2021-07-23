@@ -13,7 +13,7 @@ export const PATHS = {
   },
   EMPLOYEES: {
     INDEX: "/employees",
-    CREATE: "/Employees/create",
+    CREATE: "/employees/create",
     SHOW: "/employees/show/:id",
     EDIT: "/employees/edit/:id",
   },
@@ -53,3 +53,5 @@ export const ROLE_URL = {
 
 
 export const DEFAULT_PAGE_SIZE = 10;
+
+export const REQUIRED_FIELD_SYMBOL = String.fromCodePoint(parseInt('002A', 16));

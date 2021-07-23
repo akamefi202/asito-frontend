@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Radio } from "antd";
 import { Card, Input } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 
 export default ({ t, formik }) => {
   return (
@@ -42,7 +43,7 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.ROLE_NAME")}
+              {t("FORM.GENERAL_INFORMATION.ROLE_NAME")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               {...bindInputProps({ name: "name", ...formik })}
@@ -53,7 +54,7 @@ export default ({ t, formik }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.EMPLOYEE_REQUIRED")}
+              {t("FORM.GENERAL_INFORMATION.EMPLOYEE_REQUIRED")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               {...bindInputProps({ name: "numberOfEmployeesRequired", ...formik })}

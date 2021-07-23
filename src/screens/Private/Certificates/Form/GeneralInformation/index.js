@@ -6,6 +6,7 @@ import { EmployeeQueries, CertificateQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { bindInputProps } from "utils/helpers/input";
 import { withoutRepetitions } from "utils/helpers/array";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 import { delay } from "utils/helpers/delay";
 
 const { EMPLOYEES } = EmployeeQueries;
@@ -68,7 +69,7 @@ export default ({ t, formik, certificateTypes }) => {
         <Col xs={24} sm={24} md={24} lg={24}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.ISSUED_TO")}
+              {t("FORM.GENERAL_INFORMATION.ISSUED_TO")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Select
               placeholder={t("FORM.GENERAL_INFORMATION.ISSUED_TO_PLACEHOLDER")}
@@ -84,7 +85,7 @@ export default ({ t, formik, certificateTypes }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.CERTIFICATE_NUMBER")}
+              {t("FORM.GENERAL_INFORMATION.CERTIFICATE_NUMBER")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Input
               {...bindInputProps({ name: "number", ...formik })}
@@ -97,7 +98,7 @@ export default ({ t, formik, certificateTypes }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE")}
+              {t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <Select
               placeholder={t("FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE_PLACEHOLDER")}
@@ -110,7 +111,7 @@ export default ({ t, formik, certificateTypes }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.ISSUED_ON")}
+              {t("FORM.GENERAL_INFORMATION.ISSUED_ON")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <DatePicker
               {...bindInputProps({ name: "issuedOn", ...formik })}
@@ -121,7 +122,7 @@ export default ({ t, formik, certificateTypes }) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.VALID_UNTIL")}
+              {t("FORM.GENERAL_INFORMATION.VALID_UNTIL")} { REQUIRED_FIELD_SYMBOL }
             </label>
             <DatePicker
               {...bindInputProps({ name: "validUntil", ...formik })}

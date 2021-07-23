@@ -49,16 +49,16 @@ export default () => {
     return menuItems.map((item) => ({ ...item, title: t(`SHOW.MENU.${item.key}`) }));
   };
 
-  const editCertificate = () => history.push(PATHS.CERTIFICATES.EDIT.replace(":id", id));
+  // const editCertificate = () => history.push(PATHS.CERTIFICATES.EDIT.replace(":id", id));
 
   const setBreadcrumbsButtons = [
-    {
-      title: t("EDIT"),
-      disabled: false,
-      custom: "heading--area--buttons--left",
-      buttonStyle: "btn--outline",
-      action: editCertificate,
-    },
+    // {
+    //   title: t("EDIT"),
+    //   disabled: false,
+    //   custom: "heading--area--buttons--left",
+    //   buttonStyle: "btn--outline",
+    //   action: editCertificate,
+    // },
   ];
 
   const setBreadcrumbsItem = [

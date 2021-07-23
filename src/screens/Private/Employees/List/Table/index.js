@@ -2,7 +2,6 @@ import React from "react";
 import { Table } from "shared/components";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const columns = (t) => [
   {

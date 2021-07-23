@@ -12,8 +12,8 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.TYPE"),
-    dataIndex: "number",
-    key: "number",
+    dataIndex: "type",
+    key: "type",
   },
   {
     title: t("LIST.COLUMNS.LOCATION"),
