@@ -69,7 +69,12 @@
             "ISSUED_ON": "Uitgegeven op",
             "ISSUED_ON_PLACEHOLDER": "Selecteer een uitgegeven op",
             "VALID_UNTIL": "Geldig tot",
-            "VALID_UNTIL_PLACEHOLDER": "Selecteer een geldig tot"
+            "VALID_UNTIL_PLACEHOLDER": "Selecteer een geldig tot",
+            "EXPIRATION_DATE": "Het certificaat heeft een vervaldatum",
+            "VALID_YEAR": "Aantal jaren",
+            "VALID_MONTHS": "Aantal maanden",
+            "MONTHS_NUMBER_PLACEHOLDER": "Voer het aantal maanden in",
+            "YEAR_NUMBER_PLACEHOLDER": "Voer het aantal jaren in"
         },
         "ISSUER_INFORMATION": {
             "SIGNED_BY": "Getekend door",

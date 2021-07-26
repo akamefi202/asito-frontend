@@ -63,18 +63,18 @@ export default ({ t, certificate }) => {
             <h4 className="card--details--item--value">{dateToString(certificate.issuedOn)}</h4>
           </div>
         </Col>
-        <Col xs={24} sm={24} md={12} lg={12}>
+        {certificate?.validUntil && <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--details--item">
             <h5 className="card--details--item--key">{t('SHOW.GENERAL_INFORMATION.VALID_UNTIL')}</h5>
             <h4 className="card--details--item--value access--type">
               {isValid
-                ? certificate.validUntil && <span className="icon icon-Check green" />
-                : certificate.validUntil && <span className="icon icon-Close red" />
+                  ? certificate.validUntil && <span className="icon icon-Check green"/>
+                  : certificate.validUntil && <span className="icon icon-Close red"/>
               }
               <span className={isValid ? "" : "red"}>{dateToString(certificate.validUntil)}</span>
             </h4>
           </div>
-        </Col>
+        </Col>}
       </Row>
     </Card>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Checkbox } from "antd";
 import { Card, Input, Select, DatePicker } from "shared/components";
 import { useQuery } from "@apollo/react-hooks";
-import { EmployeeQueries, CertificateQueries } from "shared/graphql/queries";
+import { EmployeeQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { bindInputProps } from "utils/helpers/input";
 import { withoutRepetitions } from "utils/helpers/array";
@@ -19,6 +19,7 @@ export default ({ t, formik, certificateTypes }) => {
   const [totalSelect, setTotalSelect] = useState(0);
   const [takeSelect, setTakeSelect] = useState(50);
   const [scanStatus, setScanStatus] = useState(false);
+  const [isExpiringCertificate, setIsExpiringCertificate] = useState(formik?.values?.validUntil);
 
   const variablesSelect = { scan: scanSelect, skip: skipSelect, take: takeSelect };
 
@@ -119,19 +120,33 @@ export default ({ t, formik, certificateTypes }) => {
             />
           </div>
         </Col>
-        <Col xs={24} sm={24} md={12} lg={12}>
+
+        <div className="card--form--item-checkbox">
+          <Checkbox checked={isExpiringCertificate} onChange={event => setIsExpiringCertificate(event.target.checked)}>
+            {t("FORM.GENERAL_INFORMATION.EXPIRATION_DATE")}
+          </Checkbox>
+        </div>
+
+        {isExpiringCertificate && <Col xs={24} sm={24} md={12} lg={12}>
+            <div className="card--form--item">
+              <label className="card--form--item--label">
+                {t("FORM.GENERAL_INFORMATION.VALID_MONTHS")}
+              </label>
+              <Input {...bindInputProps({ name: "validForMonths", ...formik })}
+                  placeholder={t("FORM.GENERAL_INFORMATION.MONTHS_NUMBER_PLACEHOLDER")}
+              />
+            </div>
+          </Col>}
+        {isExpiringCertificate && <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item">
             <label className="card--form--item--label">
-              {t("FORM.GENERAL_INFORMATION.VALID_UNTIL")} { REQUIRED_FIELD_SYMBOL }
+              {t("FORM.GENERAL_INFORMATION.VALID_YEAR")}
             </label>
-            <DatePicker
-              {...bindInputProps({ name: "validUntil", ...formik })}
-              placeholder={t(
-                "FORM.GENERAL_INFORMATION.VALID_UNTIL_PLACEHOLDER"
-              )}
+            <Input {...bindInputProps({ name: "validForYear", ...formik })}
+                placeholder={t("FORM.GENERAL_INFORMATION.YEAR_NUMBER_PLACEHOLDER")}
             />
           </div>
-        </Col>
+        </Col>}
       </Row>
     </Card>
   );
