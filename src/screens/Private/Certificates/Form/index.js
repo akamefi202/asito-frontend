@@ -43,7 +43,7 @@ export default () => {
     number: "",
     type: "",
     issuedOn: "",
-    validForYear: "",
+    validForYears: "",
     validForMonths: "",
     attachments: [],
     employee: {
@@ -116,7 +116,7 @@ export default () => {
     onSubmit: data => {
       const newData = {...data};
       delete newData.type;
-      if (newData.validForYear === '') delete newData.validForYear;
+      if (newData.validForYears === '') delete newData.validForYears;
       if (newData.validForMonths === '') delete newData.validForMonths;
       newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
       newData.attachments = data.attachments.map(x =>

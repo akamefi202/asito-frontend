@@ -32,8 +32,8 @@ const columns = (t, removeOperator, checkRequirements) => [
     ],
     sorter: (a, b) => a.employee.firstName.localeCompare(b.employee.firstName),
     render: (_, record) => (
-      <Link 
-        className="custom-link" 
+      <Link
+        className="custom-link"
         to={PATHS.EMPLOYEES.SHOW.replace(":id", record.employee.id)}>
           {`${record.employee.firstName} ${record.employee.lastName}`}
       </Link>
@@ -63,7 +63,7 @@ const columns = (t, removeOperator, checkRequirements) => [
       return (
         <div className="access--type">
           {requirement ? <span className="icon icon-Check green" /> : <span className="icon icon-Close red"/>}
-          <span>{certificates && certificates.length}=</span>
+          <span>{certificates && certificates.length}</span>
         </div>
       )
     },
@@ -107,27 +107,37 @@ export default ({ t, role, roleId }) => {
   const variablesEmployeeRoles = { where: { role: { id: roleId } }, skip: skipEmployeeRoles, take: takeEmployeeRoles };
   const variablesSelect = { scan: scanSelect, skip: skipSelect, take: takeSelect };
 
-  useEffect(() => {
+  useEffect(async () => {
     setLoading(true);
-    getEmployeeRoles();
+    await Promise.all([getEmployeeRoles(), getEmployees()]);
   }, []);
 
-  const { loading: loadingOperators } = useQuery(EMPLOYEES, {
+  const [getEmployeeRoles] = useLazyQuery(EMPLOYEE_ROLES, {
+    variables: variablesEmployeeRoles,
+    onCompleted: ({ employeeRoles }) => {
+      if (!employeeRoles || !employeeRoles.data) return;
+      setTotalEmployeeRoles(employeeRoles.count);
+      setEmployeeRoles(employeeRoles.data);
+      setLoading(false);
+    },
+    onError: (error) => {
+      setLoading(false);
+      messages({ data: error });
+    }
+  });
+
+  const [getEmployees, { loading: loadingOperators }] = useLazyQuery(EMPLOYEES, {
     variables: variablesSelect,
     onCompleted: ({ employees }) => {
       if (!employees || !employees.data) return;
-      const select = employees.data.map((item) => ({ 
-        key: item.id, 
-        value: `${item.firstName} ${item.lastName}` 
-      }));
+
+      const select = employees.data.map(item => ({key: item.id, value: `${item.firstName} ${item.lastName}`}));
       setTotalSelect(employees.count || 0);
-      const selectAll = scanStatus ? select : withoutRepetitions([...employeesSelect, ...select]);
+
+      setEmployeesSelect(scanStatus ? select : withoutRepetitions([...employeesSelect, ...select]));
       setScanStatus(false);
-      setEmployeesSelect(selectAll);
     },
-    onError: (error) => {
-      messages({ data: error });
-    }
+    onError: (error) => messages({ data: error })
   });
 
   const getSelect = () => {
@@ -145,20 +155,6 @@ export default ({ t, role, roleId }) => {
       setScanStatus(true);
     }, 500);
   }
-
-  const [getEmployeeRoles] = useLazyQuery(EMPLOYEE_ROLES, {
-    variables: variablesEmployeeRoles,
-    onCompleted: ({ employeeRoles }) => {
-      setLoading(false);
-      if (!employeeRoles || !employeeRoles.data) return;
-      setTotalEmployeeRoles(employeeRoles.count);
-      setEmployeeRoles(employeeRoles.data);
-    },
-    onError: (error) => {
-      setLoading(false);
-      messages({ data: error });
-    }
-  });
 
   const [createEmployeeRole] = useMutation(UPDATE_CREATE_EMPLOYEE_ROLE,
     {
@@ -256,8 +252,8 @@ export default ({ t, role, roleId }) => {
     let requirement = false;
     if (role && role.requirements && role.requirements.length) {
       requirement = role.requirements.some(item => {
-        return !!certificates.find(certificat => certificat.requirement 
-          && certificat.requirement.type === item.type 
+        return !!certificates.find(certificat => certificat.requirement
+          && certificat.requirement.type === item.type
           && datesEqual(certificat.validUntil, item.validAtLeastUntil));
       });
     } else {
@@ -265,6 +261,10 @@ export default ({ t, role, roleId }) => {
     }
 
     return requirement;
+  }
+
+  const getFilteredRoles = () => {
+    return employeesSelect.filter(d => !employeeRoles.some(r => r?.employee?.id === d.key))
   }
 
   const isAccess = () => userRole && ((userRole === USER_ROLES.PLANER.key) || (userRole === USER_ROLES.TEST.key));
@@ -295,7 +295,7 @@ export default ({ t, role, roleId }) => {
                     <Select
                       placeholder={t("SHOW.EMPLOYEES.SEARCH_OPERATOR")}
                       onChange={onChangeOperator}
-                      items={employeesSelect}
+                      items={getFilteredRoles()}
                       getSelect={getSelect}
                       getScan={getScanSelect}
                       loading={loadingOperators}

@@ -6,7 +6,7 @@ export default messages => {
     type: yup.string().required(messages.REQUIRED),
     issuedOn: yup.string().required(messages.REQUIRED),
     validForMonths: yup.number().typeError("Ongeldig waardetype"),
-    validForYear: yup.number().typeError("Ongeldig waardetype"),
+    validForYears: yup.number().typeError("Ongeldig waardetype"),
     signedBy: yup.string().required(messages.REQUIRED),
     signerTitle: yup.string().required(messages.REQUIRED),
     employee: yup.object().shape({

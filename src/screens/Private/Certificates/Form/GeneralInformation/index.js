@@ -142,7 +142,7 @@ export default ({ t, formik, certificateTypes }) => {
             <label className="card--form--item--label">
               {t("FORM.GENERAL_INFORMATION.VALID_YEAR")}
             </label>
-            <Input {...bindInputProps({ name: "validForYear", ...formik })}
+            <Input {...bindInputProps({ name: "validForYears", ...formik })}
                 placeholder={t("FORM.GENERAL_INFORMATION.YEAR_NUMBER_PLACEHOLDER")}
             />
           </div>
