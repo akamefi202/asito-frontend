@@ -69,6 +69,7 @@ export const EMPLOYEES = gql`
           assignedUntil
           role {
             id
+            name
           }
         }
         accesses {
