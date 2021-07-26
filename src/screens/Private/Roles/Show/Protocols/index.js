@@ -10,7 +10,7 @@ const columns = (t) => [
     dataIndex: "name",
     key: "name",
     sorter: (a, b) => a.name.localeCompare(b.name),
-    render: (name) => (<span className="custom-link">{name}</span>),
+    render: (name, record) => (<a className="custom-link" href={record.url} target="_blank" rel="noreferrer">{name}</a>),
   },
   {
     title: t("SHOW.PROTOCOLS.COLUMNS.FILE_TYPE"),

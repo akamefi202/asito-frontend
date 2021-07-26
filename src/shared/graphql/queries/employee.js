@@ -70,6 +70,13 @@ export const EMPLOYEES = gql`
           role {
             id
             name
+            protocols {
+              id
+              name
+              type
+              url
+              updatedAt
+            }
           }
         }
         accesses {
