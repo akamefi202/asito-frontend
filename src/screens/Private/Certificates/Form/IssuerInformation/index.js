@@ -4,8 +4,19 @@ import Card from "shared/components/Card";
 import { Input } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
 import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
+import {useTranslation} from "react-i18next";
+import {NAME_SPACES} from "../../../../../shared/locales/constants";
+import {COUNTRY_LIST} from "../../../../../shared/constants/country";
 
 export default ({ t, formik, issuer }) => {
+  const translationCountry = useTranslation(NAME_SPACES.COUNTRIES);
+
+  const getCountryName = () => {
+    let country = '';
+    if (issuer && issuer.country) country = COUNTRY_LIST.find(item => item.key === issuer.country);
+    return country ? country.value : '';
+  }
+
   return (
     <Card cardStyle={"card--form"}>
       <Row>
@@ -95,7 +106,7 @@ export default ({ t, formik, issuer }) => {
             <label className="card--form--item--label">
               {t("FORM.ISSUER_INFORMATION.COUNTRY")}
             </label>
-            <h4 className="card--details--item--value">{issuer.country}</h4>
+            <h4 className="card--details--item--value">{translationCountry.t(`${getCountryName()}`)}</h4>
           </div>
         </Col>
 

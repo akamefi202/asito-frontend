@@ -11,4 +11,5 @@ export const NAME_SPACES = {
   NOTIFICATIONS: "notifications",
   MYCOMPANY: "mycompany",
   SIGN_UP: "signUp",
+  COUNTRIES: "countries",
 };

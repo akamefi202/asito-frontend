@@ -2,6 +2,8 @@ import React from "react";
 import { Select } from "antd";
 import { Spin } from "shared/components";
 import "./style.scss"
+import {useTranslation} from "react-i18next";
+import {NAME_SPACES} from "../../locales/constants";
 
 const { Option } = Select;
 
@@ -19,6 +21,8 @@ export default ({
   onChange = () => { },
   ...rest
 }) => {
+  const { t } = useTranslation(NAME_SPACES.COUNTRIES);
+
   const onPopupScroll = (event) => {
     if (!getSelect && typeof getSelect !== 'function') return;
     const target = event.target;
@@ -62,7 +66,7 @@ export default ({
           {...rest}
         >
           {items.map((item) => (
-            <Option key={item.key} value={item.key}>{item.value}</Option>
+            <Option key={item.key} value={item.key}>{t(`${item.value}`)}</Option>
           ))}
         </Select>
         {touched && <p>{errors}</p>}

@@ -2,8 +2,11 @@ import React from "react";
 import { Row, Col } from "antd";
 import Card from "shared/components/Card";
 import { COUNTRY_LIST } from "shared/constants/country";
+import {useTranslation} from "react-i18next";
+import {NAME_SPACES} from "../../../../../shared/locales/constants";
 
 export default ({ t, department }) => {
+  const translationCountry = useTranslation(NAME_SPACES.COUNTRIES);
 
   const getCountryName = () => {
     const country = COUNTRY_LIST.find(item => item.key === department.country);
@@ -93,7 +96,7 @@ export default ({ t, department }) => {
               {t("SHOW.GENERAL_INFORMATION.COUNTRY")}
             </h5>
             <h4 className="card--details--item--value">
-              {getCountryName()}
+              {translationCountry.t(`${getCountryName()}`)}
             </h4>
           </div>
         </Col>
