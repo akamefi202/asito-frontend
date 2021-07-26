@@ -28,7 +28,7 @@ const columns = (t) => [
     title: t("LIST.COLUMNS.ROLE"),
     dataIndex: ["employeeRoles"],
     key: "employeeRoles",
-    render: (employeeRoles) => employeeRoles && employeeRoles.length || 0,
+    render: (employeeRoles) => employeeRoles && employeeRoles.map(e => e?.role?.name || '').join(', '),
   },
 ];
 
@@ -47,7 +47,7 @@ export default ({ t, employees, take, setTake, setSkip, page, setPage, total }) 
   return (
     <Table
       columns={columns(t)}
-      className="table--custom"
+      className="table--custom--operators"
       data={employees}
       total={total}
       rowKey={"id"}
