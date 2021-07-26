@@ -9,6 +9,7 @@ import { AuthQueries } from "shared/graphql/queries";
 import { useMutation, useLazyQuery } from "@apollo/react-hooks";
 import { messages } from "utils/helpers/message";
 import { fieldsNotEmpty } from "utils/helpers/check";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 
 const { UPDATE_USER } = AuthMutations;
 const { USER_AUTH } = AuthQueries;
@@ -88,7 +89,7 @@ export default ({ t, user }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--form--item">
               <label className="card--form--item--label">
-                {t("FORM.CHANGE_PASSWORD.CURRENT_PASSWORD")}
+                {t("FORM.CHANGE_PASSWORD.CURRENT_PASSWORD")} { REQUIRED_FIELD_SYMBOL }
               </label>
               <Input
                 {...bindInputProps({ name: "currentPassword", ...formik })}
@@ -103,7 +104,7 @@ export default ({ t, user }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--form--item">
               <label className="card--form--item--label">
-                {t("FORM.CHANGE_PASSWORD.NEW_PASSWORD")}
+                {t("FORM.CHANGE_PASSWORD.NEW_PASSWORD")} { REQUIRED_FIELD_SYMBOL }
               </label>
               <Input
                 {...bindInputProps({ name: "newPassword", ...formik })}
@@ -115,7 +116,7 @@ export default ({ t, user }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--form--item">
               <label className="card--form--item--label">
-                {t("FORM.CHANGE_PASSWORD.REPEAT_NEW_PASSWORD")}
+                {t("FORM.CHANGE_PASSWORD.REPEAT_NEW_PASSWORD")} { REQUIRED_FIELD_SYMBOL }
               </label>
               <Input
                 {...bindInputProps({ name: "confirmNewPassword", ...formik })}

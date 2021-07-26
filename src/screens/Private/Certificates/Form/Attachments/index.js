@@ -165,7 +165,7 @@ export default ({ t, formik, certificateId, deletedFiles, setDeletedFiles }) => 
                       </Row>
                     </div>
                   ))}
-                  <Upload accept={'application/pdf'}
+                  <Upload accept={'application/pdf, image/png, image/jpeg, image/jpg'}
                     action={'/'}
                     showUploadList={false}
                     onChange={({ file }) => uploadFile(file)}>
