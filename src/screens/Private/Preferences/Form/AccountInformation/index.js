@@ -8,6 +8,7 @@ import { UserMutations } from "shared/graphql/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { messages } from "utils/helpers/message";
 import { fieldsQqual } from "utils/helpers/check";
+import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 
 const { CREATE_UPDATE_USER } = UserMutations;
 
@@ -59,7 +60,7 @@ export default ({ t, user }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--form--item">
               <label className="card--form--item--label">
-                {t("FORM.ACCOUNT_INFORMATION.FIRST_NAME")}
+                {t("FORM.ACCOUNT_INFORMATION.FIRST_NAME")} { REQUIRED_FIELD_SYMBOL }
               </label>
               <Input
                 {...bindInputProps({ name: "firstName", ...formik })}
@@ -70,7 +71,7 @@ export default ({ t, user }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--form--item">
               <label className="card--form--item--label">
-                {t("FORM.ACCOUNT_INFORMATION.LAST_NAME")}
+                {t("FORM.ACCOUNT_INFORMATION.LAST_NAME")} { REQUIRED_FIELD_SYMBOL }
               </label>
               <Input
                 {...bindInputProps({ name: "lastName", ...formik })}
@@ -82,7 +83,7 @@ export default ({ t, user }) => {
           <Col xs={24} sm={24} md={12} lg={12}>
             <div className="card--form--item">
               <label className="card--form--item--label">
-                {t("FORM.ACCOUNT_INFORMATION.EMAIL_ADDRESS")}
+                {t("FORM.ACCOUNT_INFORMATION.EMAIL_ADDRESS")} { REQUIRED_FIELD_SYMBOL }
               </label>
               <Input
                 {...bindInputProps({ name: "email", ...formik })}
