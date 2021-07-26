@@ -9,6 +9,9 @@ export const CREATE_UPDATE_ROLE = gql`
       departments {
         id
       }
+      protocols {
+        id
+      }
       employeeRoles {
         role {
           id

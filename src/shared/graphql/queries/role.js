@@ -20,6 +20,13 @@ export const ROLE = gql`
       zipCode
       city
       country
+      protocols {
+        id
+        name
+        type
+        url
+        updatedAt
+      }
       requirements {
         id
         type

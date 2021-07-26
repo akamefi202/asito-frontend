@@ -69,6 +69,13 @@ export const EMPLOYEES = gql`
           assignedUntil
           role {
             id
+            protocols {
+              id
+              name
+              type
+              url
+              updatedAt
+            }
           }
         }
         accesses {

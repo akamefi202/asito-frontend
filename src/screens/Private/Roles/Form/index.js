@@ -101,13 +101,12 @@ export default () => {
     ),
     onSubmit: data => {
       const newData = { ...data };
-      delete newData.roleDescription;
       delete newData.employeeRoles;
-      delete newData.protocols;
+      newData.protocols = data.protocols.map(x =>
+        ({ id: x.id, role: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
 
       Promise.all([
         saveChanges({ variables: { data: newData } }),
-        // deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))
       ])
         .then(() => history.push(PATHS.ROLES.INDEX))
         .catch(error => messages({ data: error }))
