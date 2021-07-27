@@ -49,7 +49,6 @@ export default ({
     return 0;
   }
 
-
   return (
     <Spin spinning={loading}>
       <div className={`select-wrapper ${custom}`}>

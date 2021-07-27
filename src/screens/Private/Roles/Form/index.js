@@ -71,8 +71,8 @@ export default () => {
           item.validAtLeastUntil = timestampToDate(item.validAtLeastUntil);
           return item;
         });
-        setInitialValues({...initialValues, ...removeTypename(newRole)});
       }
+      setInitialValues({...initialValues, ...removeTypename(newRole)});
     },
     onError: (error) => messages({ data: error })
   });
