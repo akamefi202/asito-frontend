@@ -35,23 +35,25 @@ const columns = (t) => [
     title: t("LIST.COLUMNS.VALID_UNTIL"),
     dataIndex: "validUntil",
     key: "validUntil",
-    render: (text) => {
-      if (text) {
-        const validUntil = timestampToDate(text);
-        const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
+    render: (stringDate) => {
+      let isValid = true;
+      if (stringDate) {
+        const validUntil = timestampToDate(stringDate);
+        isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
+      }
 
-        return (
+      return (
           <div className="access--type">
-            { isValid
-                ? <span className="icon icon-Check green" />
-                : <span className="icon icon-Close red" />
+            {stringDate &&
+              (isValid
+                ? <span className="icon icon-Check green"/>
+                : <span className="icon icon-Close red"/>)
             }
-            <span className={isValid ? "" : "red"}>
-              {dateToString(text)}
+            <span className={(isValid ? "" : "red") + (!stringDate ? 'empty' : '')}>
+              {stringDate ? dateToString(stringDate) : t('LIST.INFINITE')}
             </span>
           </div>
-        );
-      }
+      );
     },
   },
 ];

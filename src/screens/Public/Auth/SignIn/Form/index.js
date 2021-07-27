@@ -22,13 +22,12 @@ const Form = () => {
   const { t } = useTranslation(NAME_SPACES.AUTH);
   const history = useHistory();
   const [modalSignUp, setModalSignUp] = useState(false);
-  const [userLoading, setUserLoading] = useState(false);
-  const [getUser] = useLazyQuery(USER, {
+  const [getUser, {loading: userLoading}] = useLazyQuery(USER, {
     onCompleted: ({ user }) => {
       UserStore(user);
-      setUserLoading(false);
       history.push(PATHS.HOME);
-    }
+    },
+    onError: (error) => messages({ data: error, msg: t("SIGNIN.ERROR") })
   });
 
   const showModal = () => {
@@ -58,13 +57,10 @@ const Form = () => {
   ] = useMutation(LOGIN_MUTATION,
     {
       onCompleted: ({ signin }) => {
-        setUserLoading(true);
         localStorage.setItem('access_token', signin.accessToken);
         getUser();
       },
-      onError: (error) => {
-        messages({ data: error, msg: t("SIGNIN.ERROR") });
-      }
+      onError: (error) => messages({ data: error, msg: t("SIGNIN.ERROR") })
     });
 
   return (
