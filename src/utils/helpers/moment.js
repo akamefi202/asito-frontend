@@ -37,17 +37,7 @@ export const datesEqual = (d1, d2) => {
 }
 
 export const dateToString = (date, format = "DD-MM-YYYY") => {
-  let newDate = '';
-
-  if (date) {
-    if (!moment(date, format).isValid()) {
-      newDate = (isNaN(date) ? moment(date) : moment(parseInt(date, 10))).format(format);
-    } else {
-      newDate = moment(date, format, true).isValid() ?  moment(date, format, true).format(format) : moment(date).format(format);
-    }
-  }
-
-  return newDate;
+  return date ? moment( isNaN(date) ? date : parseInt(date, 10)).format(format) : '';
 }
 
 export const formatDate = ({ date, format }) => moment(date).format(format);
