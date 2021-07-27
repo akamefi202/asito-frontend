@@ -116,7 +116,7 @@ export default () => {
         saveChanges({ variables: { data: newData } }),
         deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))
       ])
-        .then(() => !id && history.push(PATHS.CERTIFICATES.INDEX))
+        .then(() => history.push(id ? PATHS.CERTIFICATES.SHOW.replace(":id", id) : PATHS.CERTIFICATES.INDEX))
         .catch(error => messages({ data: error }))
     },
   });

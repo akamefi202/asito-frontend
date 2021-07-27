@@ -92,7 +92,7 @@ export default () => {
           ({id: x.id, role: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
 
       saveChanges({variables: {data: newData}})
-          .then(() => id ? getRole() : history.push(PATHS.ROLES.INDEX))
+          .then(() => history.push(id ? PATHS.ROLES.SHOW.replace(":id", id) : PATHS.ROLES.INDEX))
           .catch(error => messages({data: error}))
     },
   });
