@@ -8,6 +8,8 @@ export const ROLE = gql`
       departments {
         id
         name
+        type
+        location
       }
       accepted
       roleDescription
