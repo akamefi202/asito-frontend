@@ -18,9 +18,7 @@ import { messages } from "utils/helpers/message";
 const { CREATE_UPDATE_DEPARTMENT } = DepartmentMutations;
 const { DEPARTMENT } = DepartmentQueries;
 
-const menuItems = [
-  { key: "GENERAL_INFORMATION", href: "general" },
-];
+const menuItems = [{ key: "GENERAL_INFORMATION", href: "general" }];
 
 export default () => {
   const { id } = useParams();
@@ -36,7 +34,6 @@ export default () => {
     zipCode: "",
     city: "",
     country: "",
-
     registrationNumber: "",
     vat: "",
     phone: "",
@@ -45,58 +42,32 @@ export default () => {
   });
 
   const [getDepartment, { loading: loadingDepartment }] = useLazyQuery(DEPARTMENT, {
-    variables: {
-      where: {
-        id
-      }
-    },
-    onCompleted: ({ department }) => {
-      if (id === department.id) {
-        setInitialValues({ ...initialValues, ...removeTypename(department) });
-      }
-    },
-    onError: (error) => {
-      messages({ data: error });
-    }
+    variables: {where: {id}},
+    onCompleted: ({ department }) => setInitialValues({ ...initialValues, ...removeTypename(department) }),
+    onError: (error) => messages({ data: error })
   });
 
   useEffect(() => {
-    if (!id) return;
-    getDepartment();
+    if (id) getDepartment();
   }, []);
-
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema: validation(
-      t('FORM.ERROR', {
-        returnObjects: true,
-      })
-    ),
-    onSubmit: data => {
-      saveChanges({ variables: { data } });
-    },
+    validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
+    onSubmit: data => saveChanges({ variables: { data } })
   });
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => {
-      return { ...item, title: t(`FORM.MENU.${item.key}`) };
-    });
+    return menuItems.map((item) => ({...item, title: t(`FORM.MENU.${item.key}`)}));
   };
 
-  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_DEPARTMENT,
-    {
-      onCompleted: (data) => {
-        history.push(PATHS.DEPARTMENTS.INDEX);
-      },
-      onError: (error) => {
-        messages({ data: error });
-      }
-    }
-  );
+  const [saveChanges, {loading}] = useMutation(CREATE_UPDATE_DEPARTMENT, {
+    onCompleted: () => id ? getDepartment() : history.push(PATHS.DEPARTMENTS.INDEX),
+    onError: (error) => messages({data: error})
+  });
 
-  const discardChanges = () => formik.resetForm();
+  const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
   const setBreadcrumbsButtons = [
     {

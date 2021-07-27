@@ -13,6 +13,7 @@ import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
 const { CREATE_UPDATE_USER } = UserMutations;
 
 export default ({ t, user }) => {
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -22,27 +23,14 @@ export default ({ t, user }) => {
       lastName: user ? user.lastName : '',
       email: user ? user.email : '',
     },
-    validationSchema: validation(
-      t('FORM.ERROR', {
-        returnObjects: true,
-      })
-    ),
-    onSubmit: data => saveChanges({ variables: { data } }),
+    validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
+    onSubmit: data => saveChanges({ variables: { data } })
   });
 
-  const [
-    saveChanges,
-    { loading }
-  ] = useMutation(CREATE_UPDATE_USER,
-    {
-      onCompleted: (data) => {
-        messages({ msg: t("FORM.ACCOUNT_INFORMATION.SUCCESS"), type: "success" });
-      },
-      onError: (error) => {
-        messages({ data: error });
-      }
-    }
-  );
+  const [saveChanges, {loading}] = useMutation(CREATE_UPDATE_USER, {
+    onCompleted: (data) => messages({msg: t("FORM.ACCOUNT_INFORMATION.SUCCESS"), type: "success"}),
+    onError: (error) => messages({data: error})
+  });
 
   const discardChanges = () => formik.resetForm();
 

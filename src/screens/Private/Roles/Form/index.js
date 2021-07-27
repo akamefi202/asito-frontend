@@ -56,72 +56,54 @@ export default () => {
     requirements: []
   });
 
-  const [getRole, { loading: loadingRole }] = useLazyQuery(ROLE, {
-    variables: {
-      where: {
-        id
-      }
-    },
-    onCompleted: ({ role }) => {
-      if (id === role.id) {
-        const newRole = { ...role };
-        if (newRole.requirements && newRole.requirements.length) {
-          newRole.requirements.map(item => {
-            item.validAtLeastUntil = timestampToDate(item.validAtLeastUntil);
-            return item;
-          });
-        }
-
-        setInitialValues({ ...initialValues, ...removeTypename(newRole) });
-      }
-    },
-    onError: (error) => {
-      messages({ data: error });
-    }
-  });
-
   const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
     variables: {take: 1000},
     onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type}))),
     onError: (error) => messages({data: error})
   });
 
+  const [getRole, { loading: loadingRole }] = useLazyQuery(ROLE, {
+    variables: {where: {id}},
+    onCompleted: ({role}) => {
+      const newRole = {...role};
+      if (newRole.requirements && newRole.requirements.length) {
+        newRole.requirements.map(item => {
+          item.validAtLeastUntil = timestampToDate(item.validAtLeastUntil);
+          return item;
+        });
+        setInitialValues({...initialValues, ...removeTypename(newRole)});
+      }
+    },
+    onError: (error) => messages({ data: error })
+  });
+
   useEffect(() => {
-    if (!id) return;
-    getRole();
+    if (id) getRole();
   }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema: validation(
-      t('FORM.ERROR', {
-        returnObjects: true,
-      })
-    ),
+    validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
     onSubmit: data => {
       const newData = { ...data };
       delete newData.employeeRoles;
       newData.protocols = data.protocols.map(x =>
-        ({ id: x.id, role: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
+          ({id: x.id, role: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
 
-      Promise.all([
-        saveChanges({ variables: { data: newData } }),
-      ])
-        .then(() => history.push(`${PATHS.ROLES.SHOW.replace(":id", id)}`))
-        .catch(error => messages({ data: error }))
+      saveChanges({variables: {data: newData}})
+          .then(() => id ? getRole() : history.push(PATHS.ROLES.INDEX))
+          .catch(error => messages({data: error}))
     },
   });
 
-  const discardChanges = () => formik.resetForm();
+  const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
   const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_ROLE);
   const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => {
-      return { ...item, title: t(`FORM.MENU.${item.key}`) };
-    });
+    return menuItems.map(item => ({...item, title: t(`FORM.MENU.${item.key}`)}));
   };
 
   const setBreadcrumbsButtons = [

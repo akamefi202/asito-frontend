@@ -17,9 +17,7 @@ import { messages } from "utils/helpers/message";
 const { CREATE_UPDATE_ISSUER } = IssuerMutations;
 const { USER } = UserQueries;
 
-const menuItems = [
-  { key: "GENERAL_INFORMATION", href: "general" },
-];
+const menuItems = [{ key: "GENERAL_INFORMATION", href: "general" }];
 
 export default () => {
   const history = useHistory();
@@ -50,9 +48,7 @@ export default () => {
     enableReinitialize: true,
     initialValues,
     validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
-    onSubmit: data => {
-      saveChanges({ variables: { data } }).then()
-    }
+    onSubmit: (data) => saveChanges({ variables: { data } })
   });
 
   const [saveChanges, {loading}] = useMutation(CREATE_UPDATE_ISSUER, {
@@ -60,12 +56,10 @@ export default () => {
     onError: (error) => messages({data: error})
   });
 
-  const discardChanges = () => {
-    formik.resetForm();
-  }
+  const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => ({...item, title: t(`FORM.MENU.${item.key}`)}));
+    return menuItems.map(item => ({...item, title: t(`FORM.MENU.${item.key}`)}));
   };
 
   const setBreadcrumbsButtons = [

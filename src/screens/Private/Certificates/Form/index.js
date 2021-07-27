@@ -65,11 +65,9 @@ export default () => {
     website: "",
   });
 
-  const { loading: loadingIssuer } = useQuery(USER, {
+  const [getUser, { loading: loadingIssuer }] = useLazyQuery(USER, {
     onCompleted: ({ user }) => setIssuer({ ...removeTypename(user && user.issuer ? user.issuer : {}) }),
-    onError: (error) => {
-      messages({ data: error });
-    }
+    onError: (error) => messages({ data: error })
   });
 
   const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
@@ -79,13 +77,8 @@ export default () => {
   });
 
   const [getCertificate, { loading: loadingCertificate }] = useLazyQuery(CERTIFICATE, {
-    variables: {
-      where: {
-        id
-      }
-    },
+    variables: {where: {id}},
     onCompleted: ({ certificate }) => {
-      if (id && id === certificate.id) {
         const newCertificate = { ...certificate };
         newCertificate.type = certificate.requirement && certificate.requirement.type || "";
         newCertificate.issuedOn = timestampToDate(newCertificate.issuedOn);
@@ -93,26 +86,19 @@ export default () => {
         // newCertificate.attachments = timestampToDate(newCertificate.attachments);
         setInitialValues({ ...initialValues, ...removeTypename(newCertificate) });
         if (newCertificate.issuer) setIssuer({ ...newCertificate.issuer });
-      }
     },
-    onError: (error) => {
-      messages({ data: error });
-    }
+    onError: (error) => messages({ data: error })
   });
 
   useEffect(() => {
-    if (!id) return;
-    getCertificate();
+    if (id) getCertificate();
+    else getUser();
   }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema: validation(
-      t('FORM.ERROR', {
-        returnObjects: true,
-      })
-    ),
+    validationSchema: validation(t('FORM.ERROR', {returnObjects: true,})),
     onSubmit: data => {
       const newData = {...data};
       delete newData.type;
@@ -130,7 +116,7 @@ export default () => {
         saveChanges({ variables: { data: newData } }),
         deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))
       ])
-        .then(() => history.push(PATHS.CERTIFICATES.INDEX))
+        .then(() => !id && history.push(PATHS.CERTIFICATES.INDEX))
         .catch(error => messages({ data: error }))
     },
   });
@@ -138,12 +124,10 @@ export default () => {
   const [saveChanges, { loading }] = useMutation(CREATE_CERTIFICATE);
   const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
 
-  const discardChanges = () => formik.resetForm();
+  const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => {
-      return { ...item, title: t(`FORM.MENU.${item.key}`) };
-    });
+    return menuItems.map(item => ({...item, title: t(`FORM.MENU.${item.key}`)}));
   };
 
   const setBreadcrumbsButtons = [

@@ -22,16 +22,12 @@ export default () => {
 
   const { data, loading, error } = useQuery(USER);
 
-  if (error) {
-    messages({data: error});
-  };
+  if (error) messages({data: error});
 
   const user = get(data, "user", {});
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => {
-      return { ...item, title: t(`FORM.MENU.${item.key}`) };
-    });
+    return menuItems.map((item) => ({...item, title: t(`FORM.MENU.${item.key}`)}));
   };
 
   const setBreadcrumbsItem = [

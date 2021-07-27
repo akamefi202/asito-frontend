@@ -49,46 +49,35 @@ export default () => {
   const [getEmployee, { loading: loadingEmployee }] = useLazyQuery(EMPLOYEE, {
     variables: { where: { id } },
     onCompleted: ({ employee }) => {
-      const newEmloyee = { ...employee };
-      delete newEmloyee.certificates;
-      delete newEmloyee.employeeRoles;
-      
-      setInitialValues({ ...initialValues, ...removeTypename(newEmloyee) })
+      const newEmployee = { ...employee };
+      delete newEmployee.certificates;
+      delete newEmployee.employeeRoles;
+
+      setInitialValues({ ...initialValues, ...removeTypename(newEmployee) })
     },
     onError: (error) => messages({ data: error })
   });
 
-
   useEffect(() => {
-    if (!id) return;
-    getEmployee();
+    if (id) getEmployee();
   }, [])
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
     validationSchema: validation(t('FORM.ERROR', { returnObjects: true })),
-    onSubmit: data => {
-      const newData = { ...data };
-      
-
-      saveChanges({ variables: { data: newData } });
-    }
+    onSubmit: data => saveChanges({ variables: { data } })
   });
 
   const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_EMPLOYEE, {
-    onCompleted: () => history.push(PATHS.EMPLOYEES.INDEX),
+    onCompleted: () => id ? getEmployee() : history.push(PATHS.EMPLOYEES.INDEX),
     onError: (error) => messages({data: error})
   });
 
-  const discardChanges = () => {
-    formik.resetForm();
-  }
+  const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => {
-      return { ...item, title: t(`FORM.MENU.${item.key}`) };
-    });
+    return menuItems.map(item => ({ ...item, title: t(`FORM.MENU.${item.key}`)}));
   };
 
   const setBreadcrumbsButtons = [

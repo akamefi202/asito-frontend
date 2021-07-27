@@ -34,14 +34,8 @@ export default () => {
   const { t } = useTranslation(NAME_SPACES.ROLES);
 
   const { data, loading } = useQuery(ROLE, {
-    variables: {
-      where: {
-        id
-      }
-    },
-    onError: (error) => {
-      messages({ data: error });
-    }
+    variables: {where: {id}},
+    onError: (error) => messages({ data: error })
   });
 
   const role = get(data, "role", {}) || {};
@@ -52,9 +46,7 @@ export default () => {
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
   const getScrollMenuItem = (t) => {
-    return menuItems.map((item) => {
-      return { ...item, title: t(`SHOW.MENU.${item.key}`)};
-    });
+    return menuItems.map(item => ({ ...item, title: t(`SHOW.MENU.${item.key}`)}));
   };
 
   const edit = () => {
