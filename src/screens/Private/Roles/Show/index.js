@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -10,9 +10,8 @@ import Employees from "./Employees";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
-import { useQuery } from "@apollo/react-hooks";
+import {useLazyQuery} from "@apollo/react-hooks";
 import { RoleQueries } from "shared/graphql/queries";
-import { get } from "lodash";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {useReactiveVar} from "@apollo/client";
 import {UserStore} from "shared/store/UserStore";
@@ -32,15 +31,17 @@ export default () => {
   const { id } = useParams();
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.ROLES);
+  const [role, setRole] = useState({});
 
-  const { data, loading } = useQuery(ROLE, {
+  const [getRole, { loading }] = useLazyQuery(ROLE, {
     variables: {where: {id}},
+    onCompleted: ({role}) => setRole(role),
     onError: (error) => messages({ data: error })
   });
 
-  const role = get(data, "role", {}) || {};
-  const departments = get(data, "role.departments", []) || [];
-  const protocols = get(data, "role.protocols", []) || [];
+  useEffect(() => {
+    getRole();
+  }, [])
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
@@ -89,13 +90,13 @@ export default () => {
                 <GeneralInformation t={t} role={role} />
               </section>
               <section id="departments">
-                <Departments t={t} departments={departments} />
+                <Departments t={t} departments={role?.departments || []} />
               </section>
               <section id="requirements">
                 <RequiredCertificates t={t} role={role} />
               </section>
               <section id="protocols">
-                <Protocols t={t} protocols={protocols} />
+                <Protocols t={t} protocols={role?.protocols || []} />
               </section>
               <section id="employees">
                 <Employees t={t} roleId={id} role={role} />

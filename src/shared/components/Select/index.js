@@ -57,7 +57,6 @@ export default ({
           showSearch
           size="large"
           value={value !== "" ? value : null}
-          placeholder={placeholder}
           optionFilterProp="children"
           filterOption={(input, option) => {
             if (getScan && typeof getScan === 'function') return option;
