@@ -36,7 +36,7 @@ const columns = (t) => [
     dataIndex: "validUntil",
     key: "validUntil",
     render: (stringDate) => {
-      let isValid = false;
+      let isValid = true;
       if (stringDate) {
         const validUntil = timestampToDate(stringDate);
         isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
@@ -49,7 +49,7 @@ const columns = (t) => [
                 ? <span className="icon icon-Check green"/>
                 : <span className="icon icon-Close red"/>)
             }
-            <span className={isValid || !stringDate ? "" : "red"}>
+            <span className={(isValid ? "" : "red") + (!stringDate ? 'empty' : '')}>
               {stringDate ? dateToString(stringDate) : t('LIST.INFINITE')}
             </span>
           </div>
