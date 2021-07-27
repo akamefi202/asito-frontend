@@ -69,7 +69,8 @@
         "CERTIFICATE_TYPE": "Type certificaat",
         "ISSUED_ON": "Uitgegeven op",
         "VALID_UNTIL": "Geldig tot"
-      }
+      },
+      "INFINITE": "Eindeloos"
     }
   },
   "FORM": {
