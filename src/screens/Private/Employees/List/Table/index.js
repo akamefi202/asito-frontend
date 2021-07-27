@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "shared/components";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
+import { Tooltip } from 'antd';
 
 const columns = (t) => [
   {
@@ -28,8 +29,13 @@ const columns = (t) => [
     title: t("LIST.COLUMNS.ROLE"),
     dataIndex: ["employeeRoles"],
     key: "employeeRoles",
-    render: (employeeRoles) => employeeRoles && employeeRoles.map(e => e?.role?.name || '').join(', '),
-  },
+    render: (employeeRoles) => employeeRoles &&
+        (<div className="cell-wrap">
+          <Tooltip className="custom-cell" title={employeeRoles.map(e => e?.role?.name || '').join(', ')}>
+            {employeeRoles.map(e => e?.role?.name || '').join(', ')}
+          </Tooltip>
+        </div>),
+  }
 ];
 
 export default ({ t, employees, take, setTake, setSkip, page, setPage, total }) => {
