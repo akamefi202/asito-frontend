@@ -42,6 +42,13 @@ export default ({
     getScan("");
   }
 
+  const sortItems = (a, b) => {
+    const nameA = t(`${a.value}`).toLowerCase(), nameB = t(`${b.value}`).toLowerCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  }
+
 
   return (
     <Spin spinning={loading}>
@@ -65,7 +72,7 @@ export default ({
           }}
           {...rest}
         >
-          {items.map((item) => (
+          {items.sort(sortItems).map((item) => (
             <Option key={item.key} value={item.key}>{t(`${item.value}`)}</Option>
           ))}
         </Select>
