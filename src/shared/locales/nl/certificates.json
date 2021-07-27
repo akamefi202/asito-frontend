@@ -17,7 +17,8 @@
             "ISSUED_TO": "Uitgegeven aan",
             "ISSUED_ON": "Uitgegeven op",
             "VALID_UNTIL": "Geldig tot"
-        }
+        },
+        "INFINITE": "Eindeloos"
     },
     "SHOW": {
         "MENU": {
