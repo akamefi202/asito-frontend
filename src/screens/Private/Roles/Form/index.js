@@ -108,7 +108,7 @@ export default () => {
       Promise.all([
         saveChanges({ variables: { data: newData } }),
       ])
-        .then(() => history.push(PATHS.ROLES.INDEX))
+        .then(() => history.push(`${PATHS.ROLES.SHOW.replace(":id", id)}`))
         .catch(error => messages({ data: error }))
     },
   });

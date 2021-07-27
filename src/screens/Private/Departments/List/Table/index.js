@@ -17,8 +17,8 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.LOCATION"),
-    dataIndex: "address",
-    key: "address",
+    dataIndex: "location",
+    key: "location",
   },
   {
     title: t("LIST.COLUMNS.ROLES"),
