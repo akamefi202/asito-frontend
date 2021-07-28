@@ -39,7 +39,9 @@
       "EMAIL_ADDRESS": "E-mailadres",
       "EMAIL_ADDRESS_PLACEHOLDER": "Enter e-mailadres",
       "WEBSITE": "Website",
-      "WEBSITE_PLACEHOLDER": "Enter website"
+      "WEBSITE_PLACEHOLDER": "Enter website",
+      "NAME_PLACEHOLDER": "Enter bedrijfsnaam",
+      "NUMBER_PLACEHOLDER": "Enter KvK nummer"
     },
     "GENERAL_INFORMATION_ISSUER": {
       "NAME": "Bedrijfsnaam",
