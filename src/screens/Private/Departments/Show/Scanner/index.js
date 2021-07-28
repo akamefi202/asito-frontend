@@ -62,7 +62,9 @@ const EmployeeInfo = ({t, employee, onClick, scanner}) => {
       {employee &&
         <>
           <div className='scanner__image-wrapper'>
-            <img src={employee.avatar} alt='avatar' />
+          {employee?.avatar
+            ? <img src={employee.avatar} alt='avatar' />
+            : <div className="empty-photo">{t("No photo")}</div>}
           </div>
           <p className='scanner__name'>{`${employee.firstName} ${employee.lastName}`}</p>
         </>}
@@ -107,6 +109,9 @@ const Scanner = ({ t, visible, handleCancel }) => {
 
   const [ getEmployees, { loading }] = useLazyQuery(EMPLOYEE, {
     onCompleted: async ({ employee }) => {
+
+      if (!employee) return setSteps(STEPS.STEP_2);
+
       const res = await saveChanges({variables: {data: {id: employee.wallet}}});
 
       if (res.data && !res.data.verify) {
