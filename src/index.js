@@ -9,15 +9,23 @@ import App from "./App";
 import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import "./shared/locales/i18n";
+import { ConfigProvider } from 'antd';
+import 'moment/locale/nl';
+import moment from 'moment';
+import locale from "antd/lib/locale/nl_NL";
+
+moment.locale('nl');
 
 const Component = () => (
-  <ApolloProvider client={client}>
-    <ApolloProviderHooks client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProviderHooks>
-  </ApolloProvider>
+    <ConfigProvider locale={locale}>
+        <ApolloProvider client={client}>
+            <ApolloProviderHooks client={client}>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
+            </ApolloProviderHooks>
+        </ApolloProvider>
+    </ConfigProvider>
 );
 
 const render = () => {
