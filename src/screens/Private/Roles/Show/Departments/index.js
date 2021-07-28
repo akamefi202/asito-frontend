@@ -30,6 +30,7 @@ const columns = (t) => [
 ];
 
 export default ({ t, departments }) => {
+
   return (
     <Card cardStyle={"card--details"}>
       <Row>

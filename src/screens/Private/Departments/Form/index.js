@@ -63,7 +63,7 @@ export default () => {
   };
 
   const [saveChanges, {loading}] = useMutation(CREATE_UPDATE_DEPARTMENT, {
-    onCompleted: () => id ? getDepartment() : history.push(PATHS.DEPARTMENTS.INDEX),
+    onCompleted: () => history.push(id ? PATHS.DEPARTMENTS.SHOW.replace(":id", id) : PATHS.DEPARTMENTS.INDEX),
     onError: (error) => messages({data: error})
   });
 

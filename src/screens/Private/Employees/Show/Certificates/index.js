@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { Row, Col } from "antd";
 import { Card, Table } from "shared/components";
-import { dateToString } from "utils/helpers/moment";
-import { CERTIFICATES_TYPE } from "shared/constants/certificatesType";
+import {dateToString, timestampToDate} from "utils/helpers/moment";
+import moment from "moment";
+
+const today = moment();
 
 const columns = (t) => [
   {
@@ -13,9 +15,7 @@ const columns = (t) => [
     key: "number",
     sorter: (a, b) => a.number.localeCompare(b.number),
     render: (number, record) => (
-      <Link 
-        className="custom-link" 
-        to={PATHS.CERTIFICATES.SHOW.replace(":id", record.id)}>
+      <Link className="custom-link" to={PATHS.CERTIFICATES.SHOW.replace(":id", record.id)}>
           {number}
       </Link>
     ),
@@ -24,13 +24,31 @@ const columns = (t) => [
     title: t("SHOW.CERTIFICATES.COLUMNS.CERTIFICATE_TYPE"),
     dataIndex: ["requirement", "type"],
     key: "type",
-    render: (type) => type
   },
   {
     title: t("SHOW.CERTIFICATES.COLUMNS.VALID_UNTIL"),
     dataIndex: "validUntil",
     key: "validUntil",
-    render: (validUntil) => (<span>{dateToString(validUntil, "DD-MM-YYYY")}</span>),
+    render: (stringDate) => {
+      let isValid = true;
+      if (stringDate) {
+        const validUntil = timestampToDate(stringDate);
+        isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
+      }
+
+      return (
+          <div className="access--type">
+            {stringDate &&
+            (isValid
+                ? <span className="icon icon-Check green"/>
+                : <span className="icon icon-Close red"/>)
+            }
+            <span className={(isValid ? "" : "red") + (!stringDate ? 'empty' : '')}>
+              {stringDate ? dateToString(stringDate) : t('SHOW.CERTIFICATES.INFINITE')}
+            </span>
+          </div>
+      );
+    },
   },
 ];
 

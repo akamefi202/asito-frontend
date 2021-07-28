@@ -70,7 +70,7 @@ export default () => {
   });
 
   const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_EMPLOYEE, {
-    onCompleted: () => id ? getEmployee() : history.push(PATHS.EMPLOYEES.INDEX),
+    onCompleted: () => history.push(id ? PATHS.EMPLOYEES.SHOW.replace(":id", id) : PATHS.EMPLOYEES.INDEX),
     onError: (error) => messages({data: error})
   });
 

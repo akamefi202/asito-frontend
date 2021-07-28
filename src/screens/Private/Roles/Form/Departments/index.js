@@ -85,63 +85,39 @@ export default ({ t, formik }) => {
       </Row>
       <Row className="w-100-100 card--form--list">
         <Col xs={24} sm={24}>
-          <Form
-            form={form}
-            name="dynamic_form_nest_item"
-            onValuesChange={onValuesChange}
-            autoComplete="off"
-          >
+          <Form form={form}
+                name="dynamic_form_nest_item"
+                onValuesChange={onValuesChange}
+                autoComplete="off">
+
             <Form.List name="departments">
               {(fields, { add, remove }) => (
                 <>
-                  {fields.map((field) => (
-                    <div className="card--form--list--field" key={field.key}>
-                      <Row gutter={[16, 8]} align="middle" className="m-16">
-                        <Col xs={10} md={10}>
-                          <Form.Item
-                            noStyle
-                            shouldUpdate={(prevValues, curValues) =>
-                              prevValues.area !== curValues.area ||
-                              prevValues.sights !== curValues.sights
-                            }
-                          >
-                            {() => (
-                              <Form.Item
-                                {...field}
-                                name={[field.name, 'id']}
-                                fieldKey={[field.fieldKey, 'id']}
-                              >
-                                <Select
-                                  placeholder={t("FORM.DEPARTAMENT.COLUMNS.NAME_PLACEHOLDER")}
-                                  {...bindInputProps({ prefix: true, name: `departments.${field.name}.id`, ...formik })}
-                                  items={departmentsSelect}
-                                  getSelect={getSelect}
-                                  getScan={getScanSelect}
-                                  loading={loading}
-                                />
-                              </Form.Item>
-                            )}
-                          </Form.Item>
-                        </Col>
-                        <Col xs={10} md={10}></Col>
-                        <Col xs={4} md={4}>
-                          <div className="btn--icon">
-                            <CloseOutlined onClick={() => remove(field.name)} />
-                          </div>
-                        </Col>
-                      </Row>
-                    </div>
+                  {fields.map(field => (
+                      <div className="card--form--list--field" key={field.key}>
+                        <Row gutter={[16, 8]} align="middle" className="m-16">
+                          <Col xs={10} md={10}>
+                            <Select placeholder={t("FORM.DEPARTAMENT.COLUMNS.NAME_PLACEHOLDER")}
+                                    items={departmentsSelect}
+                                    {...bindInputProps({prefix: true, name: `departments.${field.name}.id`, ...formik})}
+                                    getSelect={getSelect}
+                                    getScan={getScanSelect}
+                                    loading={loading}/>
+                          </Col>
+                          <Col xs={10} md={10}/>
+                          <Col xs={4} md={4}>
+                            <div className="btn--icon">
+                              <CloseOutlined onClick={() => remove(field.name)}/>
+                            </div>
+                          </Col>
+                        </Row>
+                      </div>
                   ))}
-
-                  <Form.Item>
-                    <Button
-                      onClick={() => add()}
-                      icon={<span className="icon-Add-New btn--icon--right" />}
-                      buttonStyle={"btn--outline"}
-                    >
-                      {t("FORM.DEPARTAMENT.ADD_ROW")}
+                    <Button buttonStyle={"btn--outline"}
+                            icon={<span className="icon-Add-New btn--icon--right"/>}
+                            onClick={() => add()}>
+                        {t("FORM.DEPARTAMENT.ADD_ROW")}
                     </Button>
-                  </Form.Item>
                 </>
               )}
             </Form.List>

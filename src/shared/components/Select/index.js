@@ -42,6 +42,12 @@ export default ({
     getScan("");
   }
 
+  const sortItems = (a, b) => {
+    const nameA = t(`${a.value}`).toLowerCase(), nameB = t(`${b.value}`).toLowerCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  }
 
   return (
     <Spin spinning={loading}>
@@ -51,7 +57,6 @@ export default ({
           showSearch
           size="large"
           value={value !== "" ? value : null}
-          placeholder={placeholder}
           optionFilterProp="children"
           filterOption={(input, option) => {
             if (getScan && typeof getScan === 'function') return option;
@@ -65,7 +70,7 @@ export default ({
           }}
           {...rest}
         >
-          {items.map((item) => (
+          {items.sort(sortItems).map((item) => (
             <Option key={item.key} value={item.key}>{t(`${item.value}`)}</Option>
           ))}
         </Select>
