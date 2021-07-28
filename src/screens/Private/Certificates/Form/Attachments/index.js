@@ -41,7 +41,7 @@ export default ({ t, formik, certificateId, deletedFiles, setDeletedFiles }) => 
           type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
           certificate: { id: certificateId },
           url: data.createFile,
-          updatedAt: moment().format("DD-MM-YYYY") // moment(file.lastModified).format()
+          updatedAt: new Date() // moment(file.lastModified).format()
         }
         fileStatus.current = '';
         const values = formik.getFieldProps('attachments').value;

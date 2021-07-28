@@ -17,7 +17,7 @@ export default ({ t, formik, certificateTypes }) => {
   const onValuesChange = (_, data) => {
     const requirements = data.requirements.map(requirement => ({
       id: requirement && requirement.id || '',
-      validAtLeastUntil: requirement && requirement.validAtLeastUntil || '',
+      validAtLeastUntil: requirement && requirement.validAtLeastUntil || null,
     }));
 
     formik.setFieldValue("requirements", requirements);

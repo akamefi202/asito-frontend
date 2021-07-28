@@ -41,7 +41,7 @@ export default ({ t, formik, roleId, deletedFiles, setDeletedFiles }) => {
           type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
           role: { id: roleId },
           url: data.createFile,
-          updatedAt: moment(file.lastModified).format()
+          updatedAt: new Date()
         }
         fileStatus.current = '';
         const values = formik.getFieldProps('protocols').value;
