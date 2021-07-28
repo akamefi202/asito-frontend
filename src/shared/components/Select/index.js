@@ -18,6 +18,7 @@ export default ({
   custom = '',
   getSelect,
   getScan,
+  notFilteredArray,
   onChange = () => { },
   ...rest
 }) => {
@@ -49,6 +50,8 @@ export default ({
     return 0;
   }
 
+  const selectedValue = notFilteredArray ? notFilteredArray.find(x => x.key === value)?.value : value;
+
   return (
     <Spin spinning={loading}>
       <div className={`select-wrapper ${custom}`}>
@@ -56,7 +59,7 @@ export default ({
           className={`custom--select ${touched && errors ? 'error' : ''}`}
           showSearch
           size="large"
-          value={value !== "" ? value : null}
+          value={value !== "" ? selectedValue : null}
           optionFilterProp="children"
           filterOption={(input, option) => {
             if (getScan && typeof getScan === 'function') return option;

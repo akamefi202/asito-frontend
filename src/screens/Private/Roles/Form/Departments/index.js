@@ -98,9 +98,10 @@ export default ({ t, formik }) => {
                         <Row gutter={[16, 8]} align="middle" className="m-16">
                           <Col xs={10} md={10}>
                             <Select placeholder={t("FORM.DEPARTAMENT.COLUMNS.NAME_PLACEHOLDER")}
-                                    items={departmentsSelect}
+                                    items={departmentsSelect.filter(x => !departments.some(y => x.key === y.id))}
                                     {...bindInputProps({prefix: true, name: `departments.${field.name}.id`, ...formik})}
                                     getSelect={getSelect}
+                                    notFilteredArray={departmentsSelect}
                                     getScan={getScanSelect}
                                     loading={loading}/>
                           </Col>
