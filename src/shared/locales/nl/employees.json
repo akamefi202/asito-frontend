@@ -30,7 +30,7 @@
     },
     "ROLES": {
       "COLUMNS": {
-        "NAME": "Afdeling",
+        "NAME": "Functie",
         "ACCEPTED": "Geaccepteerd",
         "PROTOCOLS": "Acceptatie protocollen"
       },
