@@ -12,7 +12,7 @@ const columns = (t) => [
     title: t("LIST.COLUMNS.CERTIFICATE_NUMBER"),
     dataIndex: "number",
     key: "number",
-    sorter: (a, b) => a.number - b.number,
+    sorter: (a, b) => a.number.localeCompare(b.number),
   },
   {
     title: t("LIST.COLUMNS.CERTIFICATE_TYPE"),

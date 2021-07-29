@@ -7,6 +7,7 @@ import { Card, Input, DatePicker, Button } from "shared/components";
 import { CloudUploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { bindInputProps } from "utils/helpers/input";
 import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
+import moment from "moment";
 
 const { CREATE_FILE } = FileMutations;
 
@@ -45,6 +46,10 @@ export default ({ t, formik }) => {
       };
       reader.onerror = (error) => reject(error);
     });
+  }
+
+  const disabledDate = (current) => {
+    return current && current > moment().subtract(18,'year').endOf('day');
   }
 
   return (
@@ -99,9 +104,9 @@ export default ({ t, formik }) => {
             </label>
             <DatePicker
               {...bindInputProps({ name: "dateOfBirth", ...formik })}
-              placeholder={t(
-                "FORM.GENERAL_INFORMATION.DATE_OF_BIRTH_PLACEHOLDER"
-              )}
+              placeholder={t("FORM.GENERAL_INFORMATION.DATE_OF_BIRTH_PLACEHOLDER")}
+              defaultPickerValue={moment().subtract(18,'year').endOf('day')}
+              disabledDate={disabledDate}
             />
           </div>
         </Col>
