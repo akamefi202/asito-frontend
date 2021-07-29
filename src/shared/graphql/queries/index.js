@@ -9,3 +9,4 @@ export { default as AccessQueries } from "./access";
 export { default as NotificationQueries } from "./notification";
 export { default as AttachmentQueries } from "./attachment";
 export { default as EmployeeRoleQueries } from "./employeeRole";
+export { default as ProtocolQueries } from './protocol';

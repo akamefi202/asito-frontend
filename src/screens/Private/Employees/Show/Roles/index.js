@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { Row, Col } from "antd";
@@ -45,7 +45,7 @@ const columns = (t, protocolsVisible, isAccess) => [
         )
       } else {
         return (<Button
-          onClick={() => protocolsVisible(protocols, record.role.id)}
+          onClick={() => protocolsVisible(protocols, record.role)}
           icon={<span className="btn--icon--right icon-Eye-Show" />}
           buttonStyle={"btn--primary"}
         >{t('SHOW.ROLES.VIEW_PROTOCOLS')}</Button>)
@@ -59,19 +59,14 @@ export default ({ t, roles }) => {
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
   const [page, setPage] = useState(1);
-  const [protocolsModalVisible, setProtocolsModalVisible] = useState({visible: false, activeRoleId: null});
-  const [protocols, setProtocols] = useState([
-    {name: 'protocol_doc1.pdf', id: "1", type: 'PDF', updatedAt: '01-01-2020'},
-    {name: 'protocol_doc1.pdf', id: "2", type: 'PDF', updatedAt: '01-01-2020'},
-  ]);
+  const [protocolsModalVisible, setProtocolsModalVisible] = useState({visible: false, activeRole: null});
 
   const onPageChange = (page) => {
     setPage(page);
   };
 
-  const protocolsVisible = (protocols, id) => {
-    // setProtocols(protocols);
-    setProtocolsModalVisible({visible: true, activeRoleId: id});
+  const protocolsVisible = (protocols, role) => {
+    setProtocolsModalVisible({visible: true, activeRole: role});
   }
 
   const isAccess = () => userRole && (userRole === USER_ROLES.CLIENT.key);
@@ -106,10 +101,10 @@ export default ({ t, roles }) => {
       {protocolsModalVisible
         ?
           <ProtocolsModal
-            t={t} protocols={protocols}
+            t={t}
             visible={protocolsModalVisible.visible}
             handleCancel={setProtocolsModalVisible}
-            roleId={protocolsModalVisible.activeRoleId} />
+            role={protocolsModalVisible.activeRole} />
         : ''}
     </Card>
   );
