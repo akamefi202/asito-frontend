@@ -18,12 +18,7 @@ const routes = [
     path: PATHS.CERTIFICATES.CREATE,
     exact: true,
     component: Form,
-  },
-  {
-    path: PATHS.CERTIFICATES.EDIT,
-    exact: true,
-    component: Form,
-  },
+  }
 ];
 
 export default routes;

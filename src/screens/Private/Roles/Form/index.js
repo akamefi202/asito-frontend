@@ -58,7 +58,7 @@ export default () => {
 
   const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
     variables: {take: 1000},
-    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type}))),
+    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type, validAtLeastUntil: ct.validAtLeastUntil}))),
     onError: (error) => messages({data: error})
   });
 
@@ -90,7 +90,6 @@ export default () => {
       delete newData.employeeRoles;
       newData.protocols = data.protocols.map(x =>
           ({id: x.id, role: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
-
       saveChanges({variables: {data: newData}})
           .then(() => history.push(id ? PATHS.ROLES.SHOW.replace(":id", id) : PATHS.ROLES.INDEX))
           .catch(error => messages({data: error}))

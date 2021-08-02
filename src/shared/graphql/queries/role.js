@@ -33,9 +33,6 @@ export const ROLE = gql`
         id
         type
         validAtLeastUntil
-        certificates {
-          id
-        }
       }
       employeeRoles {
         id

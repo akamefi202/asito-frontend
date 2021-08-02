@@ -12,6 +12,11 @@ export const CREATE_UPDATE_ROLE = gql`
       protocols {
         id
       }
+      requirements {
+        id
+        type
+        validAtLeastUntil
+      }
       employeeRoles {
         role {
           id

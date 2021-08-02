@@ -72,8 +72,9 @@ export default ({ t, formik, certificateTypes }) => {
                               >
                                 <Select
                                   placeholder={t("FORM.REQUIREMENTS.COLUMNS.CERTIFICATE_TYPE_PLACEHOLDER")}
+                                  notFilteredArray={certificateTypes}
                                   {...bindInputProps({ prefix: true, name: `requirements.${field.name}.id`, ...formik })}
-                                  items={certificateTypes}
+                                  items={certificateTypes.filter(x => !requirements.some(y => x.key === y.id))}
                                 />
                               </Form.Item>
                             )}
