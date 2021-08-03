@@ -3,9 +3,8 @@ import { Col, Row, Form } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { Card, Select, DatePicker, Button } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
-import cuid from "cuid";
 
-export default ({ t, formik, certificateTypes }) => {
+export default ({ t, formik, certificateTypes, roleId, addRequirementForRemove }) => {
   const [form] = Form.useForm();
 
   const requirements = formik.values.requirements;
@@ -15,13 +14,25 @@ export default ({ t, formik, certificateTypes }) => {
   }, [requirements])
 
   const onValuesChange = (_, data) => {
-    const requirements = data.requirements.map(requirement => ({
-      id: requirement && requirement.id || '',
-      validAtLeastUntil: requirement && requirement.validAtLeastUntil || null,
+    const requirements = data.requirements.map(x => ({
+      id: x && x.id || '',
+      role: {
+        id: (x && x.role.id) || roleId || ''
+      },
+      requirement: {
+        id: x && x.requirement.id || '',
+      },
+      validAtLeastUntil: x && x.validAtLeastUntil || null,
     }));
 
     formik.setFieldValue("requirements", requirements);
   };
+
+  const onDeleteHandler = (index) => {
+    addRequirementForRemove(requirements[index]);
+    requirements.splice(index, 1);
+    form.setFieldsValue({requirements});
+  }
 
   return (
     <Card cardStyle={"card--form"}>
@@ -66,15 +77,12 @@ export default ({ t, formik, certificateTypes }) => {
                           >
                             {() => (
                               <Form.Item
-                                {...field}
-                                name={[field.name, 'id']}
-                                fieldKey={[field.fieldKey, 'id']}
                               >
                                 <Select
                                   placeholder={t("FORM.REQUIREMENTS.COLUMNS.CERTIFICATE_TYPE_PLACEHOLDER")}
                                   notFilteredArray={certificateTypes}
-                                  {...bindInputProps({ prefix: true, name: `requirements.${field.name}.id`, ...formik })}
-                                  items={certificateTypes.filter(x => !requirements.some(y => x.key === y.id))}
+                                  {...bindInputProps({ prefix: true, name: `requirements.${field.name}.requirement.id`, ...formik })}
+                                  items={certificateTypes.filter(x => !requirements.some(y => x.key === y.requirement.id))}
                                 />
                               </Form.Item>
                             )}
@@ -96,7 +104,7 @@ export default ({ t, formik, certificateTypes }) => {
                         </Col>
                         <Col xs={4} md={4}>
                           <div className="btn--icon">
-                            <CloseOutlined onClick={() => remove(field.name)} />
+                            <CloseOutlined onClick={() => onDeleteHandler(field.name)} />
                           </div>
                         </Col>
                       </Row>

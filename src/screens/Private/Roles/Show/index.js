@@ -11,13 +11,14 @@ import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import {useLazyQuery} from "@apollo/react-hooks";
-import { RoleQueries } from "shared/graphql/queries";
+import { RoleQueries, RoleRequirementQueries } from "shared/graphql/queries";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {useReactiveVar} from "@apollo/client";
 import {UserStore} from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
 
 const { ROLE } = RoleQueries;
+const { ROLE_REQUIREMENTS } = RoleRequirementQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -32,6 +33,7 @@ export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.ROLES);
   const [role, setRole] = useState({});
+  const [requirements, setRequirements] = useState([]);
 
   const [getRole, { loading }] = useLazyQuery(ROLE, {
     variables: {where: {id}},
@@ -39,8 +41,17 @@ export default () => {
     onError: (error) => messages({ data: error })
   });
 
+  const [getRoleRequirements, { loading: loadingRoleRequirement }] = useLazyQuery(ROLE_REQUIREMENTS, {
+    variables: { roleRequirementsWhere: { role: { id: id } } },
+    onCompleted: ({roleRequirements: { data }}) => {
+      setRequirements(data);
+    },
+    onError: (error) => console.log(error, 'error')
+  });
+
   useEffect(() => {
-    getRole();
+    getRole()
+    getRoleRequirements();
   }, [])
 
   const user = useReactiveVar(UserStore);
@@ -77,7 +88,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading}>
+      <Spin spinning={loading || loadingRoleRequirement}>
         <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
         <div className="details--page">
           <Row gutter={[16]}>
@@ -93,7 +104,7 @@ export default () => {
                 <Departments t={t} departments={role?.departments || []} />
               </section>
               <section id="requirements">
-                <RequiredCertificates t={t} role={role} />
+                <RequiredCertificates t={t} role={role} requirements={requirements} />
               </section>
               <section id="protocols">
                 <Protocols t={t} protocols={role?.protocols || []} />

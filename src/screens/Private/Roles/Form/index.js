@@ -12,17 +12,18 @@ import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
 import {useMutation, useLazyQuery, useQuery} from "@apollo/react-hooks";
-import { RoleMutations, RemoveAttachmentsMutations } from "shared/graphql/mutations";
-import { RoleQueries, CertificateQueries } from "shared/graphql/queries";
+import { RoleMutations, RemoveAttachmentsMutations, RoleRequirementMutations } from "shared/graphql/mutations";
+import { RoleQueries, CertificateQueries, RoleRequirementQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
-import { timestampToDate } from "utils/helpers/moment";
 
 const { CREATE_UPDATE_ROLE } = RoleMutations;
 const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
 const { ROLE } = RoleQueries;
 const { CERTIFICATE_TYPES } = CertificateQueries;
+const { CREATE_ROLE_REQUIREMENT, UPDATE_ROLE_REQUIREMENT, REMOVE_ROLE_REQUIREMENT } = RoleRequirementMutations;
+const { ROLE_REQUIREMENTS } = RoleRequirementQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -38,6 +39,7 @@ export default () => {
   const [generatedId] = useState(cuid());
   const [deletedFiles, setDeletedFiles] = useState([]);
   const [certificateTypes, setCertificateTypes] = useState([]);
+  const [requirementsForDelete, setRequirementForDelete] = useState([]);
   const [initialValues, setInitialValues] = useState({
     id: generatedId,
     status: "ACTIVE",
@@ -58,7 +60,7 @@ export default () => {
 
   const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
     variables: {take: 1000},
-    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type, validAtLeastUntil: ct.validAtLeastUntil}))),
+    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(ct => ({key: ct.id, value: ct.type}))),
     onError: (error) => messages({data: error})
   });
 
@@ -66,19 +68,30 @@ export default () => {
     variables: {where: {id}},
     onCompleted: ({role}) => {
       const newRole = {...role};
-      if (newRole.requirements && newRole.requirements.length) {
-        newRole.requirements.map(item => {
-          item.validAtLeastUntil = timestampToDate(item.validAtLeastUntil);
-          return item;
-        });
-      }
       setInitialValues({...initialValues, ...removeTypename(newRole)});
     },
     onError: (error) => messages({ data: error })
   });
 
+  const [getRoleRequirements, { loading: loadingRoleRequirement }] = useLazyQuery(ROLE_REQUIREMENTS, {
+    variables: { roleRequirementsWhere: { role: { id: id } } },
+    onCompleted: ({roleRequirements: { data }}) => {
+      setInitialValues({...initialValues, ...removeTypename({requirements: data})});
+    },
+    onError: (error) => console.log(error, 'error')
+  });
+
+  const [createRole] = useMutation(CREATE_ROLE_REQUIREMENT);
+  const [updateRole] = useMutation(UPDATE_ROLE_REQUIREMENT);
+  const [removeRoleRequirement] = useMutation(REMOVE_ROLE_REQUIREMENT);
+
+  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_ROLE);
+
   useEffect(() => {
-    if (id) getRole();
+    if (id) {
+      getRole();
+      getRoleRequirements();
+    };
   }, []);
 
   const formik = useFormik({
@@ -86,20 +99,38 @@ export default () => {
     initialValues,
     validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
     onSubmit: data => {
+
       const newData = { ...data };
+      const { requirements } = newData;
+      delete newData.requirements;
       delete newData.employeeRoles;
       newData.protocols = data.protocols.map(x =>
           ({id: x.id, role: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
-      saveChanges({variables: {data: newData}})
-          .then(() => history.push(id ? PATHS.ROLES.SHOW.replace(":id", id) : PATHS.ROLES.INDEX))
-          .catch(error => messages({data: error}))
+      Promise.all([
+        ...requirements.map(x => {
+          if(x.id) return updateRole({variables: { updateRoleRequirementData: x }});
+          if (!x.id) {
+            x.id = cuid();
+            createRole({variables: { createRoleRequirementData: x }})
+          }
+        }),
+        ...requirementsForDelete.map(x => {
+          if (x.id) return removeRoleRequirement({ variables: { data: { id: x.id } } });
+        }),
+        saveChanges({variables: {data: newData}}),
+      ])
+        .then(() => history.push(id ? PATHS.ROLES.SHOW.replace(":id", id) : PATHS.ROLES.INDEX))
+        .catch(error => messages({ data: error }))
     },
   });
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
-  const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_ROLE);
   const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
+
+  const addRequirementForRemove = (requirement) => {
+    setRequirementForDelete([...requirementsForDelete, requirement]);
+  }
 
   const getScrollMenuItem = (t) => {
     return menuItems.map(item => ({...item, title: t(`FORM.MENU.${item.key}`)}));
@@ -135,7 +166,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || loadingRole || loadingAttachments || loadingCertificateTypes}>
+      <Spin spinning={loading || loadingRole || loadingCertificateTypes || loadingRoleRequirement}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
         <div className="details--page">
           <Row gutter={[16]}>
@@ -150,7 +181,7 @@ export default () => {
                 <Departments t={t} formik={formik} />
               </section>
               <section id="requirements">
-                <RequiredCertificates t={t} formik={formik} certificateTypes={certificateTypes}/>
+                <RequiredCertificates t={t} formik={formik} certificateTypes={certificateTypes} addRequirementForRemove={addRequirementForRemove} roleId={id}/>
               </section>
               <section id="protocols">
                 <Protocols

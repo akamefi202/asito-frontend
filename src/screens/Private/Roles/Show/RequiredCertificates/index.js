@@ -18,8 +18,7 @@ const columns = (t) => [
   },
 ];
 
-export default ({ t, role }) => {
-  const requirements = role && role.requirements ? role.requirements : [];
+export default ({ t, role, requirements }) => {
   const [page, setPage] = useState(1);
   const [take, setTake] = useState(10);
 
@@ -43,7 +42,7 @@ export default ({ t, role }) => {
           <Table
             columns={columns(t)}
             className="custom--table"
-            data={requirements}
+            data={requirements.map((x => ({validAtLeastUntil: x.validAtLeastUntil, type: x.requirement.type, id: x.id})))}
             rowKey={"id"}
             total={requirements.length}
             page={page}
