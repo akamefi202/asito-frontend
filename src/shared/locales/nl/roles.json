@@ -56,7 +56,8 @@
             "COLUMNS": {
                 "CERTIFICATE_TYPE": "Type certificaat",
                 "VALID_UNTIL": "Tenminste geldig tot"
-            }
+            },
+            "INFINITE": "Eindeloos"
         },
         "EMPLOYEES": {
             "ADD_ROW": "Medewerker toevoegen",

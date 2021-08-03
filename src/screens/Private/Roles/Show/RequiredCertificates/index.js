@@ -14,7 +14,7 @@ const columns = (t) => [
     title: t('SHOW.REQUIREMENTS.COLUMNS.VALID_UNTIL'),
     dataIndex: "validAtLeastUntil",
     key: "validAtLeastUntil",
-    render: (validAtLeastUntil) => dateToString(validAtLeastUntil),
+    render: (validAtLeastUntil) => validAtLeastUntil ? dateToString(validAtLeastUntil) : t('SHOW.REQUIREMENTS.INFINITE'),
   },
 ];
 
