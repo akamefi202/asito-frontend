@@ -4,7 +4,7 @@ import { PATHS } from "utils/constants";
 import { Row, Col, Popconfirm } from "antd";
 import { Card, Table, Button, Select, Spin } from "shared/components";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { useMutation, useLazyQuery } from "@apollo/react-hooks";
 import { EmployeeQueries, EmployeeRoleQueries } from "shared/graphql/queries";
 import { EmployeeRoleMutations } from "shared/graphql/mutations";
 import cuid from "cuid";
@@ -13,7 +13,6 @@ import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
 import { delay } from "utils/helpers/delay";
 import { messages } from "utils/helpers/message";
-import { datesEqual } from "utils/helpers/moment";
 import { withoutRepetitions } from "utils/helpers/array";
 
 const { EMPLOYEES } = EmployeeQueries;
@@ -86,7 +85,7 @@ const columns = (t, removeOperator, checkRequirements) => [
   }
 ];
 
-export default ({ t, role, roleId }) => {
+export default ({ t, role, roleId, requiredCertificates }) => {
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
   const [employeeRoles, setEmployeeRoles] = useState([]);
@@ -249,18 +248,22 @@ export default ({ t, role, roleId }) => {
   }
 
   const checkRequirements = (certificates) => {
-    let requirement = false;
-    if (role && role.requirements && role.requirements.length) {
-      requirement = role.requirements.some(item => {
-        return !!certificates.find(certificat => certificat.requirement
-          && certificat.requirement.type === item.type
-          && datesEqual(certificat.validUntil, item.validAtLeastUntil));
+
+    let countToValid = 0;
+    if (requiredCertificates && requiredCertificates.length && (requiredCertificates.length <= certificates.length)) {
+      requiredCertificates.forEach(item => {
+        const validCert = certificates.find(certificate => {
+          const requiredCertValidUntil = item.validAtLeastUntil ? Date.parse(item.validAtLeastUntil) : null;
+          const certificateValidUntil = certificate.validUntil ? Number(certificate.validUntil) : null;
+          return certificate.requirement
+          && certificate.requirement.id === item.requirement.id
+          && (!requiredCertValidUntil || !certificateValidUntil || certificateValidUntil > requiredCertValidUntil)
+        });
+        if (validCert) countToValid += 1;
       });
-    } else {
-      requirement = certificates && certificates.length ? true : false;
     }
 
-    return requirement;
+    return requiredCertificates.length === countToValid;
   }
 
   const getFilteredRoles = () => {

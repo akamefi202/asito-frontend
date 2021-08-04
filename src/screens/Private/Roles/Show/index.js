@@ -110,7 +110,7 @@ export default () => {
                 <Protocols t={t} protocols={role?.protocols || []} />
               </section>
               <section id="employees">
-                <Employees t={t} roleId={id} role={role} />
+                <Employees t={t} roleId={id} role={role} requiredCertificates={requirements} />
               </section>
             </Col>
           </Row>
