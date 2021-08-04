@@ -18,7 +18,7 @@ const columns = (t, protocolsVisible, isAccess) => [
     render: (name, record) => (
       <Link
         className="custom-link items-center"
-        to={PATHS.ROLES.SHOW.replace(":id", record.role.id)}>
+        to={PATHS.ROLES.SHOW.replace(":id", record.role?.id)}>
           {name}
       </Link>
     ),
@@ -28,7 +28,7 @@ const columns = (t, protocolsVisible, isAccess) => [
     dataIndex: ["role", "protocols"],
     key: "protocols",
     render: (protocols, record) => {
-      if (record.role.accepted) {
+      if (record.role?.accepted) {
         return (
           <div className="access--type items-center">
             <span className="icon icon-Check green" />
