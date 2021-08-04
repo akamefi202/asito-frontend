@@ -111,7 +111,7 @@ export default () => {
           if(x.id) return updateRole({variables: { updateRoleRequirementData: x }});
           if (!x.id) {
             x.id = cuid();
-            createRole({variables: { createRoleRequirementData: x }})
+            return createRole({variables: { createRoleRequirementData: x }})
           }
         }),
         ...requirementsForDelete.map(x => {

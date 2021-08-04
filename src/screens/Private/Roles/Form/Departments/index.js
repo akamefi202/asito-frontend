@@ -62,9 +62,10 @@ export default ({ t, formik }) => {
   }
 
   const onValuesChange = (_, data) => {
-    const departments = data.departments.map(department => ({
-      id: department && department.id || '',
-    }));
+    const departments = data.departments.map(department => {
+      if (department && !department.id) return;
+      return { id: department && department.id };
+    });
 
     formik.setFieldValue("departments", departments);
   };
