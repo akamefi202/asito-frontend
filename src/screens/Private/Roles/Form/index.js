@@ -12,14 +12,13 @@ import { PATHS } from "utils/constants";
 import { useFormik } from "formik";
 import cuid from "cuid";
 import {useMutation, useLazyQuery, useQuery} from "@apollo/react-hooks";
-import { RoleMutations, RemoveAttachmentsMutations, RoleRequirementMutations } from "shared/graphql/mutations";
+import { RoleMutations, RoleRequirementMutations } from "shared/graphql/mutations";
 import { RoleQueries, CertificateQueries, RoleRequirementQueries } from "shared/graphql/queries";
 import validation from "./validation";
 import { removeTypename } from "utils/helpers/removeTypename";
 import { messages } from "utils/helpers/message";
 
 const { CREATE_UPDATE_ROLE } = RoleMutations;
-const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
 const { ROLE } = RoleQueries;
 const { CERTIFICATE_TYPES } = CertificateQueries;
 const { CREATE_ROLE_REQUIREMENT, UPDATE_ROLE_REQUIREMENT, REMOVE_ROLE_REQUIREMENT } = RoleRequirementMutations;
@@ -81,8 +80,8 @@ export default () => {
     onError: (error) => console.log(error, 'error')
   });
 
-  const [createRole] = useMutation(CREATE_ROLE_REQUIREMENT);
-  const [updateRole] = useMutation(UPDATE_ROLE_REQUIREMENT);
+  const [createRole, {loading: loadingCreatingRole}] = useMutation(CREATE_ROLE_REQUIREMENT);
+  const [updateRole, {loading: loadingUpdatingRole}] = useMutation(UPDATE_ROLE_REQUIREMENT);
   const [removeRoleRequirement] = useMutation(REMOVE_ROLE_REQUIREMENT);
 
   const [saveChanges, { loading }] = useMutation(CREATE_UPDATE_ROLE);
@@ -102,31 +101,33 @@ export default () => {
 
       const newData = { ...data };
       const { requirements } = newData;
+      const validRequirements = requirements.filter(x => x.requirement.id);
       delete newData.requirements;
       delete newData.employeeRoles;
       newData.protocols = data.protocols.map(x =>
           ({id: x.id, role: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
-      Promise.all([
-        ...requirements.map(x => {
-          if(x.id) return updateRole({variables: { updateRoleRequirementData: x }});
-          if (!x.id) {
-            x.id = cuid();
-            return createRole({variables: { createRoleRequirementData: x }})
-          }
-        }),
-        ...requirementsForDelete.map(x => {
-          if (x.id) return removeRoleRequirement({ variables: { data: { id: x.id } } });
-        }),
-        saveChanges({variables: {data: newData}}),
-      ])
-        .then(() => history.push(id ? PATHS.ROLES.SHOW.replace(":id", id) : PATHS.ROLES.INDEX))
-        .catch(error => messages({ data: error }))
+
+      saveChanges({variables: {data: newData}})
+        .then(() => {
+          Promise.all([
+            ...validRequirements.map(x => {
+              if(x.id) return updateRole({variables: { updateRoleRequirementData: x }});
+              if (!x.id) {
+                x.id = cuid();
+                return createRole({variables: { createRoleRequirementData: x }})
+              }
+            }),
+            ...requirementsForDelete.map(x => {
+              if (x.id) return removeRoleRequirement({ variables: { data: { id: x.id } } });
+            }),
+          ])
+          .then(() => history.push(id ? PATHS.ROLES.SHOW.replace(":id", id) : PATHS.ROLES.INDEX))
+        })
+        .catch(error => console.log(error, 'error'))
     },
   });
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
-
-  const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
 
   const addRequirementForRemove = (requirement) => {
     setRequirementForDelete([...requirementsForDelete, requirement]);
@@ -166,7 +167,7 @@ export default () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || loadingRole || loadingCertificateTypes || loadingRoleRequirement}>
+      <Spin spinning={loading || loadingRole || loadingCertificateTypes || loadingRoleRequirement || loadingCreatingRole || loadingUpdatingRole}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
         <div className="details--page">
           <Row gutter={[16]}>
@@ -181,7 +182,7 @@ export default () => {
                 <Departments t={t} formik={formik} />
               </section>
               <section id="requirements">
-                <RequiredCertificates t={t} formik={formik} certificateTypes={certificateTypes} addRequirementForRemove={addRequirementForRemove} roleId={id}/>
+                <RequiredCertificates t={t} formik={formik} certificateTypes={certificateTypes} addRequirementForRemove={addRequirementForRemove} roleId={id || generatedId}/>
               </section>
               <section id="protocols">
                 <Protocols

@@ -17,7 +17,7 @@ export default ({ t, formik, certificateTypes, roleId, addRequirementForRemove }
     const requirements = data.requirements.map(x => ({
       id: x && x.id || '',
       role: {
-        id: (x && x.role.id) || roleId || ''
+        id: roleId
       },
       requirement: {
         id: x && x.requirement.id || '',
