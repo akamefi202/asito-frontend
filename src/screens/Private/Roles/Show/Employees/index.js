@@ -253,11 +253,13 @@ export default ({ t, role, roleId, requiredCertificates }) => {
     if (requiredCertificates && requiredCertificates.length && (requiredCertificates.length <= certificates.length)) {
       requiredCertificates.forEach(item => {
         const validCert = certificates.find(certificate => {
+          if (!(certificate.requirement.id === item.requirement.id)) return false;
+
           const requiredCertValidUntil = item.validAtLeastUntil ? Date.parse(item.validAtLeastUntil) : null;
           const certificateValidUntil = certificate.validUntil ? Number(certificate.validUntil) : null;
-          return certificate.requirement
-          && certificate.requirement.id === item.requirement.id
-          && (!requiredCertValidUntil || !certificateValidUntil || certificateValidUntil > requiredCertValidUntil)
+
+          if (!requiredCertValidUntil || !certificateValidUntil) return true;
+          return certificateValidUntil > requiredCertValidUntil;
         });
         if (validCert) countToValid += 1;
       });
