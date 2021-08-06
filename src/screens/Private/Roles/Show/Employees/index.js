@@ -247,6 +247,10 @@ export default ({ t, role, roleId, requiredCertificates }) => {
     setTakeEmployeeRoles(size);
   }
 
+  const dropTimeForDate = (timestamp) => {
+    return Date.parse(new Date(new Date(timestamp).toDateString()));
+  }
+
   const checkRequirements = (certificates) => {
 
     let countToValid = 0;
@@ -259,7 +263,11 @@ export default ({ t, role, roleId, requiredCertificates }) => {
           const certificateValidUntil = certificate.validUntil ? Number(certificate.validUntil) : null;
 
           if (!requiredCertValidUntil || !certificateValidUntil) return true;
-          return certificateValidUntil > requiredCertValidUntil;
+
+          const requiredCertValidUntilWithoutTime = dropTimeForDate(requiredCertValidUntil);
+          const certificateValidUntilWithoutTime = dropTimeForDate(certificateValidUntil);
+
+          return certificateValidUntilWithoutTime >= requiredCertValidUntilWithoutTime;
         });
         if (validCert) countToValid += 1;
       });
