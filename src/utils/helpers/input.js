@@ -1,32 +1,23 @@
-export const bindInputProps = ({
-  name,
-  prefix,
-  values,
-  handleChange,
-  setFieldTouched,
-  touched,
-  errors,
-}) => {
-  if (prefix) {
-    name.split('.').map(item => {
-      if (errors && typeof errors !== 'string') {
-        errors = errors[item];
-      }
-      if (touched && typeof touched !== 'boolean') {
-        touched = touched[item];
-      }
+export const bindInputProps =
+  ({
+     name,
+     values,
+     handleChange,
+     setFieldTouched,
+     touched,
+     errors,
+   }) => {
 
-      if (values) {
-        values = values[item];
-      }
-    });
-  }
-
-  return {
-    value: prefix ? values : values[name] || '',
+  return ({
+    value: getFieldValue(name, values),
     onChange: handleChange(name),
     onBlur: () => setFieldTouched(name),
-    touched: prefix ? touched : touched[name],
-    errors: prefix ? errors : errors[name],
-  };
+    touched: getFieldValue(name, touched),
+    errors: getFieldValue(name, errors)
+  })
 };
+
+
+const getFieldValue = (fields, object) => {
+  return fields.split('.').reduce((acc, value) => (acc = acc?.[value], acc), object)
+}

@@ -1,0 +1,15 @@
+@import "../../../shared/styles/colors";
+
+.field-wrapper {
+  width: 100%;
+  margin-bottom: 8px;
+
+  .label {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    color: var(--label-color);
+    padding-bottom: 4px;
+  }
+
+}

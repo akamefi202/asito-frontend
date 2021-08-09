@@ -234,8 +234,7 @@
     }
 
     .card--form--item-checkbox {
-      width: calc(50% - 16px);
-      padding: 0;
+      padding-top: 38px;
       margin: auto 8px;
 
       @media (max-width: 500px) {
@@ -252,6 +251,12 @@
       span {
         color: #808080;
         font-size: 16px;
+
+        &:last-child {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
       }
     }
 

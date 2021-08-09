@@ -1,6 +1,6 @@
-export const withoutRepetitions = (array, comparer) => {
+export const withoutRepetitions = (array, comparer, key = 'key') => {
   const count = array.length;
-  if (!comparer) comparer = { equals(v1, v2) { return v1.key === v2.key } };
+  if (!comparer) comparer = { equals(v1, v2) { return v1[key] === v2[key] } };
   let set = [];
   for (let i = 0; i < count; ++i) {
     let item = array[i];

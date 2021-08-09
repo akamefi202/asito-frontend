@@ -1,0 +1,94 @@
+@import "../../../shared/styles/colors";
+
+
+.form-select-wrapper {
+  width: 100%;
+  margin-bottom: 8px;
+
+  .label {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 22px;
+    color: var(--label-color);
+    padding-bottom: 4px;
+  }
+
+  .select {
+    width: 100%;
+
+    .ant-select-selector {
+      min-height: 50px;
+      max-height: 50px;
+      width: 100%;
+      box-shadow: none !important;
+      border-radius: 20px !important;
+      align-items: center;
+
+      .ant-select-selection-search {
+        display: flex;
+
+        .ant-select-selection-search-input {
+          margin: auto;
+        }
+      }
+
+      .ant-select-selection-item {
+        line-height: 45px;
+      }
+
+      .ant-select-selection-placeholder {
+        font-size: 16px;
+        color: var(--placeholder-color);
+      }
+    }
+
+    .ant-select-arrow {
+      height: 18px;
+      width: 18px;
+      margin-top: -8px;
+
+      .anticon:not(.ant-select-suffix) {
+        height: inherit;
+        width: inherit;
+      }
+
+      .anticon > svg {
+        height: inherit;
+        width: inherit;
+      }
+
+      .anticon {
+        height: inherit;
+        width: inherit;
+      }
+    }
+
+    .ant-select-clear {
+      height: 18px;
+      width: 18px;
+      margin-top: -9px;
+
+      .anticon {
+        height: inherit;
+        width: inherit;
+      }
+
+      .anticon svg {
+        height: inherit;
+        width: inherit;
+      }
+    }
+
+    &.error {
+      .ant-select-selector {
+        border: 1px solid var(--error-color);
+      }
+    }
+  }
+
+  p {
+    margin-top: 2px;
+    color: var(--error-color);
+    white-space: nowrap;
+  }
+}

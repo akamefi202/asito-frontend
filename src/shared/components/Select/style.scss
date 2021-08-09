@@ -5,10 +5,10 @@
   min-height: 50px;
   max-height: 50px;
   width: 100%;
-  
+
   .custom--select {
     width: 100%;
-    
+
     .ant-select-selector {
       background-color: $c-white !important;
       min-height: 50px;
@@ -34,7 +34,7 @@
       }
     }
   }
-    
+
   .custom--select.error {
     .ant-select-selector {
       border: 1px solid red;
