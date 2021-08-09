@@ -31,39 +31,14 @@ const menuItems = [
 
 export default () => {
   const { id } = useParams();
-  const [generatedId] = useState(cuid());
-  const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.CERTIFICATES);
+  const history = useHistory();
   const [deletedFiles, setDeletedFiles] = useState([]);
   const [certificateTypes, setCertificateTypes] = useState([]);
-  const [initialValues, setInitialValues] = useState({
-    id: generatedId,
-    signedBy: "",
-    signerTitle: "",
-    number: "",
-    type: "",
-    issuedOn: "",
-    validForYears: "",
-    validForMonths: "",
-    attachments: [],
-    employee: {
-      id: ""
-    }
-  });
-  const [issuer, setIssuer] = useState({
-    id: "",
-    name: "",
-    number: "",
-    address1: "",
-    address2: "",
-    zipCode: "",
-    city: "",
-    country: "",
-    kind: "",
-    phone: "",
-    email: "",
-    website: "",
-  });
+  const [issuer, setIssuer] = useState({});
+
+  const [generatedId] = useState(cuid());
+  const [initialValues, setInitialValues] = useState({id: generatedId, attachments: []});
 
   const [getUser, { loading: loadingIssuer }] = useLazyQuery(USER, {
     onCompleted: ({ user }) => setIssuer({ ...removeTypename(user && user.issuer ? user.issuer : {}) }),
@@ -83,7 +58,6 @@ export default () => {
         newCertificate.type = certificate.requirement && certificate.requirement.type || "";
         newCertificate.issuedOn = timestampToDate(newCertificate.issuedOn);
         newCertificate.validUntil = timestampToDate(newCertificate.validUntil);
-        // newCertificate.attachments = timestampToDate(newCertificate.attachments);
         setInitialValues({ ...initialValues, ...removeTypename(newCertificate) });
         if (newCertificate.issuer) setIssuer({ ...newCertificate.issuer });
     },
@@ -98,12 +72,11 @@ export default () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema: validation(t('FORM.ERROR', {returnObjects: true,})),
+    validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
     onSubmit: data => {
       const newData = {...data};
       delete newData.type;
-      if (newData.validForYears === '') delete newData.validForYears;
-      if (newData.validForMonths === '') delete newData.validForMonths;
+
       newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
       newData.attachments = data.attachments.map(x =>
         ({ id: x.id, certificate: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
@@ -126,9 +99,7 @@ export default () => {
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
-  const getScrollMenuItem = (t) => {
-    return menuItems.map(item => ({...item, title: t(`FORM.MENU.${item.key}`)}));
-  };
+  const getScrollMenuItem = () => menuItems.map(item => ({...item, title: t(`FORM.MENU.${item.key}`)}));
 
   const setBreadcrumbsButtons = [
     {
@@ -165,9 +136,8 @@ export default () => {
         <div className="details--page">
           <Row gutter={[16]}>
             <Col xs={24} sm={24} md={6} lg={6}>
-              <ScrollMenu menuItems={getScrollMenuItem(t)} />
+              <ScrollMenu menuItems={getScrollMenuItem()} />
             </Col>
-
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
                 <GeneralInformation t={t} formik={formik} certificateTypes={certificateTypes} />

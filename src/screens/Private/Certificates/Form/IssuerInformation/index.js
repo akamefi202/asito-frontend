@@ -26,7 +26,6 @@ export default ({t, formik, issuer}) => {
             {...bindInputProps({name: 'signedBy', ...formik})}/>
         </Col>
 
-
         <Col xs={24} sm={24} md={12} lg={12}>
           <InputFormControl id="number"
             label={t('FORM.ISSUER_INFORMATION.SIGNERS_TITLE') + ' ' + REQUIRED_FIELD_SYMBOL}

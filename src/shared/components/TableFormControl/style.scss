@@ -1,0 +1,14 @@
+
+.table {
+  margin-bottom: 10px;
+
+  th {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+}

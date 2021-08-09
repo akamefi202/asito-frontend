@@ -20,8 +20,8 @@ export const Field =
         {label && <div className={`label ${customStyleLabel}`}>{label}</div>}
 
         {props.href
-          ? <a className={customStyleLink} href={props?.href} {...props}>{value}</a>
-          : <div className={customStyleField} {...props}>{value}</div>}
+          ? <a className={customStyleLink} href={props?.href} {...props}>{value || ''}</a>
+          : <div className={customStyleField} {...props}>{value || ''}</div>}
 
         {errors && <p>{errors}</p>}
       </div>
