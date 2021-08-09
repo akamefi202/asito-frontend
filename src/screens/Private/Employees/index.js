@@ -1,28 +1,28 @@
-import List from "./List";
-import Show from "./Show";
-import Form from "./Form";
-import { PATHS } from "utils/constants";
+import {ShowEmployees} from "./ShowEmployees";
+import {EditEmployees} from "./EditEmployees";
+import {EmployeesList} from './EmployeesList'
+import {PATHS} from "utils/constants";
 
 const routes = [
   {
     path: PATHS.EMPLOYEES.INDEX,
     exact: true,
-    component: List,
+    component: EmployeesList,
   },
   {
     path: PATHS.EMPLOYEES.SHOW,
     exact: true,
-    component: Show,
+    component: ShowEmployees,
   },
   {
     path: PATHS.EMPLOYEES.CREATE,
     exact: true,
-    component: Form,
+    component: EditEmployees,
   },
   {
     path: PATHS.EMPLOYEES.EDIT,
     exact: true,
-    component: Form,
+    component: EditEmployees,
   },
 ];
 
