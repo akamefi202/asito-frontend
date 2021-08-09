@@ -1,23 +1,23 @@
-import List from "./List";
-import Show from "./Show";
-import Form from "./Form";
-import { PATHS } from "utils/constants";
+import CertificateList from "./CertificateList";
+import {CreateCertificate} from "./CreateCertificate";
+import {ShowCertificate} from "./ShowCertificate";
+import {PATHS} from "utils/constants";
 
 const routes = [
   {
     path: PATHS.CERTIFICATES.INDEX,
     exact: true,
-    component: List,
+    component: CertificateList,
   },
   {
     path: PATHS.CERTIFICATES.SHOW,
     exact: true,
-    component: Show,
+    component: ShowCertificate
   },
   {
     path: PATHS.CERTIFICATES.CREATE,
     exact: true,
-    component: Form,
+    component: CreateCertificate,
   }
 ];
 

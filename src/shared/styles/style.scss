@@ -52,11 +52,6 @@
 
 .container--antd {
   padding: 24px;
-  padding-top: 0px;
-
-  @media (max-width: 991px) {
-    padding-top: 24px;
-  }
 
   @media (max-width: 500px) {
     overflow: auto;

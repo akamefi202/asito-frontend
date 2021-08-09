@@ -29,7 +29,7 @@ const menuItems = [
   { key: "ATTACHMENTS", href: "attachments" },
 ];
 
-export default () => {
+export const CreateCertificate = () => {
   const { id } = useParams();
   const { t } = useTranslation(NAME_SPACES.CERTIFICATES);
   const history = useHistory();

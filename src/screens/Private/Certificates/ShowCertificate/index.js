@@ -22,7 +22,7 @@ const menuItems = [
   {key: "ATTACHMENTS", href: "attachments"},
 ];
 
-export default () => {
+export const ShowCertificate = () => {
   const {id} = useParams();
   const {t} = useTranslation(NAME_SPACES.CERTIFICATES);
 
