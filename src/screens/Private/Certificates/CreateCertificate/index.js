@@ -19,30 +19,54 @@ import {USER} from "shared/graphql/queries/user";
 import {messages} from "utils/helpers/message";
 import {timestampToDate} from "utils/helpers/moment";
 
-const { CREATE_CERTIFICATE } = CertificateMutations;
-const { REMOVE_ATTACHMENTS } = RemoveAttachmentsMutations;
-const { CERTIFICATE, CERTIFICATE_TYPES } = CertificateQueries;
+const {CREATE_CERTIFICATE} = CertificateMutations;
+const {REMOVE_ATTACHMENTS} = RemoveAttachmentsMutations;
+const {CERTIFICATE, CERTIFICATE_TYPES} = CertificateQueries;
 
 const menuItems = [
-  { key: "GENERAL_INFORMATION", href: "general" },
-  { key: "ISSUER_INFORMATION", href: "issuer" },
-  { key: "ATTACHMENTS", href: "attachments" },
+  {key: "GENERAL_INFORMATION", href: "general"},
+  {key: "ISSUER_INFORMATION", href: "issuer"},
+  {key: "ATTACHMENTS", href: "attachments"},
 ];
 
 export const CreateCertificate = () => {
-  const { id } = useParams();
-  const { t } = useTranslation(NAME_SPACES.CERTIFICATES);
+  const {id} = useParams();
+  const {t} = useTranslation(NAME_SPACES.CERTIFICATES);
   const history = useHistory();
   const [deletedFiles, setDeletedFiles] = useState([]);
   const [certificateTypes, setCertificateTypes] = useState([]);
-  const [issuer, setIssuer] = useState({});
+  const [issuer, setIssuer] = useState({
+    id: undefined,
+    name: undefined,
+    number: undefined,
+    address1: undefined,
+    address2: undefined,
+    zipCode: undefined,
+    city: undefined,
+    country: undefined,
+    kind: undefined,
+    phone: undefined,
+    email: undefined,
+    website: undefined,
+  });
 
   const [generatedId] = useState(cuid());
-  const [initialValues, setInitialValues] = useState({id: generatedId, attachments: []});
+  const [initialValues, setInitialValues] = useState({
+    id: generatedId,
+    signedBy: undefined,
+    signerTitle: undefined,
+    number: undefined,
+    type: undefined,
+    issuedOn: undefined,
+    validForYears: undefined,
+    validForMonths: undefined,
+    attachments: [],
+    employee: {id: undefined}
+  });
 
-  const [getUser, { loading: loadingIssuer }] = useLazyQuery(USER, {
-    onCompleted: ({ user }) => setIssuer({ ...removeTypename(user && user.issuer ? user.issuer : {}) }),
-    onError: (error) => messages({ data: error })
+  const [getUser, {loading: loadingIssuer}] = useLazyQuery(USER, {
+    onCompleted: ({user}) => setIssuer({...removeTypename(user && user.issuer ? user.issuer : {})}),
+    onError: (error) => messages({data: error})
   });
 
   const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
@@ -51,17 +75,17 @@ export const CreateCertificate = () => {
     onError: (error) => messages({data: error})
   });
 
-  const [getCertificate, { loading: loadingCertificate }] = useLazyQuery(CERTIFICATE, {
+  const [getCertificate, {loading: loadingCertificate}] = useLazyQuery(CERTIFICATE, {
     variables: {where: {id}},
-    onCompleted: ({ certificate }) => {
-        const newCertificate = { ...certificate };
-        newCertificate.type = certificate.requirement && certificate.requirement.type || "";
-        newCertificate.issuedOn = timestampToDate(newCertificate.issuedOn);
-        newCertificate.validUntil = timestampToDate(newCertificate.validUntil);
-        setInitialValues({ ...initialValues, ...removeTypename(newCertificate) });
-        if (newCertificate.issuer) setIssuer({ ...newCertificate.issuer });
+    onCompleted: ({certificate}) => {
+      const newCertificate = {...certificate};
+      newCertificate.type = certificate.requirement && certificate.requirement.type || "";
+      newCertificate.issuedOn = timestampToDate(newCertificate.issuedOn);
+      newCertificate.validUntil = timestampToDate(newCertificate.validUntil);
+      setInitialValues({...initialValues, ...removeTypename(newCertificate)});
+      if (newCertificate.issuer) setIssuer({...newCertificate.issuer});
     },
-    onError: (error) => messages({ data: error })
+    onError: (error) => messages({data: error})
   });
 
   useEffect(() => {
@@ -76,26 +100,27 @@ export const CreateCertificate = () => {
     onSubmit: data => {
       const newData = {...data};
       delete newData.type;
+      delete newData.infinite;
 
       newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
       newData.attachments = data.attachments.map(x =>
-        ({ id: x.id, certificate: { id: id || generatedId }, url: x.url, name: x.name, type: x.type }));
+        ({id: x.id, certificate: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
 
-      newData.issuer = issuer && issuer.id ? { id: issuer.id } : null;
+      newData.issuer = issuer && issuer.id ? {id: issuer.id} : null;
 
       if (newData.attachments.length === 0) delete newData.attachments;
 
       Promise.all([
-        saveChanges({ variables: { data: newData } }),
-        deletedFiles.map(id => removeAttachments({ variables: { data: { id } } }))
+        saveChanges({variables: {data: newData}}),
+        deletedFiles.map(id => removeAttachments({variables: {data: {id}}}))
       ])
         .then(() => history.push(id ? PATHS.CERTIFICATES.SHOW.replace(":id", id) : PATHS.CERTIFICATES.INDEX))
-        .catch(error => messages({ data: error }))
+        .catch(error => messages({data: error}))
     },
   });
 
-  const [saveChanges, { loading }] = useMutation(CREATE_CERTIFICATE);
-  const [removeAttachments, { loading: loadingAttachments }] = useMutation(REMOVE_ATTACHMENTS);
+  const [saveChanges, {loading}] = useMutation(CREATE_CERTIFICATE);
+  const [removeAttachments, {loading: loadingAttachments}] = useMutation(REMOVE_ATTACHMENTS);
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
 
@@ -111,7 +136,7 @@ export const CreateCertificate = () => {
     },
     {
       title: t("SAVE"),
-      icon: <span className="icon-Check btn--icon--right" />,
+      icon: <span className="icon-Check btn--icon--right"/>,
       disabled: false,
       action: formik.handleSubmit,
     },
@@ -131,26 +156,27 @@ export const CreateCertificate = () => {
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || (loadingCertificate && loadingIssuer && loadingCertificateTypes) || loadingAttachments}>
-        <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
+      <Spin
+        spinning={loading || (loadingCertificate && loadingIssuer && loadingCertificateTypes) || loadingAttachments}>
+        <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons}/>
         <div className="details--page">
           <Row gutter={[16]}>
             <Col xs={24} sm={24} md={6} lg={6}>
-              <ScrollMenu menuItems={getScrollMenuItem()} />
+              <ScrollMenu menuItems={getScrollMenuItem()}/>
             </Col>
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
-                <GeneralInformation t={t} formik={formik} certificateTypes={certificateTypes} />
+                <GeneralInformation t={t} formik={formik} certificateTypes={certificateTypes}/>
               </section>
               <section id="issuer">
-                <IssuerInformation t={t} formik={formik} issuer={issuer} />
+                <IssuerInformation t={t} formik={formik} issuer={issuer}/>
               </section>
               <section id="attachments">
                 <Attachments t={t}
                   formik={formik}
                   certificateId={id || generatedId}
                   deletedFiles={deletedFiles}
-                  setDeletedFiles={setDeletedFiles} />
+                  setDeletedFiles={setDeletedFiles}/>
               </section>
             </Col>
           </Row>

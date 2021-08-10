@@ -22,7 +22,6 @@ export default ({t, formik, certificateTypes}) => {
   const [skip, setSkip] = useState(0);
   const [pageSelect, setPageSelect] = useState(1);
   const [totalSelect, setTotalSelect] = useState(0);
-  const [isExpiringCertificate, setIsExpiringCertificate] = useState(formik?.values?.validUntil);
 
   useEffect(() => {
     getEmployees();
@@ -104,16 +103,15 @@ export default ({t, formik, certificateTypes}) => {
 
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className="card--form--item-checkbox">
-            <Checkbox checked={isExpiringCertificate}
-              onChange={event => setIsExpiringCertificate(event.target.checked)}>
-              {t("FORM.GENERAL_INFORMATION.EXPIRATION_DATE")}
+            <Checkbox {...bindInputProps({name: 'infinite', ...formik})}>
+              {t('FORM.GENERAL_INFORMATION.EXPIRATION_DATE')}
             </Checkbox>
           </div>
         </Col>
       </Row>
 
       <Row gutter={[10, 8]}>
-        {isExpiringCertificate && <Col xs={24} sm={24} md={12} lg={12}>
+        {formik.values?.infinite && <Col xs={24} sm={24} md={12} lg={12}>
           <InputFormControl id='validForMonths'
             type='number'
             label={t('FORM.GENERAL_INFORMATION.VALID_MONTHS')}
@@ -121,7 +119,7 @@ export default ({t, formik, certificateTypes}) => {
             {...bindInputProps({name: 'validForMonths', ...formik})}/>
         </Col>}
 
-        {isExpiringCertificate && <Col xs={24} sm={24} md={12} lg={12}>
+        {formik.values?.infinite && <Col xs={24} sm={24} md={12} lg={12}>
           <InputFormControl id='validForYears'
             type='number'
             label={t('FORM.GENERAL_INFORMATION.VALID_YEAR')}

@@ -10,6 +10,7 @@ export const bindInputProps =
 
   return ({
     value: getFieldValue(name, values),
+    checked: getFieldValue(name, values),
     onChange: handleChange(name),
     onBlur: () => setFieldTouched(name),
     touched: getFieldValue(name, touched),

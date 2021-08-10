@@ -28,7 +28,22 @@ export const EditEmployees = () => {
   const {id} = useParams();
   const history = useHistory();
   const {t} = useTranslation(NAME_SPACES.EMPLOYEES);
-  const [initialValues, setInitialValues] = useState({id: cuid(), gender: 'male'});
+  const [initialValues, setInitialValues] = useState({
+    id: cuid(),
+    number: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    dateOfBirth: undefined,
+    gender: 'male',
+    avatar: undefined,
+    phone: undefined,
+    email: undefined,
+    address1: undefined,
+    address2: undefined,
+    zipCode: undefined,
+    city: undefined,
+    country: undefined,
+  });
 
   const [getEmployee, {loading: loadingEmployee}] = useLazyQuery(EMPLOYEE, {
     variables: {where: {id}},
