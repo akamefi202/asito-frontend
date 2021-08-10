@@ -76,7 +76,7 @@ export default () => {
   const {t} = useTranslation(NAME_SPACES.CERTIFICATES);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
-  const [scan, setScan] = useState("");
+  const [scan, setScan] = useState('');
   const [skip, setSkip] = useState(0);
   const [take, setTake] = useState(10);
   const [page, setPage] = useState(1);
@@ -145,9 +145,9 @@ export default () => {
     setSkip(0);
   };
 
-  const onSearchChange = (value) => {
+  const onSearchChange = (event) => {
     delay(() => {
-      setScan(value);
+      setScan(event.target.value);
       setSkip(0);
       setPage(1);
     }, 500);

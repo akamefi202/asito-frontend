@@ -83,9 +83,9 @@ export const EmployeesList = () => {
     {title: t("EMPLOYEES"), className: "heading--area--title"},
   ];
 
-  const onSearchChange = (value) => {
+  const onSearchChange = (event) => {
     delay(() => {
-      setScan(value);
+      setScan(event.target.value);
       setSkip(0);
       setPage(1);
     }, 500);

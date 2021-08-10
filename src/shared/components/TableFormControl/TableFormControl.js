@@ -4,7 +4,7 @@ import './style.scss'
 
 export const TableFormControl =
   ({
-     customStyleTable,
+     customStyleTable = '',
      dataSource,
      columns,
      page,

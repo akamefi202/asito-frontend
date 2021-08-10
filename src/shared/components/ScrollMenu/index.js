@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ className, menuItems = [] }) => {
+export default ({ className = '', menuItems = [] }) => {
   const handleScrollIntoView = (href) => {
     if (document.getElementById(href)) {
       document.getElementById(href).scrollIntoView({
