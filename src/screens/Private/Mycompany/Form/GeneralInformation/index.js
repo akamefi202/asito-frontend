@@ -4,6 +4,7 @@ import Card from "shared/components/Card";
 import { Input, Select } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
 import {COUNTRY_LIST} from "shared/constants/country";
+import { REQUIRED_FIELD_SYMBOL } from 'utils/constants';
 
 export default ({ t, formik }) => (
   <Card cardStyle={"card--form"}>
@@ -18,7 +19,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("SHOW.GENERAL_INFORMATION_ISSUER.NAME")}
+            {t("SHOW.GENERAL_INFORMATION_ISSUER.NAME")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "name", ...formik })}
@@ -29,7 +30,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("SHOW.GENERAL_INFORMATION_ISSUER.NUMBER")}
+            {t("SHOW.GENERAL_INFORMATION_ISSUER.NUMBER")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "number", ...formik })}
@@ -41,7 +42,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.ADDRESS")}
+            {t("FORM.GENERAL_INFORMATION.ADDRESS")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "address1", ...formik })}
@@ -53,7 +54,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={6} lg={6}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.POSTCODE")}
+            {t("FORM.GENERAL_INFORMATION.POSTCODE")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "zipCode", ...formik })}
@@ -64,7 +65,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={6} lg={6}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.CITY")}
+            {t("FORM.GENERAL_INFORMATION.CITY")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "city", ...formik })}
@@ -75,7 +76,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.COUNTRY")}
+            {t("FORM.GENERAL_INFORMATION.COUNTRY")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Select
             {...bindInputProps({ name: "country", ...formik })}
@@ -87,7 +88,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.PHONE_NUMBER")}
+            {t("FORM.GENERAL_INFORMATION.PHONE_NUMBER")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "phone", ...formik })}
@@ -98,7 +99,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={12} lg={12}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.EMAIL_ADDRESS")}
+            {t("FORM.GENERAL_INFORMATION.EMAIL_ADDRESS")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "email", ...formik })}
@@ -110,7 +111,7 @@ export default ({ t, formik }) => (
       <Col xs={24} sm={24} md={24} lg={24}>
         <div className="card--form--item">
           <label className="card--form--item--label">
-            {t("FORM.GENERAL_INFORMATION.WEBSITE")}
+            {t("FORM.GENERAL_INFORMATION.WEBSITE")} { REQUIRED_FIELD_SYMBOL }
           </label>
           <Input
             {...bindInputProps({ name: "website", ...formik })}
