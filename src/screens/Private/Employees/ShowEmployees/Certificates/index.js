@@ -34,7 +34,7 @@ const columns = (t) => [
 
       return (
         <div className="access--type">
-          {stringDate && <span className={`icon icon-Check ${isValid ? 'green' : 'red'}`}/>}
+          {stringDate && <span className={`icon ${isValid ? 'icon-Check green' : 'icon-Close red'}`}/>}
 
           <span className={(isValid ? "" : "red") + (!stringDate ? 'empty' : '')}>
               {stringDate ? dateToString(stringDate) : t('SHOW.CERTIFICATES.INFINITE')}
