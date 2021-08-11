@@ -55,7 +55,10 @@ export default () => {
     enableReinitialize: true,
     initialValues,
     validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
-    onSubmit: data => saveChanges({ variables: { data } })
+    onSubmit: data => {
+      delete data.roles;
+      saveChanges({ variables: { data } });
+    }
   });
 
   const getScrollMenuItem = (t) => {
