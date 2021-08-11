@@ -50,7 +50,7 @@ export const SelectFormControl =
     const onSelectSearch = (value) => delay(() => onSearch(value), 500);
 
     const sortItems = (a, b) => {
-      const nameA = t(`${a.value}`).toLowerCase(), nameB = t(`${b.value}`).toLowerCase();
+      const nameA = t(`${a?.[optionTitle] || a}`).toLowerCase(), nameB = t(`${b?.[optionTitle] || b}`).toLowerCase();
       if (nameA < nameB) return -1;
       if (nameA > nameB) return 1;
       return 0;
