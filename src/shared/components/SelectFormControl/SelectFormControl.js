@@ -36,6 +36,7 @@ export const SelectFormControl =
      filterSort,
      onChange,
      onSearch,
+     searchDelay = 500,
      onScroll,
      ...props
    }) => {
@@ -49,7 +50,7 @@ export const SelectFormControl =
       }
     }
 
-    const onSelectSearch = (value) => delay(() => onSearch(value), 500);
+    const onSelectSearch = (value) => delay(() => onSearch(value), searchDelay);
 
     const sortItems = (a, b) => {
       const nameA = t(`${a?.[optionTitle] || a}`).toLowerCase(), nameB = t(`${b?.[optionTitle] || b}`).toLowerCase();
