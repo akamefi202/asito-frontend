@@ -19,6 +19,7 @@ export const RadioGroup =
      size = 'large',
      optionType,
      disabled,
+     children,
      errors,
      onChange
    }) => {
@@ -36,13 +37,15 @@ export const RadioGroup =
           optionType={optionType}
           onChange={onChange}>
 
-          {items.map(item =>
+          {!children && items.map(item =>
             <Radio className={`radio ${customStyleRadio}`}
               key={'key-' + item?.[optionValue]}
               value={item?.[optionValue]}>
               {item?.[optionTitle] || ''}
             </Radio>
           )}
+
+          {children}
 
         </Radio.Group>
 

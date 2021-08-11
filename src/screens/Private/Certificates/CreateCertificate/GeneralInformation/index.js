@@ -5,19 +5,19 @@ import {useLazyQuery} from "@apollo/react-hooks";
 import {EmployeeQueries} from "shared/graphql/queries";
 import {messages} from "utils/helpers/message";
 import {bindInputProps} from "utils/helpers/input";
-import {withoutRepetitions} from "utils/helpers/array";
 import {REQUIRED_FIELD_SYMBOL} from "utils/constants";
-import {delay} from "utils/helpers/delay";
 import {SelectFormControl} from "../../../../../shared/components/SelectFormControl/SelectFormControl";
 import {InputFormControl} from "../../../../../shared/components/InputformControl/InputFormControl";
 import {DatePickerFormControl} from "../../../../../shared/components/DatePickerFormControl/DatePickerFormControl";
+import {uniq} from "../../../../../utils/helpers/fn";
 
 const {EMPLOYEES} = EmployeeQueries;
 
 export default ({t, formik, certificateTypes}) => {
-  const limit = 50;
+  const limit = 10;
 
   const [employeesItems, setEmployeesItems] = useState([]);
+  const [searchEmployees, setSearchEmployees] = useState([]);
   const [search, setSearch] = useState('');
   const [skip, setSkip] = useState(0);
   const [pageSelect, setPageSelect] = useState(1);
@@ -35,7 +35,11 @@ export default ({t, formik, certificateTypes}) => {
         value: item?.firstName + ' ' + item?.lastName
       }));
       setTotalSelect(employees.count || 0);
-      setEmployeesItems(withoutRepetitions([...employeesItems, ...items], null, 'id'));
+      if (search) setSearchEmployees(items)
+      else {
+        setEmployeesItems(uniq([...employeesItems, ...items], 'id'));
+        setSearchEmployees([])
+      }
     },
     onError: (error) => messages({data: error})
   });
@@ -48,11 +52,9 @@ export default ({t, formik, certificateTypes}) => {
   }
 
   const onSearch = (value) => {
-    delay(() => {
-      setPageSelect(1);
-      setSkip(0);
-      setSearch(value);
-    }, 500);
+    setPageSelect(1);
+    setSkip(0);
+    setSearch(value);
   }
 
   return (
@@ -65,9 +67,12 @@ export default ({t, formik, certificateTypes}) => {
             label={(t('FORM.GENERAL_INFORMATION.ISSUED_TO') + ' ' + REQUIRED_FIELD_SYMBOL)}
             placeholder={t('FORM.GENERAL_INFORMATION.ISSUED_TO_PLACEHOLDER')}
             {...bindInputProps({name: 'employee.id', ...formik})}
-            items={employeesItems}
+            items={search ? searchEmployees : employeesItems}
             loading={loading}
+            filterOption={false}
             isClearable={true}
+            defaultActiveFirstOption={false}
+            notFoundContent={null}
             onScroll={onScroll}
             onSearch={onSearch}/>
         </Col>

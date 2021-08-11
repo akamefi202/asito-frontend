@@ -102,9 +102,9 @@ export default ({t, formik, certificateId, deletedFiles, setDeletedFiles}) => {
         action={'/'}
         showUploadList={false}
         onChange={({file}) => uploadFile(file)}>
-        <Button buttonStyle={"btn--outline"}>
+        <Button buttonStyle="btn--outline">
           <span className="icon-Upload btn--icon--right"/>
-          {t("FORM.ATTACHMENTS.UPLOAD_FILE")}
+          {t('FORM.ATTACHMENTS.UPLOAD_FILE')}
         </Button>
       </Upload>
     </Card>

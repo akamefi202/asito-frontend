@@ -1,5 +1,21 @@
+.table-select {
+  margin-bottom: 0;
+}
+
+.cell-action {
+  text-align: center;
+  color: #808080;
+}
+
+.form-table {
+  .ant-table-tbody > tr > td {
+    border-bottom: none;
+  }
+}
+
 .card--form {
   margin-bottom: 24px;
+
   &--title {
     padding-bottom: 24px;
     font-weight: bold;
@@ -8,7 +24,7 @@
     color: #263238;
 
     @media (max-width: 700px) {
-        padding-bottom: 12px;
+      padding-bottom: 12px;
     }
   }
 
@@ -45,6 +61,7 @@
     box-shadow: inset 0px -1px 0px #f5f5f5;
     padding: 8px 16px;
     margin-bottom: 24px;
+
     h4 {
       color: #808080;
       font-size: 14px;
@@ -59,7 +76,7 @@
     flex-direction: column;
 
     @media (max-width: 700px) {
-        padding-bottom: 12px;
+      padding-bottom: 12px;
     }
 
     &--label {
@@ -94,7 +111,7 @@
   }
 
   .m-16 {
-      margin: 16px 0;
+    margin: 16px 0;
   }
 
   #dynamic_form_nest_item {

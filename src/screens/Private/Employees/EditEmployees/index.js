@@ -112,7 +112,7 @@ export const EditEmployees = () => {
       <Spin spinning={loading || loadingEmployee}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons}/>
         <div className="details--page">
-          <Row gutter={[16]}>
+          <Row>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem(t)}/>
             </Col>
