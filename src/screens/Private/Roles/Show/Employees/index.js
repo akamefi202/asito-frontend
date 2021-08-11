@@ -190,7 +190,10 @@ export default ({ t, role, roleId, requiredCertificates }) => {
         id
       }
     }
-    createEmployeeRole({ variables: { data } })
+    createEmployeeRole({ variables: { data } }).then(() => {
+      setAddForm(false)
+      setAddForm(true)
+    });
   }
 
   const removeOperator = (id) => {
