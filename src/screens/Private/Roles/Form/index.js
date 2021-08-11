@@ -68,6 +68,7 @@ export default () => {
     onCompleted: ({role}) => {
       const newRole = {...role};
       setInitialValues({...initialValues, ...removeTypename(newRole)});
+      getRoleRequirements();
     },
     onError: (error) => messages({ data: error })
   });
@@ -88,8 +89,7 @@ export default () => {
 
   useEffect(() => {
     if (id) {
-      getRole();
-      getRoleRequirements();
+      getRole()
     };
   }, []);
 
