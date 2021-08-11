@@ -160,10 +160,11 @@ export const CreateCertificate = () => {
         spinning={loading || (loadingCertificate && loadingIssuer && loadingCertificateTypes) || loadingAttachments}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons}/>
         <div className="details--page">
-          <Row gutter={[16]}>
+          <Row>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem()}/>
             </Col>
+
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
                 <GeneralInformation t={t} formik={formik} certificateTypes={certificateTypes}/>

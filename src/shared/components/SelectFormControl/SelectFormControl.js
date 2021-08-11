@@ -1,7 +1,8 @@
 import React from 'react';
 import {Select} from 'antd';
-import './style.scss'
 import {useTranslation} from "react-i18next";
+import {delay} from "../../../utils/helpers/delay";
+import './style.scss';
 
 const {Option} = Select;
 
@@ -29,7 +30,7 @@ export const SelectFormControl =
      optionValue = 'id',
      optionTitle = 'value',
      disabledOptions = [],
-     filterOption,
+     filterOption = false,
      filterSort,
      onChange,
      onSearch,
@@ -44,6 +45,15 @@ export const SelectFormControl =
         onScroll && onScroll(event);
         target.scrollTo(0, target.scrollHeight);
       }
+    }
+
+    const onSelectSearch = (value) => delay(() => onSearch(value), 500);
+
+    const sortItems = (a, b) => {
+      const nameA = t(`${a.value}`).toLowerCase(), nameB = t(`${b.value}`).toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
     }
 
     return (
@@ -64,17 +74,17 @@ export const SelectFormControl =
           filterOption={filterOption}
           filterSort={filterSort}
           showSearch={onSearch}
-          onSearch={onSearch}
+          onSearch={onSelectSearch}
           onPopupScroll={onPopupScroll}
           onChange={data => onChange(data || '')}
           {...props}>
 
-          {items.map(item => (
+          {items.sort(sortItems).map(item => (
             <Option className={customStyleOptions}
               key={'key-' + item[optionValue]}
-              value={item[optionValue]}
+              value={item?.[optionValue] || item}
               disabled={disabledOptions.includes(item[optionValue])}>
-              {t(`${item[optionTitle]}`)}
+              {t(`${item?.[optionTitle] || item}`)}
             </Option>
           ))}
 

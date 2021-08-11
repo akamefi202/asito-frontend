@@ -99,7 +99,7 @@ export default () => {
       <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
       <div className="details--page">
         <Spin spinning={loading || loadingDepartment}>
-          <Row gutter={[16]}>
+          <Row>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem(t)} />
             </Col>

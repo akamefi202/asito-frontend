@@ -1,131 +1,72 @@
-import React, { useState, useEffect } from "react";
-import { Col, Row, Form } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
-import { Card, Select, Button } from "shared/components";
-import { bindInputProps } from "utils/helpers/input";
-import { useQuery } from "@apollo/react-hooks";
-import { DepartmentQueries } from "shared/graphql/queries";
-import { messages } from "utils/helpers/message";
-import { withoutRepetitions } from "utils/helpers/array";
-import { delay } from "utils/helpers/delay";
+import React, {useState} from "react";
+import {CloseOutlined} from "@ant-design/icons";
+import {Card, Button} from "shared/components";
+import {useQuery} from "@apollo/react-hooks";
+import {DepartmentQueries} from "shared/graphql/queries";
+import {messages} from "utils/helpers/message";
+import {TableFormControl} from "../../../../../shared/components/TableFormControl/TableFormControl";
+import cuid from "cuid";
+import {EditableCell} from "./EditableCell";
 
-const { DEPARTMENTS } = DepartmentQueries;
+const {DEPARTMENTS} = DepartmentQueries;
 
-export default ({ t, formik }) => {
-  const [form] = Form.useForm();
-  const [departmentsSelect, setDepartmentsSelect] = useState([]);
-  const [scanSelect, setScanSelect] = useState("");
-  const [pageSelect, setPageSelect] = useState(1);
-  const [skipSelect, setSkipSelect] = useState(0);
-  const [totalSelect, setTotalSelect] = useState(0);
-  const [takeSelect, setTakeSelect] = useState(50);
-  const [scanStatus, setScanStatus] = useState(false);
+const getColumns = (t, removeDepartment) => [
+  {
+    title: t('FORM.DEPARTAMENT.COLUMNS.NAME'),
+    dataIndex: 'id',
+    width: '80%',
+    editable: true,
+  },
+  {
+    title: '',
+    dataIndex: 'action',
+    width: '20%',
+    className: 'cell-action',
+    render: (_, array, index) => <CloseOutlined onClick={() => removeDepartment(index)}/>
+  },
+]
 
-  const departments = formik.values.departments;
+export default ({t, formik}) => {
+  const [departments, setDepartments] = useState([]);
 
-  const variablesSelect = { scan: scanSelect, skip: skipSelect, take: takeSelect };
-
-  useEffect(() => {
-    form.setFieldsValue({ departments });
-  }, [departments])
-
-  const { loading } = useQuery(DEPARTMENTS, {
-    variables: variablesSelect,
-    onCompleted: ({ departments }) => {
-      if (!departments || !departments.data) return;
-      const select = departments.data.map((item) => ({ key: item.id, value: item.name }))
-        .sort((a,b) => a.value.localeCompare(b.value));
-      setTotalSelect(departments.count || 0);
-      const selectAll = scanStatus ? select : withoutRepetitions([...departmentsSelect, ...select]);
-      setScanStatus(false);
-      setDepartmentsSelect(selectAll);
-    },
-    onError: (error) => {
-      messages({ data: error });
-    }
+  const {loading} = useQuery(DEPARTMENTS, {
+    variables: {skip: 0, take: 50},
+    onCompleted: (loadData) => setDepartments(loadData?.departments?.data || []),
+    onError: (error) => messages({data: error})
   });
 
-  const getSelect = () => {
-    if ((totalSelect <= skipSelect) || (takeSelect >= totalSelect)) return;
-    const page = pageSelect;
-    setPageSelect(page + 1);
-    setSkipSelect(takeSelect * page);
+  const addDepartment = () => {
+    const values = formik.getFieldProps('departments')?.value || [];
+    formik.setFieldValue('departments', [...values, {}]);
   }
 
-  const getScanSelect = (value) => {
-    delay(() => {
-      setPageSelect(1);
-      setSkipSelect(0);
-      setScanSelect(value);
-      setScanStatus(true);
-    }, 500);
+  const removeDepartment = (index) => {
+    const values = formik.getFieldProps('departments')?.value || [];
+    formik.setFieldValue('departments', [...values.filter((d, dIndex) => dIndex !== index)]);
   }
 
-  const onValuesChange = (_, data) => {
-    const departments = data.departments.map(department => {
-      if (department && !department.id) return;
-      return { id: department && department.id };
-    });
-
-    formik.setFieldValue("departments", departments);
-  };
+  const columns = getColumns(t, removeDepartment)
+    .map(col => (col.editable
+      ? {...col, onCell: (record, index) => ({editable: col.editable, index, formik, departments})}
+      : col));
 
   return (
-    <Card cardStyle={"card--form"}>
-      <Row>
-        <Col xs={24}>
-          <h2 className="card--form--title">{t("FORM.MENU.DEPARTAMENT")}</h2>
-        </Col>
-      </Row>
-      <Row className="w-100-100">
-        <Col xs={24} md={24}>
-          <div className="card--form--head">
-            <h4>{t("FORM.DEPARTAMENT.COLUMNS.NAME")}</h4>
-          </div>
-        </Col>
-      </Row>
-      <Row className="w-100-100 card--form--list">
-        <Col xs={24} sm={24}>
-          <Form form={form}
-                name="dynamic_form_nest_item"
-                onValuesChange={onValuesChange}
-                autoComplete="off">
+    <Card cardStyle='card--form'>
+      <h2 className="card--form--title">{t('FORM.MENU.DEPARTAMENT')}</h2>
 
-            <Form.List name="departments">
-              {(fields, { add, remove }) => (
-                <>
-                  {fields.map(field => (
-                      <div className="card--form--list--field" key={field.key}>
-                        <Row gutter={[16, 8]} align="middle" className="m-16">
-                          <Col xs={10} md={10}>
-                            <Select placeholder={t("FORM.DEPARTAMENT.COLUMNS.NAME_PLACEHOLDER")}
-                                    items={departmentsSelect.filter(x => !departments.some(y => x.key === y.id))}
-                                    {...bindInputProps({prefix: true, name: `departments.${field.name}.id`, ...formik})}
-                                    getSelect={getSelect}
-                                    notFilteredArray={departmentsSelect}
-                                    getScan={getScanSelect}
-                                    loading={loading}/>
-                          </Col>
-                          <Col xs={10} md={10}/>
-                          <Col xs={4} md={4}>
-                            <div className="btn--icon">
-                              <CloseOutlined onClick={() => remove(field.name)}/>
-                            </div>
-                          </Col>
-                        </Row>
-                      </div>
-                  ))}
-                    <Button buttonStyle={"btn--outline"}
-                            icon={<span className="icon-Add-New btn--icon--right"/>}
-                            onClick={() => add()}>
-                        {t("FORM.DEPARTAMENT.ADD_ROW")}
-                    </Button>
-                </>
-              )}
-            </Form.List>
-          </Form>
-        </Col>
-      </Row>
+      <TableFormControl rowKey={() => cuid()}
+        components={{body: {cell: EditableCell}}}
+        customStyleTable="form-table"
+        columns={columns}
+        dataSource={formik.values.departments}
+        loading={loading}
+        size='small'
+        pagination={false}/>
+
+      <Button type='button' buttonStyle="btn--outline" icon={<span className="icon-Add-New btn--icon--right"/>}
+        onClick={addDepartment}>
+        {t('FORM.DEPARTAMENT.ADD_ROW')}
+      </Button>
     </Card>
   );
 };
