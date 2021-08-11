@@ -4,6 +4,8 @@ import {useTranslation} from "react-i18next";
 import {delay} from "../../../utils/helpers/delay";
 import './style.scss';
 
+import {NAME_SPACES} from "../../locales/constants";
+
 const {Option} = Select;
 
 export const SelectFormControl =
@@ -37,7 +39,7 @@ export const SelectFormControl =
      onScroll,
      ...props
    }) => {
-    const {t} = useTranslation();
+    const {t} = useTranslation(NAME_SPACES.COUNTRIES);
 
     const onPopupScroll = (event) => {
       const target = event.target;
