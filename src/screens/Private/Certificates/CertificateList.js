@@ -95,8 +95,6 @@ export default () => {
 
   useEffect(() => {
     filterData();
-    validData();
-    expiredData();
   }, []);
 
   const [filterData, {loading}] = useLazyQuery(CERTIFICATES, {
@@ -105,20 +103,8 @@ export default () => {
       if (!certificates.data) return;
       setTotal(certificates.count);
       setData(certificates.data);
-      if (!Object.keys(statusTab).length && !scan) setCount({...count, ALL: certificates.count});
+      if (!Object.keys(statusTab).length && !scan) setCount({...count, ALL: certificates.allCertsCount, gt: certificates.validCertsCount + certificates.unlimitedCertsCount, lt: certificates.expiredCertsCount});
     },
-    onError: (error) => messages({data: error})
-  });
-
-  const [validData, {loading: validDataLoading}] = useLazyQuery(CERTIFICATES, {
-    variables: {gt: {validUntil: today}},
-    onCompleted: ({certificates}) => setCount({...count, gt: certificates.count}),
-    onError: (error) => messages({data: error})
-  });
-
-  const [expiredData, {loading: expiredDataLoading}] = useLazyQuery(CERTIFICATES, {
-    variables: {lt: {validUntil: today}},
-    onCompleted: ({certificates}) => setCount({...count, lt: certificates.count}),
     onError: (error) => messages({data: error})
   });
 
@@ -185,7 +171,7 @@ export default () => {
             className='table--custom'
             columns={columns(t)}
             dataSource={data}
-            loading={loading || validDataLoading || expiredDataLoading}
+            loading={loading}
             onRow={row => ({onClick: () => history.push(PATHS.CERTIFICATES.SHOW.replace(':id', row.id))})}
             total={total}
             pageSize={take}

@@ -84,6 +84,10 @@ export const CERTIFICATES = gql`
         }
       }
       count
+      allCertsCount
+      unlimitedCertsCount
+      validCertsCount
+      expiredCertsCount
     }
   }
 `;
