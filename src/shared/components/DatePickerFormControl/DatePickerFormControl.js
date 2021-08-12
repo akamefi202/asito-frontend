@@ -13,7 +13,7 @@ export const DatePickerFormControl =
      placeholder,
      value,
      size = 'large',
-     mode = 'date',
+     mode,
      format = 'DD-MM-YYYY',
      defaultPickerValue,
      disabledDate,
