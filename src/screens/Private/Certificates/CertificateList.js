@@ -103,7 +103,7 @@ export default () => {
       if (!certificates.data) return;
       setTotal(certificates.count);
       setData(certificates.data);
-      if (!Object.keys(statusTab).length && !scan) setCount({...count, ALL: certificates.allCertsCount, gt: certificates.validCertsCount + certificates.unlimitedCertsCount, lt: certificates.expiredCertsCount});
+      if (!Object.keys(statusTab).length && !scan) setCount({...count, ALL: certificates.allCertsCount, gt: certificates.validCertsCount, lt: certificates.expiredCertsCount});
     },
     onError: (error) => messages({data: error})
   });
@@ -126,7 +126,8 @@ export default () => {
   ];
 
   const changeTab = (key) => {
-    setStatusTab(key !== "ALL" ? {[key]: {validUntil: today}} : {});
+    if (key === 'gt') setStatusTab({where: { validUntil: null },[key]: {validUntil: today}});
+    else setStatusTab(key !== "ALL" ? {[key]: {validUntil: today}} : {});
     setPage(1);
     setSkip(0);
   };
