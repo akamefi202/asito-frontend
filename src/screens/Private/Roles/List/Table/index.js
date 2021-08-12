@@ -18,9 +18,9 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.REQUIREMENTS"),
-    dataIndex: "requirements",
-    key: "requirements",
-    render: (requirements) => requirements ? requirements.length : 0,
+    dataIndex: "requirementsCount",
+    key: "requirementsCount",
+    render: (requirementsCount) => requirementsCount,
   },
   {
     title: t("LIST.COLUMNS.EMPLOYEES"),

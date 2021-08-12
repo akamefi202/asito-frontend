@@ -47,8 +47,6 @@ export default () => {
 
   useEffect(() => {
     filterData();
-    activeData();
-    inactiveData();
   }, []);
 
   const [filterData, { loading }] = useLazyQuery(ROLES, {
@@ -58,21 +56,9 @@ export default () => {
       setData(roles.data);
       setTotal(roles.count);
       if (!Object.keys(statusTab).length && !scan) {
-        setCount({ ...count, ALL: roles.count });
+        setCount({ ...count, ALL: roles.count, ACTIVE: roles.activeRolesCount, INACTIVE: roles.inactiveRolesCount });
       }
     },
-    onError: (error) => messages({ data: error })
-  });
-
-  const [activeData, { loading: activeDataLoading }] = useLazyQuery(ROLES, {
-    variables: { where: { status: "ACTIVE" } },
-    onCompleted: ({ roles }) => setCount({ ...count, ACTIVE: roles.count }),
-    onError: (error) => messages({ data: error })
-  });
-
-  const [inactiveData, { loading: inactiveDataLoading }] = useLazyQuery(ROLES, {
-    variables: { where: { status: "INACTIVE" } },
-    onCompleted: ({ roles }) => setCount({ ...count, INACTIVE: roles.count }),
     onError: (error) => messages({ data: error })
   });
 
@@ -127,7 +113,7 @@ export default () => {
               />
             ))}
           </Tabs>
-          <Spin spinning={loading || activeDataLoading || inactiveDataLoading}>
+          <Spin spinning={loading}>
             <div className="search--input">
               <Input
                 onChange={onSearchChange}

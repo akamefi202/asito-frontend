@@ -29,11 +29,7 @@ export const ROLE = gql`
         url
         updatedAt
       }
-      requirements {
-        id
-        type
-        validAtLeastUntil
-      }
+      requirementsCount
       employeeRoles {
         id
         role {
@@ -74,9 +70,7 @@ export const ROLES = gql`
         }
         accepted
         roleDescription
-        requirements {
-          id
-        }
+        requirementsCount
         employeeRoles {
           id
           role {
@@ -94,6 +88,8 @@ export const ROLES = gql`
         }
       }
       count
+      activeRolesCount
+      inactiveRolesCount
     }
   }
 `;
