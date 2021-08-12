@@ -159,6 +159,7 @@ export default ({ t, role, roleId, requiredCertificates }) => {
     {
       onCompleted: (data) => {
         getEmployeeRoles();
+        if (data.createEmployeeRole.id === null) messages({ data: {message: "Deze medewerker is al toegevoegd aan deze functie"} });
       },
       onError: (error) => {
         setLoading(false);
