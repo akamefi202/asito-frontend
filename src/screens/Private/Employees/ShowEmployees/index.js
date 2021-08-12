@@ -36,7 +36,7 @@ export const ShowEmployees = () => {
   const [qrCodeModalVisible, setQRCodeModalVisible] = useState(false);
   const [pageCertificates, setPageCertificates] = useState(1);
   const [skipCertificates, setSkipCertificates] = useState(0);
-  const [takeCertificates] = useState(5);
+  const [takeCertificates] = useState(10);
   const [totalCertificates, setTotalCertificates] = useState(0);
 
   const user = useReactiveVar(UserStore);
