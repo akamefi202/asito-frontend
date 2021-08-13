@@ -44,8 +44,8 @@ export const EMPLOYEE = gql`
 `;
 
 export const EMPLOYEES = gql`
-  query employees($where: EmployeeWhereInput, $like: EmployeeWhereInput, $scan: String, $skip: Int, $take: Int) {
-    employees(where: $where, like: $like, scan: $scan, skip: $skip, take: $take) {
+  query employees($where: EmployeeWhereInput, $like: EmployeeWhereInput, $scan: String, $skip: Int, $take: Int, $orderBy: [JSONObject]) {
+    employees(where: $where, like: $like, scan: $scan, skip: $skip, take: $take, orderBy: $orderBy) {
       data {
         id
         number

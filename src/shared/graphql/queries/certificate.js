@@ -57,8 +57,8 @@ export const CERTIFICATE = gql`
 `;
 
 export const CERTIFICATES = gql`
-  query Certificates($where: CertificateWhereInput, $scan: String, $lt: CertificateWhereInput, $gt: CertificateWhereInput, $skip: Int, $take: Int) {
-    certificates(where: $where, scan: $scan, skip: $skip, take: $take, lt: $lt, gt: $gt) {
+  query Certificates($where: CertificateWhereInput, $scan: String, $lt: CertificateWhereInput, $gt: CertificateWhereInput, $skip: Int, $take: Int, $orderBy: [JSONObject]) {
+    certificates(where: $where, scan: $scan, skip: $skip, take: $take, lt: $lt, gt: $gt, orderBy: $orderBy) {
       data {
         id
         signedBy

@@ -19,6 +19,7 @@ export const TableFormControl =
      onExpand,
      scroll,
      size = 'default',
+     onChange,
      pagination = {
        total,
        pageSize,
@@ -43,6 +44,7 @@ export const TableFormControl =
         rowSelection={rowSelection}
         pagination={pagination}
         scroll={scroll}
+        onChange={onChange}
         {...props}/>
     )
   }

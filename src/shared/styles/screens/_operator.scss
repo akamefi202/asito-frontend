@@ -142,31 +142,6 @@
     @media (max-width: 500px) {
       width: 100%;
     }
-
-    input::placeholder {
-      /* Chrome, Firefox, Opera, Safari 10.1+ */
-      font-size: 16px;
-      line-height: 24px;
-      color: #dcdcdc;
-      font-weight: 600;
-      opacity: 1; /* Firefox */
-    }
-
-    input:-ms-input-placeholder {
-      /* Internet Explorer 10-11 */
-      font-size: 16px;
-      line-height: 24px;
-      color: #dcdcdc;
-      font-weight: 600;
-    }
-
-    input::-ms-input-placeholder {
-      /* Microsoft Edge */
-      font-size: 16px;
-      line-height: 24px;
-      color: #dcdcdc;
-      font-weight: 600;
-    }
   }
 }
 

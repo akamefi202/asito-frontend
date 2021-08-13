@@ -12,8 +12,8 @@ import {useReactiveVar} from "@apollo/client";
 import {UserStore} from "shared/store/UserStore";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {delay} from "utils/helpers/delay";
-import {TableFormControl} from "../../../shared/components/TableFormControl/TableFormControl";
 import {Tooltip} from "antd";
+import {TableFormControl} from "../../../shared/components/TableFormControl/TableFormControl";
 import {InputFormControl} from "../../../shared/components/InputformControl/InputFormControl";
 
 const {EMPLOYEES} = EmployeeQueries;
@@ -22,6 +22,7 @@ const columns = (t) => [
   {
     title: t('LIST.COLUMNS.NAME'),
     dataIndex: 'full_mame',
+    sorter: true,
     render: (_, column) => (column?.firstName || '') + ' ' + (column?.lastName || '')
   },
   {
@@ -54,11 +55,12 @@ export const EmployeesList = () => {
   const [total, setTotal] = useState(0);
   const [take, setTake] = useState(10);
   const [page, setPage] = useState(1);
+  const [sortType, setSortType] = useState({name: 'updatedAt', type:'DESC'});
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
-  const variables = {scan, skip, take};
+  const variables = {scan, skip, take, orderBy: [sortType]};
 
   const {data, loading} = useQuery(EMPLOYEES, {
     variables,
@@ -96,6 +98,12 @@ export const EmployeesList = () => {
     setSkip(take * (page - 1));
   };
 
+  const onChangeTable = (pagination, filters, sorter) => {
+    if (!sorter.order) return setSortType({ name: "updatedAt", type:  "DESC" });
+    const sortBy = { name: "firstName", type: sorter.order === 'descend' ? "DESC" : "ASC" };
+    setSortType(sortBy);
+  }
+
   const onShowSizeChange = (current, size) => setTake(size);
 
   const isAccess = () => userRole && ((userRole === USER_ROLES.PLANER.key) || (userRole === USER_ROLES.TEST.key));
@@ -119,6 +127,7 @@ export const EmployeesList = () => {
             total={total}
             page={page}
             pageSize={take}
+            onChange={onChangeTable}
             onPageChange={onPageChange}
             onShowSizeChange={onShowSizeChange}
             onRow={record => ({onClick: () => history.push(PATHS.EMPLOYEES.SHOW.replace(':id', record.id))})}/>

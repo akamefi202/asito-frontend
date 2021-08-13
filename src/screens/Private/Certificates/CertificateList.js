@@ -31,6 +31,7 @@ const columns = (t) => [
   {
     title: t('LIST.COLUMNS.CERTIFICATE_NUMBER'),
     dataIndex: 'number',
+    sorter: true
   },
   {
     title: t('LIST.COLUMNS.CERTIFICATE_TYPE'),
@@ -75,6 +76,7 @@ export default () => {
   const history = useHistory();
   const {t} = useTranslation(NAME_SPACES.CERTIFICATES);
   const [data, setData] = useState([]);
+  const [sortType, setSortType] = useState({name: 'updatedAt', type:'DESC'});
   const [total, setTotal] = useState(0);
   const [scan, setScan] = useState('');
   const [skip, setSkip] = useState(0);
@@ -91,7 +93,7 @@ export default () => {
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
-  const variables = {scan, skip, take, ...statusTab};
+  const variables = {scan, skip, take, orderBy: [sortType], ...statusTab};
 
   useEffect(() => {
     filterData();
@@ -145,6 +147,12 @@ export default () => {
     setSkip(take * (page - 1));
   };
 
+  const onChange = (pagination, filters, sorter) => {
+    if (!sorter.order) return setSortType({ name: "updatedAt", type:  "DESC" });
+    const sortBy = { name: "number", type: sorter.order === 'descend' ? "DESC" : "ASC" };
+    setSortType(sortBy);
+  }
+
   const onShowSizeChange = (current, size) => setTake(size);
 
   const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || (userRole === USER_ROLES.TEST.key));
@@ -177,6 +185,7 @@ export default () => {
             total={total}
             pageSize={take}
             page={page}
+            onChange={onChange}
             onPageChange={onPageChange}
             onShowSizeChange={onShowSizeChange}/>
         </Card>

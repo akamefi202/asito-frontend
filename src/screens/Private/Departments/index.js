@@ -1,4 +1,4 @@
-import List from "./List";
+import { DepartmentsList } from "./DepartmentsList";
 import Show from "./Show";
 import Form from "./Form";
 import { PATHS } from "utils/constants";
@@ -7,7 +7,7 @@ const routes = [
   {
     path: PATHS.DEPARTMENTS.INDEX,
     exact: true,
-    component: List,
+    component: DepartmentsList,
   },
   {
     path: PATHS.DEPARTMENTS.SHOW,

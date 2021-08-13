@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Tabs } from "antd";
-import { Card, Header, Spin, Input } from "shared/components";
-import Table from "./Table";
+import { Card, Header } from "shared/components";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -13,6 +12,8 @@ import { USER_ROLES } from "shared/constants/userRoles";
 import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
 import { delay } from "utils/helpers/delay";
+import { TableFormControl } from "../../../shared/components/TableFormControl/TableFormControl";
+import {InputFormControl} from "../../../shared/components/InputformControl/InputFormControl";
 
 const { ROLES } = RoleQueries;
 
@@ -24,7 +25,48 @@ const tabs = [
   { title: "INACTIVE", key: "INACTIVE", },
 ];
 
-export default () => {
+const columns = (t) => [
+  {
+    title: t("LIST.COLUMNS.NAME"),
+    dataIndex: "name",
+    key: "name",
+    sorter: true
+  },
+  {
+    title: t("LIST.COLUMNS.DEPARTAMENT"),
+    dataIndex: "departments",
+    key: "departments",
+    render: (departments) => departments ? departments.length : 0
+  },
+  {
+    title: t("LIST.COLUMNS.REQUIREMENTS"),
+    dataIndex: "requirementsCount",
+    key: "requirementsCount",
+    render: (requirementsCount) => requirementsCount,
+  },
+  {
+    title: t("LIST.COLUMNS.EMPLOYEES"),
+    dataIndex: "numberOfEmployeesRequired",
+    key: "numberOfEmployeesRequired",
+    render: (number, record) => (
+      <span>
+        {`${record.employeeRoles && record.employeeRoles.length || 0}/${number}`}
+      </span>
+    ),
+  },
+  {
+    title: t("LIST.COLUMNS.STATUS"),
+    dataIndex: "status",
+    key: "status",
+    render: (text) => (
+      <span className={text === "ACTIVE" ? "green" : "yellow"}>
+        {t(`STATUS_CODE.${text}`)}
+      </span>
+    ),
+  },
+];
+
+export const RolesList = () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.ROLES);
   const [data, setData] = useState([]);
@@ -39,11 +81,12 @@ export default () => {
   const [total, setTotal] = useState(0);
   const [take, setTake] = useState(10);
   const [page, setPage] = useState(1);
+  const [sortType, setSortType] = useState({name: 'updatedAt', type:'DESC'});
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
-  const variables = { scan, skip, take, where: { ...statusTab } };
+  const variables = { scan, skip, take, where: { ...statusTab }, orderBy: [sortType] };
 
   useEffect(() => {
     filterData();
@@ -89,6 +132,19 @@ export default () => {
     }, 500);
   };
 
+  const onPageChange = (page) => {
+    setPage(page);
+    setSkip(take * (page - 1));
+  };
+
+  const onChangeTable = (pagination, filters, sorter) => {
+    if (!sorter.order) return setSortType({ name: "updatedAt", type:  "DESC" });
+    const sortBy = { name: "name", type: sorter.order === 'descend' ? "DESC" : "ASC" };
+    setSortType(sortBy);
+  }
+
+  const onShowSizeChange = (current, size) => setTake(size);
+
   const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || (userRole === USER_ROLES.TEST.key));
 
   return (
@@ -96,33 +152,31 @@ export default () => {
       <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
       <div className="details--page">
         <Card>
-          <Tabs defaultActiveKey={tabs[0]?.title} onChange={changeTab} className="tab--custom">
-            {tabs.map((item) => (
-              <TabPane
-                tab={
-                  <div className="tab--count">
-                    <span className="tab--count--title">
-                      {t(`LIST.TABS.${item.title}`)}
-                    </span>
-                    <span className="tab--count--number">
-                      {count[item.key]}
-                    </span>
-                  </div>
-                }
-                key={item.key}
+          <Tabs className="tab--custom" defaultActiveKey={tabs[0]?.title} onChange={changeTab}>
+            {tabs.map((item) =>
+              <TabPane key={item.key}
+                tab={<div className="tab--count">{t(`LIST.TABS.${item.title}`) + ' ' + count[item.key]}</div>}
               />
-            ))}
+            )}
           </Tabs>
-          <Spin spinning={loading}>
-            <div className="search--input">
-              <Input
-                onChange={onSearchChange}
-                custom={"search--input--custom"}
-                placeholder={t("LIST.SEARCH_PLACEHOLDER")}
-              />
-            </div>
-            <Table t={t} roles={data} take={take} setTake={setTake} setSkip={setSkip} total={total} page={page} setPage={setPage} />
-          </Spin>
+
+          <InputFormControl id='search'
+            customStyleWrapper='search--input--custom'
+            placeholder={t('LIST.SEARCH_PLACEHOLDER')}
+            onChange={onSearchChange}/>
+
+          <TableFormControl rowKey='id'
+            className='table--custom'
+            columns={columns(t)}
+            dataSource={data}
+            loading={loading}
+            onRow={row => ({onClick: () => history.push(PATHS.ROLES.SHOW.replace(':id', row.id))})}
+            total={total}
+            pageSize={take}
+            page={page}
+            onChange={onChangeTable}
+            onPageChange={onPageChange}
+            onShowSizeChange={onShowSizeChange}/>
         </Card>
       </div>
     </div>

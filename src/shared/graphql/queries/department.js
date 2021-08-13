@@ -43,8 +43,8 @@ export const DEPARTMENT = gql`
 `;
 
 export const DEPARTMENTS = gql`
-  query departments($scan: String, $where: DepartmentWhereInput, $skip: Int, $take: Int) {
-    departments(scan: $scan, where: $where, skip: $skip, take: $take) {
+  query departments($scan: String, $where: DepartmentWhereInput, $skip: Int, $take: Int, $orderBy: [JSONObject]) {
+    departments(scan: $scan, where: $where, skip: $skip, take: $take, orderBy: $orderBy) {
       data {
         id
         name
