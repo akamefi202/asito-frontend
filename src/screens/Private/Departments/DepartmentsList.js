@@ -82,9 +82,9 @@ export const DepartmentsList = () => {
     { title: t("DEPARTMENTS"), className: "heading--area--title" },
   ];
 
-  const onSearchChange = (value) => {
+  const onSearchChange = (event) => {
     delay(() => {
-      setScan(value);
+      setScan(event.target.value);
       setSkip(0);
       setPage(1);
     }, 500);

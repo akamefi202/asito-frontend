@@ -44,8 +44,7 @@ export default () => {
   const setBreadcrumbsItem = [
     {
       title: t("MYCOMPANY"),
-      className: "custom--breadcrumb--one",
-      href: PATHS.MYCOMPANY.INDEX,
+      className: "heading--area--title"
     },
   ];
 
