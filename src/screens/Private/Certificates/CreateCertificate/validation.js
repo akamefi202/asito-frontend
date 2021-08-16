@@ -6,12 +6,12 @@ export default messages => {
     type: yup.string().required(messages.REQUIRED),
     issuedOn: yup.string().required(messages.REQUIRED),
     infinite: yup.boolean(),
-    validForMonths: yup.number().typeError('Ongeldig waardetype').min(0, 'Ongeldig waardetype')
+    validForMonths: yup.number().typeError('Ongeldig waardetype').min(1, 'Ongeldig waardetype')
       .when(['infinite', 'validForYears'], {
         is: (infinite, validForYears) => infinite && !validForYears,
         then: yup.number().required(messages.REQUIRED),
       }),
-    validForYears: yup.number().typeError('Ongeldig waardetype').min(0, 'Ongeldig waardetype')
+    validForYears: yup.number().typeError('Ongeldig waardetype').min(1, 'Ongeldig waardetype')
       .when(['infinite', 'validForMonths'], {
         is: (infinite, validForMonths) => infinite && !validForMonths,
         then: yup.number().required(messages.REQUIRED),
