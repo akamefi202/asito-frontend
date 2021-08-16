@@ -20,5 +20,8 @@ export const bindInputProps =
 
 
 const getFieldValue = (fields, object) => {
-  return fields.split('.').reduce((acc, value) => (acc = acc?.[value], acc), object)
+  return fields.split('.').reduce((acc, value) => {
+      acc = acc?.[value];
+      return acc;
+  }, object)
 }
