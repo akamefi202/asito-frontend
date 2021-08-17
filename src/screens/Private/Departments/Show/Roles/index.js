@@ -33,10 +33,17 @@ const columns = (t) => [
 
 export default ({ t, roles }) => {
   const [page, setPage] = useState(1);
+  const [take, setTake] = useState(1);
+  const [skip, setSkip] = useState(0);
 
   const onPageChange = (page) => {
     setPage(page);
+    setSkip(take * (page - 1));
   };
+
+  const onChange = (pagination, filters, sorter) => {
+    if (pagination.current === page) onPageChange(1);
+  }
 
   return (
     <Card cardStyle={"card--details"}>
@@ -53,10 +60,12 @@ export default ({ t, roles }) => {
             columns={columns(t)}
             className="custom--table"
             data={roles}
-            page={page}
-            total={roles.length}
-            onPageChange={onPageChange}
             rowKey={"id"}
+            onPageChange={onPageChange}
+            total={roles.length}
+            pageSize={take}
+            page={page}
+            onChange={onChange}
             onRow={() => ({
               onClick: () => {},
             })}

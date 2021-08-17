@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Table } from "shared/components";
 import Card from "shared/components/Card";
@@ -26,6 +26,19 @@ const columns = (t) => [
 ];
 
 export default ({ t, protocols }) => {
+  const [page, setPage] = useState(1);
+  const [take, setTake] = useState(10);
+  const [skip, setSkip] = useState(0);
+
+  const onPageChange = (page) => {
+    setPage(page);
+    setSkip(take * (page - 1));
+  };
+
+  const onChange = (pagination, filters, sorter) => {
+    if (pagination.current === page) onPageChange(1);
+  }
+
   return (
     <Card cardStyle={"card--details"}>
       <Row>
@@ -40,6 +53,11 @@ export default ({ t, protocols }) => {
             className="custom--table"
             data={protocols}
             rowKey={"id"}
+            onPageChange={onPageChange}
+            total={protocols.length}
+            pageSize={10}
+            page={page}
+            onChange={onChange}
             onRow={(record) => {
               return {
                 onClick: () => { },

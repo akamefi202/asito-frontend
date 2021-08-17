@@ -21,10 +21,16 @@ const columns = (t) => [
 export default ({ t, role, requirements }) => {
   const [page, setPage] = useState(1);
   const [take, setTake] = useState(10);
+  const [skip, setSkip] = useState(0);
 
   const onPageChange = (page) => {
     setPage(page);
+    setSkip(take * (page - 1));
   };
+
+  const onChange = (pagination, filters, sorter) => {
+    if (pagination.current === page) onPageChange(1);
+  }
 
   const onShowSizeChange = (current, size) => {
     setTake(size);
@@ -44,10 +50,11 @@ export default ({ t, role, requirements }) => {
             className="custom--table"
             data={requirements.map((x => ({validAtLeastUntil: x.validAtLeastUntil, type: x.requirement.type, id: x.id})))}
             rowKey={"id"}
-            total={requirements.length}
-            page={page}
-            pageSize={take}
             onPageChange={onPageChange}
+            total={requirements.length}
+            pageSize={take}
+            page={page}
+            onChange={onChange}
             onShowSizeChange={onShowSizeChange}
             onRow={(record) => {
               return {

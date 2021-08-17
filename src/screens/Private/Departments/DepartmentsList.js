@@ -100,6 +100,7 @@ export const DepartmentsList = () => {
   }
 
   const onChangeTable = (pagination, filters, sorter) => {
+    if (pagination.current === page) onPageChange(1);
     if (!sorter.order) return setSortType({ name: "updatedAt", type:  "DESC" });
     const sortBy = { name: "name", type: sorter.order === 'descend' ? "DESC" : "ASC" };
     setSortType(sortBy);

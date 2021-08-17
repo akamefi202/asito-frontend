@@ -286,6 +286,10 @@ export default ({ t, role, roleId, requiredCertificates }) => {
 
   const isAccess = () => userRole && ((userRole === USER_ROLES.PLANER.key) || (userRole === USER_ROLES.TEST.key));
 
+  const onChangeTable = (pagination, filters, sorter) => {
+    if (pagination.current === page) onPageChange(1);
+  }
+
   return (
     <Card cardStyle={"card--details"}>
       <Spin spinning={loading}>
@@ -334,6 +338,7 @@ export default ({ t, role, roleId, requiredCertificates }) => {
               pageSize={takeEmployeeRoles}
               onPageChange={onPageChange}
               onShowSizeChange={onShowSizeChange}
+              onChange={onChangeTable}
               components={{
                 header: {
                   row: (props) => renderHeader(props, columns(t, removeOperator))

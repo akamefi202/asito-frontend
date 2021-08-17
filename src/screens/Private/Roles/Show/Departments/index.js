@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { Row, Col } from "antd";
@@ -30,6 +30,18 @@ const columns = (t) => [
 ];
 
 export default ({ t, departments }) => {
+  const [page, setPage] = useState(1);
+  const [take, setTake] = useState(10);
+  const [skip, setSkip] = useState(0);
+
+  const onPageChange = (page) => {
+    setPage(page);
+    setSkip(take * (page - 1));
+  };
+
+  const onChange = (pagination, filters, sorter) => {
+    if (pagination.current === page) onPageChange(1);
+  }
 
   return (
     <Card cardStyle={"card--details"}>
@@ -45,6 +57,11 @@ export default ({ t, departments }) => {
             className="custom--table"
             data={departments}
             rowKey={"id"}
+            onPageChange={onPageChange}
+            total={departments.length}
+            pageSize={10}
+            page={page}
+            onChange={onChange}
             onRow={(record) => {
               return {
                 onClick: () => { },
