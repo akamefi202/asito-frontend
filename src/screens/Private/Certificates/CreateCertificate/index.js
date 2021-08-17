@@ -102,6 +102,9 @@ export const CreateCertificate = () => {
       delete newData.type;
       delete newData.infinite;
 
+      if (!newData.validForMonths) delete newData.validForMonths;
+      if (!newData.validForYears) delete newData.validForYears;
+
       newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
       newData.attachments = data.attachments.map(x =>
         ({id: x.id, certificate: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
