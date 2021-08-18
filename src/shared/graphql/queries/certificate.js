@@ -28,6 +28,7 @@ export const CERTIFICATE = gql`
         email
         number
         firstName
+        middleName
         lastName
         address1
         address2
@@ -80,6 +81,7 @@ export const CERTIFICATES = gql`
         employee {
           id
           firstName
+          middleName
           lastName
         }
       }

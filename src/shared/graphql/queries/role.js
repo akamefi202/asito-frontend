@@ -39,6 +39,7 @@ export const ROLE = gql`
           id
           number
           firstName
+          middleName
           lastName
           certificates {
             id

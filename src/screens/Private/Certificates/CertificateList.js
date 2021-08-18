@@ -40,7 +40,7 @@ const columns = (t) => [
   {
     title: t('LIST.COLUMNS.ISSUED_TO'),
     dataIndex: 'employee',
-    render: (employee) => (employee?.firstName || '') + ' ' + (employee?.lastName || '')
+    render: (employee) => (employee?.firstName || '') + ' ' + (employee?.middleName || '') + ' ' + (employee?.lastName || '')
   },
   {
     title: t('LIST.COLUMNS.ISSUED_ON'),

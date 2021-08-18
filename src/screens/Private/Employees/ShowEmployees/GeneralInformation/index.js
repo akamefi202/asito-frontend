@@ -17,13 +17,19 @@ export default ({t, employee}) => (
     </Row>
 
     <Row gutter={[16, 8]}>
-      <Col xs={24} sm={24} md={12} lg={12}>
+      <Col xs={24} sm={24} md={9} lg={9}>
         <Field id='firstName'
           label={t('SHOW.GENERAL_INFORMATION.FIRST_NAME')}
           value={employee.firstName}/>
       </Col>
 
-      <Col xs={24} sm={24} md={12} lg={12}>
+      <Col xs={24} sm={24} md={6} lg={6}>
+        <Field id='firstName'
+          label={t('SHOW.GENERAL_INFORMATION.MIDDLE_NAME')}
+          value={employee.middleName}/>
+      </Col>
+
+      <Col xs={24} sm={24} md={9} lg={9}>
         <Field id='lastName'
           label={t('SHOW.GENERAL_INFORMATION.LAST_NAME')}
           value={employee.lastName}/>

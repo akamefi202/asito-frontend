@@ -16,6 +16,7 @@ export const EMPLOYEE_ROLE = gql`
         id
         number
         firstName
+        middleName
         lastName
         dateOfBirth
         gender
@@ -58,6 +59,7 @@ export const EMPLOYEE_ROLES = gql`
           id
           number
           firstName
+          middleName
           lastName
           dateOfBirth
           gender

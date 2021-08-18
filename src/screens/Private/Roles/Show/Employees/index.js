@@ -34,7 +34,7 @@ const columns = (t, removeOperator, checkRequirements) => [
       <Link
         className="custom-link"
         to={PATHS.EMPLOYEES.SHOW.replace(":id", record.employee.id)}>
-          {`${record.employee.firstName} ${record.employee.lastName}`}
+          {`${record.employee.firstName} ${record.employee.middleName || ''} ${record.employee.lastName}`}
       </Link>
     ),
   },
@@ -130,7 +130,7 @@ export default ({ t, role, roleId, requiredCertificates }) => {
     onCompleted: ({ employees }) => {
       if (!employees || !employees.data) return;
 
-      const select = employees.data.map(item => ({key: item.id, value: `${item.firstName} ${item.lastName}`}));
+      const select = employees.data.map(item => ({key: item.id, value: `${item.firstName} ${item.middleName || ''} ${item.lastName}`}));
       setTotalSelect(employees.count || 0);
 
       setEmployeesSelect(scanStatus ? select : withoutRepetitions([...employeesSelect, ...select]));

@@ -32,7 +32,7 @@ export default ({t, formik, certificateTypes}) => {
     onCompleted: ({employees}) => {
       const items = employees?.data?.map(item => ({
         id: item.id,
-        value: item?.firstName + ' ' + item?.lastName
+        value: item?.firstName + ' ' + (item?.middleName || '') + ' ' + item?.lastName
       }));
       setTotalSelect(employees.count || 0);
       if (search) setSearchEmployees(items)

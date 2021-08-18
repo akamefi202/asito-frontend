@@ -32,6 +32,7 @@ export const EditEmployees = () => {
     id: cuid(),
     number: undefined,
     firstName: undefined,
+    middleName: undefined,
     lastName: undefined,
     dateOfBirth: undefined,
     gender: 'male',

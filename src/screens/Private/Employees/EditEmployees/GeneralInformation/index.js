@@ -65,14 +65,21 @@ export default ({t, formik}) => {
       </Row>
 
       <Row gutter={[16, 8]}>
-        <Col xs={24} sm={24} md={12} lg={12}>
+        <Col xs={16} sm={16} md={9} lg={9}>
           <InputFormControl id='firstName'
             label={t('FORM.GENERAL_INFORMATION.FIRST_NAME') + ' ' + REQUIRED_FIELD_SYMBOL}
             placeholder={t('FORM.GENERAL_INFORMATION.FIRST_NAME_PLACEHOLDER')}
             {...bindInputProps({name: 'firstName', ...formik})}/>
         </Col>
 
-        <Col xs={24} sm={24} md={12} lg={12}>
+        <Col xs={16} sm={16} md={6} lg={6}>
+          <InputFormControl id='middleName'
+            label={t('FORM.GENERAL_INFORMATION.MIDDLE_NAME')}
+            placeholder={t('FORM.GENERAL_INFORMATION.MIDDLE_NAME_PLACEHOLDER')}
+            {...bindInputProps({name: 'middleName', ...formik})}/>
+        </Col>
+
+        <Col xs={16} sm={16} md={9} lg={9}>
           <InputFormControl id='lastName'
             label={t('FORM.GENERAL_INFORMATION.LAST_NAME') + ' ' + REQUIRED_FIELD_SYMBOL}
             placeholder={t('FORM.GENERAL_INFORMATION.LAST_NAME_PLACEHOLDER')}

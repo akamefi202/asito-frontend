@@ -1,11 +1,12 @@
 import gql from "graphql-tag";
 
 
-export const USER = gql` 
-  query User { 
-    user { 
+export const USER = gql`
+  query User {
+    user {
       id
       firstName
+      middleName
       lastName
       email
       phone
@@ -22,8 +23,8 @@ export const USER = gql`
         email
         website
       }
-    } 
-  } 
+    }
+  }
 `;
 
 export default {

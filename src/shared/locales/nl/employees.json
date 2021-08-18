@@ -50,6 +50,7 @@
     "GENERAL_INFORMATION": {
       "NUMBER": "Personeelsnummer",
       "FIRST_NAME": "Voornaam",
+      "MIDDLE_NAME": "Tussenvoegsel",
       "LAST_NAME": "Achternaam",
       "DATE_OF_BIRTH": "Geboortedatum",
       "GENDER": "Geslacht",
@@ -96,6 +97,8 @@
       "EMPLOYEE_NUMBER_PLACEHOLDER": "Enter Personeelsnummer",
       "FIRST_NAME": "Voornaam",
       "FIRST_NAME_PLACEHOLDER": "Enter Voornaam",
+      "MIDDLE_NAME": "Tussenvoegsel",
+      "MIDDLE_NAME_PLACEHOLDER": "Enter Tussenvoegsel",
       "LAST_NAME": "Achternaam",
       "LAST_NAME_PLACEHOLDER": "Enter Achternaam",
       "DATE_OF_BIRTH": "Geboortedatum",

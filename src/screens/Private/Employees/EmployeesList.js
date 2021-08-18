@@ -23,7 +23,7 @@ const columns = (t) => [
     title: t('LIST.COLUMNS.NAME'),
     dataIndex: 'full_mame',
     sorter: true,
-    render: (_, column) => (column?.firstName || '') + ' ' + (column?.lastName || '')
+    render: (_, column) => (column?.firstName || '') + ' ' + (column?.middleName || '') + ' ' + (column?.lastName || '')
   },
   {
     title: t('LIST.COLUMNS.NUMBER'),

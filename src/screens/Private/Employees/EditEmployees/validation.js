@@ -4,6 +4,7 @@ export default messages => {
   return yup.object().shape({
     number: yup.string().required(messages.REQUIRED),
     firstName: yup.string().required(messages.REQUIRED),
+    middleName: yup.string(),
     lastName: yup.string().required(messages.REQUIRED),
     dateOfBirth: yup.string().required(messages.REQUIRED),
     gender: yup.string().required(messages.REQUIRED),

@@ -7,6 +7,7 @@ export const EMPLOYEE = gql`
       wallet
       number
       firstName
+      middleName
       lastName
       dateOfBirth
       gender
@@ -50,6 +51,7 @@ export const EMPLOYEES = gql`
         id
         number
         firstName
+        middleName
         lastName
         dateOfBirth
         gender
