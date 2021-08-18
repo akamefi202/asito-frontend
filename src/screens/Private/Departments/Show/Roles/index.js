@@ -33,7 +33,7 @@ const columns = (t) => [
 
 export default ({ t, roles }) => {
   const [page, setPage] = useState(1);
-  const [take, setTake] = useState(1);
+  const [take, setTake] = useState(10);
   const [skip, setSkip] = useState(0);
 
   const onPageChange = (page) => {
