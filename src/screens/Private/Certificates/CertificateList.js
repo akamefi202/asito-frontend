@@ -45,7 +45,18 @@ const columns = (t) => [
   {
     title: t('LIST.COLUMNS.ISSUED_ON'),
     dataIndex: 'issuedOn',
-    render: (issuedOn) => dateToString(issuedOn)
+    render: (stringDate) => {
+      let isValid = true;
+      if (stringDate) {
+        const issuedOn = timestampToDate(stringDate);
+        isValid = issuedOn && issuedOn.isValid() && today.isSameOrAfter(issuedOn);
+      }
+
+      return (
+        <span className={(isValid ? '' : 'red')}>
+          {dateToString(stringDate)}
+        </span>)
+    }
   },
   {
     title: t('LIST.COLUMNS.VALID_UNTIL'),

@@ -11,7 +11,9 @@ const today = moment();
 
 export default ({t, certificate}) => {
   const validUntil = timestampToDate(certificate.validUntil);
+  const issuedOn = timestampToDate(certificate.issuedOn);
   const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
+  const isValidIssuedOn = issuedOn && issuedOn.isValid() && today.isSameOrAfter(issuedOn);
 
   const getCertificateEmployee = (id = false) => {
     const firstName = certificate.employee && certificate.employee.firstName ? certificate.employee.firstName : '';
@@ -61,7 +63,7 @@ export default ({t, certificate}) => {
         <Col xs={24} sm={24} md={12} lg={12}>
           <Field id='issuedOn'
             label={t('SHOW.GENERAL_INFORMATION.ISSUED_ON')}
-            value={dateToString(certificate.issuedOn)}/>
+            value={<span className={isValidIssuedOn ? "" : "red"}>{dateToString(certificate.issuedOn)}</span>}/>
         </Col>
 
         {certificate?.validUntil && <Col xs={24} sm={24} md={12} lg={12}>
