@@ -99,11 +99,12 @@ export const CreateCertificate = () => {
     validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
     onSubmit: data => {
       const newData = {...data};
+
+      if (!newData.validForMonths || !newData.infinite) delete newData.validForMonths;
+      if (!newData.validForYears || !newData.infinite) delete newData.validForYears;
+
       delete newData.type;
       delete newData.infinite;
-
-      if (!newData.validForMonths) delete newData.validForMonths;
-      if (!newData.validForYears) delete newData.validForYears;
 
       newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
       newData.attachments = data.attachments.map(x =>
