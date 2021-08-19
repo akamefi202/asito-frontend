@@ -57,6 +57,11 @@ export default ({t, formik, certificateTypes}) => {
     setSearch(value);
   }
 
+  if (!formik.values.infinite) {
+    delete formik.values.validForMonths;
+    delete formik.values.validForYears;
+  }
+
   return (
     <Card cardStyle={"card--form"}>
       <h2 className="card--form--title">{t("FORM.MENU.GENERAL_INFORMATION")}</h2>
