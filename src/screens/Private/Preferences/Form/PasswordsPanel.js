@@ -3,9 +3,9 @@ import { Row, Col } from "antd";
 import { Card, Button, Spin } from "shared/components";
 import { bindInputProps } from "utils/helpers/input";
 import { REQUIRED_FIELD_SYMBOL } from "utils/constants";
-import { InputFormControl } from "../../../../../shared/components/InputformControl/InputFormControl";
+import { InputFormControl } from "../../../../shared/components/InputformControl/InputFormControl";
 
-export default ({t, formik, loading}) => {
+export const PasswordsPanel = ({t, formik, loading}) => {
 
   return (
      <Card cardStyle="card--form">

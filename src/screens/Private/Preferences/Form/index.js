@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
-import AccountInformation from "./AccountInformation";
-import ChangePassword from "./ChangePassword";
+import { InfoPanel } from "./InfoPanel";
+import { PasswordsPanel } from "./PasswordsPanel";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@apollo/react-hooks";
@@ -71,10 +71,10 @@ export default () => {
              </Col>
              <Col xs={24} sm={24} md={18} lg={18}>
                <section id="account">
-                 <AccountInformation t={t} formik={infoFormik} loading={saveInfoLoading}/>
+                 <InfoPanel t={t} formik={infoFormik} loading={saveInfoLoading}/>
                </section>
                <section id="changePassword">
-                 <ChangePassword t={t} formik={passwordsFormik} loading={savePasswordLoading}/>
+                 <PasswordsPanel t={t} formik={passwordsFormik} loading={savePasswordLoading}/>
                </section>
              </Col>
            </Row>
