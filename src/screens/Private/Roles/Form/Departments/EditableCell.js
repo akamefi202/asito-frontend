@@ -24,7 +24,7 @@ export const EditableCell =
 
     const [scan, setScan] = useState('');
     const [skip, setSkip] = useState(0);
-    const [take] = useState(50);
+    const [take] = useState(10);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
 
