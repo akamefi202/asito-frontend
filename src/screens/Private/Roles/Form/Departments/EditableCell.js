@@ -55,7 +55,7 @@ export const EditableCell =
       setPage(1);
       setSkip(0);
       setScan(value);
-      getDepartments();
+      setTimeout(() => getDepartments());
     }
 
     return (
