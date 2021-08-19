@@ -49,7 +49,7 @@ export default ({t, formik}) => {
       <Row gutter={[16, 8]}>
         <Col xs={24} sm={24} md={24} lg={24}>
           <InputFormControl id='roleDescription'
-            label={t('FORM.GENERAL_INFORMATION.EMPLOYEE_REQUIRED')}
+            label={t('FORM.GENERAL_INFORMATION.ROLE_DESCRIPTION')}
             placeholder={t('FORM.GENERAL_INFORMATION.ROLE_DESCRIPTION_PLACEHOLDER')}
             {...bindInputProps({name: 'roleDescription', ...formik})}/>
         </Col>
