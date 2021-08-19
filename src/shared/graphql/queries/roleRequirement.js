@@ -14,6 +14,7 @@ export const ROLE_REQUIREMENTS = gql`
         }
         validAtLeastUntil
       }
+      count
     }
   }
 `;

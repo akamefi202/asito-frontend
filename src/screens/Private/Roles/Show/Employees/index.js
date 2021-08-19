@@ -277,7 +277,7 @@ export default ({ t, role, roleId, requiredCertificates }) => {
       });
     }
 
-    return requiredCertificates.length === countToValid;
+    return requiredCertificates?.length === countToValid;
   }
 
   const getFilteredRoles = () => {

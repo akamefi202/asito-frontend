@@ -23,7 +23,7 @@ export default ({t, attachments}) => {
   ];
 
   return (
-    <Card cardStyle={"card--details"}>
+    <Card cardStyle="card--details">
       <h2 className="card--details--title">{t("SHOW.MENU.ATTACHMENTS")}</h2>
 
       <TableFormControl

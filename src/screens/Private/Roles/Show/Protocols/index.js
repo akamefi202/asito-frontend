@@ -1,34 +1,48 @@
 import React, { useState } from "react";
-import { Row, Col } from "antd";
-import { Table } from "shared/components";
 import Card from "shared/components/Card";
-import {dateToString} from "utils/helpers/moment";
+import { dateToString } from "utils/helpers/moment";
+import { TableFormControl } from "../../../../../shared/components/TableFormControl/TableFormControl";
+import { useQuery } from "@apollo/react-hooks";
+import { messages } from "../../../../../utils/helpers/message";
 
 const columns = (t) => [
   {
-    title: t("SHOW.PROTOCOLS.COLUMNS.FILE_NAME"),
-    dataIndex: "name",
-    key: "name",
-    sorter: (a, b) => a.name.localeCompare(b.name),
-    render: (name, record) => (<a className="custom-link" href={record.url} target="_blank" rel="noreferrer">{name}</a>),
+    title: t('SHOW.PROTOCOLS.COLUMNS.FILE_NAME'),
+    dataIndex: 'name',
+    sorter: true,
+    width: '70%',
+    render: (name, record) => (
+       <a className="custom-link" href={record.url} target="_blank" rel='noreferrer'>{name}</a>),
   },
   {
-    title: t("SHOW.PROTOCOLS.COLUMNS.FILE_TYPE"),
-    dataIndex: "type",
-    key: "type",
+    title: t('SHOW.PROTOCOLS.COLUMNS.FILE_TYPE'),
+    dataIndex: 'type',
+    width: '10%',
   },
   {
-    title: t("SHOW.PROTOCOLS.COLUMNS.UPLOAD_DATE"),
-    dataIndex: "updatedAt",
-    key: "updatedAt",
-    render: (updatedAt) => (<span>{dateToString(updatedAt, "DD-MM-YYYY")}</span>),
+    title: t('SHOW.PROTOCOLS.COLUMNS.UPLOAD_DATE'),
+    dataIndex: 'updatedAt',
+    width: '20%',
+    render: (updatedAt) => (<span>{dateToString(updatedAt, 'DD-MM-YYYY')}</span>),
   },
 ];
 
-export default ({ t, protocols }) => {
-  const [page, setPage] = useState(1);
-  const [take, setTake] = useState(10);
+export default ({t, id, proto}) => {
+  const [protocols, setProtocols] = useState([]);
+  const [sortType, setSortType] = useState([{name: 'updatedAt', type: 'DESC'}]);
   const [skip, setSkip] = useState(0);
+  const [take, setTake] = useState(5);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+
+  // const {loading} = useQuery(PROTOCOLS, {
+  //   variables: {where: {id}, skip, take, orderBy: sortType},
+  //   onCompleted: ({protocols}) => {
+  //     setProtocols(protocols.data)
+  //     setTotal(protocols.count)
+  //   },
+  //   onError: (error) => messages({data: error})
+  // });
 
   const onPageChange = (page) => {
     setPage(page);
@@ -36,36 +50,30 @@ export default ({ t, protocols }) => {
   };
 
   const onChange = (pagination, filters, sorter) => {
-    if (pagination.current === page) onPageChange(1);
+    onPageChange(1);
+
+    setSortType([sorter.order
+       ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
+       : {name: 'updatedAt', type: 'DESC'}]);
   }
 
+  const onShowSizeChange = (current, size) => setTake(size);
+
   return (
-    <Card cardStyle={"card--details"}>
-      <Row>
-        <Col xs={24}>
-          <h2 className="card--details--title">{t("SHOW.MENU.PROTOCOLS")}</h2>
-        </Col>
-      </Row>
-      <Row className="w-100-100">
-        <Col xs={24} sm={24}>
-          <Table
-            columns={columns(t)}
-            className="custom--table"
-            data={protocols}
-            rowKey={"id"}
-            onPageChange={onPageChange}
-            total={protocols.length}
-            pageSize={10}
-            page={page}
-            onChange={onChange}
-            onRow={(record) => {
-              return {
-                onClick: () => { },
-              };
-            }}
-          />
-        </Col>
-      </Row>
-    </Card>
+     <Card cardStyle={"card--details"}>
+       <h2 className="card--details--title">{t('SHOW.MENU.PROTOCOLS')}</h2>
+
+       <TableFormControl rowKey='id'
+          columns={columns(t)}
+          dataSource={proto}
+          loading={false}
+          page={page}
+          total={total}
+          pageSize={take}
+          pageSizeOptions={[5, 10, 20]}
+          onChange={onChange}
+          onShowSizeChange={onShowSizeChange}
+          onPageChange={onPageChange}/>
+     </Card>
   );
 };

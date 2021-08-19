@@ -12,6 +12,8 @@ export const TableFormControl =
      rowKey,
      loading,
      pageSize,
+     pageSizeOptions,
+     defaultPageSize,
      rowSelection,
      onPageChange,
      onShowSizeChange,
@@ -23,6 +25,8 @@ export const TableFormControl =
      pagination = {
        total,
        pageSize,
+       pageSizeOptions: pageSizeOptions,
+       defaultPageSize: defaultPageSize,
        current: page,
        position: 'bottom',
        onChange: onPageChange,

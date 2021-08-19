@@ -14,13 +14,13 @@ const getColumns = (t, removeDepartment) => [
   {
     title: t('FORM.DEPARTAMENT.COLUMNS.NAME'),
     dataIndex: 'id',
-    width: '80%',
+    width: '90%',
     editable: true,
   },
   {
     title: '',
     dataIndex: 'action',
-    width: '20%',
+    width: '10%',
     className: 'cell-action',
     render: (_, array, index) => <CloseOutlined onClick={() => removeDepartment(index)}/>
   },
@@ -60,7 +60,6 @@ export default ({t, formik}) => {
         columns={columns}
         dataSource={formik.values.departments}
         loading={loading}
-        size='small'
         pagination={false}/>
 
       <Button type='button' buttonStyle="btn--outline" icon={<span className="icon-Add-New btn--icon--right"/>}

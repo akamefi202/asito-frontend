@@ -107,8 +107,6 @@ export const CreateCertificate = () => {
       delete newData.infinite;
 
       newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
-      newData.attachments = data.attachments.map(x =>
-        ({id: x.id, certificate: {id: id || generatedId}, url: x.url, name: x.name, type: x.type}));
 
       newData.issuer = issuer && issuer.id ? {id: issuer.id} : null;
 
@@ -179,7 +177,7 @@ export const CreateCertificate = () => {
               <section id="attachments">
                 <Attachments t={t}
                   formik={formik}
-                  certificateId={id || generatedId}
+                  id={id || generatedId}
                   deletedFiles={deletedFiles}
                   setDeletedFiles={setDeletedFiles}/>
               </section>

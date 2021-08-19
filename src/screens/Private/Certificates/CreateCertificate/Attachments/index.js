@@ -11,7 +11,7 @@ import cuid from "cuid";
 
 const {CREATE_FILE} = FileMutations;
 
-export default ({t, formik, certificateId, deletedFiles, setDeletedFiles}) => {
+export default ({t, formik, id, deletedFiles, setDeletedFiles}) => {
   const fileStatus = useRef('');
 
   const columns = [
@@ -57,7 +57,7 @@ export default ({t, formik, certificateId, deletedFiles, setDeletedFiles}) => {
           id: cuid(),
           name: fileObject.name,
           type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
-          certificate: {id: certificateId},
+          certificate: {id},
           url: data.createFile,
           updatedAt: moment(file.lastModified).format()
         }

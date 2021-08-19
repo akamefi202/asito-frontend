@@ -5,20 +5,19 @@ import { Header, ScrollMenu, Spin } from "shared/components";
 import GeneralInformation from "./GeneralInformation";
 import Departments from "./Departments";
 import Protocols from "./Protocols";
-import RequiredCertificates from "./RequiredCertificates";
+import Requirements from "./Requirements";
 import Employees from "./Employees";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { PATHS } from "utils/constants";
 import {useLazyQuery} from "@apollo/react-hooks";
-import { RoleQueries, RoleRequirementQueries } from "shared/graphql/queries";
+import { RoleQueries } from "shared/graphql/queries";
 import {USER_ROLES} from "shared/constants/userRoles";
 import {useReactiveVar} from "@apollo/client";
 import {UserStore} from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
 
 const { ROLE } = RoleQueries;
-const { ROLE_REQUIREMENTS } = RoleRequirementQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -33,7 +32,6 @@ export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.ROLES);
   const [role, setRole] = useState({});
-  const [requirements, setRequirements] = useState([]);
 
   const [getRole, { loading }] = useLazyQuery(ROLE, {
     variables: {where: {id}},
@@ -41,35 +39,18 @@ export default () => {
     onError: (error) => messages({ data: error })
   });
 
-  const [getRoleRequirements, { loading: loadingRoleRequirement }] = useLazyQuery(ROLE_REQUIREMENTS, {
-    variables: { roleRequirementsWhere: { role: { id: id } } },
-    onCompleted: ({roleRequirements: { data }}) => {
-      setRequirements(data);
-    },
-    onError: (error) => console.log(error, 'error')
-  });
-
   useEffect(() => {
     getRole()
-    getRoleRequirements();
   }, [])
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
-  const getScrollMenuItem = (t) => {
-    return menuItems.map(item => ({ ...item, title: t(`SHOW.MENU.${item.key}`)}));
-  };
-
-  const edit = () => {
-    history.push(PATHS.ROLES.EDIT.replace(":id", id));
-  };
-
   const setBreadcrumbsButtons = [
     {
-      title: t("EDIT"),
+      title: t('EDIT'),
       disabled: false,
-      action: edit,
+      action: () => history.push(PATHS.ROLES.EDIT.replace(':id', id)),
       custom: "heading--area--buttons--left",
       buttonStyle: "btn--outline",
     },
@@ -77,18 +58,20 @@ export default () => {
 
   const setBreadcrumbsItem = [
     {
-      title: t("ROLES"),
+      title: t('ROLES'),
       className: "custom--breadcrumb--one",
       href: PATHS.ROLES.INDEX,
     },
     { title: role.name, className: "custom--breadcrumb--two" },
   ];
 
+  const getScrollMenuItem = (t) => menuItems.map(item => ({ ...item, title: t(`SHOW.MENU.${item.key}`)}));
+
   const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || ( userRole === USER_ROLES.TEST.key));
 
   return (
     <div className="wrapper--content">
-      <Spin spinning={loading || loadingRoleRequirement}>
+      <Spin spinning={loading}>
         <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
         <div className="details--page">
           <Row>
@@ -97,20 +80,20 @@ export default () => {
             </Col>
 
             <Col xs={24} sm={24} md={18} lg={18}>
-              <section id="general">
+              <section id='general'>
                 <GeneralInformation t={t} role={role} />
               </section>
-              <section id="departments">
-                <Departments t={t} departments={role?.departments || []} />
+              <section id='departments'>
+                <Departments t={t} id={id} depart={role?.departments || []} />
               </section>
-              <section id="requirements">
-                <RequiredCertificates t={t} role={role} requirements={requirements} />
+              <section id='requirements'>
+                <Requirements t={t} id={id}/>
               </section>
-              <section id="protocols">
-                <Protocols t={t} protocols={role?.protocols || []} />
+              <section id='protocols'>
+                <Protocols t={t} proto={role?.protocols || []} />
               </section>
-              <section id="employees">
-                <Employees t={t} roleId={id} role={role} requiredCertificates={requirements} />
+              <section id='employees'>
+                <Employees t={t} roleId={id} role={role} />
               </section>
             </Col>
           </Row>
