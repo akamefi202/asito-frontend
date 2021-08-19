@@ -6,7 +6,7 @@
       "CHANGE_PASSWORD": "Wijzig wachtwoord"
     },
     "ACCOUNT_INFORMATION": {
-      "SUCCESS": "Account information updated",
+      "SUCCESS": "Accountgegevens bijgewerkt",
       "FIRST_NAME": "Voornaam",
       "FIRST_NAME_PLACEHOLDER": "Enter voornaam",
       "LAST_NAME": "Achternaam",
