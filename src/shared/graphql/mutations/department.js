@@ -8,7 +8,24 @@ export const CREATE_UPDATE_DEPARTMENT = gql`
   }
 `;
 
+export const CREATE_ROLE_DEPARTMENT = gql`
+  mutation createRoleDepartment($createRoleDepartmentData: RoleDepartmentWhereInput) {
+    createRoleDepartment(data: $createRoleDepartmentData) {
+      id
+    }
+  }
+`;
+
+export const REMOVE_ROLE_DEPARTMENT = gql`
+  mutation RemoveRoleDepartment($data: RoleDepartmentWhereInput) {
+    removeRoleRequirement(data: $data) {
+      id
+    }
+  }
+`;
 
 export default {
   CREATE_UPDATE_DEPARTMENT,
+  CREATE_ROLE_DEPARTMENT,
+  REMOVE_ROLE_DEPARTMENT
 };

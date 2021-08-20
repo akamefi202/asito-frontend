@@ -15,3 +15,4 @@ export { default as ResetPasswordMutations } from "./resetPassword";
 export { default as RemoveAttachmentsMutations } from "./removeAttachments";
 export { default as IdentityOwnerMutations } from './identityOwner';
 export { default as RoleRequirementMutations } from './roleReqiurement';
+export { default as ProtocolMutations } from './protocol';

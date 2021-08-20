@@ -69,7 +69,25 @@ export const DEPARTMENTS = gql`
   }
 `;
 
+export const ROLE_DEPARTMENTS = gql`
+  query RoleDepartments($roleDepartmentsWhere: RoleDepartmentWhereInput, $skip: Int, $take: Int) {
+    roleDepartments(where: $roleDepartmentsWhere, skip: $skip, take: $take) {
+      data {
+        id
+        department {
+          id
+          name
+          type
+          location
+        }
+      }
+      count
+    }
+  }
+`;
+
 export default {
   DEPARTMENT,
   DEPARTMENTS,
+  ROLE_DEPARTMENTS,
 };

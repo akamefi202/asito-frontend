@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 import Card from "shared/components/Card";
-import { Field } from "../../../../../shared/components/Field/Field";
+import { Field } from "shared/components/Field/Field";
 
 export default ({t, role}) => (
    <Card cardStyle="card--details">

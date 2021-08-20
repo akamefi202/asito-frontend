@@ -26,7 +26,7 @@ const getColumns = (t, removeDepartment) => [
   },
 ]
 
-export default ({t, formik}) => {
+export default ({t, formik, removedDepartments, setRemovedDepartments}) => {
   const [departments, setDepartments] = useState([]);
 
   const {loading} = useQuery(DEPARTMENTS, {
@@ -42,6 +42,11 @@ export default ({t, formik}) => {
 
   const removeDepartment = (index) => {
     const values = formik.getFieldProps('departments')?.value || [];
+
+    if (formik.initialValues.departments.find((d, i) => i === index)?.id === values?.[index]?.id) {
+      setRemovedDepartments([...removedDepartments, values[index].id].filter(Boolean));
+    }
+
     formik.setFieldValue('departments', [...values.filter((d, dIndex) => dIndex !== index)]);
   }
 

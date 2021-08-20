@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import Card from "shared/components/Card";
-import { TableFormControl } from "../../../../../shared/components/TableFormControl/TableFormControl";
+import { TableFormControl } from "shared/components/TableFormControl/TableFormControl";
 import { useQuery } from "@apollo/react-hooks";
-import { messages } from "../../../../../utils/helpers/message";
+import { messages } from "utils/helpers/message";
+import { DepartmentQueries } from "shared/graphql/queries";
+
+const { ROLE_DEPARTMENTS } = DepartmentQueries;
 
 const columns = (t) => [
   {
     title: t('SHOW.DEPARTAMENT.COLUMNS.NAME'),
-    dataIndex: 'name',
+    dataIndex: ['department', 'name'],
     sorter: true,
     render: (name, record) => (
        <Link className="custom-link" to={PATHS.DEPARTMENTS.SHOW.replace(':id', record.id)}>{name}</Link>
@@ -17,15 +20,15 @@ const columns = (t) => [
   },
   {
     title: t('SHOW.DEPARTAMENT.COLUMNS.TYPE'),
-    dataIndex: 'type',
+    dataIndex: ['department', 'type'],
   },
   {
     title: t('SHOW.DEPARTAMENT.COLUMNS.LOCATION'),
-    dataIndex: 'location',
+    dataIndex: ['department', 'location'],
   },
 ];
 
-export default ({t, id, depart}) => {
+export default ({t, id}) => {
   const [departments, setDepartments] = useState([]);
   const [sortType, setSortType] = useState([{name: 'updatedAt', type: 'DESC'}]);
   const [skip, setSkip] = useState(0);
@@ -33,14 +36,14 @@ export default ({t, id, depart}) => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  // const {loading} = useQuery(DEPARTMENTS, {
-  //   variables: {where: {id}, skip, take, orderBy: sortType},
-  //   onCompleted: ({departments}) => {
-  //     setDepartments(departments.data)
-  //     setTotal(departments.count)
-  //   },
-  //   onError: (error) => messages({data: error})
-  // });
+  const {loading} = useQuery(ROLE_DEPARTMENTS, {
+    variables: {roleDepartmentsWhere: {role: {id}}, skip, take},
+    onCompleted: ({roleDepartments}) => {
+      setDepartments(roleDepartments.data)
+      setTotal(roleDepartments.count)
+    },
+    onError: (error) => messages({data: error})
+  });
 
   const onPageChange = (page) => {
     setPage(page);
@@ -63,8 +66,8 @@ export default ({t, id, depart}) => {
 
        <TableFormControl rowKey='id'
           columns={columns(t)}
-          dataSource={depart}
-          loading={false}
+          dataSource={departments}
+          loading={loading}
           page={page}
           total={total}
           pageSize={take}

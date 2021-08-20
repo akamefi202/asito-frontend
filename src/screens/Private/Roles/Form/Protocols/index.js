@@ -11,7 +11,7 @@ import { dateToString } from "../../../../../utils/helpers/moment";
 
 const {CREATE_FILE} = FileMutations;
 
-export default ({t, formik, id, deletedFiles, setDeletedFiles}) => {
+export default ({t, formik, id, removedProtocols, setRemovedProtocols}) => {
   const fileStatus = useRef('');
 
   const columns = [
@@ -37,7 +37,7 @@ export default ({t, formik, id, deletedFiles, setDeletedFiles}) => {
       dataIndex: 'id',
       className: 'cell-action',
       width: '10%',
-      render: (fileId) => <CloseOutlined onClick={() => onRemoveFile(fileId)}/>,
+      render: (_, array, index) => <CloseOutlined onClick={() => onRemoveFile(index)}/>,
     }
   ];
 
@@ -82,13 +82,14 @@ export default ({t, formik, id, deletedFiles, setDeletedFiles}) => {
   }
 
 
-  const onRemoveFile = (fileId) => {
-    const attachments = formik.getFieldProps('protocols')?.value || [];
+  const onRemoveFile = (index) => {
+    const values = formik.getFieldProps('protocols')?.value || [];
 
-    const filteredFiles = attachments.filter(data => data.id !== fileId);
+    if (formik.initialValues.protocols.find((p, i) => i === index)?.id === values?.[index]?.id) {
+      setRemovedProtocols([...removedProtocols, values[index].id].filter(Boolean));
+    }
 
-    setDeletedFiles([...deletedFiles, fileId]);
-    formik.setFieldValue('protocols', filteredFiles);
+    formik.setFieldValue('protocols', [...values.filter((p, pIndex) => pIndex !== index)]);
   }
 
   const [getFile] = useMutation(CREATE_FILE);

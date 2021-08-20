@@ -15,6 +15,25 @@ export const PROTOCOLS = gql`
   }
 `;
 
+export const ROLE_PROTOCOLS = gql`
+  query RoleProtocols($roleProtocolsWhere: RoleProtocolWhereInput, $skip: Int, $take: Int) {
+    roleProtocols(where: $roleProtocolsWhere, skip: $skip, take: $take) {
+      data {
+        id
+        protocol {
+          name
+          type
+          updatedAt
+          createdAt
+          url   
+        }
+      }
+      count
+    }
+  }
+`;
+
 export default {
-    PROTOCOLS
+    PROTOCOLS,
+    ROLE_PROTOCOLS
 };

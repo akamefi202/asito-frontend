@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Card from "shared/components/Card";
 import { dateToString } from "utils/helpers/moment";
-import { TableFormControl } from "../../../../../shared/components/TableFormControl/TableFormControl";
+import { TableFormControl } from "shared/components/TableFormControl/TableFormControl";
 import { useQuery } from "@apollo/react-hooks";
-import { messages } from "../../../../../utils/helpers/message";
+import { messages } from "utils/helpers/message";
+import { ProtocolQueries } from "shared/graphql/queries";
+
+const { ROLE_PROTOCOLS } = ProtocolQueries;
 
 const columns = (t) => [
   {
     title: t('SHOW.PROTOCOLS.COLUMNS.FILE_NAME'),
-    dataIndex: 'name',
+    dataIndex: ['protocol', 'name'],
     sorter: true,
     width: '70%',
     render: (name, record) => (
@@ -16,18 +19,18 @@ const columns = (t) => [
   },
   {
     title: t('SHOW.PROTOCOLS.COLUMNS.FILE_TYPE'),
-    dataIndex: 'type',
+    dataIndex: ['protocol', 'type'],
     width: '10%',
   },
   {
     title: t('SHOW.PROTOCOLS.COLUMNS.UPLOAD_DATE'),
-    dataIndex: 'updatedAt',
+    dataIndex: ['protocol', 'updatedAt'],
     width: '20%',
     render: (updatedAt) => (<span>{dateToString(updatedAt, 'DD-MM-YYYY')}</span>),
   },
 ];
 
-export default ({t, id, proto}) => {
+export default ({t, id}) => {
   const [protocols, setProtocols] = useState([]);
   const [sortType, setSortType] = useState([{name: 'updatedAt', type: 'DESC'}]);
   const [skip, setSkip] = useState(0);
@@ -35,14 +38,14 @@ export default ({t, id, proto}) => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  // const {loading} = useQuery(PROTOCOLS, {
-  //   variables: {where: {id}, skip, take, orderBy: sortType},
-  //   onCompleted: ({protocols}) => {
-  //     setProtocols(protocols.data)
-  //     setTotal(protocols.count)
-  //   },
-  //   onError: (error) => messages({data: error})
-  // });
+  const {loading} = useQuery(ROLE_PROTOCOLS, {
+    variables: {roleProtocolsWhere: {role: {id}}, skip, take},
+    onCompleted: ({roleProtocols}) => {
+      setProtocols(roleProtocols.data)
+      setTotal(roleProtocols.count)
+    },
+    onError: (error) => messages({data: error})
+  });
 
   const onPageChange = (page) => {
     setPage(page);
@@ -60,13 +63,13 @@ export default ({t, id, proto}) => {
   const onShowSizeChange = (current, size) => setTake(size);
 
   return (
-     <Card cardStyle={"card--details"}>
+     <Card cardStyle="card--details">
        <h2 className="card--details--title">{t('SHOW.MENU.PROTOCOLS')}</h2>
 
        <TableFormControl rowKey='id'
           columns={columns(t)}
-          dataSource={proto}
-          loading={false}
+          dataSource={protocols}
+          loading={loading}
           page={page}
           total={total}
           pageSize={take}

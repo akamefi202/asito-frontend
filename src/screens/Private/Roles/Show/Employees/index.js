@@ -291,15 +291,10 @@ export default ({ t, role, roleId, requiredCertificates }) => {
   }
 
   return (
-    <Card cardStyle={"card--details"}>
+     <Card cardStyle="card--details">
+       <h2 className="card--details--title">{t('SHOW.MENU.EMPLOYEES')}</h2>
+
       <Spin spinning={loading}>
-        <Row>
-          <Col xs={24}>
-            <h2 className="card--details--title">
-              {t("SHOW.MENU.EMPLOYEES")}
-            </h2>
-          </Col>
-        </Row>
         <Row className="w-100-100">
           <Col xs={24} sm={24}>
             {isAccess() &&
@@ -328,6 +323,7 @@ export default ({ t, role, roleId, requiredCertificates }) => {
                 }
               </>)
             }
+
             <Table
               columns={columns(t, removeOperator, checkRequirements)}
               className="custom--table"

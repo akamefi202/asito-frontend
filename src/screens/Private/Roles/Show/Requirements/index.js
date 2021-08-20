@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Card } from "shared/components";
 import { dateToString } from "utils/helpers/moment";
 import { useQuery } from "@apollo/react-hooks";
-import { RoleRequirementQueries } from "../../../../../shared/graphql/queries";
-import { messages } from "../../../../../utils/helpers/message";
-import { TableFormControl } from "../../../../../shared/components/TableFormControl/TableFormControl";
+import { RoleRequirementQueries } from "shared/graphql/queries";
+import { messages } from "utils/helpers/message";
+import { TableFormControl } from "shared/components/TableFormControl/TableFormControl";
 
 const {ROLE_REQUIREMENTS} = RoleRequirementQueries;
 
