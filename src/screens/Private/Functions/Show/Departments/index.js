@@ -45,10 +45,6 @@ export default ({t, id}) => {
     onError: (error) => messages({data: error})
   });
 
-  const onPageChange = (page) => {
-    setPage(page);
-    setSkip(take * (page - 1));
-  };
 
   const onChange = (pagination, filters, sorter) => {
     if (pagination.current !== page) return;
@@ -58,6 +54,11 @@ export default ({t, id}) => {
        ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
        : {name: 'updatedAt', type: 'DESC'}]);
   }
+
+  const onPageChange = (page) => {
+    setPage(page);
+    setSkip(take * (page - 1));
+  };
 
   const onShowSizeChange = (current, size) => setTake(size);
 

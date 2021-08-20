@@ -93,7 +93,7 @@ export default () => {
                  <Protocols t={t} id={id}/>
                </section>
                <section id='employees'>
-                 <Employees t={t} roleId={id} role={role}/>
+                 <Employees t={t} id={id}/>
                </section>
              </Col>
            </Row>

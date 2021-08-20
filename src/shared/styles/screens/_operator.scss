@@ -195,10 +195,6 @@
   .ant-row {
     height: 100%;
 
-    @media (max-width: 500px) {
-      margin: 0 !important;
-    }
-
     .ant-col {
       height: 100%;
       overflow: auto;
