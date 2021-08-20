@@ -13,16 +13,16 @@ import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
 import { delay } from "utils/helpers/delay";
 import { TableFormControl } from "../../../shared/components/TableFormControl/TableFormControl";
-import {InputFormControl} from "../../../shared/components/InputformControl/InputFormControl";
+import { InputFormControl } from "../../../shared/components/InputformControl/InputFormControl";
 
-const { ROLES } = RoleQueries;
+const {ROLES} = RoleQueries;
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 const tabs = [
-  { title: "ALL", key: "ALL", },
-  { title: "ACTIVE", key: "ACTIVE", },
-  { title: "INACTIVE", key: "INACTIVE", },
+  {title: "ALL", key: "ALL",},
+  {title: "ACTIVE", key: "ACTIVE",},
+  {title: "INACTIVE", key: "INACTIVE",},
 ];
 
 const columns = (t) => [
@@ -49,7 +49,7 @@ const columns = (t) => [
     dataIndex: "numberOfEmployeesRequired",
     key: "numberOfEmployeesRequired",
     render: (number, record) => (
-      <span>
+       <span>
         {`${record.employeeRoles && record.employeeRoles.length || 0}/${number}`}
       </span>
     ),
@@ -59,16 +59,16 @@ const columns = (t) => [
     dataIndex: "status",
     key: "status",
     render: (text) => (
-      <span className={text === "ACTIVE" ? "green" : "yellow"}>
+       <span className={text === "ACTIVE" ? "green" : "yellow"}>
         {t(`STATUS_CODE.${text}`)}
       </span>
     ),
   },
 ];
 
-export const RolesList = () => {
+export const FunctionsList = () => {
   const history = useHistory();
-  const { t } = useTranslation(NAME_SPACES.ROLES);
+  const {t} = useTranslation(NAME_SPACES.ROLES);
   const [data, setData] = useState([]);
   const [count, setCount] = useState({
     ALL: 0,
@@ -76,33 +76,33 @@ export const RolesList = () => {
     INACTIVE: 0,
   });
   const [statusTab, setStatusTab] = useState({});
-  const [scan, setScan] = useState("");
+  const [scan, setScan] = useState('');
   const [skip, setSkip] = useState(0);
   const [total, setTotal] = useState(0);
   const [take, setTake] = useState(10);
   const [page, setPage] = useState(1);
-  const [sortType, setSortType] = useState({name: 'updatedAt', type:'DESC'});
+  const [sortType, setSortType] = useState({name: 'updatedAt', type: 'DESC'});
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
 
-  const variables = { scan, skip, take, where: { ...statusTab }, orderBy: [sortType] };
+  const variables = {scan, skip, take, where: {...statusTab}, orderBy: sortType};
 
   useEffect(() => {
     filterData();
   }, []);
 
-  const [filterData, { loading }] = useLazyQuery(ROLES, {
+  const [filterData, {loading}] = useLazyQuery(ROLES, {
     variables,
-    onCompleted: ({ roles }) => {
+    onCompleted: ({roles}) => {
       if (!roles.data) return;
       setData(roles.data);
       setTotal(roles.count);
       if (!Object.keys(statusTab).length && !scan) {
-        setCount({ ...count, ALL: roles.count, ACTIVE: roles.activeRolesCount, INACTIVE: roles.inactiveRolesCount });
+        setCount({...count, ALL: roles.count, ACTIVE: roles.activeRolesCount, INACTIVE: roles.inactiveRolesCount});
       }
     },
-    onError: (error) => messages({ data: error })
+    onError: (error) => messages({data: error})
   });
 
   const create = () => history.push(PATHS.ROLES.CREATE);
@@ -112,14 +112,14 @@ export const RolesList = () => {
       title: t("NEW"),
       disabled: false,
       action: create,
-      icon: <span className="icon-Add-New btn--icon--right" />,
+      icon: <span className="icon-Add-New btn--icon--right"/>,
     },
   ];
 
-  const setBreadcrumbsItem = [{ title: t("ROLES"), className: "heading--area--title" }];
+  const setBreadcrumbsItem = [{title: t("ROLES"), className: "heading--area--title"}];
 
   const changeTab = (key) => {
-    setStatusTab(key !== "ALL" ? { status: key } : {});
+    setStatusTab(key !== "ALL" ? {status: key} : {});
     setPage(1);
     setSkip(0);
   };
@@ -138,10 +138,12 @@ export const RolesList = () => {
   };
 
   const onChangeTable = (pagination, filters, sorter) => {
-    if (pagination.current === page) onPageChange(1);
-    if (!sorter.order) return setSortType({ name: "updatedAt", type:  "DESC" });
-    const sortBy = { name: "name", type: sorter.order === 'descend' ? "DESC" : "ASC" };
-    setSortType(sortBy);
+    if (pagination.current !== page) return;
+    onPageChange(1);
+
+    setSortType([sorter.order
+       ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
+       : {name: 'updatedAt', type: 'DESC'}]);
   }
 
   const onShowSizeChange = (current, size) => setTake(size);
@@ -149,37 +151,37 @@ export const RolesList = () => {
   const isAccess = () => userRole && ((userRole === USER_ROLES.CLIENT.key) || (userRole === USER_ROLES.TEST.key));
 
   return (
-    <div className="wrapper--content">
-      <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
-      <div className="details--page">
-        <Card>
-          <Tabs className="tab--custom" defaultActiveKey={tabs[0]?.title} onChange={changeTab}>
-            {tabs.map((item) =>
-              <TabPane key={item.key}
-                tab={<div className="tab--count">{t(`LIST.TABS.${item.title}`) + ' ' + count[item.key]}</div>}
-              />
-            )}
-          </Tabs>
+     <div className="wrapper--content">
+       <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []}/>
+       <div className="details--page">
+         <Card>
+           <Tabs className="tab--custom" defaultActiveKey={tabs[0]?.title} onChange={changeTab}>
+             {tabs.map((item) =>
+                <TabPane key={item.key}
+                   tab={<div className="tab--count">{t(`LIST.TABS.${item.title}`) + ' ' + count[item.key]}</div>}
+                />
+             )}
+           </Tabs>
 
-          <InputFormControl id='search'
-            customStyleWrapper='search--input--custom'
-            placeholder={t('LIST.SEARCH_PLACEHOLDER')}
-            onChange={onSearchChange}/>
+           <InputFormControl id='search'
+              customStyleWrapper='search--input--custom'
+              placeholder={t('LIST.SEARCH_PLACEHOLDER')}
+              onChange={onSearchChange}/>
 
-          <TableFormControl rowKey='id'
-            className='table--custom'
-            columns={columns(t)}
-            dataSource={data}
-            loading={loading}
-            onRow={row => ({onClick: () => history.push(PATHS.ROLES.SHOW.replace(':id', row.id))})}
-            total={total}
-            pageSize={take}
-            page={page}
-            onChange={onChangeTable}
-            onPageChange={onPageChange}
-            onShowSizeChange={onShowSizeChange}/>
-        </Card>
-      </div>
-    </div>
+           <TableFormControl rowKey='id'
+              className='table--custom'
+              columns={columns(t)}
+              dataSource={data}
+              loading={loading}
+              onRow={row => ({onClick: () => history.push(PATHS.ROLES.SHOW.replace(':id', row.id))})}
+              total={total}
+              pageSize={take}
+              page={page}
+              onChange={onChangeTable}
+              onPageChange={onPageChange}
+              onShowSizeChange={onShowSizeChange}/>
+         </Card>
+       </div>
+     </div>
   );
 };

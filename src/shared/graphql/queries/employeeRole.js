@@ -80,6 +80,7 @@ export const EMPLOYEE_ROLES = gql`
             }
           }
         }
+        hasAccess
         assignedFrom
         assignedUntil
       }

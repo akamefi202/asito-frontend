@@ -32,7 +32,7 @@ const getColumns = (t, removeRequirement) => [
   },
 ]
 
-export default ({t, id, formik, removedRequirements, setRemovedRequirements}) => {
+export default ({t, id, lRoleRequirement, formik, removedRequirements, setRemovedRequirements}) => {
   const [requirements, setRequirements] = useState([]);
 
   const {loading} = useQuery(CERTIFICATE_TYPES, {
@@ -70,7 +70,7 @@ export default ({t, id, formik, removedRequirements, setRemovedRequirements}) =>
           customStyleTable="form-table"
           columns={columns}
           dataSource={formik.values.requirements}
-          loading={loading}
+          loading={lRoleRequirement || loading}
           pagination={false}/>
 
        <Button type='button' buttonStyle="btn--outline" icon={<span className="icon-Add-New btn--icon--right"/>}

@@ -2,7 +2,7 @@ import PrivateRoute from "shared/authorization/PrivateRoute";
 import { Layout } from "shared/components";
 import Home from "./Home";
 import Certificates from "./Certificates";
-import Roles from "./Roles";
+import Functions from "./Functions";
 import Departments from "./Departments";
 import Employees from "./Employees";
 import Preferences from "./Preferences";
@@ -12,7 +12,7 @@ import Mycompany from "./Mycompany";
 const routes = [
   ...Home,
   ...Certificates,
-  ...Roles,
+  ...Functions,
   ...Departments,
   ...Employees,
   ...Preferences,

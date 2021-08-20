@@ -17,10 +17,8 @@ export const CREATE_ROLE_DEPARTMENT = gql`
 `;
 
 export const REMOVE_ROLE_DEPARTMENT = gql`
-  mutation RemoveRoleDepartment($data: RoleDepartmentWhereInput) {
-    removeRoleRequirement(data: $data) {
-      id
-    }
+  mutation RemoveRoleDepartment($removeRoleDepartmentData: RoleDepartmentWhereInput) {
+    removeRoleDepartment(data: $removeRoleDepartmentData)
   }
 `;
 

@@ -13,7 +13,7 @@ const {DEPARTMENTS} = DepartmentQueries;
 const getColumns = (t, removeDepartment) => [
   {
     title: t('FORM.DEPARTAMENT.COLUMNS.NAME'),
-    dataIndex: 'id',
+    dataIndex: ['department', 'id'],
     width: '90%',
     editable: true,
   },
@@ -26,7 +26,7 @@ const getColumns = (t, removeDepartment) => [
   },
 ]
 
-export default ({t, formik, removedDepartments, setRemovedDepartments}) => {
+export default ({t, formik, lRoleDepartments, removedDepartments, setRemovedDepartments}) => {
   const [departments, setDepartments] = useState([]);
 
   const {loading} = useQuery(DEPARTMENTS, {
@@ -64,7 +64,7 @@ export default ({t, formik, removedDepartments, setRemovedDepartments}) => {
         customStyleTable="form-table"
         columns={columns}
         dataSource={formik.values.departments}
-        loading={loading}
+        loading={lRoleDepartments || loading}
         pagination={false}/>
 
       <Button type='button' buttonStyle="btn--outline" icon={<span className="icon-Add-New btn--icon--right"/>}

@@ -51,6 +51,7 @@ export default ({t, id}) => {
   };
 
   const onChange = (pagination, filters, sorter) => {
+    if (pagination.current !== page) return;
     onPageChange(1);
 
     setSortType([sorter.order

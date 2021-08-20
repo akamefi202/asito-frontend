@@ -159,10 +159,12 @@ export default () => {
   };
 
   const onChange = (pagination, filters, sorter) => {
-    if (pagination.current === page) onPageChange(1);
-    if (!sorter.order) return setSortType({ name: "updatedAt", type:  "DESC" });
-    const sortBy = { name: "number", type: sorter.order === 'descend' ? "DESC" : "ASC" };
-    setSortType(sortBy);
+    if (pagination.current !== page) return;
+    onPageChange(1);
+
+    setSortType([sorter.order
+       ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
+       : {name: 'updatedAt', type: 'DESC'}]);
   }
 
   const onShowSizeChange = (current, size) => setTake(size);

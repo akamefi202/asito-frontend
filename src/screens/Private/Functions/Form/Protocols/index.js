@@ -11,7 +11,7 @@ import { dateToString } from "../../../../../utils/helpers/moment";
 
 const {CREATE_FILE} = FileMutations;
 
-export default ({t, formik, id, removedProtocols, setRemovedProtocols}) => {
+export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) => {
   const fileStatus = useRef('');
 
   const columns = [
@@ -35,7 +35,7 @@ export default ({t, formik, id, removedProtocols, setRemovedProtocols}) => {
     {
       title: '',
       dataIndex: 'id',
-      className: 'cell-action',
+      className: ['protocol', 'cell-action'],
       width: '10%',
       render: (_, array, index) => <CloseOutlined onClick={() => onRemoveFile(index)}/>,
     }
@@ -53,7 +53,6 @@ export default ({t, formik, id, removedProtocols, setRemovedProtocols}) => {
            id: cuid(),
            name: fileObject.name,
            type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
-           role: {id},
            url: data.createFile,
            updatedAt: moment(file.lastModified).format()
          }
@@ -101,6 +100,7 @@ export default ({t, formik, id, removedProtocols, setRemovedProtocols}) => {
        <TableFormControl
           rowKey='id'
           columns={columns}
+          loading={lProtocols}
           dataSource={formik.values.protocols}
           pagination={false}/>
 

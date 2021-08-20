@@ -1,4 +1,4 @@
-import { RolesList } from './RolesList';
+import { FunctionsList } from './FunctionsList';
 import Show from "./Show";
 import Form from "./Form";
 import { PATHS } from "utils/constants";
@@ -7,7 +7,7 @@ const routes = [
   {
     path: PATHS.ROLES.INDEX,
     exact: true,
-    component: RolesList,
+    component: FunctionsList,
   },
   {
     path: PATHS.ROLES.SHOW,
