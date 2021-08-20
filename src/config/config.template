@@ -2,4 +2,4 @@ export const apiUrl = `https://__dns__asito.api.ledgerleopard.com/graphql`;
 export const apiSubscriptionUrl = `wss://__dns__asito.api.ledgerleopard.com/graphql/subscription`;
 export const authApiUrl = `https://openid__openid_dns__.asito.api.ledgerleopard.com/graphql`;
 export const authSubscriptionUrl = `wss://openid__openid_dns__.asito.api.ledgerleopard.com`;
-export const wsUrl = 'wss://__dns__develop.mammoet.api.ledgerleopard.com/graphql';
+export const wsUrl = 'wss://__dns__mammoet.api.ledgerleopard.com/graphql';
