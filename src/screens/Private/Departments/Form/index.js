@@ -26,24 +26,24 @@ export default () => {
   const { t } = useTranslation(NAME_SPACES.DEPARTMENTS)
   const [initialValues, setInitialValues] = useState({
     id: cuid(),
-    name: "",
-    number: "",
-    type: "",
-    location: "",
-    address: "",
-    zipCode: "",
-    city: "",
-    country: "",
-    registrationNumber: "",
-    vat: "",
-    phone: "",
-    email: "",
-    webrole: "",
+    name: undefined,
+    number: undefined,
+    type: undefined,
+    location: undefined,
+    address: undefined,
+    zipCode: undefined,
+    city: undefined,
+    country: undefined,
+    registrationNumber: undefined,
+    vat: undefined,
+    phone: undefined,
+    email: undefined,
+    webrole: undefined,
   });
 
   const [getDepartment, { loading: loadingDepartment }] = useLazyQuery(DEPARTMENT, {
     variables: {where: {id}},
-    onCompleted: ({ department }) => setInitialValues({ ...initialValues, ...removeTypename(department) }),
+    onCompleted: ({ department }) => setInitialValues({ ...initialValues, ...removeTypename(department, ['roles']) }),
     onError: (error) => messages({ data: error })
   });
 
@@ -55,10 +55,7 @@ export default () => {
     enableReinitialize: true,
     initialValues,
     validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
-    onSubmit: data => {
-      delete data.roles;
-      saveChanges({ variables: { data } });
-    }
+    onSubmit: data => saveChanges({ variables: { data } })
   });
 
   const getScrollMenuItem = (t) => {
@@ -100,6 +97,7 @@ export default () => {
   return (
     <div className="wrapper--content">
       <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons} />
+
       <div className="details--page">
         <Spin spinning={loading || loadingDepartment}>
           <Row>
