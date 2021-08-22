@@ -8,7 +8,7 @@ export default messages => {
     dateOfBirth: yup.string().required(messages.REQUIRED),
     gender: yup.string().required(messages.REQUIRED),
     phone: yup.string().required(messages.REQUIRED),
-    email: yup.string().email().required(messages.REQUIRED),
+    email: yup.string().email('Moet een geldige e-mailadres zijn').required(messages.REQUIRED),
     address1: yup.string().required(messages.REQUIRED),
     zipCode: yup.string().required(messages.REQUIRED),
     city: yup.string().required(messages.REQUIRED),
