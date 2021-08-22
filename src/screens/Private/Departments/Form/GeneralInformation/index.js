@@ -9,7 +9,6 @@ import { SelectFormControl } from "../../../../../shared/components/SelectFormCo
 
 export default ({t, formik}) => (
    <Card cardStyle="card--form">
-
      <h2 className="card--form--title">{t('FORM.MENU.GENERAL_INFORMATION')}</h2>
 
      <Row gutter={[16, 8]}>
@@ -72,7 +71,6 @@ export default ({t, formik}) => (
             placeholder={t('FORM.GENERAL_INFORMATION.CITY_PLACEHOLDER')}
             {...bindInputProps({name: 'city', ...formik})}/>
        </Col>
-
 
        <Col xs={24} sm={24} md={12} lg={12}>
          <SelectFormControl id='country'
