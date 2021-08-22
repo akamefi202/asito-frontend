@@ -1,26 +1,25 @@
-import React, {useState, useEffect} from "react";
-import {useParams, useHistory} from "react-router-dom";
-import {Row, Col} from "antd";
-import {Header, ScrollMenu, Spin} from "shared/components";
+import React, { useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { Row, Col } from "antd";
+import { Header, ScrollMenu, Spin } from "shared/components";
 import Roles from "./Roles";
 import GeneralInformation from "./GeneralInformation";
 import ContactInformation from "./ContactInformation";
 import Certificates from "./Certificates";
-import {NAME_SPACES} from "shared/locales/constants";
-import {useTranslation} from "react-i18next";
-import {PATHS} from "utils/constants";
-import {useQuery, useLazyQuery} from "@apollo/react-hooks";
-import {EmployeeQueries, CertificateQueries} from "shared/graphql/queries";
-import {get} from "lodash";
-import {useReactiveVar} from "@apollo/client";
-import {UserStore} from "shared/store/UserStore";
-import {USER_ROLES} from "shared/constants/userRoles";
-import {messages} from "utils/helpers/message";
-import {QrcodeOutlined} from "@ant-design/icons";
+import { NAME_SPACES } from "shared/locales/constants";
+import { useTranslation } from "react-i18next";
+import { PATHS } from "utils/constants";
+import { useQuery } from "@apollo/react-hooks";
+import { EmployeeQueries } from "shared/graphql/queries";
+import { get } from "lodash";
+import { useReactiveVar } from "@apollo/client";
+import { UserStore } from "shared/store/UserStore";
+import { USER_ROLES } from "shared/constants/userRoles";
+import { messages } from "utils/helpers/message";
+import { QrcodeOutlined } from "@ant-design/icons";
 import QRCodeModal from "./QRCodeModal";
 
 const {EMPLOYEE} = EmployeeQueries;
-const {CERTIFICATES} = CertificateQueries;
 
 const menuItems = [
   {key: "ROLES", href: "roles"},
@@ -34,26 +33,9 @@ export const ShowEmployees = () => {
   const history = useHistory();
   const {t} = useTranslation(NAME_SPACES.EMPLOYEES);
   const [qrCodeModalVisible, setQRCodeModalVisible] = useState(false);
-  const [pageCertificates, setPageCertificates] = useState(1);
-  const [skipCertificates, setSkipCertificates] = useState(0);
-  const [takeCertificates] = useState(10);
-  const [totalCertificates, setTotalCertificates] = useState(0);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
-
-  const variablesCertificates = {where: {employee: {id}}, skip: skipCertificates, take: takeCertificates};
-
-  const [requestCertificates, {data: dataCertificates, loading: loadingCertificates}] =
-    useLazyQuery(CERTIFICATES, {
-      variables: variablesCertificates,
-      onCompleted: ({certificates}) => setTotalCertificates(certificates.count || 0),
-      onError: (error) => messages({data: error})
-    });
-
-  useEffect(() => {
-    requestCertificates();
-  }, [])
 
   const {data, loading} = useQuery(EMPLOYEE, {
     variables: {where: {id}},
@@ -62,7 +44,6 @@ export const ShowEmployees = () => {
 
   const employee = get(data, "employee", {}) || {};
   const roles = get(data, "employee.employeeRoles", []) || [];
-  const certificates = get(dataCertificates, "certificates.data", []) || [];
 
   const getScrollMenuItem = () => menuItems.map(item => ({...item, title: t(`SHOW.MENU.${item.key}`)}));
 
@@ -100,43 +81,33 @@ export const ShowEmployees = () => {
   const isAccess = () => userRole && ((userRole === USER_ROLES.PLANER.key) || (userRole === USER_ROLES.TEST.key));
 
   return (
-    <div className="wrapper--content">
-      <Spin spinning={loading}>
-        <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []}/>
-        <div className="details--page">
-          <Row>
-            <Col xs={24} sm={24} md={6} lg={6}>
-              <ScrollMenu menuItems={getScrollMenuItem(t)}/>
-            </Col>
+     <div className="wrapper--content">
+       <Spin spinning={loading}>
+         <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []}/>
+         <div className="details--page">
+           <Row>
+             <Col xs={24} sm={24} md={6} lg={6}>
+               <ScrollMenu menuItems={getScrollMenuItem(t)}/>
+             </Col>
 
-            <Col xs={24} sm={24} md={18} lg={18}>
-              <section id="roles">
-                <Roles t={t} roles={roles} loading={loading}/>
-              </section>
-              <section id="general">
-                <GeneralInformation t={t} employee={employee}/>
-              </section>
-              <section id="contact">
-                <ContactInformation t={t} employee={employee}/>
-              </section>
-              <section id="certificates">
-                <Certificates t={t}
-                  certificates={certificates}
-                  loading={loadingCertificates}
-                  page={pageCertificates}
-                  setPage={setPageCertificates}
-                  setSkip={setSkipCertificates}
-                  take={takeCertificates}
-                  total={totalCertificates}/>
-              </section>
-            </Col>
-          </Row>
-        </div>
-      </Spin>
-      <QRCodeModal id={id}
-        t={t}
-        visible={qrCodeModalVisible}
-        handleCancel={() => setQRCodeModalVisible(false)}/>
-    </div>
+             <Col xs={24} sm={24} md={18} lg={18}>
+               <section id="roles">
+                 <Roles t={t} roles={roles} loading={loading}/>
+               </section>
+               <section id="general">
+                 <GeneralInformation t={t} employee={employee}/>
+               </section>
+               <section id="contact">
+                 <ContactInformation t={t} employee={employee}/>
+               </section>
+               <section id="certificates">
+                 <Certificates t={t} id={id}/>
+               </section>
+             </Col>
+           </Row>
+         </div>
+       </Spin>
+       <QRCodeModal id={id} t={t} visible={qrCodeModalVisible} handleCancel={() => setQRCodeModalVisible(false)}/>
+     </div>
   );
 };
