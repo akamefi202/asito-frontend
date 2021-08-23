@@ -60,9 +60,7 @@ export const DEPARTMENTS = gql`
         phone
         email
         webrole
-        roles {
-          id
-        }
+        rolesCount
       }
       count
     }
@@ -79,6 +77,14 @@ export const ROLE_DEPARTMENTS = gql`
           name
           type
           location
+        }
+        role {
+          id
+          name
+          numberOfEmployeesRequired
+          employeeRoles {
+            id
+          }
         }
       }
       count

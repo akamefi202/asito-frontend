@@ -36,9 +36,8 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.ROLES"),
-    dataIndex: "roles",
-    key: "roles",
-    render: (roles) =>  roles ? roles.length : 0
+    dataIndex: "rolesCount",
+    key: "rolesCount",
   },
 ];
 

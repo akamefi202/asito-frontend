@@ -66,27 +66,11 @@ export const ROLES = gql`
         city
         country
         status
-        departments {
-          id
-        }
         accepted
         roleDescription
         requirementsCount
-        employeeRoles {
-          id
-          role {
-            id
-          }
-          employee {
-            id
-            number
-            firstName
-            lastName
-            certificates {
-              id
-            }
-          }
-        }
+        departmentsCount
+        employeeRolesCount
       }
       count
       activeRolesCount

@@ -89,7 +89,7 @@ export const EditableCell =
          case 'requirement':
            return <Select
               t={t}
-              localRequirements={localRequirements}
+              localRequirements={localRequirements.filter(d => !formik.values.requirements.some((fd, i) => i !== index && fd.requirement && d.id === fd.requirement.id))}
               formik={formik}
               index={index}
               loading={loading}

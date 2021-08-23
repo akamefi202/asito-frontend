@@ -63,7 +63,7 @@ export const EditableCell =
         {editable
           ? <SelectFormControl customStyleWrapper='table-select'
             placeholder={t('FORM.DEPARTAMENT.COLUMNS.NAME_PLACEHOLDER')}
-            items={localDepartments.filter(d => !formik.values.departments.some((fd, i) => i !== index && d.id === fd.id))}
+            items={localDepartments.filter(d => !formik.values.departments.some((fd, i) => i !== index && fd.department && d.id === fd.department.id))}
             {...bindInputProps({name: `departments.${index}.department.id`, ...formik})}
             loading={loading}
             optionTitle='name'

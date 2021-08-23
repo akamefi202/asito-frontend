@@ -34,15 +34,13 @@ const columns = (t) => [
   },
   {
     title: t("LIST.COLUMNS.DEPARTAMENT"),
-    dataIndex: "departments",
-    key: "departments",
-    render: (departments) => departments ? departments.length : 0
+    dataIndex: "departmentsCount",
+    key: "departmentsCount"
   },
   {
     title: t("LIST.COLUMNS.REQUIREMENTS"),
     dataIndex: "requirementsCount",
-    key: "requirementsCount",
-    render: (requirementsCount) => requirementsCount,
+    key: "requirementsCount"
   },
   {
     title: t("LIST.COLUMNS.EMPLOYEES"),
@@ -50,7 +48,7 @@ const columns = (t) => [
     key: "numberOfEmployeesRequired",
     render: (number, record) => (
        <span>
-        {`${record.employeeRoles && record.employeeRoles.length || 0}/${number}`}
+        {`${record.employeeRolesCount}/${number}`}
       </span>
     ),
   },

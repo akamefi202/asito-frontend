@@ -17,7 +17,7 @@ import { messages } from "utils/helpers/message";
 import { ScanOutlined } from "@ant-design/icons";
 import Scanner from './Scanner';
 
-const { DEPARTMENT } = DepartmentQueries;
+const { DEPARTMENT, ROLE_DEPARTMENTS } = DepartmentQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -29,6 +29,7 @@ export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.DEPARTMENTS);
   const [scannerVisible, setScannerVisible] = useState(false);
+  const [roles, setRoles] = useState([]);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
@@ -42,8 +43,18 @@ export default () => {
     }
   });
 
+  const { data: rolesData, loading: loadingData } = useQuery(ROLE_DEPARTMENTS, {
+    variables: {roleDepartmentsWhere: {department: {id}}, skip: 0, take: 1000},
+    onCompleted: () => {
+      const roles = rolesData.roleDepartments.data.map(x => x.role);
+      setRoles(roles);
+    },
+    onError: (error) => {
+      messages({ data: error });
+    }
+  });
+
   const department = get(data, "department", {}) || {};
-  const roles = get(data, "department.roles", []) || [];
 
   const getScrollMenuItem = (t) => {
     return menuItems.map((item) => {
@@ -94,7 +105,7 @@ export default () => {
     <div className="wrapper--content">
       <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
       <div className="details--page">
-        <Spin spinning={loading}>
+        <Spin spinning={loading || loadingData}>
           <Row>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem(t)} />
