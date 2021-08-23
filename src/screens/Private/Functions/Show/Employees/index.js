@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
-import { Row, Col } from "antd";
+import { Row, Col, Popconfirm } from "antd";
 import { Card, Button } from "shared/components";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useMutation, useLazyQuery } from "@apollo/react-hooks";
@@ -20,7 +20,7 @@ const {EMPLOYEES} = EmployeeQueries;
 const {EMPLOYEE_ROLES} = EmployeeRoleQueries;
 const {UPDATE_CREATE_EMPLOYEE_ROLE, REMOVE_EMPLOYEE_ROLE} = EmployeeRoleMutations;
 
-const columns = (t, remove) => [
+const columns = (t, remove, isAccess) => [
   {
     title: t('SHOW.EMPLOYEES.COLUMNS.EMPLOYEE'),
     dataIndex: 'employee',
@@ -50,14 +50,17 @@ const columns = (t, remove) => [
        </div>
     )
   },
-  {
+  isAccess() && {
     title: '',
     dataIndex: 'action',
     width: '10%',
     className: 'cell-action',
-    render: (value, row) => <CloseOutlined onClick={() => remove(row.id)}/>
+    render: (value, row) => (
+       <Popconfirm title={t('SHOW.EMPLOYEES.SURE_DELETE')} onConfirm={() => remove(row.id)}>
+         <CloseOutlined/>
+       </Popconfirm>)
   }
-];
+].filter(Boolean);
 
 export default ({t, id}) => {
   const user = useReactiveVar(UserStore);
@@ -195,7 +198,7 @@ export default ({t, id}) => {
        </>}
 
        <TableFormControl rowKey='id'
-          columns={columns(t, remove)}
+          columns={columns(t, remove, isAccess)}
           dataSource={employeeRoles}
           loading={lEmployeeRoles}
           page={page}
