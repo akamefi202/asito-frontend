@@ -9,6 +9,6 @@ export default messages => {
        .integer('Moet een geheel getal zijn')
        .min(1, 'Ongeldig waardetype')
        .required(messages.REQUIRED),
-    roleDescription: yup.string()
+    roleDescription: yup.string().nullable()
   });
 };
