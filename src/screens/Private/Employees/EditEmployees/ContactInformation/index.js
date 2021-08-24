@@ -14,7 +14,7 @@ export default ({t, formik}) => {
     const [countries, setCountries] = useState(COUNTRY_LIST);
 
     const searchCountry = (value) => {
-        setCountries(COUNTRY_LIST.filter(c => countryTranslate.t(c.value).toLowerCase().includes(value)));
+        setCountries(COUNTRY_LIST.filter(c => countryTranslate.t(c.value).toLowerCase().includes(value.toLowerCase())));
     }
 
    return (

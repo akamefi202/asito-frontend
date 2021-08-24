@@ -162,9 +162,9 @@ export default () => {
     if (pagination.current !== page) return;
     onPageChange(1);
 
-    setSortType([sorter.order
+    setSortType(sorter.order
        ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
-       : {name: 'updatedAt', type: 'DESC'}]);
+       : {name: 'updatedAt', type: 'DESC'});
   }
 
   const onShowSizeChange = (current, size) => setTake(size);

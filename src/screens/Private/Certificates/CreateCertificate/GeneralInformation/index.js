@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Row, Col, Checkbox} from "antd";
 import {Card} from "shared/components";
 import {useLazyQuery} from "@apollo/react-hooks";
-import {EmployeeQueries} from "shared/graphql/queries";
+import {EmployeeQueries, CertificateQueries} from "shared/graphql/queries";
 import {messages} from "utils/helpers/message";
 import {bindInputProps} from "utils/helpers/input";
 import {REQUIRED_FIELD_SYMBOL} from "utils/constants";
@@ -11,20 +11,28 @@ import {InputFormControl} from "../../../../../shared/components/InputformContro
 import {DatePickerFormControl} from "../../../../../shared/components/DatePickerFormControl/DatePickerFormControl";
 import {uniq} from "../../../../../utils/helpers/fn";
 
-const {EMPLOYEES} = EmployeeQueries;
+const { EMPLOYEES } = EmployeeQueries;
+const { CERTIFICATE_TYPES } = CertificateQueries;
 
 export default ({t, formik, certificateTypes}) => {
   const limit = 10;
 
   const [employeesItems, setEmployeesItems] = useState([]);
+  const [requirementsItems, setRequirementsItems] = useState([]);
   const [searchEmployees, setSearchEmployees] = useState([]);
   const [search, setSearch] = useState('');
+  const [searchRequirementValue, setSearchRequirementValue] = useState('');
+  const [searchRequirements,  setSearchRequirements] = useState([]);
+  const [totalSelectRequirements, setTotalSelectRequirements] = useState(0);
   const [skip, setSkip] = useState(0);
+  const [skipRequirements, setSkipRequirements] = useState(0);
   const [pageSelect, setPageSelect] = useState(1);
+  const [requirementPageSelect, setRequirementPageSelect] = useState(1);
   const [totalSelect, setTotalSelect] = useState(0);
 
   useEffect(() => {
     getEmployees();
+    getRequirements();
   }, [])
 
   const [getEmployees, {loading}] = useLazyQuery(EMPLOYEES, {
@@ -44,6 +52,24 @@ export default ({t, formik, certificateTypes}) => {
     onError: (error) => messages({data: error})
   });
 
+  const [getRequirements, { loading: loadingRequirements }] = useLazyQuery(CERTIFICATE_TYPES, {
+    variables: {scan: searchRequirementValue, skip: skipRequirements, take: limit},
+    onCompleted: ({requirements}) => {
+      const items = requirements?.data?.map(item => ({
+        id: item.id,
+        type: item?.type,
+        validUntil: item.validAtLeastUntil
+      }));
+      setTotalSelectRequirements(requirements.count || 0);
+      if (searchRequirementValue) setSearchRequirements(items)
+      else {
+        setRequirementsItems(uniq([...requirementsItems, ...items], 'id'));
+        setSearchRequirements([])
+      }
+    },
+    onError: (error) => messages({data: error})
+  });
+
   const onScroll = () => {
     if ((totalSelect <= skip) || (limit >= totalSelect)) return;
     const page = pageSelect;
@@ -55,6 +81,18 @@ export default ({t, formik, certificateTypes}) => {
     setPageSelect(1);
     setSkip(0);
     setSearch(value);
+  }
+
+  const onSearchRequirement = (value) => {
+    setSkipRequirements(0);
+    setSearchRequirementValue(value);
+  }
+
+  const onScrollRequirement = () => {
+    if ((totalSelectRequirements <= skipRequirements) || (limit >= totalSelectRequirements)) return;
+    const page = requirementPageSelect;
+    setRequirementPageSelect(page + 1);
+    setSkipRequirements(limit * page);
   }
 
   if (!formik.values.infinite) {
@@ -95,10 +133,13 @@ export default ({t, formik, certificateTypes}) => {
           <SelectFormControl id="type"
             label={(t('FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE') + ' ' + REQUIRED_FIELD_SYMBOL)}
             placeholder={t('FORM.GENERAL_INFORMATION.CERTIFICATE_TYPE_PLACEHOLDER')}
-            {...bindInputProps({name: 'type', ...formik})}
-            items={certificateTypes}
+            {...bindInputProps({name: 'requirement.id', ...formik})}
+            items={searchRequirementValue ? searchRequirements : requirementsItems}
+            loading={loadingRequirements}
             optionValue='id'
-            optionTitle='type'/>
+            optionTitle='type'
+            onScroll={onScrollRequirement}
+            onSearch={onSearchRequirement}/>
         </Col>
       </Row>
 

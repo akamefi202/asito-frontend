@@ -99,6 +99,7 @@ export const CERTIFICATE_TYPES = gql`
         data {
             id
             type
+            validAtLeastUntil
         }
     }
   }

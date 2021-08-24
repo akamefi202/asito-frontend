@@ -123,7 +123,7 @@
       "CITY": "Woonplaats",
       "CITY_PLACEHOLDER": "Enter Woonplaats",
       "COUNTRY": "Land",
-      "COUNTRY_PLACEHOLDER": "Selecteer een Land"
+      "COUNTRY_PLACEHOLDER": "Zoek een land"
     },
     "ERROR": {
       "REQUIRED": "Is een verplicht veld",

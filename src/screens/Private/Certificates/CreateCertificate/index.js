@@ -21,7 +21,7 @@ import {timestampToDate} from "utils/helpers/moment";
 
 const {CREATE_CERTIFICATE} = CertificateMutations;
 const {REMOVE_ATTACHMENTS} = RemoveAttachmentsMutations;
-const {CERTIFICATE, CERTIFICATE_TYPES} = CertificateQueries;
+const { CERTIFICATE } = CertificateQueries;
 
 const menuItems = [
   {key: "GENERAL_INFORMATION", href: "general"},
@@ -34,7 +34,6 @@ export const CreateCertificate = () => {
   const {t} = useTranslation(NAME_SPACES.CERTIFICATES);
   const history = useHistory();
   const [deletedFiles, setDeletedFiles] = useState([]);
-  const [certificateTypes, setCertificateTypes] = useState([]);
   const [issuer, setIssuer] = useState({
     id: undefined,
     name: undefined,
@@ -69,12 +68,6 @@ export const CreateCertificate = () => {
     onError: (error) => messages({data: error})
   });
 
-  const {loading: loadingCertificateTypes} = useQuery(CERTIFICATE_TYPES, {
-    variables: {take: 1000},
-    onCompleted: ({requirements: {data}}) => setCertificateTypes(data.map(x => ({...x, validAtLeastUntil: null}))),
-    onError: (error) => messages({data: error})
-  });
-
   const [getCertificate, {loading: loadingCertificate}] = useLazyQuery(CERTIFICATE, {
     variables: {where: {id}},
     onCompleted: ({certificate}) => {
@@ -105,8 +98,6 @@ export const CreateCertificate = () => {
 
       delete newData.type;
       delete newData.infinite;
-
-      newData.requirement = removeTypename(certificateTypes.find(c => c.id === data.type || c.type === data.type));
 
       newData.issuer = issuer && issuer.id ? {id: issuer.id} : null;
 
@@ -159,7 +150,7 @@ export const CreateCertificate = () => {
   return (
     <div className="wrapper--content">
       <Spin
-        spinning={loading || (loadingCertificate && loadingIssuer && loadingCertificateTypes) || loadingAttachments}>
+        spinning={loading || (loadingCertificate && loadingIssuer) || loadingAttachments}>
         <Header items={setBreadcrumbsItem} buttons={setBreadcrumbsButtons}/>
         <div className="details--page">
           <Row>
@@ -169,7 +160,7 @@ export const CreateCertificate = () => {
 
             <Col xs={24} sm={24} md={18} lg={18}>
               <section id="general">
-                <GeneralInformation t={t} formik={formik} certificateTypes={certificateTypes}/>
+                <GeneralInformation t={t} formik={formik} />
               </section>
               <section id="issuer">
                 <IssuerInformation t={t} formik={formik} issuer={issuer}/>
