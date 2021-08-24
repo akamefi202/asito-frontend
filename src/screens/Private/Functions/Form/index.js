@@ -53,6 +53,8 @@ export default () => {
   const [initialValues, setInitialValues] = useState({
     id: generatedId,
     status: 'ACTIVE',
+    name: undefined,
+    numberOfEmployeesRequired: undefined,
     departments: [],
     requirements: [],
     protocols: []

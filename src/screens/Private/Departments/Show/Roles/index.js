@@ -14,7 +14,7 @@ const columns = (t) => [
     render: (text, record) => (
       <Link 
         className="custom-link" 
-        to={PATHS.ROLES.SHOW.replace(":id", record.id)}>
+        to={PATHS.ROLES.SHOW.replace(":id", record?.id)}>
           {text}
       </Link>
     ),
