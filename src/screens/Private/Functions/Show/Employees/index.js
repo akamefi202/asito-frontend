@@ -92,7 +92,7 @@ export default ({t, id}) => {
   });
 
   const [getEmployees, {loading: lEmployees}] = useLazyQuery(EMPLOYEES, {
-    variables: {/*where: {role: {id}},*/ scan: scanSelect, skip: skipSelect, take: takeSelect},
+    variables: { scan: scanSelect, skip: skipSelect, take: takeSelect },
     onCompleted: (loadData) => {
       setEmployees(scanSelect
          ? loadData?.employees?.data
@@ -105,7 +105,7 @@ export default ({t, id}) => {
 
   const load = () => {
     setValue(null);
-    if (skip === total - 1) setSkip(skip - take);
+    if (skip === total - 1 && skip >= take) setSkip(skip - take);
     Promise.all([getEmployeeRoles(), getEmployees()]).then();
   }
 
