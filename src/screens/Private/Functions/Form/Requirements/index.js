@@ -28,7 +28,7 @@ const getColumns = (t, removeRequirement) => [
     dataIndex: 'action',
     width: '10%',
     className: 'cell-action',
-    render: (_, array, index) => <CloseOutlined onClick={() => removeRequirement(index)}/>
+    render: (_, requirement, index) => <CloseOutlined onClick={() => removeRequirement(requirement.id, index)}/>
   },
 ]
 
@@ -46,14 +46,15 @@ export default ({t, id, lRoleRequirement, formik, removedRequirements, setRemove
     formik.setFieldValue('requirements', [...values, {id: cuid(), role: {id}}]);
   }
 
-  const removeRequirement = (index) => {
+  const removeRequirement = (id, index) => {
     const values = formik.getFieldProps('requirements')?.value || [];
+    const removedRequirement = formik.initialValues.requirements.find((d) => d.id === id);
 
-    if (formik.initialValues.requirements.find((r, i) => i === index)?.id === values?.[index]?.id) {
+    if (removedRequirement?.id === values?.[index]?.id) {
       setRemovedRequirements([...removedRequirements, values[index].id].filter(Boolean));
     }
 
-    formik.setFieldValue('requirements', [...values.filter((r, rIndex) => rIndex !== index)]);
+    formik.setFieldValue('requirements', [...values.filter((r,) => r.id !== id)]);
   }
 
   const columns = getColumns(t, removeRequirement).map(col => ({

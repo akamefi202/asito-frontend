@@ -22,7 +22,7 @@ const getColumns = (t, removeDepartment) => [
     dataIndex: 'action',
     width: '10%',
     className: 'cell-action',
-    render: (_, array, index) => <CloseOutlined onClick={() => removeDepartment(index)}/>
+    render: (_, department, index) => <CloseOutlined onClick={() => removeDepartment(department.id, index)}/>
   },
 ]
 
@@ -40,14 +40,15 @@ export default ({t, formik, lRoleDepartments, removedDepartments, setRemovedDepa
     formik.setFieldValue('departments', [...values, {}]);
   }
 
-  const removeDepartment = (index) => {
+  const removeDepartment = (id, index) => {
     const values = formik.getFieldProps('departments')?.value || [];
+    const removedDep = formik.initialValues.departments.find((d) => d.id === id);
 
-    if (formik.initialValues.departments.find((d, i) => i === index)?.id === values?.[index]?.id) {
+    if (removedDep?.id === values?.[index]?.id) {
       setRemovedDepartments([...removedDepartments, values[index].id].filter(Boolean));
     }
 
-    formik.setFieldValue('departments', [...values.filter((d, dIndex) => dIndex !== index)]);
+    formik.setFieldValue('departments', [...values.filter((d) => d.id !== id)]);
   }
 
   const columns = getColumns(t, removeDepartment)

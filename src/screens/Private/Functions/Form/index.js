@@ -136,8 +136,8 @@ export default () => {
 
           ...protocols.map(p => createProtocol({variables: {createProtocolData: p}})),
           ...removedProtocols.map(p => removeProtocol({variables: {data: {id: p}}})),
-        ]).then(() => history.push(id ? PATHS.ROLES.SHOW.replace(':id', id) : PATHS.ROLES.INDEX))
-      })
+        ])
+      }).then(() => history.push(id ? PATHS.ROLES.SHOW.replace(':id', id) : PATHS.ROLES.INDEX));
     }
   });
 
