@@ -33,7 +33,7 @@ export const EditableCell =
     }, [])
 
     const [getDepartments, {loading}] = useLazyQuery(DEPARTMENTS, {
-      variables: {scan, skip, take},
+      variables: {scan, skip, take, orderBy: { name: 'name', type: 'ASC' }},
       onCompleted: (loadData) => {
         setLocalDepartments(scan
           ? loadData?.departments?.data
@@ -55,7 +55,7 @@ export const EditableCell =
       setPage(1);
       setSkip(0);
       setScan(value);
-      setTimeout(() => getDepartments());
+      getDepartments();
     }
 
     return (

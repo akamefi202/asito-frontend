@@ -121,7 +121,6 @@ export default () => {
       const requirements = getNewArrayItems(newData?.requirements, 'requirements', ['validAtLeastUntil']);
       const protocols = getNewArrayItems(newData?.protocols, 'protocols', ['name', 'type', 'url', 'updatedAt']);
 
-
       delete newData.departments;
       delete newData.requirements;
       delete newData.protocols;
@@ -151,7 +150,8 @@ export default () => {
          role: {id: id || generatedId},
          ...arrayName !== 'protocols' && {[fieldName]: {id: i?.[fieldName]?.id}},
          ...fields.reduce((acc, field) => (acc[field] = i?.[field], acc), {})
-       }));
+       }))
+       .filter(x => x[fieldName].id);
   }
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
