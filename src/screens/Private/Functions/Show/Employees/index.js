@@ -45,7 +45,7 @@ const columns = (t, remove, isAccess) => [
     render: (employee, row) => (
        <div className="access--type">
          {employee?.certificates?.length !== 0 &&
-         <span className={'icon ' + row.hasAccess ? 'icon-Check green' : 'icon-Close red'}/>}
+         <span className={'icon ' + (row.hasAccess ? 'icon-Check green' : 'icon-Close red')}/>}
          <span> {employee?.certificates?.length}</span>
        </div>
     )

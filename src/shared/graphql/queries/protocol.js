@@ -11,6 +11,7 @@ export const PROTOCOLS = gql`
         createdAt
         url
       }
+      count
     }
   }
 `;
@@ -25,7 +26,7 @@ export const ROLE_PROTOCOLS = gql`
           type
           updatedAt
           createdAt
-          url   
+          url
         }
       }
       count
