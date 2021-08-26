@@ -164,8 +164,8 @@ export default ({t, formik, certificateTypes}) => {
       <Row gutter={[10, 8]}>
         {formik.values?.infinite && <Col xs={24} sm={24} md={12} lg={12}>
           <InputFormControl id='validForMonths'
+            novalidate
             type='number'
-            min={1}
             label={t('FORM.GENERAL_INFORMATION.VALID_MONTHS')}
             placeholder={t('FORM.GENERAL_INFORMATION.MONTHS_NUMBER_PLACEHOLDER')}
             {...bindInputProps({name: 'validForMonths', ...formik})}/>
@@ -174,7 +174,7 @@ export default ({t, formik, certificateTypes}) => {
         {formik.values?.infinite && <Col xs={24} sm={24} md={12} lg={12}>
           <InputFormControl id='validForYears'
             type='number'
-            min={1}
+            novalidate
             label={t('FORM.GENERAL_INFORMATION.VALID_YEAR')}
             placeholder={t('FORM.GENERAL_INFORMATION.YEAR_NUMBER_PLACEHOLDER')}
             {...bindInputProps({name: 'validForYears', ...formik})}/>

@@ -5,6 +5,8 @@ import {Row, Col, Upload} from "antd";
 import {Card, Button} from "shared/components";
 import {CloudUploadOutlined, DeleteOutlined} from "@ant-design/icons";
 import {bindInputProps} from "utils/helpers/input";
+import {isCorrectFileSize} from "utils/helpers/fn";
+import {messages} from "utils/helpers/message";
 import {REQUIRED_FIELD_SYMBOL} from "utils/constants";
 import moment from "moment";
 import {InputFormControl} from "../../../../../shared/components/InputformControl/InputFormControl";
@@ -22,6 +24,12 @@ export default ({t, formik}) => {
     if (fileStatus.current === file.status || file.status !== 'error') return;
     fileStatus.current = file.status;
     const fileObject = await readFile(file.originFileObj);
+
+    if (!isCorrectFileSize(fileObject.size)) {
+      fileStatus.current = '';
+      return messages({msg: "Het bestand is te groot"});
+    }
+
     getFile({variables: {data: fileObject}})
       .then(({data}) => {
         fileStatus.current = '';

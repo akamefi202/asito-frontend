@@ -101,6 +101,7 @@ export const CERTIFICATE_TYPES = gql`
             type
             validAtLeastUntil
         }
+        count
     }
   }
 `;

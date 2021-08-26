@@ -4,6 +4,8 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Card, Button } from "shared/components";
 import { useMutation } from "@apollo/react-hooks";
 import { FileMutations } from "shared/graphql/mutations";
+import {isCorrectFileSize} from "utils/helpers/fn";
+import {messages} from "utils/helpers/message";
 import moment from "moment";
 import cuid from "cuid";
 import { TableFormControl } from "../../../../../shared/components/TableFormControl/TableFormControl";
@@ -19,7 +21,7 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
       title: t('FORM.PROTOCOLS.COLUMNS.FILE_NAME'),
       dataIndex: 'name',
       width: '60%',
-      render: (name, file) => <a target='_blank' href={file.url} download={name}>{name}</a>
+      render: (name, file) => <a target='_blank' href={file.url} download={name} rel="noreferrer">{name}</a>
     },
     {
       title: t('FORM.PROTOCOLS.COLUMNS.FILE_TYPE'),
@@ -46,6 +48,11 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
     fileStatus.current = file.status;
 
     const fileObject = await readFile(file.originFileObj);
+
+    if (!isCorrectFileSize(fileObject.size)) {
+      fileStatus.current = '';
+      return messages({msg: "Het bestand is te groot"});
+    }
 
     getFile({variables: {data: fileObject}})
        .then(({data}) => {

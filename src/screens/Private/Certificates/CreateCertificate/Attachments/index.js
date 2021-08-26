@@ -6,6 +6,8 @@ import {useMutation} from "@apollo/react-hooks";
 import {FileMutations} from "shared/graphql/mutations";
 import {TableFormControl} from "../../../../../shared/components/TableFormControl/TableFormControl";
 import {dateToString} from "../../../../../utils/helpers/moment";
+import {isCorrectFileSize} from 'utils/helpers/fn';
+import {messages} from "utils/helpers/message";
 import moment from "moment";
 import cuid from "cuid";
 
@@ -18,7 +20,7 @@ export default ({t, formik, id, deletedFiles, setDeletedFiles}) => {
     {
       title: t('FORM.ATTACHMENTS.COLUMNS.FILE_NAME'),
       dataIndex: 'name',
-      render: (name, file) => <a target='_blank' href={file.url} download={name}>{name}</a>
+      render: (name, file) => <a target='_blank' href={file.url} download={name} rel="noreferrer">{name}</a>
     },
     {
       title: t('FORM.ATTACHMENTS.COLUMNS.FILE_TYPE'),
@@ -50,6 +52,11 @@ export default ({t, formik, id, deletedFiles, setDeletedFiles}) => {
     fileStatus.current = file.status;
 
     const fileObject = await readFile(file.originFileObj);
+
+    if (!isCorrectFileSize(fileObject.size)) {
+      fileStatus.current = '';
+      return messages({msg: "Het bestand is te groot"});
+    }
 
     getFile({variables: {data: fileObject}})
       .then(({data}) => {
