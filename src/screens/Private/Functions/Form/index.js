@@ -151,7 +151,7 @@ export default () => {
          ...arrayName !== 'protocols' && {[fieldName]: {id: i?.[fieldName]?.id}},
          ...fields.reduce((acc, field) => (acc[field] = i?.[field], acc), {})
        }))
-       .filter(x => x[fieldName].id);
+       .filter(x => fieldName === 'protocol' ? x : x[fieldName]?.id);
   }
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
