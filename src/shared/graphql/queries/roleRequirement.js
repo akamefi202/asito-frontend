@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const ROLE_REQUIREMENTS = gql`
-  query RoleRequirements($roleRequirementsWhere: RoleRequirementWhereInput, $scan: String, $skip: Int, $take: Int) {
-    roleRequirements(where: $roleRequirementsWhere, scan: $scan, skip: $skip, take: $take) {
+  query RoleRequirements($roleRequirementsWhere: RoleRequirementWhereInput, $scan: String, $skip: Int, $take: Int, $orderBy: [JSONObject]) {
+    roleRequirements(where: $roleRequirementsWhere, scan: $scan, skip: $skip, take: $take, orderBy: $orderBy) {
       data {
         id
         role {

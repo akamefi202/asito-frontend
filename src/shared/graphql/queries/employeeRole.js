@@ -43,8 +43,8 @@ export const EMPLOYEE_ROLE = gql`
 `;
 
 export const EMPLOYEE_ROLES = gql`
-  query employeeRoles($where: EmployeeRoleWhereInput, $skip: Int, $take: Int, $scan: String) {
-    employeeRoles(where: $where, skip: $skip, take: $take, scan: $scan) {
+  query employeeRoles($where: EmployeeRoleWhereInput, $skip: Int, $take: Int, $scan: String, $orderBy: [JSONObject]) {
+    employeeRoles(where: $where, skip: $skip, take: $take, scan: $scan, orderBy: $orderBy) {
       data {
         id
         role {

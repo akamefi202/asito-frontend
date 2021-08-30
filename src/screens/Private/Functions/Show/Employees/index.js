@@ -71,7 +71,7 @@ export default ({t, id}) => {
   const [take, setTake] = useState(5);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [sortType, setSortType] = useState({});
+  const [sortType, setSortType] = useState([{name: 'updatedAt', type: 'DESC'}]);
 
   const [employees, setEmployees] = useState([]);
   const [scanSelect, setScanSelect] = useState('');
@@ -83,7 +83,7 @@ export default ({t, id}) => {
   const [value, setValue] = useState(null);
 
   const [getEmployeeRoles, {loading: lEmployeeRoles}] = useLazyQuery(EMPLOYEE_ROLES, {
-    variables: {where: {role: {id}}, skip, take},
+    variables: {where: {role: {id}}, skip, take, orderBy: sortType},
     onCompleted: ({employeeRoles}) => {
       setEmployeeRoles(employeeRoles.data);
       setTotal(employeeRoles.count);
@@ -155,7 +155,7 @@ export default ({t, id}) => {
     onPageChange(1);
 
     setSortType([sorter.order
-       ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
+       ? {name: 'employee.firstName', type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
        : {name: 'updatedAt', type: 'DESC'}]);
   }
 

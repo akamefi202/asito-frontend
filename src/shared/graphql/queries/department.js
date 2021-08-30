@@ -68,8 +68,8 @@ export const DEPARTMENTS = gql`
 `;
 
 export const ROLE_DEPARTMENTS = gql`
-  query RoleDepartments($roleDepartmentsWhere: RoleDepartmentWhereInput, $skip: Int, $take: Int) {
-    roleDepartments(where: $roleDepartmentsWhere, skip: $skip, take: $take) {
+  query RoleDepartments($roleDepartmentsWhere: RoleDepartmentWhereInput, $skip: Int, $take: Int, $orderBy: [JSONObject]) {
+    roleDepartments(where: $roleDepartmentsWhere, skip: $skip, take: $take, orderBy: $orderBy) {
       data {
         id
         department {

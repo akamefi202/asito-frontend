@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import { Row, Col } from "antd";
-import { Table } from "shared/components";
+import { useQuery } from "@apollo/react-hooks";
+import { DepartmentQueries } from "shared/graphql/queries";
+import { messages } from "utils/helpers/message";
 import Card from "shared/components/Card";
 import { Link } from "react-router-dom";
 import { PATHS } from "utils/constants";
+import { TableFormControl } from "shared/components/TableFormControl/TableFormControl";
 
 const columns = (t) => [
   {
@@ -31,10 +34,27 @@ const columns = (t) => [
   }
 ];
 
-export default ({ t, roles }) => {
+const { ROLE_DEPARTMENTS } = DepartmentQueries;
+
+export default ({ t, departmentId: id }) => {
   const [page, setPage] = useState(1);
-  const [take, setTake] = useState(10);
+  const [sortType, setSortType] = useState([{name: 'updatedAt', type: 'DESC'}]);
   const [skip, setSkip] = useState(0);
+  const [take, setTake] = useState(5);
+  const [roles, setRoles] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const {loading: loadingData } = useQuery(ROLE_DEPARTMENTS, {
+    variables: {roleDepartmentsWhere: {department: {id}}, skip, take, orderBy: sortType },
+    onCompleted: ({roleDepartments}) => {
+      const roles = roleDepartments.data.map(x => x.role);
+      setRoles(roles);
+      setTotal(roleDepartments.count)
+    },
+    onError: (error) => {
+      messages({ data: error });
+    }
+  });
 
   const onPageChange = (page) => {
     setPage(page);
@@ -42,8 +62,15 @@ export default ({ t, roles }) => {
   };
 
   const onChange = (pagination, filters, sorter) => {
-    if (pagination.current === page) onPageChange(1);
+    if (pagination.current !== page) return;
+    onPageChange(1);
+
+    setSortType([sorter.order
+       ? {name: 'role.name', type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
+       : {name: 'updatedAt', type: 'DESC'}]);
   }
+
+  const onShowSizeChange = (current, size) => setTake(size);
 
   return (
     <Card cardStyle={"card--details"}>
@@ -56,13 +83,15 @@ export default ({ t, roles }) => {
       </Row>
       <Row className="w-100-100">
         <Col xs={24} sm={24}>
-          <Table
+          <TableFormControl
             columns={columns(t)}
+            loading={loadingData}
             className="custom--table"
-            data={roles}
+            dataSource={roles}
             rowKey={"id"}
             onPageChange={onPageChange}
-            total={roles.length}
+            onShowSizeChange={onShowSizeChange}
+            total={total}
             pageSize={take}
             page={page}
             onChange={onChange}

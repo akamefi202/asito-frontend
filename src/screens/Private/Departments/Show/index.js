@@ -17,7 +17,7 @@ import { messages } from "utils/helpers/message";
 import { ScanOutlined } from "@ant-design/icons";
 import Scanner from './Scanner';
 
-const { DEPARTMENT, ROLE_DEPARTMENTS } = DepartmentQueries;
+const { DEPARTMENT } = DepartmentQueries;
 
 const menuItems = [
   { key: "GENERAL_INFORMATION", href: "general" },
@@ -29,7 +29,6 @@ export default () => {
   const history = useHistory();
   const { t } = useTranslation(NAME_SPACES.DEPARTMENTS);
   const [scannerVisible, setScannerVisible] = useState(false);
-  const [roles, setRoles] = useState([]);
 
   const user = useReactiveVar(UserStore);
   const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
@@ -38,17 +37,6 @@ export default () => {
 
   const { data, loading } = useQuery(DEPARTMENT, {
     variables,
-    onError: (error) => {
-      messages({ data: error });
-    }
-  });
-
-  const { data: rolesData, loading: loadingData } = useQuery(ROLE_DEPARTMENTS, {
-    variables: {roleDepartmentsWhere: {department: {id}}, skip: 0, take: 1000},
-    onCompleted: () => {
-      const roles = rolesData.roleDepartments.data.map(x => x.role);
-      setRoles(roles);
-    },
     onError: (error) => {
       messages({ data: error });
     }
@@ -105,7 +93,7 @@ export default () => {
     <div className="wrapper--content">
       <Header items={setBreadcrumbsItem} buttons={isAccess() ? setBreadcrumbsButtons : []} />
       <div className="details--page">
-        <Spin spinning={loading || loadingData}>
+        <Spin spinning={loading}>
           <Row>
             <Col xs={24} sm={24} md={6} lg={6}>
               <ScrollMenu menuItems={getScrollMenuItem(t)} />
@@ -116,7 +104,7 @@ export default () => {
                 <GeneralInformation t={t} department={department} />
               </section>
               <section id="roles">
-                <Roles t={t} roles={roles} />
+                <Roles t={t} departmentId={id} />
               </section>
             </Col>
           </Row>

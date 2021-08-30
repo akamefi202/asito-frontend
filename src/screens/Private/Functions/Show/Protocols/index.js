@@ -39,7 +39,7 @@ export default ({t, id}) => {
   const [page, setPage] = useState(1);
 
   const {loading} = useQuery(PROTOCOLS, {
-    variables: {protocolsWhere: {role: {id}}, skip, take},
+    variables: {protocolsWhere: {role: {id}}, skip, take, orderBy: sortType},
     onCompleted: ({protocols}) => {
       setProtocols(protocols.data)
       setTotal(protocols.count)

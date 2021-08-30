@@ -37,7 +37,7 @@ export default ({t, id}) => {
   const [page, setPage] = useState(1);
 
   const {loading} = useQuery(ROLE_DEPARTMENTS, {
-    variables: {roleDepartmentsWhere: {role: {id}}, skip, take},
+    variables: {roleDepartmentsWhere: {role: {id}}, skip, take, orderBy: sortType},
     onCompleted: ({roleDepartments}) => {
       setDepartments(roleDepartments.data)
       setTotal(roleDepartments.count)
@@ -51,7 +51,7 @@ export default ({t, id}) => {
     onPageChange(1);
 
     setSortType([sorter.order
-       ? {name: sorter.field, type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
+       ? {name: sorter.field.join('.'), type: sorter.order === 'descend' ? 'DESC' : 'ASC'}
        : {name: 'updatedAt', type: 'DESC'}]);
   }
 
