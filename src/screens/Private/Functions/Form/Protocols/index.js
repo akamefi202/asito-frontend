@@ -61,7 +61,7 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
            name: fileObject.name,
            type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
            url: data.createFile,
-           updatedAt: moment(file.lastModified).format()
+           updatedAt: moment(new Date()).format()
          }
          fileStatus.current = '';
          const values = formik.getFieldProps('protocols')?.value || [];
@@ -111,7 +111,7 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
           dataSource={formik.values.protocols}
           pagination={false}/>
 
-       <Upload accept={'application/pdf'}
+       <Upload accept={'application/*'}
           action={'/'}
           showUploadList={false}
           onChange={({file}) => uploadFile(file)}>
