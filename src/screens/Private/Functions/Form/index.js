@@ -126,7 +126,7 @@ export default () => {
       delete newData.protocols;
       delete newData.employeeRoles;
 
-      saveChanges({variables: {data: newData}}).then(() => {
+      saveChanges({variables: {data: newData}}).then(() =>
         Promise.all([
           ...departments.map(d => createDepartment({variables: {createRoleDepartmentData: d}})),
           ...removedDepartments.map(d => removeDepartment({variables: {removeRoleDepartmentData: {id: d}}})),
@@ -136,8 +136,7 @@ export default () => {
 
           ...protocols.map(p => createProtocol({variables: {createProtocolData: p}})),
           ...removedProtocols.map(p => removeProtocol({variables: {data: {id: p}}})),
-        ])
-      }).then(() => history.push(id ? PATHS.ROLES.SHOW.replace(':id', id) : PATHS.ROLES.INDEX));
+        ])).then(() => history.push(id ? PATHS.ROLES.SHOW.replace(':id', id) : PATHS.ROLES.INDEX));
     }
   });
 

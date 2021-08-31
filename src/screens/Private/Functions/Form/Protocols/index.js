@@ -39,7 +39,7 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
       dataIndex: 'id',
       className: ['protocol', 'cell-action'],
       width: '10%',
-      render: (_, array, index) => <CloseOutlined onClick={() => onRemoveFile(index)}/>,
+      render: (_, protocol, index) => <CloseOutlined onClick={() => onRemoveFile(protocol.id, index)}/>,
     }
   ];
 
@@ -88,14 +88,14 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
   }
 
 
-  const onRemoveFile = (index) => {
+  const onRemoveFile = (id, index) => {
     const values = formik.getFieldProps('protocols')?.value || [];
 
-    if (formik.initialValues.protocols.find((p, i) => i === index)?.id === values?.[index]?.id) {
+    if (formik.initialValues.protocols.find((p, i) => p.id === id)?.id === values?.[index]?.id) {
       setRemovedProtocols([...removedProtocols, values[index].id].filter(Boolean));
     }
 
-    formik.setFieldValue('protocols', [...values.filter((p, pIndex) => pIndex !== index)]);
+    formik.setFieldValue('protocols', [...values.filter((p) => p.id !== id)]);
   }
 
   const [getFile] = useMutation(CREATE_FILE);
