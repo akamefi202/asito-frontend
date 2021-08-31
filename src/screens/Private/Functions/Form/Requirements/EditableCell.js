@@ -24,14 +24,12 @@ const Select = ({t, localRequirements, formik, index, loading, onScroll, onSearc
    />)
 
 const DatePicker = ({t, formik, index}) => {
-  const disabledDate = (current) => current && current < moment().subtract(1, 'day').endOf('day');
 
   return (
      <DatePickerFormControl
         customStyleWrapper='table-date-picker'
         placeholder={t('FORM.REQUIREMENTS.COLUMNS.VALID_UNTIL_PLACEHOLDER')}
         {...bindInputProps({name: `requirements.${index}.validAtLeastUntil`, ...formik})}
-        disabledDate={disabledDate}
      />)
 }
 
