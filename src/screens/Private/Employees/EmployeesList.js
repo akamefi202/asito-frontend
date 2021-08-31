@@ -87,7 +87,7 @@ export const EmployeesList = () => {
 
   const onSearchChange = (event) => {
     delay(() => {
-      setScan(event.target.value);
+      setScan(event.target.value.trimStart());
       setSkip(0);
       setPage(1);
     }, 500);
