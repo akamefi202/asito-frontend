@@ -101,7 +101,11 @@
                 "CERTIFICATE_TYPE": "Type certificaat",
                 "CERTIFICATE_TYPE_PLACEHOLDER": "Zoek een type certificaat...",
                 "VALID_UNTIL": "Tenminste geldig tot",
-                "VALID_UNTIL_PLACEHOLDER": "Selecteer een tenminste geldig tot"
+                "VALID_UNTIL_PLACEHOLDER": "Selecteer een tenminste geldig tot",
+                "VALID_YEARS": "Aantal jaren",
+                "VALID_MONTHS": "Aantal maanden",
+                "MONTHS_NUMBER_PLACEHOLDER": "Voer het aantal maanden in",
+                "YEAR_NUMBER_PLACEHOLDER": "Voer het aantal jaren in"
             }
         },
         "EMPLOYEES": {

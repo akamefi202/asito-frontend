@@ -59,6 +59,7 @@ export const CreateCertificate = () => {
     issuedOn: undefined,
     validForYears: undefined,
     validForMonths: undefined,
+    validUntil: undefined,
     attachments: [],
     employee: {id: undefined}
   });

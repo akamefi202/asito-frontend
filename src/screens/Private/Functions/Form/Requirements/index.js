@@ -18,15 +18,21 @@ const getColumns = (t, removeRequirement) => [
     editable: true,
   },
   {
-    title: t('FORM.REQUIREMENTS.COLUMNS.VALID_UNTIL'),
-    dataIndex: 'validAtLeastUntil',
-    width: '45%',
+    title: t('FORM.REQUIREMENTS.COLUMNS.VALID_MONTHS'),
+    dataIndex: 'validForMonths',
+    width: '25%',
+    editable: true,
+  },
+  {
+    title: t('FORM.REQUIREMENTS.COLUMNS.VALID_YEARS'),
+    dataIndex: 'validForYears',
+    width: '25%',
     editable: true,
   },
   {
     title: '',
     dataIndex: 'action',
-    width: '10%',
+    width: '5%',
     className: 'cell-action',
     render: (_, requirement, index) => <CloseOutlined onClick={() => removeRequirement(requirement.id, index)}/>
   },

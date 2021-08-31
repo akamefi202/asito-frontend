@@ -7,8 +7,7 @@ import { useLazyQuery } from "@apollo/react-hooks";
 import { uniq } from "../../../../../utils/helpers/fn";
 import { messages } from "../../../../../utils/helpers/message";
 import { CertificateQueries } from "../../../../../shared/graphql/queries";
-import { DatePickerFormControl } from "../../../../../shared/components/DatePickerFormControl/DatePickerFormControl";
-import moment from "moment";
+import { InputFormControl } from '../../../../../shared/components/InputformControl/InputFormControl';
 
 const {CERTIFICATE_TYPES} = CertificateQueries;
 
@@ -22,16 +21,6 @@ const Select = ({t, localRequirements, formik, index, loading, onScroll, onSearc
       onScroll={onScroll}
       onSearch={onSearch}
    />)
-
-const DatePicker = ({t, formik, index}) => {
-
-  return (
-     <DatePickerFormControl
-        customStyleWrapper='table-date-picker'
-        placeholder={t('FORM.REQUIREMENTS.COLUMNS.VALID_UNTIL_PLACEHOLDER')}
-        {...bindInputProps({name: `requirements.${index}.validAtLeastUntil`, ...formik})}
-     />)
-}
 
 export const EditableCell =
    ({
@@ -93,8 +82,20 @@ export const EditableCell =
               loading={loading}
               onScroll={onScroll}
               onSearch={onSearch}/>
-         case 'validAtLeastUntil':
-           return <DatePicker t={t} formik={formik} index={index}/>
+         case 'validForMonths':
+           return <div className='table-input'>
+              <InputFormControl id='validForMonths'
+                type='number'
+                placeholder={t('FORM.REQUIREMENTS.COLUMNS.MONTHS_NUMBER_PLACEHOLDER')}
+                {...bindInputProps({name: `requirements.${index}.validForMonths`, ...formik})}/>
+            </div>
+          case 'validForYears':
+            return <div className='table-input'>
+              <InputFormControl id='validForYears'
+                type='number'
+                placeholder={t('FORM.REQUIREMENTS.COLUMNS.YEAR_NUMBER_PLACEHOLDER')}
+                {...bindInputProps({name: `requirements.${index}.validForYears`, ...formik})}/>
+            </div>
          default:
            return children
        }

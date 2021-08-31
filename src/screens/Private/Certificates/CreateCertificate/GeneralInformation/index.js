@@ -5,6 +5,7 @@ import {useLazyQuery} from "@apollo/react-hooks";
 import {EmployeeQueries, CertificateQueries} from "shared/graphql/queries";
 import {messages} from "utils/helpers/message";
 import {bindInputProps} from "utils/helpers/input";
+import moment from 'moment';
 import {REQUIRED_FIELD_SYMBOL} from "utils/constants";
 import {SelectFormControl} from "../../../../../shared/components/SelectFormControl/SelectFormControl";
 import {InputFormControl} from "../../../../../shared/components/InputformControl/InputFormControl";
@@ -100,6 +101,8 @@ export default ({t, formik, certificateTypes}) => {
     delete formik.values.validForYears;
   }
 
+  const disabledDate = (current) => current && current < moment().subtract(1, 'day').endOf('day');
+
   return (
     <Card cardStyle={"card--form"}>
       <h2 className="card--form--title">{t("FORM.MENU.GENERAL_INFORMATION")}</h2>
@@ -163,21 +166,12 @@ export default ({t, formik, certificateTypes}) => {
 
       <Row gutter={[10, 8]}>
         {formik.values?.infinite && <Col xs={24} sm={24} md={12} lg={12}>
-          <InputFormControl id='validForMonths'
-            novalidate
-            type='number'
-            label={t('FORM.GENERAL_INFORMATION.VALID_MONTHS')}
-            placeholder={t('FORM.GENERAL_INFORMATION.MONTHS_NUMBER_PLACEHOLDER')}
-            {...bindInputProps({name: 'validForMonths', ...formik})}/>
-        </Col>}
-
-        {formik.values?.infinite && <Col xs={24} sm={24} md={12} lg={12}>
-          <InputFormControl id='validForYears'
-            type='number'
-            novalidate
-            label={t('FORM.GENERAL_INFORMATION.VALID_YEAR')}
-            placeholder={t('FORM.GENERAL_INFORMATION.YEAR_NUMBER_PLACEHOLDER')}
-            {...bindInputProps({name: 'validForYears', ...formik})}/>
+          <DatePickerFormControl id="validUntil"
+            label={t('FORM.GENERAL_INFORMATION.VALID_UNTIL') + ' ' + REQUIRED_FIELD_SYMBOL}
+            placeholder={t('FORM.GENERAL_INFORMATION.VALID_UNTIL_PLACEHOLDER')}
+            {...bindInputProps({name: 'validUntil', ...formik})}
+            disabledDate={disabledDate}
+          />
         </Col>}
       </Row>
     </Card>

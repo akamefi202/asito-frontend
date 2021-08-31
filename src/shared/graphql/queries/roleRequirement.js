@@ -13,6 +13,8 @@ export const ROLE_REQUIREMENTS = gql`
           type
         }
         validAtLeastUntil
+        validForMonths
+        validForYears
       }
       count
     }

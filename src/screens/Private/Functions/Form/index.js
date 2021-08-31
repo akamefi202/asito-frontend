@@ -118,7 +118,11 @@ export default () => {
       const newData = {...data};
 
       const departments = getNewArrayItems(newData?.departments, 'departments');
-      const requirements = getNewArrayItems(newData?.requirements, 'requirements', ['validAtLeastUntil']);
+      const requirements = getNewArrayItems(newData?.requirements, 'requirements', ['validForMonths', 'validForYears']).map(x => {
+        if (!x.validForMonths) x.validForMonths = null;
+        if (!x.validForYears) x.validForYears = null;
+        return x;
+      });
       const protocols = getNewArrayItems(newData?.protocols, 'protocols', ['name', 'type', 'url', 'updatedAt']);
 
       delete newData.departments;

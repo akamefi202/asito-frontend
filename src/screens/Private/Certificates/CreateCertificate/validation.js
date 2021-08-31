@@ -8,25 +8,11 @@ export default messages => {
     }),
     issuedOn: yup.string().required(messages.REQUIRED),
     infinite: yup.boolean(),
-    validForMonths: yup.number().integer('Moet een geheel getal zijn').typeError('Ongeldig waardetype')
-      .when(['infinite', 'validForYears'], {
-        is: (infinite, validForYears) => infinite && !validForYears,
-        then: yup.number().min(1, 'Ongeldig waardetype').required(messages.REQUIRED),
-        otherwise: yup.number().when('infinite', {
-          is: (infinite) => infinite,
-          then: yup.number().min(1, 'Ongeldig waardetype'),
-          otherwise: yup.number()
-        })
-      }),
-    validForYears: yup.number().integer('Moet een geheel getal zijn').typeError('Ongeldig waardetype')
-      .when(['infinite', 'validForMonths'], {
-        is: (infinite, validForMonths) => infinite && !validForMonths,
-        then: yup.number().min(1, 'Ongeldig waardetype').required(messages.REQUIRED),
-        otherwise: yup.number().when('infinite', {
-          is: (infinite) => infinite,
-          then: yup.number().min(1, 'Ongeldig waardetype'),
-          otherwise: yup.number()
-        })
+    validUntil: yup.string()
+      .when(['infinite'], {
+        is: (infinite) => infinite,
+        then: yup.string().required(messages.REQUIRED),
+        otherwise: yup.string()
       }),
     signedBy: yup.string().required(messages.REQUIRED),
     signerTitle: yup.string().required(messages.REQUIRED),
