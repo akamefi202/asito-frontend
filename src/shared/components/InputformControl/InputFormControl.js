@@ -21,6 +21,12 @@ export const InputFormControl =
      ...props
    }) => {
 
+    const onChangeHandler = (e) => {
+      const event = Object.assign(e);
+      event.target.value = event.target.value.trimStart();
+      onChange(event);
+    }
+
     return (
       <div className={`form-input-wrapper ${customStyleWrapper} ${touched && errors ? 'error' : ''}`}>
         {label && <div className={`label ${customStyleLabel}`}>{label}</div>}
@@ -32,7 +38,7 @@ export const InputFormControl =
           value={value}
           loading={loading}
           disabled={disabled}
-          onChange={onChange}
+          onChange={onChangeHandler}
           {...props}/>
 
         {touched && errors && <p>{errors}</p>}
