@@ -55,6 +55,7 @@ export const CreateCertificate = () => {
     signedBy: undefined,
     signerTitle: undefined,
     number: undefined,
+    requirement: {id: undefined},
     type: undefined,
     issuedOn: undefined,
     validForYears: undefined,
