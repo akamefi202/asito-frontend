@@ -11,10 +11,10 @@ export default messages => {
        .required(messages.REQUIRED),
     roleDescription: yup.string().nullable(),
     requirements: yup.array().of(yup.object().shape({
-        validForMonths: yup.number().typeError(messages.NUMBER || true)
+        validForMonths: yup.number().nullable().typeError(messages.NUMBER || true).optional()
           .integer('Moet een geheel getal zijn')
           .min(1, 'Ongeldig waardetype'),
-        validForYears: yup.number().typeError(messages.NUMBER || true)
+        validForYears: yup.number().nullable().typeError(messages.NUMBER || true).optional()
           .integer('Moet een geheel getal zijn')
           .min(1, 'Ongeldig waardetype')
     }))
