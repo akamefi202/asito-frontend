@@ -102,6 +102,8 @@ export const CreateCertificate = () => {
 
       newData.issuer = issuer && issuer.id ? {id: issuer.id} : null;
 
+      if (!newData.validUntil) newData.validUntil = null;
+
       if (newData.attachments.length === 0) delete newData.attachments;
 
       Promise.all([
