@@ -37,7 +37,7 @@ export default ({t, formik, certificateTypes}) => {
   }, [])
 
   const [getEmployees, {loading}] = useLazyQuery(EMPLOYEES, {
-    variables: {scan: search, skip: skip, take: limit},
+    variables: {scan: search, skip: skip, take: limit, orderBy:[{name: 'firstName', type: 'ASC'}]},
     onCompleted: ({employees}) => {
       const items = employees?.data?.map(item => ({
         id: item.id,
@@ -54,7 +54,7 @@ export default ({t, formik, certificateTypes}) => {
   });
 
   const [getRequirements, { loading: loadingRequirements }] = useLazyQuery(CERTIFICATE_TYPES, {
-    variables: {scan: searchRequirementValue, skip: skipRequirements, take: limit},
+    variables: {scan: searchRequirementValue, skip: skipRequirements, take: limit, orderBy: [{name: 'type', type: 'ASC'}]},
     onCompleted: ({requirements}) => {
       const items = requirements?.data?.map(item => ({
         id: item.id,

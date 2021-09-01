@@ -94,8 +94,8 @@ export const CERTIFICATES = gql`
 `;
 
 export const CERTIFICATE_TYPES = gql`
-  query Requirements($where: RequirementWhereInput, $scan: String, $lt: RequirementWhereInput, $gt: RequirementWhereInput, $skip: Int, $take: Int) {
-    requirements(where: $where, scan: $scan, skip: $skip, take: $take, lt: $lt, gt: $gt) {
+  query Requirements($where: RequirementWhereInput, $scan: String, $lt: RequirementWhereInput, $gt: RequirementWhereInput, $skip: Int, $take: Int, $orderBy: [JSONObject]) {
+    requirements(where: $where, scan: $scan, skip: $skip, take: $take, lt: $lt, gt: $gt, orderBy: $orderBy) {
         data {
             id
             type
