@@ -143,7 +143,10 @@ export default ({t, id}) => {
       role: {id},
       employee: {id: value}
     }
-    await createEmployeeRole({variables: {data}});
+
+    const res = await createEmployeeRole({variables: {data}});
+
+    if (!res.data.createEmployeeRole.id) messages({msg: 'Gebruiker al toegevoegd'})
   }
 
   const remove = async (id) => {
@@ -178,7 +181,7 @@ export default ({t, id}) => {
              <SelectFormControl customStyleWrapper='table-select'
                 placeholder={t('SHOW.EMPLOYEES.SEARCH_OPERATOR')}
                 value={value}
-                items={employees.map(e => ({...e, name: e.firstName + ' ' + e.lastName}))}
+                items={employees.filter(employee => !employeeRoles.some((er, i) => er.employee && employee.id === er.employee.id)).map(e => ({...e, name: e.firstName + ' ' + e.lastName}))}
                 loading={lEmployees}
                 isClearable={true}
                 optionTitle='name'
