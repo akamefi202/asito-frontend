@@ -37,7 +37,7 @@ export default ({t, formik, lRoleDepartments, removedDepartments, setRemovedDepa
 
   const addDepartment = () => {
     const values = formik.getFieldProps('departments')?.value || [];
-    formik.setFieldValue('departments', [...values, {}]);
+    formik.setFieldValue('departments', [...values, {id: cuid()}]);
   }
 
   const removeDepartment = (id, index) => {

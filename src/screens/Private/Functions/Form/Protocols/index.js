@@ -111,7 +111,7 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
           dataSource={formik.values.protocols}
           pagination={false}/>
 
-       <Upload accept={'application/*'}
+       <Upload
           action={'/'}
           showUploadList={false}
           onChange={({file}) => uploadFile(file)}>
