@@ -59,7 +59,7 @@ export default ({t, formik, lProtocols, removedProtocols, setRemovedProtocols}) 
          const displayedFile = {
            id: cuid(),
            name: fileObject.name,
-           type: fileObject.contentType.split('/').reverse()[0].toUpperCase(),
+           type: fileObject.name.split('.').reverse()[0].toUpperCase(),
            url: data.createFile,
            updatedAt: moment(new Date()).format()
          }
