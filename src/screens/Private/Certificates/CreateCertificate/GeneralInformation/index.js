@@ -101,6 +101,10 @@ export default ({t, formik, certificateTypes}) => {
     delete formik.values.validForYears;
   }
 
+  if (new Date(formik.values.issuedOn) > new Date(formik.values.validUntil)) {
+    formik.values.validUntil = undefined;
+  }
+
   const disabledDate = (current) => current &&
     (current < moment().subtract(1, 'day').endOf('day') || current < new Date(formik.values.issuedOn));
 
