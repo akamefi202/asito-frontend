@@ -10,7 +10,7 @@ import {Field} from "../../../../../shared/components/Field/Field";
 const today = moment();
 
 export default ({t, certificate}) => {
-  const validUntil = timestampToDate(certificate.validUntil);
+  const validUntil = timestampToDate(Date.parse(new Date(certificate.validUntil)));
   const issuedOn = timestampToDate(certificate.issuedOn);
   const isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
   const isValidIssuedOn = issuedOn && issuedOn.isValid() && today.isSameOrAfter(issuedOn);
@@ -74,7 +74,7 @@ export default ({t, certificate}) => {
                 ? <span className="icon icon-Check green"/>
                 : <span className="icon icon-Close red"/>}
 
-              <span className={!isValid && "red"}>{dateToString(certificate.validUntil)}</span>
+              <span className={!isValid && "red"}>{dateToString(Date.parse(new Date(certificate.validUntil)))}</span>
             </h4>
           </div>
         </Col>}

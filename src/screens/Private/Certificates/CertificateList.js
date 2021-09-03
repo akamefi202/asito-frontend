@@ -63,8 +63,9 @@ const columns = (t) => [
     dataIndex: 'validUntil',
     render: (stringDate) => {
       let isValid = true;
+
       if (stringDate) {
-        const validUntil = timestampToDate(stringDate);
+        const validUntil = timestampToDate(Date.parse(new Date(stringDate)));
         isValid = validUntil && validUntil.isValid() && today.isSameOrBefore(validUntil);
       }
 
