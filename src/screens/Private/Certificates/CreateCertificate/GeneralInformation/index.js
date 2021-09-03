@@ -103,7 +103,7 @@ export default ({t, formik, certificateTypes}) => {
   }
 
   const disabledDate = (current) => current &&
-    (current < moment().subtract(1, 'day').endOf('day') || current < new Date(formik.values.issuedOn));
+    (current < moment().subtract(0, 'day').endOf('day') || current < new Date(formik.values.issuedOn));
 
   return (
     <Card cardStyle={"card--form"}>
