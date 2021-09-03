@@ -102,8 +102,12 @@ export default ({t, formik, certificateTypes}) => {
     formik.values.validUntil = undefined;
   }
 
-  const disabledDate = (current) => current &&
-    (current < moment().subtract(0, 'day').endOf('day') || current < new Date(formik.values.issuedOn));
+  const disabledDate = (current) => {
+    const issuedOn = new Date(formik.values.issuedOn);
+
+    return current &&
+      (current < moment().subtract(0, 'day').endOf('day') || current < new Date(issuedOn.getFullYear(), issuedOn.getMonth(), issuedOn.getDate() + 1));
+  };
 
   return (
     <Card cardStyle={"card--form"}>
