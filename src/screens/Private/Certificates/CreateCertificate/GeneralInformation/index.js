@@ -96,10 +96,7 @@ export default ({t, formik, certificateTypes}) => {
     setSkipRequirements(limit * page);
   }
 
-  if (!formik.values.infinite) {
-    delete formik.values.validForMonths;
-    delete formik.values.validForYears;
-  }
+  if (!formik.values.infinite) delete formik.values.validUntil;
 
   if (new Date(formik.values.issuedOn) > new Date(formik.values.validUntil)) {
     formik.values.validUntil = undefined;
