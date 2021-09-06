@@ -24,7 +24,7 @@ export default ({t, employee}) => (
       </Col>
 
       <Col xs={24} sm={24} md={6} lg={6}>
-        <Field id='firstName'
+        <Field id='middleName'
           label={t('SHOW.GENERAL_INFORMATION.MIDDLE_NAME')}
           value={employee.middleName}/>
       </Col>

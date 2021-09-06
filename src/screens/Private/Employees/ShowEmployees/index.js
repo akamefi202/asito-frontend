@@ -73,7 +73,7 @@ export const ShowEmployees = () => {
       href: PATHS.EMPLOYEES.INDEX,
     },
     {
-      title: `${employee.firstName} ${employee.lastName}`,
+      title: `${employee.firstName} ${employee.middleName || ''} ${employee.lastName}`,
       className: "custom--breadcrumb--two"
     },
   ];

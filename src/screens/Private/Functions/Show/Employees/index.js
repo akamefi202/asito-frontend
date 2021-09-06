@@ -180,7 +180,7 @@ export default ({t, id}) => {
              <SelectFormControl customStyleWrapper='table-select'
                 placeholder={t('SHOW.EMPLOYEES.SEARCH_OPERATOR')}
                 value={value}
-                items={employees.filter(employee => !employeeRoles.some((er, i) => er.employee && employee.id === er.employee.id)).map(e => ({...e, name: e.firstName + ' ' + e.lastName}))}
+                items={employees.filter(employee => !employeeRoles.some((er, i) => er.employee && employee.id === er.employee.id)).map(e => ({...e, name: e.firstName + ' ' + (e.middleName || '') + ' ' + e.lastName}))}
                 loading={lEmployees}
                 isClearable={true}
                 optionTitle='name'
