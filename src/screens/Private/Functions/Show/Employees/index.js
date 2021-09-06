@@ -76,7 +76,7 @@ export default ({t, id}) => {
   const [employees, setEmployees] = useState([]);
   const [scanSelect, setScanSelect] = useState('');
   const [skipSelect, setSkipSelect] = useState(0);
-  const [takeSelect] = useState(50);
+  const [takeSelect] = useState(10);
   const [totalSelect, setTotalSelect] = useState(0);
   const [pageSelect, setPageSelect] = useState(1);
 
@@ -92,13 +92,12 @@ export default ({t, id}) => {
   });
 
   const [getEmployees, {loading: lEmployees}] = useLazyQuery(EMPLOYEES, {
-    variables: { scan: scanSelect, skip: skipSelect, take: takeSelect },
+    variables: { scan: scanSelect, skip: skipSelect, take: takeSelect, orderBy: [{name: 'firstName', type: 'ASC'}] },
     onCompleted: (loadData) => {
       setEmployees(scanSelect
          ? loadData?.employees?.data
          : uniq([...employees, ...(loadData?.employees?.data || [])], 'id'));
-
-      setTotalSelect(loadData?.departments?.count || 0);
+      setTotalSelect(loadData?.employees?.count || 0);
     },
     onError: (error) => messages({data: error})
   });
