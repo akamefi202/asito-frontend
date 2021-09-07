@@ -103,7 +103,7 @@ export const EditEmployees = () => {
       href: PATHS.EMPLOYEES.INDEX,
     },
     {
-      title: id ? `${initialValues.firstName} ${initialValues.lastName}` : t("NEW"),
+      title: id ? `${initialValues.firstName} ${initialValues.middleName || ''} ${initialValues.lastName}` : t("NEW"),
       className: "custom--breadcrumb--two",
     },
   ];
