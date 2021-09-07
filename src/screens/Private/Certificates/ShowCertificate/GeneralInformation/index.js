@@ -38,7 +38,7 @@ export default ({t, certificate}) => {
               <Link
                 className="custom-link"
                 to={PATHS.EMPLOYEES.SHOW.replace(':id', certificate?.employee?.id || '')}>
-                {(certificate?.employee?.firstName || '') + ' ' + (certificate?.employee?.lastName || '')}
+                {(certificate?.employee?.firstName || '') + ' ' + (certificate?.employee?.middleName || '') + ' ' + (certificate?.employee?.lastName || '')}
               </Link>
             </h4>
           </div>
