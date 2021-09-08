@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Tabs } from "antd";
 import { Card, Header } from "shared/components";
 import { NAME_SPACES } from "shared/locales/constants";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
+import { get } from "lodash";
 import { RoleQueries } from "shared/graphql/queries";
 import { messages } from "utils/helpers/message";
 import { USER_ROLES } from "shared/constants/userRoles";
@@ -67,7 +68,6 @@ const columns = (t) => [
 export const FunctionsList = () => {
   const history = useHistory();
   const {t} = useTranslation(NAME_SPACES.ROLES);
-  const [data, setData] = useState([]);
   const [count, setCount] = useState({
     ALL: 0,
     ACTIVE: 0,
@@ -86,15 +86,10 @@ export const FunctionsList = () => {
 
   const variables = {scan, skip, take, where: {...statusTab}, orderBy: sortType};
 
-  useEffect(() => {
-    filterData();
-  }, []);
-
-  const [filterData, {loading}] = useLazyQuery(ROLES, {
+  const {data, loading} = useQuery(ROLES, {
     variables,
     onCompleted: ({roles}) => {
       if (!roles.data) return;
-      setData(roles.data);
       setTotal(roles.count);
       if (!Object.keys(statusTab).length && !scan) {
         setCount({...count, ALL: roles.count, ACTIVE: roles.activeRolesCount, INACTIVE: roles.inactiveRolesCount});
@@ -104,6 +99,8 @@ export const FunctionsList = () => {
   });
 
   const create = () => history.push(PATHS.ROLES.CREATE);
+
+  const roles = get(data, "roles.data", []);
 
   const setBreadcrumbsButtons = [
     {
@@ -127,7 +124,7 @@ export const FunctionsList = () => {
       setScan(event.target.value.trimStart());
       setSkip(0);
       setPage(1);
-    }, 500);
+    }, 1000);
   };
 
   const onPageChange = (page) => {
@@ -169,7 +166,7 @@ export const FunctionsList = () => {
            <TableFormControl rowKey='id'
               className='table--custom'
               columns={columns(t)}
-              dataSource={data}
+              dataSource={roles}
               loading={loading}
               onRow={row => ({onClick: () => history.push(PATHS.ROLES.SHOW.replace(':id', row.id))})}
               total={total}
