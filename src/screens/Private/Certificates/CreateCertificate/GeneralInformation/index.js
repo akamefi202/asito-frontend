@@ -96,6 +96,8 @@ export default ({t, formik, certificateTypes}) => {
     setSkipRequirements(limit * page);
   }
 
+  const onClear = () => setSearch('');
+
   if (!formik.values.infinite) delete formik.values.validUntil;
 
   if (new Date(formik.values.issuedOn) > new Date(formik.values.validUntil)) {
@@ -126,6 +128,7 @@ export default ({t, formik, certificateTypes}) => {
             defaultActiveFirstOption={false}
             notFoundContent={null}
             onScroll={onScroll}
+            onClear={onClear}
             onSearch={onSearch}/>
         </Col>
       </Row>
