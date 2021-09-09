@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs } from "antd";
 import { Card, Header } from "shared/components";
 import { NAME_SPACES } from "shared/locales/constants";
@@ -6,9 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "utils/constants";
 import { useQuery } from "@apollo/react-hooks";
-import { get } from "lodash";
 import { RoleQueries } from "shared/graphql/queries";
-import { messages } from "utils/helpers/message";
 import { USER_ROLES } from "shared/constants/userRoles";
 import { useReactiveVar } from "@apollo/client";
 import { UserStore } from "shared/store/UserStore";
@@ -73,9 +71,11 @@ export const FunctionsList = () => {
     ACTIVE: 0,
     INACTIVE: 0,
   });
+  const [isFetching, setIsFetching] = useState(true);
   const [statusTab, setStatusTab] = useState({});
   const [scan, setScan] = useState('');
   const [skip, setSkip] = useState(0);
+  const [roles, setRoles] = useState([]);
   const [total, setTotal] = useState(0);
   const [take, setTake] = useState(10);
   const [page, setPage] = useState(1);
@@ -88,19 +88,21 @@ export const FunctionsList = () => {
 
   const {data, loading} = useQuery(ROLES, {
     variables,
-    onCompleted: ({roles}) => {
-      if (!roles.data) return;
-      setTotal(roles.count);
-      if (!Object.keys(statusTab).length && !scan) {
-        setCount({...count, ALL: roles.count, ACTIVE: roles.activeRolesCount, INACTIVE: roles.inactiveRolesCount});
-      }
-    },
-    onError: (error) => messages({data: error})
+    onError: (error) => setRoles([])
   });
 
-  const create = () => history.push(PATHS.ROLES.CREATE);
+  useEffect(() => {
+    if (!loading) {
+      if (!data.roles.data) return;
+      setTotal(data.roles.count);
+      setRoles(data.roles.data)
+      if (!Object.keys(statusTab).length && !scan) {
+        setCount({...count, ALL: data.roles.count, ACTIVE: data.roles.activeRolesCount, INACTIVE: data.roles.inactiveRolesCount});
+      }
+    }
+  }, [loading]);
 
-  const roles = get(data, "roles.data", []);
+  const create = () => history.push(PATHS.ROLES.CREATE);
 
   const setBreadcrumbsButtons = [
     {
