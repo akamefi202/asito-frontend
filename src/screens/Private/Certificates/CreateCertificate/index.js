@@ -58,8 +58,6 @@ export const CreateCertificate = () => {
     requirement: {id: undefined},
     type: undefined,
     issuedOn: undefined,
-    validForYears: undefined,
-    validForMonths: undefined,
     validUntil: undefined,
     attachments: [],
     employee: {id: undefined}
@@ -94,9 +92,6 @@ export const CreateCertificate = () => {
     validationSchema: validation(t('FORM.ERROR', {returnObjects: true})),
     onSubmit: data => {
       const newData = {...data};
-
-      if (!newData.validForMonths || !newData.infinite) delete newData.validForMonths;
-      if (!newData.validForYears || !newData.infinite) delete newData.validForYears;
 
       delete newData.type;
       delete newData.infinite;
