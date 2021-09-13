@@ -13,6 +13,7 @@ import Logo from "shared/assets/images/Logo.svg";
 import { useMutation } from "@apollo/react-hooks";
 import { ForgetPasswordMutations } from "shared/graphql/mutations";
 import { messages } from "utils/helpers/message";
+import { checkRecaptcha } from "utils/helpers/recaptcha";
 
 const { FORGET_PASSWORD } = ForgetPasswordMutations;
 
@@ -39,8 +40,17 @@ const FORGOT = () => {
         validationSchema: validation(t('ERROR', { returnObjects: true })),
         onSubmit: (data) => {
             setSendMode(true);
-            sendEmail({ variables: { data } });
-        },
+            checkRecaptcha().then((token) => {
+                return sendEmail({
+                  variables: { data },
+                  context: {
+                    headers: {
+                      "X-ReCaptcha": token
+                    }
+                  }
+                });
+            });
+        }
     });
 
     const backToLogin = () => history.push(PATHS.PUBLIC.AUTH.SIGN_IN);

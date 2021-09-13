@@ -15,6 +15,7 @@ import SignUpModal from "./signUpModal";
 import { USER } from "shared/graphql/queries/user";
 import { UserStore } from "shared/store/UserStore";
 import { messages } from "utils/helpers/message";
+import { checkRecaptcha } from "utils/helpers/recaptcha";
 
 const { LOGIN_MUTATION } = AuthMutations;
 
@@ -48,7 +49,18 @@ const Form = () => {
         returnObjects: true,
       })
     ),
-    onSubmit: data => signIn({ variables: { data } }),
+    onSubmit: (data) => {
+      checkRecaptcha().then((token) => {
+        return signIn({
+          variables: { data },
+          context: {
+            headers: {
+              "X-ReCaptcha": token
+            }
+          }
+        });
+      });
+    },
   });
 
   const [
