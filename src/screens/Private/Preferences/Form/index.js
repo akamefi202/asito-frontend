@@ -14,7 +14,7 @@ import { AuthMutations, UserMutations } from "../../../../shared/graphql/mutatio
 
 const {USER} = UserQueries;
 const {CREATE_UPDATE_USER} = UserMutations;
-const {UPDATE_USER} = AuthMutations;
+const {UPDATE_USER, CHANGE_PASSWORD} = AuthMutations;
 
 const menuItems = [
   {key: 'ACCOUNT_INFORMATION', href: 'account'},
@@ -27,7 +27,7 @@ export default () => {
   const [passwordsValues] = useState({});
 
   const {loading} = useQuery(USER, {
-    onCompleted: ({user}) => setInfoValues({firstName: user?.firstName, lastName: user?.lastName, email: user?.email}),
+    onCompleted: ({user}) => setInfoValues({firstName: user?.firstName, lastName: user?.lastName, email: user?.email, id: user?.id}),
     onError: error => messages({data: error})
   });
 
@@ -42,7 +42,10 @@ export default () => {
     enableReinitialize: true,
     initialValues: passwordsValues,
     validationSchema: passwords(t('FORM.ERROR', {returnObjects: true})),
-    onSubmit: data => changePassword({variables: {data}})
+    onSubmit: data => {
+      data.id = infoValues.id;
+      changePassword({variables: {data}})
+    }
   });
 
   const [saveInfo, {loading: saveInfoLoading}] = useMutation(CREATE_UPDATE_USER, {
@@ -50,7 +53,7 @@ export default () => {
     onError: (error) => messages({data: error})
   });
 
-  const [changePassword, {loading: savePasswordLoading}] = useMutation(UPDATE_USER, {
+  const [changePassword, {loading: savePasswordLoading}] = useMutation(CHANGE_PASSWORD, {
     onCompleted: () => messages({msg: t('FORM.CHANGE_PASSWORD.PASSWORD_CHANGED'), type: 'success'}),
     onError: (error) => messages({data: error})
   });

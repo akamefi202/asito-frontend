@@ -38,8 +38,7 @@ export const CREATE_ACCESS = gql`
 export const CHANGE_PASSWORD = gql`
   mutation ChangePassword($data: InputPaswordUpdated) {
     changePassword(data: $data) @authBff {
-      accessToken
-      refreshToken
+      id
     }
   }
 `;
