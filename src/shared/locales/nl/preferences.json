@@ -25,7 +25,7 @@
       "REPEAT_NEW_PASSWORD": "Herhaal het nieuwe wachtwoord",
       "REPEAT_NEW_PASSWORD_PLACEHOLDER": "Enter herhaal het nieuwe wachtwoord",
       "CHANGE_PASSWORD": "Wachtwoord opslaan",
-      "PASSWORD_CHANGED": "wachtwoord veranderd",
+      "PASSWORD_CHANGED": "Wachtwoord veranderd",
       "INVALID_CURRENT_PASSWORD": "Ongeldig huidig wachtwoord"
     },
     "ERROR": {
