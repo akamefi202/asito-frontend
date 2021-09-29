@@ -16,7 +16,7 @@ import validation from "./validation";
 import {removeTypename} from "utils/helpers/removeTypename";
 import {messages} from "utils/helpers/message";
 
-const {CREATE_UPDATE_EMPLOYEE} = EmployeeMutations;
+const {CREATE_EMPLOYEE, UPDATE_EMPLOYEE} = EmployeeMutations;
 const {EMPLOYEE} = EmployeeQueries;
 
 const menuItems = [
@@ -69,7 +69,7 @@ export const EditEmployees = () => {
     onSubmit: data => saveChanges({variables: {data}})
   });
 
-  const [saveChanges, {loading}] = useMutation(CREATE_UPDATE_EMPLOYEE, {
+  const [saveChanges, {loading}] = useMutation(id ? UPDATE_EMPLOYEE : CREATE_EMPLOYEE, {
     onCompleted: () => history.push(id ? PATHS.EMPLOYEES.SHOW.replace(":id", id) : PATHS.EMPLOYEES.INDEX),
     onError: (error) => messages({data: error})
   });

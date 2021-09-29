@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const CREATE_UPDATE_EMPLOYEE = gql`
+export const CREATE_EMPLOYEE = gql`
   mutation createEmployee($data: EmployeeWhereInput) {
     createEmployee(data: $data) {
       id
@@ -8,6 +8,15 @@ export const CREATE_UPDATE_EMPLOYEE = gql`
   }
 `;
 
+export const UPDATE_EMPLOYEE = gql`
+  mutation updateEmployee($data: EmployeeWhereInput) {
+    updateEmployee(data: $data) {
+      id
+    }
+  }
+`;
+
 export default {
-  CREATE_UPDATE_EMPLOYEE,
+  CREATE_EMPLOYEE,
+  UPDATE_EMPLOYEE
 };
