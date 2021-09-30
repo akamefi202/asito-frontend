@@ -11,7 +11,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     localStorage.getItem('auth_token') && localStorage.removeItem('auth_token');
     const accessToken = localStorage.getItem("access_token");
     const user = useReactiveVar(UserStore);
-    const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
+    const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : user && user.employee && USER_ROLES.EMPLOYEE.key;
 
     const checkRole = (rootRoute, currentRoute) => {
         return USER_ROLES[userRole] && USER_ROLES[userRole].access.some(route => {
@@ -25,7 +25,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
             localStorage.removeItem('access_token');
             return PATHS.PUBLIC.AUTH.SIGN_IN;
         }
-        const route = USER_ROLES[userRole].access[0];
+        const route = userRole === USER_ROLES.EMPLOYEE.key ?  USER_ROLES[userRole].access[0].replace(':id', user.employee.id) : USER_ROLES[userRole].access[0];
         return route.INDEX ? route.INDEX : route;
     }
 
