@@ -23,6 +23,24 @@ export const USER = gql`
         email
         website
       }
+      employee {
+        id
+        number
+        firstName
+        middleName
+        lastName
+        dateOfBirth
+        gender
+        avatar
+        phone
+        email
+        address1
+        address2
+        zipCode
+        city
+        country
+        wallet
+      }
     }
   }
 `;

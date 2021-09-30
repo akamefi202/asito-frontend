@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { Header, ScrollMenu, Spin } from "shared/components";
@@ -35,7 +35,7 @@ export const ShowEmployees = () => {
   const [qrCodeModalVisible, setQRCodeModalVisible] = useState(false);
 
   const user = useReactiveVar(UserStore);
-  const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : null;
+  const userRole = user && user.issuer && user.issuer.kind ? user.issuer.kind : user.employee && USER_ROLES.EMPLOYEE.key;
 
   const {data, loading} = useQuery(EMPLOYEE, {
     variables: {where: {id}},
@@ -77,6 +77,13 @@ export const ShowEmployees = () => {
       className: "custom--breadcrumb--two"
     },
   ];
+
+  useEffect(() => {
+    if (userRole === USER_ROLES.EMPLOYEE.key && id !== user.employee.id) { //TODO Remove after adding 404 page
+      history.push(PATHS.EMPLOYEES.SHOW.replace(":id", user.employee.id));
+      return;
+    }
+  }, [])
 
   const isAccess = () => userRole && ((userRole === USER_ROLES.PLANER.key) || (userRole === USER_ROLES.TEST.key));
 

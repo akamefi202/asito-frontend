@@ -38,6 +38,12 @@ export const USER_ROLES = {
             PREFERENCES
         ]
     },
+    EMPLOYEE: {
+        key: 'EMPLOYEE',
+        access: [
+            EMPLOYEES.SHOW
+        ]
+    }
     // ISSUER: {
     //     key: 'ISSUER',
     //     access: [
