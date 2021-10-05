@@ -127,7 +127,8 @@
     },
     "ERROR": {
       "REQUIRED": "Is een verplicht veld",
-      "NUMBER": "Moet een nummer zijn"
+      "NUMBER": "Moet een nummer zijn",
+      "EMAIL_DUPLICATE": "Dit e-mailadres is reeds geregistreerd"
     }
   }
 }

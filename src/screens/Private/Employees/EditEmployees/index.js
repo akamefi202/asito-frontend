@@ -71,7 +71,7 @@ export const EditEmployees = () => {
 
   const [saveChanges, {loading}] = useMutation(id ? UPDATE_EMPLOYEE : CREATE_EMPLOYEE, {
     onCompleted: () => history.push(id ? PATHS.EMPLOYEES.SHOW.replace(":id", id) : PATHS.EMPLOYEES.INDEX),
-    onError: (error) => messages({data: error})
+    onError: (error) => messages({msg: error.message.includes(t('duplicate key value violates unique constraint')) ? t('FORM.ERROR.EMAIL_DUPLICATE') : error?.message || error})
   });
 
   const discardChanges = () => formik.dirty ? formik.resetForm() : history.goBack();
